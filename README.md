@@ -1,43 +1,70 @@
-# CarbonO
+# Getting Started with Create React App
 
-> Project By: SMU CS203 G2T2
-> - [Zhao Xing](https://github.com/Newbieshine/)
-> - [Yuan Sheng](https://github.com/ChongYuanSheng/)
-> - [Novia](http://github.com/noviaantony/)
-> - [Ariff](http://github.com//)
-> - [Alison]
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Cloning Repo
-Open your git cmd console, cd to the directory of your choosing example cd C:/users/(name)/Desktop/
+## Available Scripts
 
-Thereafter, enter git clone https://github.com/Chen-ZhaoXing/CS203-Team-2.git
+In the project directory, you can run:
 
-After clone enter cd cs203-team-2 to access the repo
+### `npm start`
 
-Code submission for [SMU CS203]
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-## Core Features
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-***Carbon Footprint Tracker***
-> Search from a list of recipes and view their corresponding carbon-emission rating
-> Submit a jpeg of receipt for food & claim e-credits (the lower the carbon-emission rating, the more e-credits you can collect!)
-> View historical receipt submissions & e-credit wallet
+### `npm test`
 
-***Rewards***
-> Users can use e-credits to claim rewards from sustainable brands working towards climate change
-> User can view their historical reward claims
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-***Donation***
-> Users can use e-credits to donate to their desired organisation that is fighting climate change
-> User can choose to donate to organisations using their credit cards as well
-> User can view historical donation transactions (using e-credits or credit card)
+### `npm run build`
 
----
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-## **Technology Stack**
-- [ReactJs] ()
-- [Tailwind CSS]()
-- [Axios]()
-- [SpringBoot](https://spring.io/projects/spring-boot)
-- [PostgreSQL](https://www.postgresql.org/download/)
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

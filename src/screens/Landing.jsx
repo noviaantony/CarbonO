@@ -1,10 +1,9 @@
 import React from "react";
-import Navbar from "../components/landingpage/Navbar";
+import Footer from "../components/footer/Footer";
 import Features2 from "../components/landingpage/Features2";
 import Hero3 from "../components/landingpage/Hero3";
-import Footer from "../components/landingpage/Footer";
-const Landing = () => {
 
+const Landing = () => {
 
   return (
     <div>

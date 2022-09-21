@@ -20,7 +20,7 @@ const Hero3 = () => {
                   efforts into more effort today!
                 </p>
                 <button
-                  className="bg-primary-500 text-white hocus:bg-primary-700 hocus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300
+                  className="bg-primary-500 text-white focus:bg-primary-700 focus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300
                   px-7 py-3 w-full bg-[#5E9387] text-center rounded-md block sm:w-auto font-bold hover:shadow-md hover:bg-gray-700"
                   as="a"
                 >
