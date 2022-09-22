@@ -18,7 +18,7 @@ const SignUpForm = () => {
             </div>
             <div className="py-10">
               <h2 className="text-2xl font-bold text-gray-700 mb-2">
-                Sign in to your account
+                Sign up for an account
               </h2>
               <div className="border-2 w-10 border-gray-700 bg-gray-700 inline-block mb-2"></div>
             </div>

@@ -24,7 +24,7 @@ const Hero3 = () => {
                   px-7 py-3 w-full bg-[#5E9387] text-center rounded-md block sm:w-auto font-bold hover:shadow-md hover:bg-gray-700"
                   as="a"
                 >
-                  Get Started
+                  Save the earth today!
                 </button>
               </div>
               <div className=" lg:w-1/2 mt-16 lg:mt-0 lg:ml-16 ">
