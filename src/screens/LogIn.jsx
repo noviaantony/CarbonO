@@ -1,12 +1,14 @@
 import React from 'react'
-import FormSignup from '../components/signup_login/FormSignup';
-import Features2 from "../components/signup_login/FormSignup";
+import LogInForm from "../components/signup_login/LogInForm";
+import SignUpForm from "../components/signup_login/SignUpForm";
 import Footer from "../components/footer/Footer";
+
 
 const LogIn = () => {
   return (
     <div>
-      <FormSignup />
+      {/* <LogInForm /> */}
+      <SignUpForm/>
       <Footer />
     </div>
   );
