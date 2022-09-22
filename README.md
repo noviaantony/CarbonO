@@ -35,9 +35,9 @@ Code submission for [SMU CS203]
 ---
 
 ## **Technology Stack**
-- [ReactJs] ()
-- [Tailwind CSS]()
-- [Axios]()
+- [ReactJs] (https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Axios](https://www.axios.com/)
 - [SpringBoot](https://spring.io/projects/spring-boot)
 - [PostgreSQL](https://www.postgresql.org/download/)
 
