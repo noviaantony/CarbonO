@@ -7,12 +7,14 @@ import Card from "../components/carbontracker/Card";
 
 const CarbonTracker = () => {
   return (
-    <div>
+    <div className = "items-center">
       <Navbar />
       <Searchbar />
 
-      <div class=" container my-12 mx-auto px-4 md:px-12">
-        <div class="flex flex-wrap -mx-1 lg:-mx-4">
+      <div class=" container my-12 mx-auto px-4 md:px-12 items-center">
+        <div class="flex flex-wrap -mx-1 lg:-mx-4 items-center">
+          <Card />
+          <Card />
           <Card />
           <Card />
           <Card />
@@ -21,8 +23,6 @@ const CarbonTracker = () => {
           <Card />
         </div>
       </div>
-
-      {/* <Footer /> */}
     </div>
   );
 }

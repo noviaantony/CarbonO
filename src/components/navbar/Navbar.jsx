@@ -1,4 +1,5 @@
 import React from 'react'
+import Logo from "./LogoPng.png";
 
 const Navbar = () => {
   return (
@@ -8,7 +9,8 @@ const Navbar = () => {
           class="toggleColour text-white my-4 leading-tight no-underline hover:no-underline font-bold text-xl lg:text-3xl"
           href="#"
         >
-          CarbonO
+          {/* CarbonO */}
+          <img src={Logo} width = "90rem" alt="" />
         </a>
         <div className="flex md:order-2">
           {/* <button
