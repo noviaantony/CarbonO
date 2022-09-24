@@ -8,7 +8,7 @@ const Card = () => {
   const[showReceiptModal, setReceiptModal] = React.useState(false);
 
   return (
-    <div className="max-w-sm bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-700 m-2 rounded-xl items-center">
+    <div className="max-w-sm bg-white border border-gray-200 m-2 rounded-xl items-center">
       <img
         className="rounded-t-lg"
         src={ChickenRice}
@@ -18,7 +18,7 @@ const Card = () => {
       />
       <div className="p-5">
         <a href="#">
-          <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+          <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-black">
             Hainanese Chicken Rice
           </h5>
         </a>

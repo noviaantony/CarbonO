@@ -3,7 +3,7 @@ import Logo from "./LogoPng.png";
 
 const Navbar = () => {
   return (
-    <nav className="bg-[#5E9387] px-2 sm:px-4 py-2.5 dark:bg-gray-900 w-full z-20 sticky top-0 left-0">
+    <nav className="bg-[#5E9387] px-2 sm:px-4 py-2.5 w-full z-20 sticky top-0 left-0">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
         <a
           class="toggleColour text-white my-4 leading-tight no-underline hover:no-underline font-bold text-xl lg:text-3xl"
@@ -30,7 +30,7 @@ const Navbar = () => {
           <button
             data-collapse-toggle="navbar-sticky"
             type="button"
-            className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
             aria-controls="navbar-sticky"
             aria-expanded="false"
           >
@@ -54,11 +54,11 @@ const Navbar = () => {
           className="hidden justify-between items-center w-full md:flex md:w-auto md:order-1"
           id="navbar-sticky"
         >
-          <ul className="flex flex-col p-4 mt-4  rounded-lg border md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          <ul className="flex flex-col p-4 mt-4  rounded-lg border md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0">
             <li>
               <a
                 href="#"
-                className="block py-2 pr-4 pl-3 font-extrabold text-white rounded md:bg-transparent md:text-white md:p-0 dark:text-white"
+                className="block py-2 pr-4 pl-3 font-extrabold text-white rounded md:bg-transparent md:text-white md:p-0"
                 aria-current="page"
               >
                 CarbonTracker
@@ -67,7 +67,7 @@ const Navbar = () => {
             <li>
               <a
                 href="#"
-                className="block py-2 pr-4 pl-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:font-bold  md:p-0 md:dark:hover:text-white dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                className="block py-2 pr-4 pl-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:font-bold  md:p-0"
               >
                 Dashboard
               </a>
@@ -75,7 +75,7 @@ const Navbar = () => {
             <li>
               <a
                 href="#"
-                className="block py-2 pr-4 pl-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:font-bold  md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                className="block py-2 pr-4 pl-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:font-bold  md:p-0"
               >
                 Rewards
               </a>
@@ -83,7 +83,7 @@ const Navbar = () => {
             <li>
               <a
                 href="#"
-                className="block py-2 pr-4 pl-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:font-bold  md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                className="block py-2 pr-4 pl-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:font-bold  md:p-0"
               >
                 Donate
               </a>
