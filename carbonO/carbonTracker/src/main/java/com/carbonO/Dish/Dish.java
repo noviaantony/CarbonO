@@ -1,5 +1,6 @@
 package com.carbonO.Dish;
 
+import com.carbonO.UserCarbonTracker.userCarbonTracker;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +28,9 @@ public class Dish {
     @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
     private List<DishRecipe> recipeIngredients;
     private Integer TotalCarbonFootprint;
+
+    @ManyToMany(mappedBy = "dishes")
+    private List<userCarbonTracker> userCarbonTrackers;
 
     public Dish() {
     }
