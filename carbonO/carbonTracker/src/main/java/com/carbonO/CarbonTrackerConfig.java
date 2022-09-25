@@ -1,19 +1,26 @@
-package com.carbonO.Dish;
+package com.carbonO;
 
+import com.carbonO.Dish.Dish;
+import com.carbonO.Dish.DishRecipe;
+import com.carbonO.Dish.DishRecipeRepository;
+import com.carbonO.Dish.DishRepository;
 import com.carbonO.Ingredient.Ingredient;
 import com.carbonO.Ingredient.IngredientRepository;
+import com.carbonO.UserCarbonTracker.userCarbonTracker;
+import com.carbonO.UserCarbonTracker.userCarbonTrakerRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Configuration
-public class DishConfig {
+public class CarbonTrackerConfig {
 
     @Bean
-    CommandLineRunner commandLineRunner(DishRepository dishRepository, IngredientRepository ingredientRepository, DishRecipeRepository dishRecipeRepository){
+    CommandLineRunner commandLineRunner(DishRepository dishRepository, IngredientRepository ingredientRepository, DishRecipeRepository dishRecipeRepository, userCarbonTrakerRepository userCarbonTrakerRepository) {
 
         return args -> {
             Ingredient ingredient1 = new Ingredient(
@@ -58,6 +65,23 @@ public class DishConfig {
             dishRecipeRepository.saveAll(
                     List.of(dishRecipe, dishRecipe2)
             );
+
+            userCarbonTracker userCarbonTracker1 = new userCarbonTracker(
+                    1L,
+                    dish2,
+                    new Date()
+            );
+
+            userCarbonTracker userCarbonTracker2 = new userCarbonTracker(
+                    2L,
+                    dish2,
+                    new Date()
+            );
+
+            userCarbonTrakerRepository.saveAll(
+                    List.of(userCarbonTracker1, userCarbonTracker2)
+            );
+
         };
     }
 }

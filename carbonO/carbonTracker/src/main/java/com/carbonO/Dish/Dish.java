@@ -29,7 +29,7 @@ public class Dish {
     private List<DishRecipe> recipeIngredients;
     private Integer TotalCarbonFootprint;
 
-    @ManyToMany(mappedBy = "dishes")
+    @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
     private List<userCarbonTracker> userCarbonTrackers;
 
     public Dish() {

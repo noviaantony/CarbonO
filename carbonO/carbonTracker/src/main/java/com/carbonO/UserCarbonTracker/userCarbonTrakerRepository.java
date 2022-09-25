@@ -2,7 +2,10 @@ package com.carbonO.UserCarbonTracker;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface userCarbonTrakerRepository extends JpaRepository<userCarbonTracker, Long> {
+import java.util.List;
 
+
+public interface userCarbonTrakerRepository extends JpaRepository<userCarbonTracker, Long> {
+    List<userCarbonTracker> findByUserId(Long userId);
 }
 

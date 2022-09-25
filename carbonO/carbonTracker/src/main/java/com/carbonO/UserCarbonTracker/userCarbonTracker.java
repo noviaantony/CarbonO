@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Getter
@@ -16,21 +15,31 @@ import java.util.List;
 public class userCarbonTracker {
     @Id
     @SequenceGenerator(
-            name = "dish_sequence",
-            sequenceName = "dish_sequence",
+            name = "userCarbonTracker_sequence",
+            sequenceName = "userCarbonTracker_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "dish_sequence"
+            generator = "userCarbonTracker_sequence"
     )
     private Long id;
     private Long userId;
-    private Long dishId;
     @Column(name="date_of_consumption")
     private Date dateConsumed;
+
+    @ManyToOne
+    @JoinColumn(name="dish_id")
+    private Dish dish;
 
     public userCarbonTracker() {
 
     }
+    public userCarbonTracker(Long userId, Dish dish, Date dateConsumed) {
+        this.userId = userId;
+        this.dateConsumed = dateConsumed;
+        this.dish = dish;
+    }
+
+
 }
