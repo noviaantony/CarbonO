@@ -30,7 +30,7 @@ const Navbar = () => {
         <div className="flex md:order-2">
           <button
             className="bg-primary-500 text-[#5E9387]  focus:bg-primary-700 focus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300
-            px-7 py-3 w-full bg-white text-center rounded-md block sm:w-auto font-bold hover:bg-gray-700 hover:text-white"
+            px-7 py-2 w-full bg-white text-center rounded-md block sm:w-auto font-bold hover:bg-gray-700 hover:text-white"
             as="a"
           >
             Log Out

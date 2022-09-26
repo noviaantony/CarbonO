@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar from './Navbar'
+
 import { ReactComponent as HeroSvg } from "./HeroSvg.svg";
 import { Link } from "react-router-dom";
 

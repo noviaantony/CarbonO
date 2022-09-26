@@ -3,7 +3,7 @@ import React from 'react'
 const Searchbar = () => {
   return (
  
-        <form className="m-10 mx-40">
+        <form className="m-10 mx-50">
           <label
             for="default-search"
             class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300"

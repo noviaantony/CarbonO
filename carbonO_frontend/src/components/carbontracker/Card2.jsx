@@ -11,30 +11,16 @@ const Card2 = () => {
   return (
     <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3  ">
       <article class="overflow-hidden rounded-lg bg-white">
-        <a href="#">
-          <img
-            alt="Placeholder"
-            class="block h-auto w-full"
-            src={ChickenRice}
-          />
-        </a>
-
+        <img alt="Placeholder" class="block h-auto w-full" src={ChickenRice} />
         <header class="flex items-center justify-between leading-tight p-2 md:p-4">
-          <h1 class="text-lg">
-            <a
-              class="no-underline hover:underline font-bold text-black"
-              href="#"
-            >
-              Singapore Chinese Rice
-            </a>
-          </h1>
+          <h1 class="text-lg font-bold">Singapore Chinese Rice</h1>
         </header>
 
         <footer class="flex items-center justify-between leading-none p-2 md:p-4 bg-white">
-          <a class="flex items-center no-underline  text-black" href="#">
+          <div class="flex items-center no-underline  text-black" href="#">
             <Link
               to="/ClaimReward"
-              className="inline-flex items-center py-1.5 px-3 text-xs font-xs text-center text-white bg-[#5E9387] rounded-lg  focus:outline-none transition duration-300 mr-3 font-semibold
+              className="inline-flex items-center py-2 px-3 text-xs font-xs text-center text-white bg-[#5E9387] rounded-lg  focus:outline-none transition duration-300 mr-3 font-semibold hover:bg-gray-700 hover:text-white
           "
               type="button"
             >
@@ -42,14 +28,14 @@ const Card2 = () => {
             </Link>
             <button
               href="#"
-              className="inline-flex items-center py-1.5 px-3 text-xs font-xs text-center bg-white text-[#5E9387] rounded-lg focus:outline-none transition duration-300 mr-3 font-semibold border-blue-300 border-solid
+              className="inline-flex items-center py-1.5 px-3 text-xs font-xs text-center bg-white text-[#5E9387] rounded-md focus:outline-none transition duration-300 mr-3 font-semibold border-blue-300 border-solid hover:text-gray-700
           "
               type="button"
               onClick={() => setShowModal(true)}
             >
               View Emission
             </button>
-          </a>
+          </div>
 
           {/* more info modal */}
           {showModal ? (
@@ -57,7 +43,7 @@ const Card2 = () => {
               <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
                 <div className="relative w-auto my-6 mx-auto max-w-3xl">
                   {/*content*/}
-                  <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                  <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-2/3 bg-white outline-none focus:outline-none">
                     {/*header*/}
                     <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                       <h3 className="text-3xl font-semibold">
@@ -66,11 +52,7 @@ const Card2 = () => {
                       <button
                         className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                         onClick={() => setShowModal(false)}
-                      >
-                        <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                          ×
-                        </span>
-                      </button>
+                      ></button>
                     </div>
                     {/*body*/}
                     <div className="relative p-6 flex-auto">
@@ -95,11 +77,6 @@ const Card2 = () => {
               <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
             </>
           ) : null}
-
-          <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
-            <span class="hidden">Like</span>
-            <i class="fa fa-heart"></i>
-          </a>
         </footer>
       </article>
     </div>
