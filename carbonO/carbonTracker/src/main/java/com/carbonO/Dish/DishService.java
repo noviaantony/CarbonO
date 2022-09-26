@@ -20,11 +20,11 @@ public class DishService {
         return dishRepository.findById(id).orElseThrow(()-> new DishNotFoundException("Dish by id " + id + " was not found"));
     }
     //create a new dish
-    public Dish addNewDish(String dishName) {
-        Dish dish = new Dish(dishName);
-
-        return dishRepository.save(dish);
-    }
+//    public Dish addNewDish(String dishName) {
+//        Dish dish = new Dish(dishName);
+//
+//        return dishRepository.save(dish);
+//    }
 
 
 }

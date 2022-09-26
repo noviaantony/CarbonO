@@ -37,7 +37,8 @@ public class CarbonTrackerConfig {
             ingredients.add("rice");
 
             Dish dish1 = new Dish(
-                    "Chicken Rice"
+                    "Chicken Rice",
+                    ingredient1.getCarbonFootprint() + ingredient2.getCarbonFootprint()
             );
 
             ingredientRepository.saveAll(
