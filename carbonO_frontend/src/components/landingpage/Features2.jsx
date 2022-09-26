@@ -19,10 +19,10 @@ const Features2 = () => {
           <div class="flex flex-wrap">
           <div class="w-5/6 sm:w-1/2 p-6 my-20">
             <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
-              Lorem ipsum dolor sit amet
+              Ease into a Low-Carbon Diet 
             </h3>
             <p class="text-gray-600 mb-8">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
+              Browse from our catalogue of international dishes and learn more about the carbon footprint of the food that you eat.
             </p>
           </div>
           <div class="w-full sm:w-1/2 p-6">
@@ -36,10 +36,10 @@ const Features2 = () => {
           <div class="w-full sm:w-1/2 p-6 mt-6 ">
             <div class="align-middle my-20">
               <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">
-                Lorem ipsum dolor sit amet
+                Track and Get Rewarded
               </h3>
               <p class="text-gray-600 mb-8">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
+                Ate a low-carbon food? Pick a dish from our menu and upload your receipt to claim CarbonO's e-credits! Accumulate your e-credits to claim attractive <i>and sustainable</i> rewards!
               </p>
             </div>
           </div>
@@ -47,10 +47,10 @@ const Features2 = () => {
         <div class="flex flex-wrap">
           <div class="w-5/6 sm:w-1/2 p-6">
             <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3 my-20">
-              Lorem ipsum dolor sit amet
+              Translate your efforts
             </h3>
             <p class="text-gray-600 mb-8">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
+              Donate your e-credits to campaigns and organisations fighting climate change. You can donate to the causes using your credits cards as well.
             </p>
           </div>
           <div class="w-full sm:w-1/2 p-6">

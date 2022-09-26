@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from './Navbar'
 import { ReactComponent as HeroSvg } from "./HeroSvg.svg";
+import { Link } from "react-router-dom";
 
 const Hero3 = () => {
   return (
@@ -19,13 +20,14 @@ const Hero3 = () => {
                   take the first step against climate change, translate your
                   efforts into more effort today!
                 </p>
-                <button
+                <Link
                   className="bg-primary-500 text-white focus:bg-primary-700 focus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300
                   px-7 py-3 w-full bg-[#5E9387] text-center rounded-md block sm:w-auto font-bold hover:shadow-md hover:bg-gray-700"
                   as="a"
+                  to = "/Signup"
                 >
                   Save the earth today!
-                </button>
+                </Link>
               </div>
               <div className=" lg:w-1/2 mt-16 lg:mt-0 lg:ml-16 ">
                 <HeroSvg classname="w-144 ml-auto" width="40rem" />

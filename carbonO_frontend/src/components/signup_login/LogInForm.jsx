@@ -1,6 +1,7 @@
 import React from 'react'
 import { HiMail, HiLockClosed } from "react-icons/hi";
 import { ReactComponent as SignInSvg } from "./SignInSvg.svg";
+import { Link } from "react-router-dom";
 
 
 
@@ -69,12 +70,12 @@ const LogInForm = () => {
               >
                 Sign In
               </a>
-              <a
-                href="#"
+              <Link
+                to = "/Signup"
                 className="text-xs font-bold text-gray-700 hover:text-[#5E9387] transition duration-300 mt-6 hover:underline-offset-4"
               >
                 Don't have an account? Sign up here
-              </a>
+              </Link>
             </div>
           </div>
           {/* Right Section */}
