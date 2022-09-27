@@ -30,7 +30,7 @@ function App() {
           <Route path="/ClaimReward" element={<ClaimReward />} />
         </Routes>
  
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
