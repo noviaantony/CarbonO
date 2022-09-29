@@ -1,53 +1,56 @@
-import React, {useState} from 'react'
-import Stepper from "../components/carbontracker/Stepper";
-import StepperControl from "../components/carbontracker/StepperControl";
-import ReceiptUpload from '../components/carbontracker/uploadSteps/ReceiptUpload';
-import ConfirmReceiptDetails from '../components/carbontracker/uploadSteps/ConfirmReceiptDetails';
-import ClaimedCredits from '../components/carbontracker/uploadSteps/ClaimedCredits';
+import React from 'react'
+import axios from "axios";
+import Dropzone from "../components/carbontracker/Dropzone"
+
+
 
 const ClaimReward = () => {
 
-  const [currentStep, setCurrentStep] = useState(1);
+  const postData = () => {
+    // const apiKey = "AIzaSyC3rJnOOPzFe0snLWmBrgukHmSqFxlimU8";
 
-  const steps = [
-    "Upload Receipt",
-    "Confirm Details",
-    "Claim E-credits"
-  ];
+    console.log("in");
 
-  const displayStep = (step) => {
-    switch (step) {
-      case 1:
-        return <ReceiptUpload />;
-      case 2:
-        return <ConfirmReceiptDetails />;
-      case 3:
-        return <ClaimedCredits />;
-    }
-  }
+    let body = {
+      requests: [
+        {
+          image: {
+            source: {
+              imageUri:
+                "https://p2d7x8x2.stackpathcdn.com/content/uploads/2016/05/Bill.jpg", //image URL
+            },
+          },
+          features: [
+            {
+              type: "TEXT_DETECTION",
+              maxResults: 1,
+            },
+          ],
+        },
+      ],
+    };
 
-  const handleClick = (direction) => {
-    let newStep = currentStep;
-    direction == "next" ? newStep++ : newStep--;
-    // Check if steps are within the boundary
-    if (newStep > 0 && newStep <= steps.length) {
-      setCurrentStep(newStep);
-    }
+    axios
+      .post(
+        "https://vision.googleapis.com/v1/images:annotate?key=AIzaSyC3rJnOOPzFe0snLWmBrgukHmSqFxlimU8",
+        body
+      )
+      .then((response) => console.log(response));
   };
+
 
   return (
     <div>
-      <div className="md: w-1/2 mx-auto shadow-l rounded-2xl pb-2 bg-white">
-        <div className=" container horizontal mt-5">
-          <Stepper steps = {steps} currentStep = {currentStep}/>
-        </div>
-
-        <StepperControl 
-        handleClick= {handleClick}
-        currentStep={currentStep}
-        steps = {steps}
-        
-        />
+      <div className="md: w-1/2 mx-auto shadow-l rounded-2xl pb-2 bg-white mt-32">
+        <Dropzone />
+        <button
+          className="bg-primary-500 bg-[#5E9387]  focus:bg-primary-700 focus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300
+            px-7 py-2 w-full text-white text-center rounded-md block sm:w-auto font-bold hover:bg-gray-700 hover:text-white mt-20"
+          as="a"
+          onClick={() => postData()}
+        >
+          Upload Receipt
+        </button>
       </div>
     </div>
   );

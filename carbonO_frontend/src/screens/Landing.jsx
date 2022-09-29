@@ -1,14 +1,14 @@
 import React from "react";
 import Footer from "../components/footer/Footer";
-import Features2 from "../components/landingpage/Features2";
-import Hero3 from "../components/landingpage/Hero3";
+import Features from "../components/landingpage/Features";
+import Hero from "../components/landingpage/Hero";
 
 const Landing = () => {
 
   return (
     <div>
-      <Hero3 />
-      <Features2 />
+      <Hero />
+      <Features />
     </div>
   );
 };

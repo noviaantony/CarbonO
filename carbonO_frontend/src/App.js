@@ -18,18 +18,18 @@ function App() {
   return (
     <>
       <Navbar />
+      <Routes>
+        <Route path="/Home" element={<Landing />} />
+        <Route path="/CarbonTracker" element={<CarbonTracker />} />
+        <Route path="/Login" element={<LogInForm />} />
+        <Route path="/Signup" element={<SignUpForm />} />
+        <Route path="/Dashboard" element={<Dashboard />} />
+        <Route path="/Donate" element={<Donate />} />
+        <Route path="/Rewards" element={<Rewards />} />
+        <Route path="/ClaimReward" element={<ClaimReward />} />
+      </Routes>
+      <Footer />
 
-        <Routes>
-          <Route path="/Home" element={<Landing />} />
-          <Route path="/CarbonTracker" element={<CarbonTracker />} />
-          <Route path="/Login" element={<LogInForm />} />
-          <Route path="/Signup" element={<SignUpForm />} />
-          <Route path="/Dashboard" element={<Dashboard />} />
-          <Route path="/Donate" element={<Donate />} />
-          <Route path="/Rewards" element={<Rewards />} />
-          <Route path="/ClaimReward" element={<ClaimReward />} />
-        </Routes>
- 
       {/* <Footer /> */}
     </>
   );
