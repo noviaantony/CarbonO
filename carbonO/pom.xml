@@ -7,6 +7,7 @@
 		<module>user</module>
         <module>userRewardPoints</module>
         <module>CarbonTracker</module>
+        <module>api-gateway</module>
     </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
