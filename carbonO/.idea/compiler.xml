@@ -14,6 +14,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="api-gateway" target="17" />
+      <module name="carbonO" target="17" />
       <module name="CarbonTracker" target="17" />
       <module name="user" target="17" />
       <module name="userRewardPoints" target="17" />
@@ -23,8 +25,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="CarbonTracker" options="-parameters" />
       <module name="api-gateway" options="-parameters" />
-      <module name="carbonO" options="-parameters" />
-      <module name="carbonO-microservices" options="" />
+      <module name="carbonO" options="" />
       <module name="user" options="-parameters" />
       <module name="userRewardPoints" options="-parameters" />
     </option>

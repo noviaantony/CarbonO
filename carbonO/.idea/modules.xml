@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/carbonTracker/CarbonTracker.iml" filepath="$PROJECT_DIR$/carbonTracker/CarbonTracker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/api-gateway.iml" filepath="$PROJECT_DIR$/api-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../carbonO.iml" filepath="$PROJECT_DIR$/../carbonO.iml" />
       <module fileurl="file://$PROJECT_DIR$/user/user.iml" filepath="$PROJECT_DIR$/user/user.iml" />
       <module fileurl="file://$PROJECT_DIR$/userRewardPoints/userRewardPoints.iml" filepath="$PROJECT_DIR$/userRewardPoints/userRewardPoints.iml" />
     </modules>
