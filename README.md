@@ -4,8 +4,8 @@
 > - [Zhao Xing](https://github.com/Newbieshine/)
 > - [Yuan Sheng](https://github.com/ChongYuanSheng/)
 > - [Novia](http://github.com/noviaantony/)
-> - [Ariff](http://github.com//)
-> - [Alison]
+> - [Ariff](http://github.com/KimmyChanga/)
+> - [Alison](http://github.com//)
 
 ## Cloning Repo
 Open your git cmd console, cd to the directory of your choosing example cd C:/users/(name)/Desktop/
@@ -40,4 +40,3 @@ Code submission for [SMU CS203]
 - [ReactJs](https://reactjs.org/) 
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Axios](https://www.axios.com/)
-
