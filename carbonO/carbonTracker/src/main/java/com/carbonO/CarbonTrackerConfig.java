@@ -23,31 +23,25 @@ public class CarbonTrackerConfig {
     CommandLineRunner commandLineRunner(DishRepository dishRepository, IngredientRepository ingredientRepository, DishRecipeRepository dishRecipeRepository, userCarbonTrakerRepository userCarbonTrakerRepository) {
 
         return args -> {
-            Ingredient ingredient1 = new Ingredient(
-                    "chicken",
-                    5
-            );
-            Ingredient ingredient2 = new Ingredient(
-                    "rice",
-                    2
-            );
+            //arraylist of ingredients
+            List<Ingredient> ingredients = new ArrayList<>();
 
-            List<String> ingredients = new ArrayList<>();
-            ingredients.add("chicken");
-            ingredients.add("rice");
+            ingredients.add(new Ingredient("chicken",1600));
+            ingredients.add(new Ingredient("rice", 565));
 
             Dish dish1 = new Dish(
                     "Chicken Rice",
-                    ingredient1.getCarbonFootprint() + ingredient2.getCarbonFootprint()
+                    ingredients.get(0).getCarbonFootprint() + ingredients.get(1).getCarbonFootprint()
             );
 
             ingredientRepository.saveAll(
-                    List.of(ingredient1, ingredient2)
+                    List.of(ingredients.get(0), ingredients.get(1))
             );
             dishRepository.saveAll(
                     List.of(dish1)
             );
 
+            //saving new dish recipe
             Dish dish2 = dishRepository.findByDishName("Chicken Rice").get();
             Ingredient ingredient3 = ingredientRepository.findByIngredientName("chicken").get();
             Ingredient ingredient4 = ingredientRepository.findByIngredientName("rice").get();
@@ -67,6 +61,7 @@ public class CarbonTrackerConfig {
                     List.of(dishRecipe, dishRecipe2)
             );
 
+            //user sample for food consumed
             userCarbonTracker userCarbonTracker1 = new userCarbonTracker(
                     1L,
                     dish2,
