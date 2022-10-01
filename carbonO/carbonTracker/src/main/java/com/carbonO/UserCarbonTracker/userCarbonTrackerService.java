@@ -14,9 +14,9 @@ public class userCarbonTrackerService {
         this.userCarbonTrakerRepository = userCarbonTrakerRepository;
     }
 
-    public Integer getUserTotalCarbonConsumption(Long userId) {
+    public Double getUserTotalCarbonConsumption(Long userId) {
         List<userCarbonTracker> userCarbonTransactions = userCarbonTrakerRepository.findAllByUserId(userId);
-        Integer totalCarbonConsumption = 0;
+        Double totalCarbonConsumption = 0.0;
 
         for (userCarbonTracker userCarbonTransaction : userCarbonTransactions) {
             totalCarbonConsumption += userCarbonTransaction.getDish().getTotalCarbonFootprint();

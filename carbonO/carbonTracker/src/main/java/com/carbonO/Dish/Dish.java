@@ -27,15 +27,24 @@ public class Dish {
     private String dishName;
     @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
     private List<DishRecipe> recipeIngredients;
-    private Integer totalCarbonFootprint;
+    private Double totalCarbonFootprint;
 
     @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
     private List<userCarbonTracker> userCarbonTrackers;
 
     public Dish() {
     }
-    public Dish(String dishName, Integer totalCarbonFootprint) {
+
+    public Dish(String dishName) {
         this.dishName = dishName;
+    }
+
+    public Dish(String dishName, Double totalCarbonFootprint) {
+        this.dishName = dishName;
+        this.totalCarbonFootprint = totalCarbonFootprint;
+    }
+
+    public void setTotalCarbonFootprint(Double totalCarbonFootprint) {
         this.totalCarbonFootprint = totalCarbonFootprint;
     }
 }

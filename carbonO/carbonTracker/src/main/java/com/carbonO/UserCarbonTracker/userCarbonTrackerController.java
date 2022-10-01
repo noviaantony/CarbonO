@@ -20,7 +20,7 @@ public class userCarbonTrackerController {
 
     //Get all user total carbon consumption
     @GetMapping("/getUserTotalCarbonConsumption")
-    public ResponseEntity<Integer> getUserTotalCarbonConsumption(@RequestParam("userId") Long userId) {
+    public ResponseEntity<Double> getUserTotalCarbonConsumption(@RequestParam("userId") Long userId) {
         return ResponseEntity.ok().body(userCarbonTrackerService.getUserTotalCarbonConsumption(userId));
     }
 
