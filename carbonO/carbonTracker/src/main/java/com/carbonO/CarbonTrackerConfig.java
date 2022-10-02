@@ -9,12 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
 
 @Configuration
 public class CarbonTrackerConfig {
 
+    @Bean
+    public RestTemplate restTemplate(){
+        return new RestTemplate();
+    }
     @Autowired
     DishService dishService;
 
@@ -862,22 +867,22 @@ public class CarbonTrackerConfig {
 
 
 
-//            //user sample for food consumed
-//            userCarbonTracker userCarbonTracker1 = new userCarbonTracker(
-//                    1L,
-//                    dish2,
-//                    new Date()
-//            );
-//
-//            userCarbonTracker userCarbonTracker2 = new userCarbonTracker(
-//                    2L,
-//                    dish2,
-//                    new Date()
-//            );
-//
-//            userCarbonTrakerRepository.saveAll(
-//                    List.of(userCarbonTracker1, userCarbonTracker2)
-//            );
+            //user sample for food consumed
+            userCarbonTracker userCarbonTracker1 = new userCarbonTracker(
+                    1L,
+                    dish2,
+                    new Date()
+            );
+
+            userCarbonTracker userCarbonTracker2 = new userCarbonTracker(
+                    2L,
+                    dish2,
+                    new Date()
+            );
+
+            userCarbonTrakerRepository.saveAll(
+                    List.of(userCarbonTracker1, userCarbonTracker2)
+            );
 
         };
     }

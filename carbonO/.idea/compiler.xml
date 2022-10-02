@@ -19,7 +19,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="CarbonTracker" options="-parameters" />
       <module name="api-gateway" options="-parameters" />
-      <module name="carbonO" options="-parameters" />
+      <module name="carbonO" options="" />
       <module name="eureka-server" options="-parameters" />
       <module name="user" options="-parameters" />
       <module name="userRewardPoints" options="-parameters" />
