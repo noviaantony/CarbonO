@@ -6,7 +6,7 @@ import CarbonTracker from "./screens/CarbonTracker";
 import Dashboard from "./screens/Dashboard";
 import Donate from "./screens/Donate";
 import Rewards from "./screens/Rewards";
-import ClaimReward2 from "./screens/ClaimReward2";
+// import ClaimReward2 from "./screens/ClaimReward2";
 import Footer from "./components/footer/Footer";
 
 import Navbar from "./screens/Navbar";
@@ -26,7 +26,7 @@ function App() {
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/Donate" element={<Donate />} />
         <Route path="/Rewards" element={<Rewards />} />
-        <Route path="/ClaimReward" element={<ClaimReward2 />} />
+        {/* <Route path="/ClaimReward" element={<ClaimReward2 />} /> */}
       </Routes>
       {/* <Footer /> */}
 

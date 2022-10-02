@@ -1,9 +1,12 @@
 import React from 'react'
+import Wallet from '../components/dashboard/Wallet'
+import Table from "../components/dashboard/Table";
 
 const Dashboard = () => {
   return (
     <div>
-      this is the dashboard
+      <Wallet/>
+      <Table/>
     </div>
   )
 }
