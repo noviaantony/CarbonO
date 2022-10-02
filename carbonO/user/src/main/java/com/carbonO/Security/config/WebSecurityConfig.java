@@ -2,7 +2,6 @@ package com.carbonO.Security.config;
 
 import com.carbonO.Security.CustomAuthenticationFilter;
 import com.carbonO.Security.CustomAuthorizationFilter;
-import com.carbonO.User.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -26,14 +25,13 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserService UserService;
     private final UserDetailsService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean());
-        customAuthenticationFilter.setFilterProcessesUrl("/api/v1/carbonO/login");
+        customAuthenticationFilter.setFilterProcessesUrl("/api/v1/carbonO/user/login");
         http.cors().and().csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.authorizeRequests().antMatchers("/api/v1/carbonO/login/**").permitAll();
@@ -66,7 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(bCryptPasswordEncoder);
-        provider.setUserDetailsService(UserService);
+        provider.setUserDetailsService(userDetailsService);
         return provider;
     }
 

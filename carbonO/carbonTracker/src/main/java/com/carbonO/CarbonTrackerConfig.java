@@ -19,7 +19,8 @@ public class CarbonTrackerConfig {
     DishService dishService;
 
     @Bean
-    CommandLineRunner commandLineRunner(DishRepository dishRepository, IngredientRepository ingredientRepository, DishRecipeRepository dishRecipeRepository, userCarbonTrakerRepository userCarbonTrakerRepository) {
+    CommandLineRunner commandLineRunner(DishRepository dishRepository, IngredientRepository ingredientRepository,
+                                        DishRecipeRepository dishRecipeRepository, userCarbonTrakerRepository userCarbonTrakerRepository, DishKeywordsRepository dishKeywordsRepository) {
 
         return args -> {
             //hashset of ingredients
@@ -80,6 +81,7 @@ public class CarbonTrackerConfig {
             ingredients2.add(new Ingredient("Carrot", 0.18));
             ingredients2.add(new Ingredient("Egg Noodles", 0.37));
             ingredients2.add(new Ingredient("Char Siew", 2.47));
+            ingredients2.add(new Ingredient("Chilli", 0.6));
             ingredients2.add(new Ingredient("Cai Xin", 0.09));
             ingredients2.add(new Ingredient("Pork", 1.73));
             ingredients2.add(new Ingredient("Mushroom", 0.43));
@@ -91,41 +93,94 @@ public class CarbonTrackerConfig {
                     "Chicken Rice"
             );
 
+            ArrayList<DishKeywords> keywords = new ArrayList<>();
+            keywords.add(new DishKeywords(dish1,"Chicken"));
+            keywords.add(new DishKeywords(dish1,"rice"));
+            keywords.add(new DishKeywords(dish1,"chicken rice"));
+
             Dish dish2 = new Dish(
                     "Salmon Burger"
             );
+
+            keywords.add(new DishKeywords(dish2,"salmon"));
+            keywords.add(new DishKeywords(dish2,"burger"));
+            keywords.add(new DishKeywords(dish2,"salmon burger"));
+            keywords.add(new DishKeywords(dish2,"fish"));
+
 
             Dish dish3 = new Dish(
                     "Hokkien Mee"
             );
 
+            keywords.add(new DishKeywords(dish3,"hokkien mee"));
+            keywords.add(new DishKeywords(dish3,"hokkien noodles"));
+            keywords.add(new DishKeywords(dish3,"noodles"));
+
             Dish dish4 = new Dish(
                     "Nasi Lemak"
             );
+
+            keywords.add(new DishKeywords(dish4,"Nasi Lemak"));
+            keywords.add(new DishKeywords(dish4,"Nasi"));
+            keywords.add(new DishKeywords(dish4,"Lemak"));
 
             Dish dish5 = new Dish(
                     "Margherita Pizza"
             );
 
+            keywords.add(new DishKeywords(dish5,"Margherita Pizza"));
+            keywords.add(new DishKeywords(dish5,"Pizza"));
+            keywords.add(new DishKeywords(dish5,"Margherita"));
+            keywords.add(new DishKeywords(dish5,"cheese pizza"));
+            keywords.add(new DishKeywords(dish5,"Mozerella Pizza"));
+
             Dish dish6 = new Dish(
                     "Aglio Olio"
             );
+
+            keywords.add(new DishKeywords(dish6,"Aglio Olio"));
+            keywords.add(new DishKeywords(dish6,"Aglio"));
+            keywords.add(new DishKeywords(dish6,"Olio"));
+            keywords.add(new DishKeywords(dish6,"Pasta"));
 
             Dish dish7 = new Dish(
                     "Fish Head Curry"
             );
 
+            keywords.add(new DishKeywords(dish7,"Fish Head Curry"));
+            keywords.add(new DishKeywords(dish7,"Fish"));
+            keywords.add(new DishKeywords(dish7,"Curry"));
+            keywords.add(new DishKeywords(dish7,"Fish Curry"));
+
+
             Dish dish8 = new Dish(
                     "Fish and Chips"
             );
+
+            keywords.add(new DishKeywords(dish8,"Fish and Chips"));
+            keywords.add(new DishKeywords(dish8,"Fish"));
+            keywords.add(new DishKeywords(dish8,"Chips"));
+            keywords.add(new DishKeywords(dish8,"Fries"));
+            keywords.add(new DishKeywords(dish8,"Western")); // maybe will add a cuisine tag
 
             Dish dish9 = new Dish(
                     "Beef Stew"
             );
 
+
+            keywords.add(new DishKeywords(dish9,"Beef Stew"));
+            keywords.add(new DishKeywords(dish9,"Beef"));
+            keywords.add(new DishKeywords(dish9,"Stew"));
+
             Dish dish10 = new Dish(
                     "Wanton Mee"
             );
+
+            keywords.add(new DishKeywords(dish10,"Wanton Mee"));
+            keywords.add(new DishKeywords(dish10,"Wanton"));
+            keywords.add(new DishKeywords(dish10,"Mee"));
+            keywords.add(new DishKeywords(dish10,"Noodles"));
+            keywords.add(new DishKeywords(dish10,"Wanton Noodles"));
 
             dishSet.add(dish1);
             dishSet.add(dish2);
@@ -145,6 +200,11 @@ public class CarbonTrackerConfig {
             for (Dish dish : dishSet) {
                 dishRepository.save(dish);
             }
+
+            for (DishKeywords keyword : keywords) {
+                dishKeywordsRepository.save(keyword);
+            }
+
 
             // Saving Chicken Rice
             Dish newDish = dishRepository.findByDishName("Chicken Rice").get();
@@ -540,7 +600,7 @@ public class CarbonTrackerConfig {
             Ingredient new6Ingredient1 = ingredientRepository.findByIngredientName("Spaghetti").get();
             Ingredient new6Ingredient2 = ingredientRepository.findByIngredientName("Olive Oil").get();
             Ingredient new6Ingredient3 = ingredientRepository.findByIngredientName("Garlic").get();
-            Ingredient new6Ingredient4 = ingredientRepository.findByIngredientName("Pepper").get();
+            Ingredient new6Ingredient4 = ingredientRepository.findByIngredientName("Black Pepper").get();
 
             DishRecipe new6DishRecipe1 = new DishRecipe(
                     newDish6,
@@ -570,7 +630,7 @@ public class CarbonTrackerConfig {
                     List.of(new6DishRecipe1,new6DishRecipe2,new6DishRecipe3,new6DishRecipe4)
             );
 
-            // Saving Fish Head Curry
+//             Saving Fish Head Curry
             Dish newDish7 = dishRepository.findByDishName("Fish Head Curry").get();
             Ingredient new7Ingredient1 = ingredientRepository.findByIngredientName("Red Sea Bream").get();
             Ingredient new7Ingredient2 = ingredientRepository.findByIngredientName("Curry Paste").get();
@@ -612,13 +672,13 @@ public class CarbonTrackerConfig {
                     List.of(new7DishRecipe1,new7DishRecipe2,new7DishRecipe3,new7DishRecipe4,new7DishRecipe5)
             );
 
-            // Saving Fish and Chips
+//             Saving Fish and Chips
             Dish newDish8 = dishRepository.findByDishName("Fish and Chips").get();
             Ingredient new8Ingredient1 = ingredientRepository.findByIngredientName("Potato").get();
             Ingredient new8Ingredient2 = ingredientRepository.findByIngredientName("Milk").get();
             Ingredient new8Ingredient3 = ingredientRepository.findByIngredientName("All-Purpose Flour").get();
             Ingredient new8Ingredient4 = ingredientRepository.findByIngredientName("Fish Fillet").get();
-            Ingredient new8Ingredient5 = ingredientRepository.findByIngredientName("Pepper").get();
+            Ingredient new8Ingredient5 = ingredientRepository.findByIngredientName("Black Pepper").get();
             Ingredient new8Ingredient6 = ingredientRepository.findByIngredientName("Egg").get();
 
             DishRecipe new8DishRecipe1 = new DishRecipe(
@@ -661,7 +721,7 @@ public class CarbonTrackerConfig {
                     List.of(new8DishRecipe1,new8DishRecipe2,new8DishRecipe3,new8DishRecipe4,new8DishRecipe5,new8DishRecipe6)
             );
 
-            // Saving Beef Stew
+//            // Saving Beef Stew
             Dish newDish9 = dishRepository.findByDishName("Beef Stew").get();
             Ingredient new9Ingredient1 = ingredientRepository.findByIngredientName("Beef").get();
             Ingredient new9Ingredient2 = ingredientRepository.findByIngredientName("Beef Broth").get();
@@ -710,7 +770,7 @@ public class CarbonTrackerConfig {
                     List.of(new9DishRecipe1,new9DishRecipe2,new9DishRecipe3,new9DishRecipe4,new9DishRecipe5,new9DishRecipe6)
             );
 
-            // Saving Wanton Mee
+//            // Saving Wanton Mee
             Dish newDish10 = dishRepository.findByDishName("Wanton Mee").get();
             Ingredient new10Ingredient1 = ingredientRepository.findByIngredientName("Egg Noodles").get();
             Ingredient new10Ingredient2 = ingredientRepository.findByIngredientName("Char Siew").get();
@@ -795,8 +855,8 @@ public class CarbonTrackerConfig {
                             new10DishRecipe7,new10DishRecipe8,new10DishRecipe9,new10DishRecipe10,new10DishRecipe11)
             );
 
-            // Adding total carbon footprint
-            dishService.updateTotalCarbonFootprint(newDish);
+//             Adding total carbon footprint
+            dishService.updateTotalCarbonFootprint();
 
 
 

@@ -28,6 +28,9 @@ public class Dish {
     @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
     private List<DishRecipe> recipeIngredients;
     private Double totalCarbonFootprint;
+    @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
+    private List<DishKeywords> dishKeywords;
+    private String photo;
 
     @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
     private List<userCarbonTracker> userCarbonTrackers;

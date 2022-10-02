@@ -5,6 +5,7 @@ import com.carbonO.Ingredient.Ingredient;
 import com.carbonO.Ingredient.IngredientRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -29,20 +30,39 @@ public class DishService {
 //        return dishRepository.save(dish);
 //    }
 
-    public void updateTotalCarbonFootprint(Dish dish) {
-        List<DishRecipe> dishRecipeList = dish.getRecipeIngredients();
+    @Transactional
+    public void updateTotalCarbonFootprint() {
+//        Dish dish = getDishById(dishId);
+//        List<DishRecipe> dishRecipeList = dish.getRecipeIngredients();
+//
+//        Double total = 0.0;
+//        for (DishRecipe dishRecipe : dishRecipeList) {
+//
+//            Ingredient ingredient = dishRecipe.getIngredient();
+//            Double quantity = dishRecipe.getQuantity();
+//            Double footprint = ingredient.getCarbonFootprint();
+//
+//            total += quantity * footprint;
+//        }
 
-        Double total = 0.0;
-        for (DishRecipe dishRecipe : dishRecipeList) {
+//        dish.setTotalCarbonFootprint(total);
+        List<Dish> dishList = dishRepository.findAll();
+        for (Dish dish : dishList) {
+            List<DishRecipe> dishRecipeList = dish.getRecipeIngredients();
 
-            Ingredient ingredient = dishRecipe.getIngredient();
-            Double quantity = dishRecipe.getQuantity();
-            Double footprint = ingredient.getCarbonFootprint();
+            Double total = 0.0;
+            for (DishRecipe dishRecipe : dishRecipeList) {
 
-            total += quantity * footprint;
+                Ingredient ingredient = dishRecipe.getIngredient();
+                Double quantity = dishRecipe.getQuantity();
+                Double footprint = ingredient.getCarbonFootprint();
+
+                total += quantity * footprint;
+            }
+
+            dish.setTotalCarbonFootprint(total);
+            dishRepository.save(dish);
         }
-
-        dish.setTotalCarbonFootprint(total);
     }
 
 }
