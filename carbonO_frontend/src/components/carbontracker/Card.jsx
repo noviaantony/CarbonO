@@ -103,7 +103,7 @@ const Card2 = ({DishTitle, DishImage}) => {
 
 
   return (
-    <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3  ">
+    <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 font-default">
       <article class="overflow-hidden rounded-lg bg-white">
         <img alt="Placeholder" class="block h-72 w-full" src={DishImage} />
         <header class="flex items-left  leading-tight p-2 md:p-4 ">

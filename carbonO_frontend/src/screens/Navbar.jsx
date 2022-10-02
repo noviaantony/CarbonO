@@ -7,7 +7,7 @@ const Navbar = () => {
 
 
   return (
-    <nav className="bg-[#5E9387] px-2 sm:px-4 py-2.5 w-full z-20 sticky top-0 left-0">
+    <nav className="bg-[#5E9387] px-2 sm:px-4 py-2.5 w-full z-20 sticky top-0 left-0 font-default">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
         <Link
           class="toggleColour text-white my-4 leading-tight no-underline hover:no-underline font-bold text-xl lg:text-3xl"

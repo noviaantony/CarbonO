@@ -18,7 +18,7 @@ const FileUploader = ({
   };
 
   return (
-    <div className="file-uploader">
+    <div className="file-uploader font-default">
       <input type="file" onChange={handleFileInput} />
       <button
         onClick={(e) => fileInput.current && fileInput.current.click()}
