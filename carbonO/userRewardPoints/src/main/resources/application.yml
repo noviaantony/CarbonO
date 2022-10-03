@@ -1,11 +1,11 @@
 Server:
-    port: 8081
+    port: 8083
 spring:
     application:
             name: userReward
     datasource:
         password: zhaoxing
-        url: jdbc:postgresql://localhost:5433/userReward
+        url: jdbc:postgresql://localhost:5432/userReward
         username: xxhea
     jpa:
         hibernate:
