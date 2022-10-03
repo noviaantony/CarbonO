@@ -10,8 +10,8 @@
         <module name="api-gateway" />
         <module name="userRewardPoints" />
         <module name="eureka-server" />
-        <module name="user" />
         <module name="CarbonTracker" />
+        <module name="user" />
       </profile>
     </annotationProcessing>
   </component>
