@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping(path ="api/v1/carbonO")
+@RequestMapping(path ="api/v1/carbonO/user")
 public class UserController {
     private final UserService userService;
 
@@ -20,9 +20,13 @@ public class UserController {
     }
 
 
-    @GetMapping("/users")
+    @GetMapping("/getAllUsers")
     public ResponseEntity<List<User>> getUsers(){
         return ResponseEntity.ok().body(userService.getUsers());
+    }
+    @GetMapping("/authorizeUser")
+    public ResponseEntity<String> isAuthorize(){
+        return ResponseEntity.ok().body("Authorized");
     }
 
 }

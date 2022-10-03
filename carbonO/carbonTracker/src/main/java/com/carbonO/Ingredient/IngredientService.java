@@ -11,7 +11,7 @@ public class IngredientService {
     }
 
     //create a new ingredient
-    public Ingredient addNewIngredient(String ingredientName, Integer carbonFootprint) {
+    public Ingredient addNewIngredient(String ingredientName, Double carbonFootprint) {
         Ingredient ingredient = new Ingredient(ingredientName, carbonFootprint);
 
         return ingredientRepository.save(ingredient);

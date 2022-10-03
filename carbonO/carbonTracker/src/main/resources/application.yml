@@ -5,15 +5,23 @@ spring:
             name: carbonTracker
     datasource:
         password: zhaoxing
-        url: jdbc:postgresql://localhost:5434/carbonTracker
+        url: jdbc:postgresql://localhost:5432/carbonTracker
         username: xxhea
     jpa:
         hibernate:
             ddl-auto: create-drop
+
         properties:
             hibernate:
                 dialect: org.hibernate.dialect.PostgreSQLDialect
                 format_sql: true
+                globally_quoted_identifiers: true
         show-sql: true
 
+eureka:
+    client:
+        service-url:
+            defaultZone: http://localhost:8761/eureka/
+        fetch-registry: true
+        register-with-eureka: true
 

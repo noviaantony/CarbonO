@@ -27,9 +27,10 @@ public class Ingredient {
     private String ingredientName;
     @OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL)
     private List<DishRecipe> dishRecipe;
-    private Integer carbonFootprint;
+    private Double carbonFootprint;
+    private String photo;
 
-    public Ingredient(String ingredientName, Integer carbonFootprint) {
+    public Ingredient(String ingredientName, Double carbonFootprint) {
         this.ingredientName = ingredientName;
         this.carbonFootprint = carbonFootprint;
     }

@@ -1,8 +1,12 @@
 package com.carbonO.Dish;
 
 import com.carbonO.Exceptions.DishNotFoundException;
+import com.carbonO.Ingredient.Ingredient;
 import com.carbonO.Ingredient.IngredientRepository;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class DishService {
@@ -26,5 +30,39 @@ public class DishService {
 //        return dishRepository.save(dish);
 //    }
 
+    @Transactional
+    public void updateTotalCarbonFootprint() {
+//        Dish dish = getDishById(dishId);
+//        List<DishRecipe> dishRecipeList = dish.getRecipeIngredients();
+//
+//        Double total = 0.0;
+//        for (DishRecipe dishRecipe : dishRecipeList) {
+//
+//            Ingredient ingredient = dishRecipe.getIngredient();
+//            Double quantity = dishRecipe.getQuantity();
+//            Double footprint = ingredient.getCarbonFootprint();
+//
+//            total += quantity * footprint;
+//        }
+
+//        dish.setTotalCarbonFootprint(total);
+        List<Dish> dishList = dishRepository.findAll();
+        for (Dish dish : dishList) {
+            List<DishRecipe> dishRecipeList = dish.getRecipeIngredients();
+
+            Double total = 0.0;
+            for (DishRecipe dishRecipe : dishRecipeList) {
+
+                Ingredient ingredient = dishRecipe.getIngredient();
+                Double quantity = dishRecipe.getQuantity();
+                Double footprint = ingredient.getCarbonFootprint();
+
+                total += quantity * footprint;
+            }
+
+            dish.setTotalCarbonFootprint(total);
+            dishRepository.save(dish);
+        }
+    }
 
 }

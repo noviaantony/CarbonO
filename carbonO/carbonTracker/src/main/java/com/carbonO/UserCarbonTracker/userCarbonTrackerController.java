@@ -2,8 +2,14 @@ package com.carbonO.UserCarbonTracker;
 
 import com.carbonO.Dish.Dish;
 import com.carbonO.Dish.DishRepository;
+import org.apache.http.protocol.HTTP;
+import org.springframework.http.HttpCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
+
+import javax.servlet.http.HttpServletResponse;
 
 
 @RestController
@@ -11,17 +17,17 @@ import org.springframework.web.bind.annotation.*;
 public class userCarbonTrackerController {
     private final userCarbonTrackerService userCarbonTrackerService;
     private final DishRepository dishRepository;
+//    private final RestTemplate restTemplate;
 
-    public userCarbonTrackerController(userCarbonTrackerService userCarbonTrackerService, DishRepository dishRepository) {
+    public userCarbonTrackerController(userCarbonTrackerService userCarbonTrackerService, DishRepository dishRepository, WebClient.Builder webClientBuilder) {
         this.userCarbonTrackerService = userCarbonTrackerService;
         this.dishRepository = dishRepository;
     }
 
-
     //Get all user total carbon consumption
     @GetMapping("/getUserTotalCarbonConsumption")
-    public ResponseEntity<Integer> getUserTotalCarbonConsumption(@RequestParam("userId") Long userId) {
-        return ResponseEntity.ok().body(userCarbonTrackerService.getUserTotalCarbonConsumption(userId));
+    public ResponseEntity<Double> getUserTotalCarbonConsumption(@RequestParam("userId") Long userId, @RequestHeader("Authorization") String token ) {
+            return ResponseEntity.ok().body(userCarbonTrackerService.getUserTotalCarbonConsumption(userId, token));
     }
 
     //Post user dish consumed

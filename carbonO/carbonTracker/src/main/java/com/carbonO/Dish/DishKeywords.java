@@ -1,17 +1,16 @@
-package com.carbonO.dishCarbonInfo;
+package com.carbonO.Dish;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
+@NoArgsConstructor
 @Getter
 @Setter
-@AllArgsConstructor
-public class Dish {
+public class DishKeywords {
     @Id
     @SequenceGenerator(
             name = "dish_sequence",
@@ -23,12 +22,15 @@ public class Dish {
             generator = "dish_sequence"
     )
     private Long id;
-    private String dishName;
-    @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
-    private List<DishRecipe> recipeIngredients;
-    private Integer TotalCarbonFootprint;
 
-    public Dish() {
+    @ManyToOne
+    @JoinColumn(name = "dish_Id")
+    private Dish dish;
+    private String keyword;
 
+    public DishKeywords(Dish dish, String keyword) {
+        this.dish = dish;
+        this.keyword = keyword;
     }
+
 }
