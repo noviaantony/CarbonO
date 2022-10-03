@@ -29,6 +29,8 @@ const Searchbar = () => {
               </svg>
             </div>
             <input
+            //  value={searchQuery}
+        //  onInput={e => setSearchQuery(e.target.value)}
               type="search"
               id="default-search"
               class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border"
