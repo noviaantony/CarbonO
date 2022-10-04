@@ -1,8 +1,8 @@
 import React from "react";
 // import './App.css';
 import Landing from './screens/Landing';
-import SignUpForm from "./components/signup_login/SignUpForm";
-import LogInForm from "./components/signup_login/LogInForm";
+import SignUpForm from "./components/registration/SignUpForm";
+import LogInForm from "./components/registration/LogInForm";
 import CarbonTracker from "./screens/CarbonTracker";
 import Dashboard from "./screens/Dashboard";
 import Donate from "./screens/Donate";
