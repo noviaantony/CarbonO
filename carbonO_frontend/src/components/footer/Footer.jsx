@@ -3,7 +3,7 @@ import React from 'react'
 const Footer = () => {
   return (
     <footer
-      className="bg-[#5E9387] "
+      className="bg-[#5E9387] font-default"
       // style={{
       //   position: "fixed",
       //   left: 0,

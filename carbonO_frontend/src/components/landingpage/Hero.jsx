@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Hero3 = () => {
   return (
     <div>
-      <div className="max-w-screen-2xl mx-auto pt-15">
+      <div className="max-w-screen-2xl mx-auto pt-15 font-default">
         {/* <Navbar /> */}
         <div className="relative">
           <div className="max-w-screen-lg mx-auto py-20 lg:py-24">
