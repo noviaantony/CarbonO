@@ -1,0 +1,19 @@
+Server:
+    port: 8083
+spring:
+    application:
+            name: userReward
+    datasource:
+        password: zhaoxing
+        url: jdbc:postgresql://localhost:5432/userReward
+        username: xxhea
+    jpa:
+        hibernate:
+            ddl-auto: create-drop
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+                format_sql: true
+        show-sql: true
+
+

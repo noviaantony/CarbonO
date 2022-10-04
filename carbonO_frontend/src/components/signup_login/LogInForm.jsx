@@ -1,13 +1,63 @@
-import React from 'react'
+import React, {useRef, useState, useEffect} from 'react'
 import { HiMail, HiLockClosed } from "react-icons/hi";
 import { ReactComponent as SignInSvg } from "./SignInSvg.svg";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-
-
+const LOGIN_URL = 'http://localhost:8080/api/v1/carbonO/user/login'
 
 const LogInForm = () => {
+  const userRef = useRef();
+  const errRef = useRef();
+
+  const[email, setEmail] = useState('');
+  const[password, setPassword] = useState('');
+  const[errMsg, setErrMsg] = useState('');
+  const[success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    userRef.current.focus();
+  }, [])
+
+  useEffect(() => {
+    setErrMsg();
+  }, [email, password])
+
+const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // const url = require('http://localhost:8080/api/v1/carbonO/user/login');
+    // const params = new url.URLSearchParams({ username: email, password: password });
+
+    const params = new URLSearchParams();
+    params.append('username', email);
+    params.append('password', password);
+
+    try {
+        const response = await axios.post(LOGIN_URL,
+            params);
+        // console.log(JSON.stringify(response?.data))
+        const accessToken = response?.data?.access_token;
+        console.log(accessToken);
+        setEmail('');
+        setPassword('');
+        setSuccess(true);
+    } catch (err){
+        console.log(err)
+    }
+}
+
   return (
+      <>
+        {success ? (
+          <section>
+            <h1>Successfully logged in</h1>
+            <br />
+            <p>
+              <a href="#">Go to Dashboard</a>
+            </p>
+          </section>
+        ) : (
     <div className="flex flex-col items-center justify-center min-h-screen py-2 font-default">
       <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
         <div className="bg-white rounded-2xl shadow-2xl flex w-2/3 max-w-4xl">
@@ -26,7 +76,7 @@ const LogInForm = () => {
               </h2>
               <div className="border-2 w-10 border-gray-700 bg-gray-700 inline-block mb-2"></div>
             </div>
-
+            <form onSubmit={handleSubmit}>
             <div className="flex flex-col items-center">
               {/* email section */}
               <div className="bg-gray-100 w-64 p-2 flex items-center rounded mb-3">
@@ -38,6 +88,10 @@ const LogInForm = () => {
                   name="email"
                   placeholder="enter your email"
                   className="bg-gray-100 outline-none text-m flex-1"
+                  ref={userRef}
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                  required
                 />
               </div>
               {/* email section */}
@@ -52,6 +106,9 @@ const LogInForm = () => {
                   name="password"
                   placeholder="enter your password"
                   className="bg-gray-100 outline-none text-m flex-1"
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  required
                 />
               </div>
               {/* password section */}
@@ -64,12 +121,13 @@ const LogInForm = () => {
                   Forgot Password
                 </a>
               </div>
-              <a
-                href=""
-                className="px-7 py-3 w-64 justify-center rounded-md border border-transparent text-sm focus:outline-none transition duration-300 bg-[#5E9387] hover:bg-gray-700  text-center marker:sm:w-auto font-bold text-white"
+
+              <button
+                // href=""
+                className="signIn px-7 py-3 w-64 justify-center rounded-md border border-transparent text-sm focus:outline-none transition duration-300 bg-[#5E9387] hover:bg-gray-700  text-center marker:sm:w-auto font-bold text-white"
               >
                 Sign In
-              </a>
+              </button>
               <Link
                 to="/Signup"
                 className="text-xs font-bold text-gray-700 hover:text-[#5E9387] transition duration-300 mt-6 hover:underline-offset-4"
@@ -77,6 +135,7 @@ const LogInForm = () => {
                 Don't have an account? Sign up here
               </Link>
             </div>
+            </form>
           </div>
           {/* Right Section */}
           <div className="w-2/5 bg-[#5E9387]  text-white rounded-tr-2xl rounded-br-2xl py-36 px-12">
@@ -97,6 +156,8 @@ const LogInForm = () => {
         </div>
       </main>
     </div>
+        )}
+        </>
   );
 }
 

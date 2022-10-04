@@ -1,0 +1,35 @@
+Server:
+    port: 8081
+spring:
+    application:
+            name: user
+    datasource:
+        password: zhaoxing
+        url: jdbc:postgresql://localhost:5432/user
+        username: xxhea
+    jpa:
+        hibernate:
+            ddl-auto: create-drop
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+                format_sql: true
+        show-sql: true
+eureka:
+    client:
+        service-url:
+            defaultZone: http://localhost:8761/eureka/
+        fetch-registry: true
+        register-with-eureka: true
+
+#spring.datasource.url=jdbc:postgresql://localhost:5432/user
+#spring.datasource.username=xxhea
+#spring.datasource.password=zhaoxing
+#spring.jpa.hibernate.ddl-auto=create-drop
+#spring.jpa.show-sql=true
+#spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+#spring.jpa.properties.hibernate.format_sql=true
+#
+#server.error.include-message=always
+#server.error.include-binding-errors=always
+
