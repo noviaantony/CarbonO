@@ -1,4 +1,5 @@
 import React from "react";
+// import './App.css';
 import Landing from './screens/Landing';
 import SignUpForm from "./components/signup_login/SignUpForm";
 import LogInForm from "./components/signup_login/LogInForm";
@@ -16,8 +17,11 @@ import {Routes, Route} from "react-router-dom"
 
 function App() {
   return (
+    // <div className="App">
+    //     <UserComponent/>
+    // </div>
     <>
-      <Navbar />
+      <Navbar/>
       <Routes>
         <Route path="/Home" element={<Landing />} />
         <Route path="/CarbonTracker" element={<CarbonTracker />} />
@@ -28,9 +32,6 @@ function App() {
         <Route path="/Rewards" element={<Rewards />} />
         <Route path="/ClaimReward2" element={<ClaimReward2 />} />
       </Routes>
-      <Footer />
-
-      {/* <Footer /> */}
     </>
   );
 }
