@@ -38,12 +38,20 @@ const handleSubmit = async (e) => {
             params);
         // console.log(JSON.stringify(response?.data))
         const accessToken = response?.data?.access_token;
-        console.log(accessToken);
-        setEmail('');
-        setPassword('');
+        localStorage.setItem('token', accessToken);
+        console.log(localStorage.getItem('token'));
         setSuccess(true);
     } catch (err){
-        console.log(err)
+        if (!err?.response){
+            setErrMsg('Unable to connect to server');
+        } else if (err.response.status === 400){
+            setErrMsg('Missing Username or password');
+        } else if (err.response.status === 401){
+            setErrMsg('Unauthorized');
+        } else {
+            setErrMsg('Unable to login');
+        }
+        errRef.current.focus();
     }
 }
 
@@ -64,13 +72,14 @@ const handleSubmit = async (e) => {
           <div className="w-3/5 p-5">
             <div>
               <a
-                class="toggleColour text-[#5E9387] my-4 leading-tight no-underline hover:no-underline font-bold text-xl lg:text-2xl"
+                className="toggleColour text-[#5E9387] my-4 leading-tight no-underline hover:no-underline font-bold text-xl lg:text-2xl"
                 href="#"
               >
                 CarbonO
               </a>
             </div>
             <div className="py-10">
+                <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
               <h2 className="text-2xl font-bold text-gray-700 mb-2">
                 Sign in to your account
               </h2>
