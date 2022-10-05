@@ -1,23 +1,19 @@
 import axios from 'axios';
 
 // const USERS_REST_API_URL = 'http://localhost:8080/api/v1/carbonO/user/login';
-const USERS_REST_API_URL = 'http://localhost:8080/api/v1/carbonO/user/getAllUsers';
+const CARBON_TRACKER_API_URL = 'http://localhost:8080/api/v1/carbonO/userCarbonTracker';
+const userId = localStorage.getItem('userId');
+const userToken = localStorage.getItem('token');
 
-class UserService {
+class CarbonTrackerService {
 
-    getUsers(){
-        // axios.get(USERS_REST_API_URL).then(r => r.data);
-        axios.get(USERS_REST_API_URL).then(r => {
-            console.log("successful");
-            console.log(r.data)
-            return r.data
-        });
-
+    async getUserTotalCarbonConsumption() {
+        console.log("grabbing consumption");
+        const response = await axios.get(CARBON_TRACKER_API_URL + '/getUserTotalCarbonConsumption',
+            {params: {userId: userId},
+            headers: {Authorization: userToken}
+            });
+        return response.data;
     }
-
-    // login(user) {
-    //     axios.post(USERS_REST_API_URL,)
-    // }
-
 }
-export default new UserService();
+export default new CarbonTrackerService();

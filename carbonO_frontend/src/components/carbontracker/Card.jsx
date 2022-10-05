@@ -4,7 +4,6 @@ import FileUploaded from "./FileUploader";
 import { IoLeafOutline, IoLeafSharp } from "react-icons/io5";
 
 
-
 const Card2 = ({DishTitle, DishImage}) => {
 
   const [showDishInfo, setshowDishInfo] = React.useState(false);
@@ -95,12 +94,6 @@ const Card2 = ({DishTitle, DishImage}) => {
   for (let i = 0; i < outline; i++) {
     dishRating.push(<IoLeafOutline size={30} />);
   }
-
-
-
-
-
-
 
   return (
     <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 font-default">

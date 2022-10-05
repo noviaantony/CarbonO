@@ -3,8 +3,10 @@ import { HiMail, HiLockClosed } from "react-icons/hi";
 import { ReactComponent as SignInSvg } from "./SignInSvg.svg";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import CarbonTrackerService from "../../services/CarbonTrackerService";
 
 const LOGIN_URL = 'http://localhost:8080/api/v1/carbonO/user/login'
+const USER_ID_URL = 'http://localhost:8080/api/v1/carbonO/user/getUserId'
 
 const LogInForm = () => {
   const userRef = useRef();
@@ -34,12 +36,20 @@ const handleSubmit = async (e) => {
     params.append('password', password);
 
     try {
-        const response = await axios.post(LOGIN_URL,
+        const loginResponse = await axios.post(LOGIN_URL,
             params);
         // console.log(JSON.stringify(response?.data))
-        const accessToken = response?.data?.access_token;
-        localStorage.setItem('token', accessToken);
-        console.log(localStorage.getItem('token'));
+        localStorage.setItem('token', loginResponse?.data?.access_token);
+
+        const userIdResponse = await axios.get(USER_ID_URL, {params: {email: email},
+            headers :{Authorization: `Bearer ${localStorage.getItem('token')}`}
+        });
+
+        localStorage.setItem('userId', userIdResponse.data);
+        // console.log(localStorage.getItem('token')); //for testing
+        // console.log(localStorage.getItem('userId'));
+        // const carbonTrackerConsumption = CarbonTrackerService.getUserTotalCarbonConsumption();
+        console.log( await CarbonTrackerService.getUserTotalCarbonConsumption());
         setSuccess(true);
     } catch (err){
         if (!err?.response){
