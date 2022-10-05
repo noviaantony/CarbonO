@@ -3,6 +3,7 @@ package com.carbonO.Registration;
 import com.carbonO.Registration.token.ConfirmationToken;
 import com.carbonO.Registration.token.ConfirmationTokenService;
 import com.carbonO.User.User;
+import com.carbonO.User.UserRepository;
 import com.carbonO.User.UserRole;
 import com.carbonO.User.UserService;
 import lombok.AllArgsConstructor;
@@ -19,10 +20,15 @@ public class RegistrationService {
 
     private final EmailValidator emailValidator;
 
+    private final UserRepository userRepository;
+
     public String register(RegistrationRequest request) {
         boolean isValid = emailValidator.test(request.getEmail());
+        boolean isEmailTaken = userRepository.findByEmail(request.getEmail()).isPresent();
         if (!isValid) {
             throw new IllegalStateException("email not found");
+        } else if (isEmailTaken) {
+            throw new IllegalStateException("email taken");
         }
         String token = userService.signUpUser(
                 new User(
