@@ -23,7 +23,7 @@ function App() {
     <>
       <Navbar/>
       <Routes>
-        <Route path="/Home" element={<Landing />} />
+        <Route path="*" element={<Landing />} />
         <Route path="/CarbonTracker" element={<CarbonTracker />} />
         <Route path="/Login" element={<LogInForm />} />
         <Route path="/Signup" element={<SignUpForm />} />
