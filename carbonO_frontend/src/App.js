@@ -30,11 +30,10 @@ function App() {
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/Donate" element={<Donate />} />
         <Route path="/Rewards" element={<Rewards />} />
-        {/* <Route path="/ClaimReward" element={<ClaimReward2 />} /> */}
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
 
-      {/* <Footer /> */}
+
     </>
   );
 }

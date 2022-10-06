@@ -1,15 +1,11 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../assets/images/LogoPng.png";
+import Logo from "./LogoPng.png";
 
-const Navbar = () => {
-
-  // this is basically auth navbar
-
+const NotAuthNavbar = () => {
   const [navbar, setNavbar] = useState(false);
 
   return (
-
     <nav className="shadow bg-[#5E9387] px-2 sm:px-4 py-2.5 w-full z-20 sticky top-0 left-0 font-default">
       <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
         <div>
@@ -65,48 +61,14 @@ const Navbar = () => {
             }`}
           >
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-              <div>
-                <Link
-                  className="text-white font-bold hover:font-bolder"
-                  to="/CarbonTracker"
-                >
-                  <a href="javascript:void(0)">Carbon Tracker</a>
-                </Link>
-              </div>
-
-              <div>
-                <Link
-                  className="text-white font-bold hover:font-bolder"
-                  to="/Dashboard"
-                >
-                  <a href="javascript:void(0)">Dashboard</a>
-                </Link>
-              </div>
-
-              <div>
-                <Link
-                  className="text-white font-bold hover:font-bolder"
-                  to="/Rewards"
-                >
-                  <a href="javascript:void(0)">Rewards</a>
-                </Link>
-              </div>
-
-              <div>
-                <Link
-                  className="text-white font-bold hover:font-bolder"
-                  to="/Donate"
-                >
-                  <a href="javascript:void(0)">Donate</a>
-                </Link>
-              </div>
+              
               <button
                 className="bg-primary-500 text-[#5E9387]  focus:bg-primary-700 focus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300
                 px-7 py-2 w-full bg-white text-center rounded-md block sm:w-auto font-bold hover:bg-gray-700 hover:text-white"
                 as="a"
                 type="button"
               >
-                Log Out
+                Log In
               </button>
             </ul>
           </div>
@@ -116,4 +78,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NotAuthNavbar;
