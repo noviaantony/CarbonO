@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 // import './App.css';
 import Landing from './screens/Landing';
 import SignUpForm from "./components/registration/SignUpForm";
@@ -10,18 +10,23 @@ import Rewards from "./screens/Rewards";
 // import ClaimReward2 from "./screens/ClaimReward2";
 import Footer from "./components/footer/Footer";
 
-import Navbar from "./screens/Navbar";
-import {Routes, Route} from "react-router-dom"
+import {Routes, Route, Router} from "react-router-dom"
+import AuthContext from "./context/AuthProvider";
+import AuthNavbar from "./components/navigation/AuthNavbar";
+import NotAuthNavbar from "./components/navigation/NotAuthNavbar";
 
 
 
 function App() {
+    const {auth} = useContext(AuthContext);
+
   return (
     // <div className="App">
     //     <UserComponent/>
     // </div>
     <>
-      <Navbar/>
+        {/*<Router>*/}
+        {auth.authenticated ? <AuthNavbar /> : <NotAuthNavbar />}
       <Routes>
         <Route path="*" element={<Landing />} />
         <Route path="/CarbonTracker" element={<CarbonTracker />} />
@@ -31,6 +36,7 @@ function App() {
         <Route path="/Donate" element={<Donate />} />
         <Route path="/Rewards" element={<Rewards />} />
       </Routes>
+        {/*</Router>*/}
       <Footer />
 
 

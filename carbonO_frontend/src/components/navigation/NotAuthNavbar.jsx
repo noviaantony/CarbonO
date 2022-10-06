@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "./LogoPng.png";
+
 
 const NotAuthNavbar = () => {
   const [navbar, setNavbar] = useState(false);
@@ -14,7 +14,7 @@ const NotAuthNavbar = () => {
               class="toggleColour text-white my-4 leading-tight no-underline hover:no-underline font-bold text-xl lg:text-3xl"
               to="*"
             >
-              <img src={Logo} width="90rem" alt="" />
+              <img src={process.env.PUBLIC_URL + '/images/logo.png'} width="90rem" alt="" />
             </Link>
             <div className="md:hidden">
               <button
@@ -62,14 +62,15 @@ const NotAuthNavbar = () => {
           >
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
               
-              <button
+              <Link
                 className="bg-primary-500 text-[#5E9387]  focus:bg-primary-700 focus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300
                 px-7 py-2 w-full bg-white text-center rounded-md block sm:w-auto font-bold hover:bg-gray-700 hover:text-white"
                 as="a"
+                to="/login"
                 type="button"
               >
                 Log In
-              </button>
+              </Link>
             </ul>
           </div>
         </div>
