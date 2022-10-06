@@ -1,6 +1,7 @@
 package com.carbonO.Dish;
 
 import com.carbonO.Ingredient.Ingredient;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -45,10 +46,12 @@ public class DishRecipe {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "dish_Id")
+    @JsonBackReference
     private Dish dish;
 
     @ManyToOne
     @JoinColumn (name = "ingredient_Id")
+    @JsonBackReference
     private Ingredient ingredient;
 
     private double quantity;

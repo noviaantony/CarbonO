@@ -1,7 +1,8 @@
-import React, {useRef, useState, useEffect} from 'react'
+import React, {useRef, useState, useEffect, useContext} from 'react'
 import { HiMail, HiLockClosed } from "react-icons/hi";
 import { ReactComponent as SignInSvg } from "./SignInSvg.svg";
 import {Navigate ,Link, useNavigate} from "react-router-dom";
+import AuthContext, {AuthProvider} from "../../context/AuthProvider";
 import axios from "axios";
 import CarbonTrackerService from "../../services/CarbonTrackerService";
 
@@ -10,6 +11,7 @@ const LOGIN_URL = 'http://localhost:8080/api/v1/carbonO/user/login'
 const USER_ID_URL = 'http://localhost:8080/api/v1/carbonO/user/getUserId'
 
 const LogInForm = () => {
+  const {auth , setAuth } = useContext(AuthContext);
   const userRef = useRef();
   const errRef = useRef();
 
@@ -47,6 +49,9 @@ const handleSubmit = async (e) => {
         });
 
         localStorage.setItem('userId', userIdResponse.data);
+        setAuth({"authenticated": true, "accessToken": loginResponse?.data?.access_token, "userId": userIdResponse.data});
+        console.log("from login");
+        console.log(auth);
         // console.log(localStorage.getItem('token')); //for testing
         // console.log(localStorage.getItem('userId'));
         // const carbonTrackerConsumption = CarbonTrackerService.getUserTotalCarbonConsumption();

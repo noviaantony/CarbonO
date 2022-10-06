@@ -1,6 +1,7 @@
 package com.carbonO.Ingredient;
 
 import com.carbonO.Dish.DishRecipe;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,6 +27,7 @@ public class Ingredient {
     private Long id;
     private String ingredientName;
     @OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<DishRecipe> dishRecipe;
     private Double carbonFootprint;
     private String photo;

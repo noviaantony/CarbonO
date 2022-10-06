@@ -105,13 +105,12 @@ public class CarbonTrackerConfig {
             keywords.add(new DishKeywords(dish2,"salmon"));
             keywords.add(new DishKeywords(dish2,"burger"));
             keywords.add(new DishKeywords(dish2,"salmon burger"));
-            keywords.add(new DishKeywords(dish2,"fish"));
 
 
             Dish dish3 = new Dish(
                     "Hokkien Mee"
             );
-
+            keywords.add(new DishKeywords(dish3,"hokkien "));
             keywords.add(new DishKeywords(dish3,"hokkien mee"));
             keywords.add(new DishKeywords(dish3,"hokkien noodles"));
             keywords.add(new DishKeywords(dish3,"noodles"));
@@ -141,14 +140,13 @@ public class CarbonTrackerConfig {
             keywords.add(new DishKeywords(dish6,"Aglio Olio"));
             keywords.add(new DishKeywords(dish6,"Aglio"));
             keywords.add(new DishKeywords(dish6,"Olio"));
-            keywords.add(new DishKeywords(dish6,"Pasta"));
 
             Dish dish7 = new Dish(
                     "Fish Head Curry"
             );
 
             keywords.add(new DishKeywords(dish7,"Fish Head Curry"));
-            keywords.add(new DishKeywords(dish7,"Fish"));
+            keywords.add(new DishKeywords(dish7,"Fish Head"));
             keywords.add(new DishKeywords(dish7,"Curry"));
             keywords.add(new DishKeywords(dish7,"Fish Curry"));
 
@@ -160,7 +158,6 @@ public class CarbonTrackerConfig {
             keywords.add(new DishKeywords(dish8,"Fish and Chips"));
             keywords.add(new DishKeywords(dish8,"Fish"));
             keywords.add(new DishKeywords(dish8,"Chips"));
-            keywords.add(new DishKeywords(dish8,"Fries"));
             keywords.add(new DishKeywords(dish8,"Western")); // maybe will add a cuisine tag
 
             Dish dish9 = new Dish(

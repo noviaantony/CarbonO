@@ -1,5 +1,6 @@
 package com.carbonO.Dish;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,6 +26,7 @@ public class DishKeywords {
 
     @ManyToOne
     @JoinColumn(name = "dish_Id")
+    @JsonBackReference
     private Dish dish;
     private String keyword;
 
