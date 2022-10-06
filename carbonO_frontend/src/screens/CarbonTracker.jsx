@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useRef} from 'react'
 import Card from "../components/carbontracker/Card";
 import ChickenRice from "../assets/images/ChickenRice.jpg";
 import CaeserSalad from "../assets/images/CaeserSalad.jpeg";
@@ -20,7 +20,7 @@ import carbonTrackerService from "../services/CarbonTrackerService";
 //import WantanMee from './WantanMee.jpg'
 
 const CARBON_TRACKER_URL = 'http://localhost:8080/api/v1/carbonO/carbonTracker/'
-
+// const ref = useRef(null);
 
 const CarbonTracker = () => {
   const {auth} = useContext(AuthContext);
@@ -121,7 +121,7 @@ const CarbonTracker = () => {
             }).map((dish) => {
               console.log(dish);
               return (
-                  <Card DishTitle={dish.DishName} DishImage={dish.DishImage}/>
+                  <Card DishTitle={dish.DishName} DishImage= {dish.DishImage}/>                 
               );
             })}
           </div>

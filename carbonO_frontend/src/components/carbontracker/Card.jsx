@@ -4,8 +4,7 @@ import FileUploaded from "./FileUploader";
 import { IoLeafOutline, IoLeafSharp } from "react-icons/io5";
 
 
-const Card2 = ({DishTitle, DishImage}) => {
-
+const Card2 = ({ DishTitle, DishImage}) => {
   const [showDishInfo, setshowDishInfo] = React.useState(false);
   const [showReceiptUpload, setshowReceiptUpload] = React.useState(false);
 
@@ -84,12 +83,9 @@ const Card2 = ({DishTitle, DishImage}) => {
 
   const dishRating = [];
   let shaded = 3;
-  let outline = 2
+  let outline = 2;
   for (let i = 0; i < shaded; i++) {
-    dishRating.push(
-      <IoLeafSharp size={30} color="gray-700" />
-    );
-    
+    dishRating.push(<IoLeafSharp size={30} color="gray-700" />);
   }
   for (let i = 0; i < outline; i++) {
     dishRating.push(<IoLeafOutline size={30} />);
@@ -131,27 +127,23 @@ const Card2 = ({DishTitle, DishImage}) => {
           {/* more info modal */}
           {showDishInfo ? (
             <>
-               <div
-            className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
-          >
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
-              {/*content*/}
-              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                {/*header*/}
-                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                  <h3 className="text-3xl font-semibold">
-                   Chicken Rice
-                  </h3>
-                  <button
-                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                    onClick={() => setshowDishInfo(false)}
-                  >
-                    <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                      ×
-                    </span>
-                  </button>
+              <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                  {/*content*/}
+                  <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                    {/*header*/}
+                    <div className="text-center items-start justify-between p-3 border-b border-solid border-slate-200 rounded-t">
+                      <h3 className="text-3xl font-semibold">{DishTitle}</h3>
+                      <button
+                        className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                        onClick={() => setshowDishInfo(false)}
+                      >
+                        <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                          ×
+                        </span>
+                      </button>
                     </div>
-                    {/*body*/}            
+                    {/*body*/}
                     <div className="relative p-6 flex-auto">
                       <p className="my-4 text-slate-500 text-lg leading-relaxed">
                         we will put in information like carbon footprint per
@@ -160,16 +152,15 @@ const Card2 = ({DishTitle, DishImage}) => {
                     </div>
                     {/*footer*/}
                     <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-                  <button
-                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => setshowDishInfo(false)}
-                  >
+                      <button
+                        className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button"
+                        onClick={() => setshowDishInfo(false)}
+                      >
                         Close
                       </button>
                     </div>
                   </div>
-        
                 </div>
               </div>
               <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
@@ -179,17 +170,13 @@ const Card2 = ({DishTitle, DishImage}) => {
           {/* receipt upload modal */}
           {showReceiptUpload ? (
             <>
-              <div
-            className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
-          >
-            <div className="relative w-auto my-6 mx-auto max-w-sm">
-              {/*content*/}
-              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                {/*header*/}
-                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                  <h3 className="text-3xl font-semibold">
-                        Singapore Chicken Rice
-                      </h3>
+              <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                <div className="relative w-auto my-6 mx-auto max-w-sm">
+                  {/*content*/}
+                  <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                    {/*header*/}
+                    <div className="text-center items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                      <h3 className="text-3xl font-semibold">{DishTitle}</h3>
                       <button
                         className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                         onClick={() => setshowReceiptUpload(false)}
@@ -233,7 +220,7 @@ const Card2 = ({DishTitle, DishImage}) => {
                                 {/*header*/}
                                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                                   <h3 className="text-3xl font-semibold">
-                                    Singapore Chicken Rice
+                                    {DishTitle}
                                   </h3>
                                   <button
                                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
@@ -270,9 +257,9 @@ const Card2 = ({DishTitle, DishImage}) => {
                               {/*content*/}
                               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-2/3 bg-white outline-none focus:outline-none">
                                 {/*header*/}
-                                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                                <div className="text-center items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                                   <h3 className="text-3xl font-semibold">
-                                    Singapore Chicken Rice
+                                    {DishTitle}
                                   </h3>
                                   <button
                                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
@@ -315,7 +302,6 @@ const Card2 = ({DishTitle, DishImage}) => {
       </article>
     </div>
   );
-
-}
+};
 
 export default Card2;
