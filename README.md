@@ -5,14 +5,15 @@
 > - [Yuan Sheng](https://github.com/ChongYuanSheng/)
 > - [Novia](http://github.com/noviaantony/)
 > - [Ariff](http://github.com/KimmyChanga/)
-> - [Alison](http://github.com//)
+> - [Alison](https://github.com/alisonhow194) 
+
+##  Our Solution
+CarbonO is an application whereby users can claim e-credits when the
 
 ## Cloning Repo
-Open your git cmd console, cd to the directory of your choosing example cd C:/users/(name)/Desktop/
-
-Thereafter, enter git clone https://github.com/Chen-ZhaoXing/CS203-Team-2.git
-
-After clone enter cd cs203-team-2 to access the repo
+> Open your git cmd console, cd to the directory of your choosing example cd C:/users/(name)/Desktop/
+> Thereafter, enter git clone https://github.com/Chen-ZhaoXing/CS203-Team-2.git
+> After clone enter cd cs203-team-2 to access the repo
 
 Code submission for [SMU CS203]
 
@@ -40,3 +41,12 @@ Code submission for [SMU CS203]
 - [ReactJs](https://reactjs.org/) 
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Axios](https://www.axios.com/)
+- [Docker](https://www.docker.com/)
+
+## **Tools Used**
+- [VSCode](https://code.visualstudio.com/)
+- [IntelliJ IDEA](https://www.jetbrains.com/idea/)
+- [Postman](https://www.postman.com/)
+- [Vision AI API](https://cloud.google.com/vision)
+- [pgAdmin](https://www.pgadmin.org/)
+- [Chart.js](https://www.chartjs.org/)
