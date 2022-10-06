@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import Card from "../components/carbontracker/Card";
 import ChickenRice from "../assets/images/ChickenRice.jpg";
 import CaeserSalad from "../assets/images/CaeserSalad.jpeg";
@@ -11,6 +11,7 @@ import HokkienMee from "../assets/images/HokkienMee.jpg";
 import MargheritaPizza from "../assets/images/MargheritaPizza.jpg";
 import SalmonBurger from "../assets/images/SalmonBurger.jpg";
 import FishHeadCurry from "../assets/images/FishHeadCurry.png";
+import AuthContext from "../context/AuthProvider";
 //import AglioOlio from './AglioOlio.jpg'
 //import BeefStew from './BeefStew.jpg'
 //import FishandChips from './Fish&Chips.jpg'
@@ -18,13 +19,16 @@ import FishHeadCurry from "../assets/images/FishHeadCurry.png";
 
 
 const CarbonTracker = () => {
-
+  const {auth} = useContext(AuthContext);
   const [searchTerm, setSearchTerm] = useState("");
-
+  console.log("from carbon tracker");
+  console.log(auth);
   const DishInformation = [
     {
       DishName: "Chicken Rice",
       DishImage: { ChickenRice },
+      DishRating:4,
+
     },
     {
       DishName: "Nasi Lemak",

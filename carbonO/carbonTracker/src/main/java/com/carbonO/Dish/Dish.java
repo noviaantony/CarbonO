@@ -1,6 +1,7 @@
 package com.carbonO.Dish;
 
 import com.carbonO.UserCarbonTracker.userCarbonTracker;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,14 +26,19 @@ public class Dish {
     )
     private Long id;
     private String dishName;
+
     @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<DishRecipe> recipeIngredients;
     private Double totalCarbonFootprint;
+
     @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<DishKeywords> dishKeywords;
     private String photo;
 
-    @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<userCarbonTracker> userCarbonTrackers;
 
     public Dish() {

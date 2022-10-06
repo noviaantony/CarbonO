@@ -1,6 +1,7 @@
 package com.carbonO.UserCarbonTracker;
 
 import com.carbonO.Dish.Dish;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,6 +31,7 @@ public class userCarbonTracker {
 
     @ManyToOne
     @JoinColumn(name="dish_id")
+    @JsonBackReference
     private Dish dish;
 
     public userCarbonTracker() {
