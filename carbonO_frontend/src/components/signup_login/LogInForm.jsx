@@ -1,9 +1,10 @@
 import React, {useRef, useState, useEffect} from 'react'
 import { HiMail, HiLockClosed } from "react-icons/hi";
 import { ReactComponent as SignInSvg } from "./SignInSvg.svg";
-import { Link } from "react-router-dom";
+import {Navigate ,Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import CarbonTrackerService from "../../services/CarbonTrackerService";
+
 
 const LOGIN_URL = 'http://localhost:8080/api/v1/carbonO/user/login'
 const USER_ID_URL = 'http://localhost:8080/api/v1/carbonO/user/getUserId'
@@ -50,6 +51,7 @@ const handleSubmit = async (e) => {
         // console.log(localStorage.getItem('userId'));
         // const carbonTrackerConsumption = CarbonTrackerService.getUserTotalCarbonConsumption();
         console.log( await CarbonTrackerService.getUserTotalCarbonConsumption());
+
         setSuccess(true);
     } catch (err){
         if (!err?.response){
@@ -69,10 +71,9 @@ const handleSubmit = async (e) => {
       <>
         {success ? (
           <section>
-            <h1>Successfully logged in</h1>
             <br />
             <p>
-              <a href="#">Go to Dashboard</a>
+              <Navigate to="/CarbonTracker" />
             </p>
           </section>
         ) : (
