@@ -25,14 +25,14 @@ const CarbonTracker = () => {
       DishImage:
         "https://www.visitsingapore.com/dining-drinks-singapore/local-dishes/hainanese-chicken-rice/_jcr_content/par-carousel/carousel_detailpage/carousel/item_1.thumbnail.carousel-img.740.416.jpg",
       DishRating: 4,
-      DishKeywords: ["chicken", "rice", "chicken rice", "rice chicken"],
+      DishKeywords: ["Chicken", "Rice"],
     },
     {
-      DishName: "Aglio Olio",
+      DishName: "French Toast",
       DishImage:
-        "https://happymuncher.com/wp-content/uploads/2022/01/Pasta-Aglio-E-Olio-Side-Dishes.png.webp",
+        "https://www.seriouseats.com/thmb/O1-dTHGmNqo9dUpPHR5LW9DOFA0=/1125x1125/smart/filters:no_upscale()/perfect-quick-easy-french-toast-hero-03-2a9485bbb12b4cf5abcfef53aa9accd9.jpg",
       DishRating: 2,
-      DishKeywords: ["Aglio", "Olio", "Aglio Olio", "Olio Aglio"],
+      DishKeywords: ["French", "Toast"],
     },
   ];
 

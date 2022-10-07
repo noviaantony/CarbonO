@@ -2,7 +2,7 @@ import React, {useRef, useState, useEffect, useContext} from 'react'
 import { HiMail, HiLockClosed } from "react-icons/hi";
 import { ReactComponent as SignInSvg } from "./SignInSvg.svg";
 import {Navigate ,Link, useNavigate} from "react-router-dom";
-import AuthContext, {AuthProvider} from "../../context/AuthProvider";
+import AuthContext from "../../context/AuthProvider";
 import axios from "axios";
 import CarbonTrackerService from "../../services/CarbonTrackerService";
 

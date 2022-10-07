@@ -16,9 +16,6 @@ const Card2 = ({DishTitle, DishImage, DishRating, DishKeywords}) => {
     const encodeImageURI = require("encode-image-uri");
     encodeImageURI(selectedFile)
       .then((base64) => {
-        // console.log(base64);
-        // console.log(base64.substring(23, base64.length));
-
         let body = {
           requests: [
             {
@@ -42,41 +39,23 @@ const Card2 = ({DishTitle, DishImage, DishRating, DishKeywords}) => {
             body
           )
           .then(function (response) {
-            // console.log(response)
-            // console.log(response.data.responses[0].textAnnotations)
-            // console.log(response.data.responses[0].textAnnotations[21].description)
-            // words.concat(response.data.responses[0].textAnnotations)
+            console.log(response)
+            console.log(response.data.responses[0].textAnnotations)
+            console.log(response.data.responses[0].textAnnotations[21].description)
 
-            let wordCheck = 0;
-
-            for (
-              let i = 0;
-              i < response.data.responses[0].textAnnotations.length;
-              i++
-            ) {
-              if (
-                response.data.responses[0].textAnnotations[i].description ===
-                "Chicken"
-              ) {
-                wordCheck++;
-              } else if (
-                response.data.responses[0].textAnnotations[i].description ===
-                "Rice"
-              ) {
-                wordCheck++;
-              }
-
-              if (wordCheck === 2) {
+            console.log(DishKeywords[0]);
+    
+            for (let i = 0; i < response.data.responses[0].textAnnotations.length - 1; i++) {
+              if (response.data.responses[0].textAnnotations[i].description.toLowerCase() === DishKeywords[0].toLowerCase() && response.data.responses[0].textAnnotations[i + 1].description.toLowerCase() === DishKeywords[1].toLowerCase()) {
                 setShowSuccessModal(true);
                 return;
-              }
+              }  
             }
 
             setShowErrorModal(true);
           });
       })
       .catch((error) => {
-        // console.error(error);
         setShowErrorModal(true);
       });
   };
