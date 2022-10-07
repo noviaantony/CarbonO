@@ -857,15 +857,15 @@ public class CarbonTrackerConfig {
 
             // Setting carbon rating
             newDish.setCarbonRating(3);
-            newDish.setCarbonRating(4);
-            newDish.setCarbonRating(2);
-            newDish.setCarbonRating(4);
-            newDish.setCarbonRating(4);
-            newDish.setCarbonRating(5);
-            newDish.setCarbonRating(4);
-            newDish.setCarbonRating(4);
-            newDish.setCarbonRating(2);
-            newDish.setCarbonRating(4);
+            newDish2.setCarbonRating(4);
+            newDish3.setCarbonRating(2);
+            newDish4.setCarbonRating(4);
+            newDish5.setCarbonRating(4);
+            newDish6.setCarbonRating(5);
+            newDish7.setCarbonRating(4);
+            newDish8.setCarbonRating(4);
+            newDish9.setCarbonRating(2);
+            newDish10.setCarbonRating(4);
 
             //user sample for food consumed
             userCarbonTracker userCarbonTracker1 = new userCarbonTracker(
