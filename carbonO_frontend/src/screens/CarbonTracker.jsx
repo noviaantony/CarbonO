@@ -1,23 +1,7 @@
 import React, {useContext, useState, useRef} from 'react'
 import Card from "../components/carbontracker/Card";
-import ChickenRice from "../assets/images/ChickenRice.jpg";
-import CaeserSalad from "../assets/images/CaeserSalad.jpeg";
-import TonkatsuRamen from "../assets/images/TonkotsuRamen.jpeg";
-import Laksa from "../assets/images/Laksa.jpeg";
-import KoreanTofuSoup from "../assets/images/KoreanTofuSoup.jpeg";
-import SteakAndFries from "../assets/images/SteakAndFries.webp";
-import NasiLemak from "../assets/images/NasiLemak.webp";
-import HokkienMee from "../assets/images/HokkienMee.jpg";
-import MargheritaPizza from "../assets/images/MargheritaPizza.jpg";
-import SalmonBurger from "../assets/images/SalmonBurger.jpg";
-import FishHeadCurry from "../assets/images/FishHeadCurry.png";
 import AuthContext from "../context/AuthProvider";
-import axios from "axios";
 import carbonTrackerService from "../services/CarbonTrackerService";
-//import AglioOlio from './AglioOlio.jpg'
-//import BeefStew from './BeefStew.jpg'
-//import FishandChips from './Fish&Chips.jpg'
-//import WantanMee from './WantanMee.jpg'
 
 const CARBON_TRACKER_URL = 'http://localhost:8080/api/v1/carbonO/carbonTracker/'
 // const ref = useRef(null);
@@ -28,6 +12,7 @@ const CarbonTracker = () => {
   console.log("from carbon tracker");
   console.log(auth);
   const [foodList, setFoodList] = useState('');
+
   //grabbing all dishes
   carbonTrackerService.getAllDishes().then(response => {
      console.log(response)
@@ -37,34 +22,17 @@ const CarbonTracker = () => {
   const DishInformation = [
     {
       DishName: "Chicken Rice",
-      DishImage: {ChickenRice}
-      // DishRating: 4,
-      // ingredients: [],
-      // dishKeywords: ["chicken", "rice", "chicken rice", "rice chicken"]
+      DishImage:
+        "https://www.visitsingapore.com/dining-drinks-singapore/local-dishes/hainanese-chicken-rice/_jcr_content/par-carousel/carousel_detailpage/carousel/item_1.thumbnail.carousel-img.740.416.jpg",
+      DishRating: 4,
+      DishKeywords: ["chicken", "rice", "chicken rice", "rice chicken"],
     },
     {
-      DishName: "Nasi Lemak",
-      DishImage: {NasiLemak},
-    },
-    {
-      DishName: "Laksa",
-      DishImage: {Laksa},
-    },
-    {
-      DishName: "Caeser Salad",
-      DishImage: {CaeserSalad},
-    },
-    {
-      DishName: "Korean Tofu Soup",
-      DishImage: {KoreanTofuSoup},
-    },
-    {
-      DishName: "Tonkatsu Ramen",
-      DishImage: {TonkatsuRamen},
-    },
-    {
-      DishName: "Steak and Fries",
-      DishImage: {SteakAndFries},
+      DishName: "Aglio Olio",
+      DishImage:
+        "https://happymuncher.com/wp-content/uploads/2022/01/Pasta-Aglio-E-Olio-Side-Dishes.png.webp",
+      DishRating: 2,
+      DishKeywords: ["Aglio", "Olio", "Aglio Olio", "Olio Aglio"],
     },
   ];
 
@@ -121,7 +89,7 @@ const CarbonTracker = () => {
             }).map((dish) => {
               console.log(dish);
               return (
-                  <Card DishTitle={dish.DishName} DishImage= {dish.DishImage}/>                 
+                  <Card DishTitle={dish.DishName} DishImage= {dish.DishImage} DishRating = {dish.DishRating} DishKeywords={dish.DishKeywords}/>                 
               );
             })}
           </div>

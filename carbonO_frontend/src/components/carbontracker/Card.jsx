@@ -4,7 +4,7 @@ import FileUploaded from "./FileUploader";
 import { IoLeafOutline, IoLeafSharp } from "react-icons/io5";
 
 
-const Card2 = ({ DishTitle, DishImage}) => {
+const Card2 = ({DishTitle, DishImage, DishRating, DishKeywords}) => {
   const [showDishInfo, setshowDishInfo] = React.useState(false);
   const [showReceiptUpload, setshowReceiptUpload] = React.useState(false);
 
@@ -81,25 +81,30 @@ const Card2 = ({ DishTitle, DishImage}) => {
       });
   };
 
-  const dishRating = [];
-  let shaded = 3;
-  let outline = 2;
-  for (let i = 0; i < shaded; i++) {
-    dishRating.push(<IoLeafSharp size={30} color="gray-700" />);
+  
+  // Render Dish Carbon Rating
+  const renderedDishRating = [];
+  for (let i = 0; i < DishRating ; i++) {
+    renderedDishRating.push(<IoLeafSharp size={30} color="gray-700" />);
   }
-  for (let i = 0; i < outline; i++) {
-    dishRating.push(<IoLeafOutline size={30} />);
+  for (let i = 0; i < (5 - DishRating) ; i++) {
+    renderedDishRating.push(<IoLeafOutline size={30} color="gray-700" />);
   }
 
   return (
+
     <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 font-default">
       <article class="overflow-hidden rounded-lg bg-white">
-        <img alt="Placeholder" class="block h-72 w-full" src={DishImage} />
+        <img
+          alt="Chicken Rice"
+          class="block h-72 w-full"
+          src={DishImage}
+        />
         <header class="flex items-left  leading-tight p-2 md:p-4 ">
           <h1 class="text-2xl font-bold">{DishTitle}</h1>
         </header>
         <div className="flex items-center justify-items-start leading-tight p-2 md:p-4">
-          {dishRating}
+          {renderedDishRating}
         </div>
 
         <footer class="flex items-center justify-between leading-none p-2 md:p-4 bg-white">
