@@ -41,6 +41,8 @@ public class Dish {
     @JsonManagedReference
     private List<userCarbonTracker> userCarbonTrackers;
 
+    private Integer carbonRating;
+
     public Dish() {
     }
 

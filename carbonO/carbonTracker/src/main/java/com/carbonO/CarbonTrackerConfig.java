@@ -855,7 +855,17 @@ public class CarbonTrackerConfig {
 //             Adding total carbon footprint
             dishService.updateTotalCarbonFootprint();
 
-
+            // Setting carbon rating
+            newDish.setCarbonRating(3);
+            newDish.setCarbonRating(4);
+            newDish.setCarbonRating(2);
+            newDish.setCarbonRating(4);
+            newDish.setCarbonRating(4);
+            newDish.setCarbonRating(5);
+            newDish.setCarbonRating(4);
+            newDish.setCarbonRating(4);
+            newDish.setCarbonRating(2);
+            newDish.setCarbonRating(4);
 
             //user sample for food consumed
             userCarbonTracker userCarbonTracker1 = new userCarbonTracker(
