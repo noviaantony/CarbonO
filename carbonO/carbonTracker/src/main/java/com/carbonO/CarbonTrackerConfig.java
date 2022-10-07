@@ -179,6 +179,18 @@ public class CarbonTrackerConfig {
             keywords.add(new DishKeywords(dish10,"Noodles"));
             keywords.add(new DishKeywords(dish10,"Wanton Noodles"));
 
+            // Setting carbon rating
+            dish1.setCarbonRating(3);
+            dish2.setCarbonRating(4);
+            dish3.setCarbonRating(2);
+            dish4.setCarbonRating(4);
+            dish5.setCarbonRating(4);
+            dish6.setCarbonRating(5);
+            dish7.setCarbonRating(4);
+            dish8.setCarbonRating(4);
+            dish9.setCarbonRating(2);
+            dish10.setCarbonRating(4);
+
             dishSet.add(dish1);
             dishSet.add(dish2);
             dishSet.add(dish3);
@@ -855,17 +867,6 @@ public class CarbonTrackerConfig {
 //             Adding total carbon footprint
             dishService.updateTotalCarbonFootprint();
 
-            // Setting carbon rating
-            newDish.setCarbonRating(3);
-            newDish2.setCarbonRating(4);
-            newDish3.setCarbonRating(2);
-            newDish4.setCarbonRating(4);
-            newDish5.setCarbonRating(4);
-            newDish6.setCarbonRating(5);
-            newDish7.setCarbonRating(4);
-            newDish8.setCarbonRating(4);
-            newDish9.setCarbonRating(2);
-            newDish10.setCarbonRating(4);
 
             //user sample for food consumed
             userCarbonTracker userCarbonTracker1 = new userCarbonTracker(
