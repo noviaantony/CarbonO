@@ -1,7 +1,10 @@
 import axios from 'axios';
+import {useContext} from "react";
+import AuthContext from "../context/AuthProvider";
 
 // const USERS_REST_API_URL = 'http://localhost:8080/api/v1/carbonO/user/login';
 const CARBON_TRACKER_API_URL = 'http://localhost:8080/api/v1/carbonO/carbonTracker';
+
 const userId = localStorage.getItem('userId');
 const userToken = localStorage.getItem('token');
 

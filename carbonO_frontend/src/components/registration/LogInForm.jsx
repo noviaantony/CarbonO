@@ -54,7 +54,7 @@ const handleSubmit = async (e) => {
         // console.log(localStorage.getItem('token')); //for testing
         // console.log(localStorage.getItem('userId'));
         // const carbonTrackerConsumption = CarbonTrackerService.getUserTotalCarbonConsumption();
-        console.log( await CarbonTrackerService.getUserTotalCarbonConsumption());
+        // console.log( await CarbonTrackerService.getUserTotalCarbonConsumption());
 
         setSuccess(true);
     } catch (err){
