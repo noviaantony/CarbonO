@@ -78,8 +78,8 @@ const DonutChart = () => {
 
   return (
     <div
-      style={{ width: "30%", height: "30%" }}
-      className="bg-white rounded-lg  h-auto p-6 flex items-stretch m-6 shadow-md font-default"
+      style={{ width: "28%", height: "30%" }}
+      className="bg-white rounded-lg h-auto p-6 flex items-stretch m-6 shadow-md font-default"
     >
       <Pie data={data} />
     </div>
