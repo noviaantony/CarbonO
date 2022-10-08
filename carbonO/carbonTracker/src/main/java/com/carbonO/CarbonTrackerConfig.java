@@ -20,7 +20,8 @@ public class CarbonTrackerConfig {
 
     @Bean
     CommandLineRunner commandLineRunner(DishRepository dishRepository, IngredientRepository ingredientRepository,
-                                        DishRecipeRepository dishRecipeRepository, userCarbonTrakerRepository userCarbonTrakerRepository, DishKeywordsRepository dishKeywordsRepository) {
+                                        DishRecipeRepository dishRecipeRepository, userCarbonTrakerRepository userCarbonTrakerRepository,
+                                        DishKeywordsRepository dishKeywordsRepository, DishRewardPoints dishRewardPoints) {
 
         return args -> {
             //hashset of ingredients
@@ -191,6 +192,19 @@ public class CarbonTrackerConfig {
             dish9.setCarbonRating(2);
             dish10.setCarbonRating(4);
 
+            dish1.setPhoto("https://s.yimg.com/ny/api/res/1.2/Es124WRVqRqcBeuDSaqqsg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTQyNw--/https://s.yimg.com/os/creatr-uploaded-images/2021-08/cd49fd60-ffd4-11eb-afbb-14ba1462fc3e");
+            dish2.setPhoto("https://static01.nyt.com/images/2014/04/18/dining/salmonburger2/salmonburger-articleLarge.jpg");
+            dish3.setPhoto("https://asianfoodnetwork.com/content/dam/afn/global/en/recipes/singapore-hokkien-mee/AFN_singapore_hokkien_mee_main_image1.jpg.transform/recipestep-img/img.jpg");
+            dish4.setPhoto("https://media.timeout.com/images/103636261/image.jpg");
+            dish5.setPhoto("https://www.blossmangas.com/wp-content/uploads/2021/05/Margherita-pizza-2.jpg");
+            dish6.setPhoto("https://simply-delicious-food.com/wp-content/uploads/2019/09/Shrimp-Aglio-Olio-4.jpg");
+            dish7.setPhoto("https://ccpl.ninjaos.com/media/dev_team/products/gallery-image/d11a9e1796f4a6e318ff16440c972308.jpg");
+            dish8.setPhoto("https://media.istockphoto.com/photos/british-traditional-fish-and-chips-with-mashed-peas-tartar-sauce-and-picture-id1178035212?k=20&m=1178035212&s=170667a&w=0&h=Lq_0r-YdoP_7toqFeymzjldBg6fWSG07lEyCPYFLc3A=");
+            dish9.setPhoto("https://media.istockphoto.com/photos/beef-meat-stewed-with-vegetables-picture-id584228484?k=20&m=584228484&s=612x612&w=0&h=HYx5tjHdPTXpRGvpxl9bL1ISrCUBNuoFjxUzwOcbH5M=");
+            dish10.setPhoto("https://www.misstamchiak.com/wp-content/uploads/2016/06/DSCF2137-1300x867.jpg");
+
+
+
             dishSet.add(dish1);
             dishSet.add(dish2);
             dishSet.add(dish3);
@@ -207,6 +221,7 @@ public class CarbonTrackerConfig {
             }
 
             for (Dish dish : dishSet) {
+                dish.setDishRewardPoints(dishRewardPoints.getDishRewardPoints(dish.getCarbonRating()));
                 dishRepository.save(dish);
             }
 

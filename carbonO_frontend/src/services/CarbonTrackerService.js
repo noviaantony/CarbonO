@@ -17,7 +17,7 @@ class CarbonTrackerService {
   async getAllDishes(){
       console.log("grabbing dishes");
       const response = await axios.get(CARBON_TRACKER_API_URL + '/dish/getAllDishes')
-      console.log(response.data);
+      // console.log(response.data);
 
       return response.data;
   }

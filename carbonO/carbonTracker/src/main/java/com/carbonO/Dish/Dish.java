@@ -43,6 +43,8 @@ public class Dish {
 
     private Integer carbonRating;
 
+    private Integer dishRewardPoints;
+
     public Dish() {
     }
 
