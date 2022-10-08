@@ -6,7 +6,7 @@ import ViewInformationAccordion from "./ViewInformationAccordion";
 
 
 
-const Card = ({DishTitle, DishImage, DishRating, DishKeywords, DishIngredients, DishCarbonFootprint}) => {
+const Card = ({DishTitle, DishImage, DishRating, DishKeywords, DishIngredients, DishCarbonFootprint, DishCredit}) => {
 
   const [showDishInfo, setshowDishInfo] = React.useState(false);
   const [showReceiptUpload, setshowReceiptUpload] = React.useState(false);
@@ -44,7 +44,7 @@ const Card = ({DishTitle, DishImage, DishRating, DishKeywords, DishIngredients, 
             body
           )
           .then(function (response) {
-
+            console.log(response)
             for (
               let i = 0;
               i < response.data.responses[0].textAnnotations.length - 1;
@@ -53,10 +53,10 @@ const Card = ({DishTitle, DishImage, DishRating, DishKeywords, DishIngredients, 
               if (
                 response.data.responses[0].textAnnotations[
                   i
-                ].description.toLowerCase() === DishKeywords[0].toLowerCase() &&
+                ].description.toLowerCase() === DishKeywords[0].keyword.toLowerCase() &&
                 response.data.responses[0].textAnnotations[
                   i + 1
-                ].description.toLowerCase() === DishKeywords[1].toLowerCase()
+                ].description.toLowerCase() === DishKeywords[1].keyword.toLowerCase()
               ) {
                 setSuccessMessage(true);
                 return;
@@ -87,7 +87,7 @@ const Card = ({DishTitle, DishImage, DishRating, DishKeywords, DishIngredients, 
   return (
     <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 font-default">
       <article class="overflow-hidden rounded-lg bg-white">
-        <img alt="Chicken Rice" class="block h-72 w-full" src={DishImage} />
+        <img alt={DishTitle} class="block h-72 w-full" src={DishImage} />
         <header class="flex items-left leading-tight p-2 md:p-4 ">
           <h1 class="text-2xl font-bold">{DishTitle}</h1>
         </header>
@@ -96,7 +96,7 @@ const Card = ({DishTitle, DishImage, DishRating, DishKeywords, DishIngredients, 
             {DishCarbonFootprint}g CO2
           </span>
           <span class="text-m font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200 ml-4">
-            300 E-Credits
+            {DishCredit} E-Credits
           </span>
         </div>
         <div className="flex items-center justify-items-start leading-tight p-2 md:p-4">

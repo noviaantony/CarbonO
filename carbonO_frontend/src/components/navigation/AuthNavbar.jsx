@@ -1,12 +1,22 @@
-import React, { useState } from "react";
-import { Link} from "react-router-dom"
+import React, {useContext, useState} from "react";
+import { Link, Navigate} from "react-router-dom"
+import AuthContext from "../../context/AuthProvider";
 
 
 const AuthNavbar = () => {
-
+    const {auth} = useContext(AuthContext);
     const [navbar, setNavbar] = useState(false);
 
+
+    const logout = (e) => {
+      e.preventDefault();
+      auth.authenticated = false;
+      setNavbar(false);
+        window.location.href = "*";
+    }
+
     return (
+
       <nav className="shadow bg-[#5E9387] px-2 sm:px-4 py-2.5 w-full z-20 sticky top-0 left-0 font-default">
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
@@ -100,7 +110,7 @@ const AuthNavbar = () => {
                 <button
                   className="bg-primary-500 text-[#5E9387]  focus:bg-primary-700 focus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300
                 px-7 py-2 w-full bg-white text-center rounded-md block sm:w-auto font-bold hover:bg-gray-700 hover:text-white"
-                  as="a"
+                  onClick={logout}
                   type="button"
                 >
                   Log Out
@@ -110,7 +120,7 @@ const AuthNavbar = () => {
           </div>
         </div>
       </nav>
-    );
+        )
 }
 
 export default AuthNavbar;

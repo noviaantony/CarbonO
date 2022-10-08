@@ -19,7 +19,7 @@ import NotAuthNavbar from "./components/navigation/NotAuthNavbar";
 
 function App() {
     const {auth} = useContext(AuthContext);
-
+    console.log(auth.authenticated);
   return (
     // <div className="App">
     //     <UserComponent/>

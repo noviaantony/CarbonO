@@ -30,7 +30,6 @@ const LogInForm = () => {
 
 const handleSubmit = async (e) => {
     e.preventDefault();
-
     // const url = require('http://localhost:8080/api/v1/carbonO/user/login');
     // const params = new url.URLSearchParams({ username: email, password: password });
 
