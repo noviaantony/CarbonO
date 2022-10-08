@@ -15,26 +15,36 @@ const CarbonTracker = () => {
 
   //grabbing all dishes
   carbonTrackerService.getAllDishes().then(response => {
-     console.log(response)
+    console.log(response);
+    // const DishInformation = response;
+  }).catch((error) => {
+    console.log(error)
   })
 
 
   const DishInformation = [
     {
-      DishName: "Chicken Rice",
-      DishImage:
+      dishName: "Chicken Rice",
+      photo:
         "https://www.visitsingapore.com/dining-drinks-singapore/local-dishes/hainanese-chicken-rice/_jcr_content/par-carousel/carousel_detailpage/carousel/item_1.thumbnail.carousel-img.740.416.jpg",
-      DishRating: 4,
-      DishKeywords: ["Chicken", "Rice"],
+      carbonRating: 4,
+      dishKeywords: ["Chicken", "Rice"],
+      recipeIngredients: ["Chicken", "Rice", "Egg", "Cucumber"],
+      totalCarbonFootprint: 3000,
     },
     {
-      DishName: "French Toast",
-      DishImage:
+      dishName: "French Toast",
+      photo:
         "https://www.seriouseats.com/thmb/O1-dTHGmNqo9dUpPHR5LW9DOFA0=/1125x1125/smart/filters:no_upscale()/perfect-quick-easy-french-toast-hero-03-2a9485bbb12b4cf5abcfef53aa9accd9.jpg",
-      DishRating: 2,
-      DishKeywords: ["French", "Toast"],
+      carbonRating: 2,
+      dishKeywords: ["French", "Toast"],
+      recipeIngredients: ["Bread", "Butter", "Eggs", "Milk", "Honey"],
+      totalCarbonFootprint: 3000,
     },
   ];
+
+
+
 
   return (
       <div className="items-center">
@@ -82,14 +92,21 @@ const CarbonTracker = () => {
               if (searchTerm == "") {
                 return dish;
               } else if (
-                  dish.DishName.toLowerCase().includes(searchTerm.toLowerCase())
+                  dish.dishName.toLowerCase().includes(searchTerm.toLowerCase())
               ) {
                 return dish;
               }
             }).map((dish) => {
-              console.log(dish);
               return (
-                  <Card DishTitle={dish.DishName} DishImage= {dish.DishImage} DishRating = {dish.DishRating} DishKeywords={dish.DishKeywords}/>                 
+                <Card
+                  DishTitle={dish.dishName}
+                  DishImage={dish.photo}
+                  DishRating={dish.carbonRating}
+                  DishKeywords={dish.dishKeywords}
+                  DishIngredients = {dish.recipeIngredients}
+                  DishCarbonFootprint = {dish.totalCarbonFootprint}
+
+                />
               );
             })}
           </div>
