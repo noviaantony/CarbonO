@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
-import FileUploaded from "./FileUploader";
+import FileUploader from "./FileUploader";
 import { IoLeafOutline, IoLeafSharp } from "react-icons/io5";
 import ViewInformationAccordion from "./ViewInformationAccordion";
 
 
-const Card2 = ({DishTitle, DishImage, DishRating, DishKeywords, DishIngredients, DishCarbonFootprint}) => {
+
+const Card = ({DishTitle, DishImage, DishRating, DishKeywords, DishIngredients, DishCarbonFootprint}) => {
 
   const [showDishInfo, setshowDishInfo] = React.useState(false);
   const [showReceiptUpload, setshowReceiptUpload] = React.useState(false);
@@ -43,24 +44,33 @@ const Card2 = ({DishTitle, DishImage, DishRating, DishKeywords, DishIngredients,
             body
           )
           .then(function (response) {
-            console.log(response)
-            console.log(response.data.responses[0].textAnnotations)
-            console.log(response.data.responses[0].textAnnotations[21].description)
 
-            console.log(DishKeywords[0]);
-    
-            for (let i = 0; i < response.data.responses[0].textAnnotations.length - 1; i++) {
-              if (response.data.responses[0].textAnnotations[i].description.toLowerCase() === DishKeywords[0].toLowerCase() && response.data.responses[0].textAnnotations[i + 1].description.toLowerCase() === DishKeywords[1].toLowerCase()) {
+            for (
+              let i = 0;
+              i < response.data.responses[0].textAnnotations.length - 1;
+              i++
+            ) {
+              if (
+                response.data.responses[0].textAnnotations[
+                  i
+                ].description.toLowerCase() === DishKeywords[0].toLowerCase() &&
+                response.data.responses[0].textAnnotations[
+                  i + 1
+                ].description.toLowerCase() === DishKeywords[1].toLowerCase()
+              ) {
                 setSuccessMessage(true);
                 return;
-              }  
+              }
             }
 
-            setErrorMessage(false);
+            setErrorMessage(true);
+          })
+          .catch((error) => {
+            setErrorMessage(true);
           });
       })
       .catch((error) => {
-        setErrorMessage(false);
+        setErrorMessage(true);
       });
   };
 
@@ -178,7 +188,7 @@ const Card2 = ({DishTitle, DishImage, DishRating, DishKeywords, DishIngredients,
                     <div className="relative p-6 flex-auto">
                       <p className="my-4 text-slate-500 text-lg leading-relaxed">
                         <form>
-                          <FileUploaded
+                          <FileUploader
                             onFileSelectSuccess={(file) =>
                               setSelectedFile(file)
                             }
@@ -205,7 +215,7 @@ const Card2 = ({DishTitle, DishImage, DishRating, DishKeywords, DishIngredients,
                       <button
                         className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="button"
-                        onClick={() => setshowReceiptUpload(false)}
+                        onClick={() => {setshowReceiptUpload(false); setSuccessMessage(false); setErrorMessage(false);}}
                       >
                         Close
                       </button>
@@ -228,4 +238,4 @@ const Card2 = ({DishTitle, DishImage, DishRating, DishKeywords, DishIngredients,
   );
 };
 
-export default Card2;
+export default Card;
