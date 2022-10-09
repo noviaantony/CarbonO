@@ -8,7 +8,7 @@ import CarbonTrackerService from "../../services/CarbonTrackerService";
 
 
 const LOGIN_URL = 'http://localhost:8080/api/v1/carbonO/user/login'
-const USER_ID_URL = 'http://localhost:8080/api/v1/carbonO/user/getUserId'
+const USER_ID_URL = 'http://localhost:8080/api/v1/carbonO/user/getUser'
 
 const LogInForm = () => {
   const {auth , setAuth } = useContext(AuthContext);
@@ -47,8 +47,8 @@ const handleSubmit = async (e) => {
             headers :{Authorization: `Bearer ${localStorage.getItem('token')}`}
         });
 
-        localStorage.setItem('userId', userIdResponse.data);
-        setAuth({"authenticated": true, "accessToken": loginResponse?.data?.access_token, "userId": userIdResponse.data});
+        localStorage.setItem('userId', userIdResponse.data.id);
+        setAuth({"authenticated": true, "accessToken": loginResponse?.data?.access_token, "userId": userIdResponse.data.id, "firstName": userIdResponse.data.firstName});
         console.log("from login");
         console.log(auth);
         // console.log(localStorage.getItem('token')); //for testing

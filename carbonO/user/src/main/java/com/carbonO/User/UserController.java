@@ -32,9 +32,9 @@ public class UserController {
         return ResponseEntity.ok().body("Authorized");
     }
 
-    @GetMapping("/getUserId")
-    public ResponseEntity<Long> getUserId(@RequestParam String email){
-        return ResponseEntity.ok().body(userService.loadUserByUsername(email).getId());
+    @GetMapping("/getUser")
+    public ResponseEntity<User> getUserId(@RequestParam String email){
+        return ResponseEntity.ok().body(userService.loadUserByUsername(email));
     }
 
 }
