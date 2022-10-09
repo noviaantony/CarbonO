@@ -31,9 +31,9 @@ class CarbonTrackerService {
         return response.status;
   }
 
-  async getDishConsumed(userId){
+  async getDishConsumed(){
         console.log("grabbing dish consumed");
-        const response = await axios.get(CARBON_TRACKER_API_URL + '/getUserDishConsumed', { params: { userId: userId }, headers: { Authorization: userToken } })
+        const response = await axios.get(CARBON_TRACKER_API_URL + '/getUserDishedConsumed', { params: { userId: userId }, headers: { Authorization: userToken } })
         return response.data;
   }
 }

@@ -1,10 +1,20 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import Wallet from "../components/dashboard/Wallet";
 import Table from "../components/dashboard/Table";
 import DonutChart from "../components/dashboard/DonutChart";
 import Testing from "../components/dashboard/Testing";
+import AuthContext from "../context/AuthProvider";
+import carbonTrackerService from "../services/CarbonTrackerService";
+
+
 
 const Dashboard = () => {
+  useEffect(() => {
+    carbonTrackerService.getDishConsumed().then(response =>
+      console.log(response)
+    );
+  }, [])
+  // console.log(carbonTrackerService.getDishConsumed());
   return (
     <>
       <div>
