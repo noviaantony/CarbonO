@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {HiMail, HiLockClosed, HiUser} from "react-icons/hi";
 import { ReactComponent as SignUpSvg } from "./SignUpSvg.svg";
-import { Link } from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import axios from "axios";
 
 const REGISTER_URL = 'http://localhost:8080/api/v1/carbonO/user/registration'
@@ -67,7 +67,7 @@ const SignUpForm = () => {
               <h1>Successfully Signed up</h1>
               <br />
               <p>
-                <a href="#">Go to Login page</a>
+                  <Navigate to="/login" />
               </p>
             </section>
         ) : (

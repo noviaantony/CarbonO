@@ -890,14 +890,8 @@ public class CarbonTrackerConfig {
                     new Date()
             );
 
-            UserCarbonTracker userCarbonTracker2 = new UserCarbonTracker(
-                    2L,
-                    dish2,
-                    new Date()
-            );
-
             userCarbonTrakerRepository.saveAll(
-                    List.of(userCarbonTracker1, userCarbonTracker2)
+                    List.of(userCarbonTracker1)
             );
 
         };

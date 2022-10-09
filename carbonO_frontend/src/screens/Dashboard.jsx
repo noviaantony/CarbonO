@@ -14,7 +14,7 @@ const Dashboard = () => {
   const {auth} = useContext(AuthContext);
 
   useEffect(() => {
-    carbonTrackerService.getDishConsumed().then((response) => {
+    carbonTrackerService.getDishConsumed(auth.userId, auth.accessToken).then((response) => {
       console.log("Table response")
       console.log(response)
       setHistoricalData(response);
@@ -23,7 +23,7 @@ const Dashboard = () => {
   }, [])
 
   useEffect(() => {
-    carbonTrackerService.getUserTotalCarbonConsumption().then((response) => {
+    carbonTrackerService.getUserTotalCarbonConsumption(auth.userId, auth.accessToken).then((response) => {
       console.log("Carbon response")
       console.log(response)
       setTotalCarbon(response);
