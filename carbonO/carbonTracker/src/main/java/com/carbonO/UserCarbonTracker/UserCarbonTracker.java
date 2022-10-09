@@ -2,6 +2,7 @@ package com.carbonO.UserCarbonTracker;
 
 import com.carbonO.Dish.Dish;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,7 @@ import java.util.Date;
 @Getter
 @Setter
 @AllArgsConstructor
-public class userCarbonTracker {
+public class UserCarbonTracker {
     @Id
     @SequenceGenerator(
             name = "userCarbonTracker_sequence",
@@ -31,13 +32,13 @@ public class userCarbonTracker {
 
     @ManyToOne
     @JoinColumn(name="dish_id")
-    @JsonBackReference
+    @JsonManagedReference
     private Dish dish;
 
-    public userCarbonTracker() {
+    public UserCarbonTracker() {
 
     }
-    public userCarbonTracker(Long userId, Dish dish, Date dateConsumed) {
+    public UserCarbonTracker(Long userId, Dish dish, Date dateConsumed) {
         this.userId = userId;
         this.dateConsumed = dateConsumed;
         this.dish = dish;

@@ -10,8 +10,8 @@ const  CarbonTracker = () => {
 
   const {auth} = useContext(AuthContext);
   const [searchTerm, setSearchTerm] = useState("");
-  console.log("from carbon tracker");
-  console.log(auth);
+  // console.log("from carbon tracker");
+  // console.log(auth);
   const [foodList, setFoodList] = useState([]);
     const [todo, setTodo] = useState({});
     const [loading, setLoading] = useState(false);
@@ -21,8 +21,9 @@ const  CarbonTracker = () => {
       setLoading(true);
      carbonTrackerService.getAllDishes()
          .then((response) => {
-           setFoodList(response)
-             console.log(foodList)
+           setFoodList(response);
+             // console.log("Food List");
+             // console.log(foodList);
          }).then((data) => {
           setTodo(data);
           setLoading(false);
@@ -86,6 +87,7 @@ const  CarbonTracker = () => {
               }).map((dish) => {
               return (
                   <Card
+                      DishId = {dish.id}
                       DishTitle={dish.dishName}
                       DishImage={dish.photo}
                       DishRating={dish.carbonRating}

@@ -3,8 +3,8 @@ package com.carbonO;
 import com.carbonO.Dish.*;
 import com.carbonO.Ingredient.Ingredient;
 import com.carbonO.Ingredient.IngredientRepository;
-import com.carbonO.UserCarbonTracker.userCarbonTracker;
-import com.carbonO.UserCarbonTracker.userCarbonTrakerRepository;
+import com.carbonO.UserCarbonTracker.UserCarbonTracker;
+import com.carbonO.UserCarbonTracker.UserCarbonTrakerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +20,7 @@ public class CarbonTrackerConfig {
 
     @Bean
     CommandLineRunner commandLineRunner(DishRepository dishRepository, IngredientRepository ingredientRepository,
-                                        DishRecipeRepository dishRecipeRepository, userCarbonTrakerRepository userCarbonTrakerRepository,
+                                        DishRecipeRepository dishRecipeRepository, UserCarbonTrakerRepository userCarbonTrakerRepository,
                                         DishKeywordsRepository dishKeywordsRepository, DishRewardPoints dishRewardPoints) {
 
         return args -> {
@@ -884,13 +884,13 @@ public class CarbonTrackerConfig {
 
 
             //user sample for food consumed
-            userCarbonTracker userCarbonTracker1 = new userCarbonTracker(
+            UserCarbonTracker userCarbonTracker1 = new UserCarbonTracker(
                     1L,
                     dish2,
                     new Date()
             );
 
-            userCarbonTracker userCarbonTracker2 = new userCarbonTracker(
+            UserCarbonTracker userCarbonTracker2 = new UserCarbonTracker(
                     2L,
                     dish2,
                     new Date()

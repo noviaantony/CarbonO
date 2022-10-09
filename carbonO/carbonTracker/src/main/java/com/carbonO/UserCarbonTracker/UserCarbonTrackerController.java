@@ -3,31 +3,32 @@ package com.carbonO.UserCarbonTracker;
 import com.carbonO.Dish.Dish;
 import com.carbonO.Dish.DishRepository;
 import com.carbonO.Dish.DishService;
-import org.apache.http.protocol.HTTP;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
 @RestController
 @RequestMapping(path = "api/v1/carbonO/carbonTracker/")
-public class userCarbonTrackerController {
-    private final userCarbonTrackerService userCarbonTrackerService;
+public class UserCarbonTrackerController {
+    private final UserCarbonTrackerService userCarbonTrackerService;
     private final DishRepository dishRepository;
     private final DishService dishService;
 //    private final RestTemplate restTemplate;
 
     @Autowired
-    public userCarbonTrackerController(userCarbonTrackerService userCarbonTrackerService, DishRepository dishRepository, DishService dishService, WebClient.Builder webClientBuilder) {
+    public UserCarbonTrackerController(UserCarbonTrackerService userCarbonTrackerService, DishRepository dishRepository, DishService dishService, WebClient.Builder webClientBuilder) {
         this.userCarbonTrackerService = userCarbonTrackerService;
         this.dishRepository = dishRepository;
         this.dishService = dishService;
+    }
+    //Get all dishes consumed by a user
+    @GetMapping("/getUserDishedConsumed")
+    public ResponseEntity<List<UserCarbonTracker>> getUserDishedConsumed(@RequestParam("userId") Long userId){
+        return ResponseEntity.ok().body(userCarbonTrackerService.getUserDishedConsumed(userId));
     }
 
     //Get all user total carbon consumption
@@ -37,6 +38,7 @@ public class userCarbonTrackerController {
     }
 
     //Post user dish consumed
+    //Note: To add Authorization header to request, currently not needed to allow initial testing of just the method logic
     @PostMapping("/addUserDishConsumed")
     public void addUserDishConsumed(@RequestParam("userId") Long userId, @RequestParam("dishId") Long dishId) {
         Dish dish = dishRepository.findById(dishId).get();
