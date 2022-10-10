@@ -1,8 +1,6 @@
 package com.carbonO.UserCarbonTracker;
 
 import com.carbonO.Dish.Dish;
-import com.carbonO.Dish.DishRepository;
-import com.carbonO.Dish.DishService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -10,11 +8,11 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class userCarbonTrackerService {
-    private final userCarbonTrakerRepository userCarbonTrakerRepository;
+public class UserCarbonTrackerService {
+    private final UserCarbonTrakerRepository userCarbonTrakerRepository;
     private final WebClient webClient;
 
-    public userCarbonTrackerService(userCarbonTrakerRepository userCarbonTrakerRepository, WebClient.Builder webClientBuilder) {
+    public UserCarbonTrackerService(UserCarbonTrakerRepository userCarbonTrakerRepository, WebClient.Builder webClientBuilder) {
         this.userCarbonTrakerRepository = userCarbonTrakerRepository;
         this.webClient = webClientBuilder.baseUrl("http://localhost:8080/api/v1/carbonO/user/").build();
     }
@@ -27,18 +25,21 @@ public class userCarbonTrackerService {
                 .header("Authorization", "Bearer " + token)
                 .retrieve().bodyToMono(String.class).block();
 
-        List<userCarbonTracker> userCarbonTransactions = userCarbonTrakerRepository.findAllByUserId(userId);
+        List<UserCarbonTracker> userCarbonTransactions = userCarbonTrakerRepository.findAllByUserId(userId);
         Double totalCarbonConsumption = 0.0;
 
-        for (userCarbonTracker userCarbonTransaction : userCarbonTransactions) {
+        for (UserCarbonTracker userCarbonTransaction : userCarbonTransactions) {
             totalCarbonConsumption += userCarbonTransaction.getDish().getTotalCarbonFootprint();
         }
         return totalCarbonConsumption;
     }
 
     public void addUserDishConsumed(Long userId, Dish dish) {
-        userCarbonTracker userCarbonTracker = new userCarbonTracker(userId, dish,new Date());
+        UserCarbonTracker userCarbonTracker = new UserCarbonTracker(userId, dish,new Date());
         userCarbonTrakerRepository.save(userCarbonTracker);
     }
 
+    public List<UserCarbonTracker> getUserDishedConsumed(Long userId) {
+        return userCarbonTrakerRepository.findAllByUserId(userId);
+    }
 }

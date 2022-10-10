@@ -1,6 +1,7 @@
 package com.carbonO.Dish;
 
-import com.carbonO.UserCarbonTracker.userCarbonTracker;
+import com.carbonO.UserCarbonTracker.UserCarbonTracker;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -38,8 +39,8 @@ public class Dish {
     private String photo;
 
     @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference
-    private List<userCarbonTracker> userCarbonTrackers;
+    @JsonBackReference
+    private List<UserCarbonTracker> userCarbonTrackers;
 
     private Integer carbonRating;
 

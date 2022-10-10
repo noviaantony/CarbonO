@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, {useContext, useState} from "react";
 import axios from "axios";
 import FileUploader from "./FileUploader";
 import { IoLeafOutline, IoLeafSharp } from "react-icons/io5";
 import ViewInformationAccordion from "./ViewInformationAccordion";
+import CarbonTrackerService from "../../services/CarbonTrackerService";
+import AuthContext from "../../context/AuthProvider";
 
 
-
-const Card = ({DishTitle, DishImage, DishRating, DishKeywords, DishIngredients, DishCarbonFootprint, DishCredit}) => {
-
+const Card = ({DishId, DishTitle, DishImage, DishRating, DishKeywords, DishIngredients, DishCarbonFootprint, DishCredit}) => {
+  const {auth} = useContext(AuthContext);
   const [showDishInfo, setshowDishInfo] = React.useState(false);
   const [showReceiptUpload, setshowReceiptUpload] = React.useState(false);
 
@@ -58,7 +59,11 @@ const Card = ({DishTitle, DishImage, DishRating, DishKeywords, DishIngredients, 
                   i + 1
                 ].description.toLowerCase() === DishKeywords[1].keyword.toLowerCase()
               ) {
-                setSuccessMessage(true);
+                console.log(DishId);
+                CarbonTrackerService.postDishConsumed(DishId, auth.accessToken, auth.userId).then((response) => {
+                  console.log(response);
+                  setSuccessMessage(true);
+                });
                 return;
               }
             }
