@@ -23,7 +23,6 @@ ChartJs.register(Tooltip, Title, ArcElement, Legend);
 
 const DonutChart = () => {
 
-
   const [data, setData] = useState({
     labels: ["A", "B", "C"],
     datasets: [

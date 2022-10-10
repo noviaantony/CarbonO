@@ -2,6 +2,7 @@ import React from "react";
 import { FaWallet, FaReceipt, FaLeaf } from "react-icons/fa";
 import { useState } from "react";
 import DonutChart from "../dashboard/DonutChart";
+import LineChart from "../dashboard/LineChart";
 
 const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
   const [isClickedCredit, setIsClickedCredit] = React.useState(false);
@@ -71,9 +72,9 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
         </div>
       </div>
 
-      <div class= "flex flex-wrap space-x-10">
+      <div class= "flex flex-wrap space-x-12">
       {isClickedCredit && <DonutChart />}
-      {isClickedCarbon && <DonutChart />}    
+      {isClickedCarbon && <LineChart />}    
       {isClickedReceipt && <DonutChart />}
       </div>
     </>

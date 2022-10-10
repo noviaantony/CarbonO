@@ -6,7 +6,7 @@ import UserStatistics from "../components/dashboard/UserStatistics";
 import { useState, useEffect, useContext } from "react";
 import AuthContext from "../context/AuthProvider";
 import carbonTrackerService from "../services/CarbonTrackerService";
-
+//import LineChart from "../components/dashboard/LineChart";
 
 const Dashboard = () => {
   const [historicalData, setHistoricalData] = useState([]);
@@ -43,7 +43,10 @@ const Dashboard = () => {
           <DonutChart />
           <DonutChart />
         </div> */}
+     
       </div>
+
+    
     </>
   );
 };
