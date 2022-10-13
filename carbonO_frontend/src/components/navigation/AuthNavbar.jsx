@@ -120,6 +120,9 @@ const AuthNavbar = () => {
           </div>
         </div>
       </nav>
+
+
+
         )
 }
 

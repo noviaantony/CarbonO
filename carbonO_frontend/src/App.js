@@ -37,7 +37,7 @@ function App() {
         <Route path="/Rewards" element={<Rewards />} />
       </Routes>
         {/*</Router>*/}
-      <Footer />
+      {/* <Footer /> */}
 
 
     </>
