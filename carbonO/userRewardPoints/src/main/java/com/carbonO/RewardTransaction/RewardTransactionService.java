@@ -18,4 +18,6 @@ public class RewardTransactionService {
         this.rewardTransactionRepository = rewardTransactionRepository;
     }
 
+    //create a method to retrieve the user's reward transactions
+
 }

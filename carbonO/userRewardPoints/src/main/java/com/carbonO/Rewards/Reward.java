@@ -1,5 +1,6 @@
 package com.carbonO.Rewards;
 
+import com.carbonO.RewardTransaction.RewardTransaction;
 import lombok.*;
 
 import javax.persistence.*;
@@ -32,7 +33,7 @@ public class Reward {
 
     @OneToOne
     @JoinColumn(name = "reward_Id")
-    private Reward reward;
+    private RewardTransaction reward;
 
     public Reward(Integer rewardId, String rewardName, String description, Integer redemptionPoints, Integer quantity) {
         this.rewardId = rewardId;
