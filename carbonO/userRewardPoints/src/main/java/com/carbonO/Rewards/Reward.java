@@ -30,6 +30,10 @@ public class Reward {
 
     private Integer quantity;
 
+    @OneToOne
+    @JoinColumn(name = "reward_Id")
+    private Reward reward;
+
     public Reward(Integer rewardId, String rewardName, String description, Integer redemptionPoints, Integer quantity) {
         this.rewardId = rewardId;
         this.rewardName = rewardName;

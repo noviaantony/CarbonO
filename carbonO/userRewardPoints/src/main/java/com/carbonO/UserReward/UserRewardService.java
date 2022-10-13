@@ -1,21 +1,21 @@
-package com.carbonO.userReward;
+package com.carbonO.UserReward;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class userRewardService {
-    private final userRewardRepository userRewardRepository;
+public class UserRewardService {
+    private final UserRewardRepository userRewardRepository;
 
     @Autowired
-    public userRewardService(userRewardRepository userRewardRepository) {
+    public UserRewardService(UserRewardRepository userRewardRepository) {
         this.userRewardRepository = userRewardRepository;
     }
 
     //if it is a new user, create a new reward point for the user
-    public userReward addNewUserReward(Integer userID) {
+    public UserReward addNewUserReward(Integer userID) {
 
-        userReward userReward = new userReward(userID, 0);
+        UserReward userReward = new UserReward(userID, 0);
         return userRewardRepository.save(userReward);
     }
     //create another method to edit reward points (set points)

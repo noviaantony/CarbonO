@@ -1,4 +1,4 @@
-package com.carbonO.userReward;
+package com.carbonO.UserReward;
 
 import com.carbonO.Common.ApiResponse;
 import org.springframework.http.HttpStatus;
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "api/v1/carbonO/userReward")
-public class userRewardController {
-    private final userRewardService userRewardService;
+public class UserRewardController {
+    private final UserRewardService userRewardService;
 
-    public userRewardController(userRewardService userRewardService) {
+    public UserRewardController(UserRewardService userRewardService) {
         this.userRewardService = userRewardService;
     }
 

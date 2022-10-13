@@ -1,15 +1,18 @@
-package com.carbonO.userReward;
+package com.carbonO.UserReward;
 
+import com.carbonO.RewardTransaction.RewardTransaction;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class userReward {
+public class UserReward {
     @Id
     @SequenceGenerator(
             name = "user_Reward_sequence",
@@ -21,10 +24,14 @@ public class userReward {
             generator = "user_Reward_sequence"
     )
     private Long rewardId;
-    private Integer userID;
+    private Long userID;
     private Integer rewardPoints;
 
-    public userReward(Integer userID, int i) {
+    @OneToMany(mappedBy = "userReward", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<RewardTransaction> rewardTransactions;
+
+    public UserReward(Integer userID, int i) {
 
     }
 }
