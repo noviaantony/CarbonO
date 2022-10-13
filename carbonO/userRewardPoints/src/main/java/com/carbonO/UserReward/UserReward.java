@@ -1,4 +1,4 @@
-package com.carbonO.UserReward;
+package com.carbonO.userReward;
 
 import com.carbonO.RewardTransaction.RewardTransaction;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -23,7 +23,7 @@ public class UserReward {
             strategy = GenerationType.SEQUENCE,
             generator = "user_Reward_sequence"
     )
-    private Long rewardId;
+    private Long userRewardId;
     private Long userID;
     private Integer rewardPoints;
 

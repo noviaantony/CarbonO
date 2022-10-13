@@ -21,7 +21,7 @@ public class Reward {
             strategy = GenerationType.SEQUENCE,
             generator = "user_Reward_sequence"
     )
-    private Integer rewardId;
+    private Long rewardId;
 
     private String rewardName;
 
@@ -35,7 +35,7 @@ public class Reward {
     @JoinColumn(name = "reward_Id")
     private RewardTransaction reward;
 
-    public Reward(Integer rewardId, String rewardName, String description, Integer redemptionPoints, Integer quantity) {
+    public Reward(Long rewardId, String rewardName, String description, Integer redemptionPoints, Integer quantity) {
         this.rewardId = rewardId;
         this.rewardName = rewardName;
         this.description = description;
