@@ -1,36 +1,80 @@
-import React from 'react'
+import React, {useState} from 'react'
+// import { Progress } from "@material-tailwind/react";
 
 const RewardCard = ({
   RewardImage,
   RewardTitle,
   RewardDescription,
-  RewardCompany,
   CompanyName,
-  CompanyWebsite
+  CompanyWebsite,
+  progressPercentage
 }) => {
+
+  let claimable = true;
+
+  console.log("meow" + progressPercentage)
+
+
+  if (progressPercentage < 100) {
+    console.log("woof" + progressPercentage)
+    claimable = false;
+  }
+
+  
+
   return (
-    <div className="mb-5">
-      <a
-        href="#"
-        className="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
-      >
-        <img
-          className="object-cover w-full h-44 rounded-t-lg  md:w-48 md:rounded-none md:rounded-l-lg"
-          src={RewardImage}
-          alt="Product Image"
-        />
-        <div className="flex flex-col justify-between p-4 leading-normal">
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            {RewardTitle}
-          </h5>
-          <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-            {RewardDescription}
-          </p>
-          <a href={CompanyWebsite} className="underline-offset-3 font-semibold text-grey-700">
-            Visit {CompanyName}
-          </a>
+    <div className="mb-5 w-full grid place-items-center">
+      <div className="flex justify-center">
+        <div className="bg-[#8000000]"></div>
+        {/* <div className={`flex flex-col md:flex-row md:max-w-xl rounded-lg shadow-lg ${claimable  ? "bg-white " : "bg-[#404040]"}`}> */}
+        <div className="flex flex-col md:flex-row md:max-w-xl rounded-lg shadow-lg bg-white">
+          <img
+            className=" w-full h-98 md:h-52  md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg object-fill"
+            src={RewardImage}
+            alt=""
+          />
+
+          <div className="p-6 flex flex-col justify-start">
+            <h5 className="text-gray-900 text-xl font-bold mb-2">
+              {RewardTitle}
+            </h5>
+            <p className="text-gray-700 text-base mb-2">{RewardDescription}</p>
+            <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-lg text-blue-600 bg-blue-200 w-fit mb-2">
+              50 E-Credits
+            </span>
+
+            {claimable ? (
+              <button className="items-center py-2 px-3 text-xs font-xs text-center text-white bg-[#5E9387] rounded-lg  focus:outline-none transition duration-300 mr-3 font-semibold hover:bg-gray-700 hover:text-white mb-3">
+                {" "}
+                Claim Reward
+              </button>
+            ) : (
+              <button
+                className="items-center py-2 px-3 text-xs font-xs text-center text-black bg-[#EBEBE4] rounded-lg focus:outline-none transition mr-3 font-semibold mb-3"
+                disabled={!claimable}
+              >
+                Claim Reward
+              </button>
+            )}
+
+            <a
+              href={CompanyWebsite}
+              className="text-xs font-semibold hover:underline-offset-2"
+            >
+              Visit {CompanyName}
+            </a>
+
+            <div className="h-1 w-full bg-gray-300 mt-5">
+              <div
+                style={{ width: `${progressPercentage}%` }}
+                className={`h-full ${
+                  progressPercentage < 70 ? "bg-red-600" : "bg-green-600"
+                }`}
+              ></div>
+            </div>
+          </div>
         </div>
-      </a>
+      </div>
     </div>
   );
 };
