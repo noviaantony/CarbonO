@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
-// import { Progress } from "@material-tailwind/react";
+import { ConfirmDialog } from 'primereact/confirmdialog'; // To use <ConfirmDialog> tag
+import { confirmDialog } from 'primereact/confirmdialog'; // To use confirmDialog method
 
 const RewardCard = ({
   RewardImage,
@@ -12,15 +13,30 @@ const RewardCard = ({
 
   let claimable = true;
 
-  console.log("meow" + progressPercentage)
-
-
   if (progressPercentage < 100) {
-    console.log("woof" + progressPercentage)
     claimable = false;
   }
 
-  
+  const acceptReward = () => {
+    console.log("claimed reward!");
+  }
+
+  const rejectReward = () => {
+    console.log("not claiming reward!");
+  };
+
+  const claimRewardConfirmation = () => {
+
+    confirmDialog({
+      message: "Are you sure you want to proceed?",
+      header: "Confirmation",
+      icon: "pi pi-exclamation-triangle",
+      accept: () => acceptReward(),
+      reject: () => rejectReward(),
+    });
+
+
+  }
 
   return (
     <div className="mb-5 w-full grid place-items-center">
@@ -44,10 +60,16 @@ const RewardCard = ({
             </span>
 
             {claimable ? (
-              <button className="items-center py-2 px-3 text-xs font-xs text-center text-white bg-[#5E9387] rounded-lg  focus:outline-none transition duration-300 mr-3 font-semibold hover:bg-gray-700 hover:text-white mb-3">
-                {" "}
-                Claim Reward
-              </button>
+              <>
+                <button
+                  className="items-center py-2 px-3 text-xs font-xs text-center text-white bg-[#5E9387] rounded-lg  focus:outline-none transition duration-300 mr-3 font-semibold hover:bg-gray-700 hover:text-white mb-3"
+                  onClick={() => claimRewardConfirmation()}
+                >
+                  {" "}
+                  Claim Reward
+                </button>
+                <ConfirmDialog breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '50vw'}} />
+              </>
             ) : (
               <button
                 className="items-center py-2 px-3 text-xs font-xs text-center text-black bg-[#EBEBE4] rounded-lg focus:outline-none transition mr-3 font-semibold mb-3"
