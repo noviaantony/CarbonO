@@ -1,5 +1,5 @@
 import React from "react";
-import { Line } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 import {
   Chart,
   LineController,
@@ -20,19 +20,20 @@ Chart.register(
 );
 
 Chart.defaults.font.size = 20;
-const LineChart = () => {
+
+const TestChart = () => {
   return (
     <div
-      style={{ width: "28%", height: "80%" }}
+      style={{ width: "28%", height: "30%" }}
       className="bg-white rounded-lg h-auto p-6 flex items-stretch m-6 shadow-md font-default"
     >
-      <Line
+      <Doughnut
         data={{
           //labels on x-axis
-          labels: ["Jan", "Feb", "Mar"],
+          labels: ["Category 1", "Category 2", "Category 3"],
           datasets: [
             {
-              label: "c02 consumed",
+              label: "E-Credits",
               data: [12, 19, 3],
               backgroundColor: [
                 "rgba(255, 99, 132, 0.2)",
@@ -55,28 +56,21 @@ const LineChart = () => {
           plugins: {
             title: {
               display: true,
-              text: "C02 Consumed"
+              text: "Total Current E-Credits",
             },
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
 
-          legend: {
-            labels: {
-                // This more specific font property overrides the global property
+            legend: {
+              labels: {
                 font: {
-                    size: 14
-                }
-            }
-        }
-    
+                  size: 12,
+                },
+              },
+            },
+          },
         }}
       />
     </div>
   );
 };
 
-export default LineChart;
+export default TestChart;
