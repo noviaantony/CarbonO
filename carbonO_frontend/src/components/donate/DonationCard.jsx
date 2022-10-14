@@ -20,7 +20,15 @@ const DonationCard = ({Title, Image, Description, Website}) => {
           "
               type="button"
             >
-              Donate
+              Donate E-Credits
+            </button>
+            <button
+              to="/ClaimReward"
+              className="inline-flex items-center py-2 px-3 text-xs font-xs text-center text-white bg-[#5E9387] rounded-lg  focus:outline-none transition duration-300 mr-3 font-semibold hover:bg-gray-700 hover:text-white
+          "
+              type="button"
+            >
+              Donate Cash
             </button>
             <a
               href={Website}
