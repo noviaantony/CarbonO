@@ -2,6 +2,7 @@ import React, {useContext, useState, useRef, useEffect} from 'react'
 import Card from "../components/carbontracker/Card";
 import AuthContext from "../context/AuthProvider";
 import carbonTrackerService from "../services/CarbonTrackerService";
+import Header from "../components/misc/Header";
 
 const CARBON_TRACKER_URL = 'http://localhost:8080/api/v1/carbonO/carbonTracker/'
 // const ref = useRef(null);
@@ -32,6 +33,7 @@ const  CarbonTracker = () => {
 
   return (
       <>
+      <Header Title = "Reduce Your Carbon Foodprint Today!" Description="upload a valid receipt for a dish and claim e-credits to redeem rewards or donate!"/>
       {loading ? (
               <div>...Data Loading.....</div>
           ) : (

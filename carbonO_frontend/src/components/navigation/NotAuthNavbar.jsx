@@ -7,7 +7,7 @@ const NotAuthNavbar = () => {
   const [navbar, setNavbar] = useState(false);
 
   return (
-    <nav className="shadow bg-[#5E9387] px-2 sm:px-4 py-2.5 w-full z-20 sticky top-0 left-0 font-default">
+    <nav className=" bg-[#5E9387] px-2 sm:px-4 py-2.5 w-full z-20 sticky top-0 left-0 font-default shadow-xl">
       <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
         <div>
           <div className="flex items-center justify-between py-3 md:py-5 md:block">
