@@ -1,11 +1,10 @@
 import React from "react";
 import { FaWallet, FaReceipt, FaLeaf } from "react-icons/fa";
-import { useState } from "react";
 import DonutChart from "../dashboard/DonutChart";
 import LineChart from "../dashboard/LineChart";
 import PieChart from "./PieChart";
 import TestChart from "./TestChart";
-import Split from "react-split";
+// import Split from "react-split";
 
 
 const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {

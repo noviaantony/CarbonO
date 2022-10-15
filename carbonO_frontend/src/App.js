@@ -21,23 +21,19 @@ function App() {
     const {auth} = useContext(AuthContext);
     console.log(auth.authenticated);
   return (
-    // <div className="App">
-    //     <UserComponent/>
-    // </div>
+
     <>
-        {/*<Router>*/}
-        {auth.authenticated ? <AuthNavbar /> : <NotAuthNavbar />}
-      <Routes>
-        <Route path="*" element={<Landing />} />
-        <Route path="/CarbonTracker" element={<CarbonTracker />} />
-        <Route path="/Login" element={<LogInForm />} />
-        <Route path="/Signup" element={<SignUpForm />} />
-        <Route path="/Dashboard" element={<Dashboard />} />
-        <Route path="/Donate" element={<Donate />} />
-        <Route path="/Rewards" element={<Rewards />} />
-      </Routes>
-        {/*</Router>*/}
-      {/* <Footer /> */}
+      {auth.authenticated ? <AuthNavbar /> : <NotAuthNavbar />}
+        <Routes>
+          <Route path="*" element={<Landing />} />
+          <Route path="/CarbonTracker" element={<CarbonTracker />} />
+          <Route path="/Login" element={<LogInForm />} />
+          <Route path="/Signup" element={<SignUpForm />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/Donate" element={<Donate />} />
+          <Route path="/Rewards" element={<Rewards />} />
+        </Routes>
+      <Footer />
 
 
     </>
