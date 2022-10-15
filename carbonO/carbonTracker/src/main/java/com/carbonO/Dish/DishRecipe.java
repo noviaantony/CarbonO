@@ -44,6 +44,8 @@ public class DishRecipe {
             generator = "dishRecipe_sequence"
     )
     private Long id;
+    private double quantity;
+
     @ManyToOne
     @JoinColumn(name = "dish_Id")
     @JsonBackReference
@@ -53,9 +55,6 @@ public class DishRecipe {
     @JoinColumn (name = "ingredient_Id")
     @JsonBackReference
     private Ingredient ingredient;
-
-    private double quantity;
-
 
     public DishRecipe(Dish dish, Ingredient ingredient, double quantity) {
         this.dish = dish;

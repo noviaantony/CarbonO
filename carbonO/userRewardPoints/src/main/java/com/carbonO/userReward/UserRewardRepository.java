@@ -1,6 +1,7 @@
-package com.carbonO.UserReward;
+package com.carbonO.userReward;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
 
 public interface UserRewardRepository extends JpaRepository<UserReward, Long> {
 }

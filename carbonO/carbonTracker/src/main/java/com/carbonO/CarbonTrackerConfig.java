@@ -15,8 +15,13 @@ import java.util.*;
 @Configuration
 public class CarbonTrackerConfig {
 
+    private final DishService dishService;
+
     @Autowired
-    DishService dishService;
+    public CarbonTrackerConfig(DishService dishService) {
+        this.dishService = dishService;
+    }
+
 
     @Bean
     CommandLineRunner commandLineRunner(DishRepository dishRepository, IngredientRepository ingredientRepository,

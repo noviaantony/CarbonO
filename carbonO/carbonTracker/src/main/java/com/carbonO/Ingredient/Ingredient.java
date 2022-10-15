@@ -26,11 +26,14 @@ public class Ingredient {
     )
     private Long id;
     private String ingredientName;
+    private Double carbonFootprint;
+    private String photo;
+
+    //todo: add a field for description of the dish
+
     @OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<DishRecipe> dishRecipe;
-    private Double carbonFootprint;
-    private String photo;
 
     public Ingredient(String ingredientName, Double carbonFootprint) {
         this.ingredientName = ingredientName;

@@ -18,10 +18,9 @@ public class DishController {
         this.dishService = dishService;
     }
 
+    //Retrieve all dishes in the database
     @GetMapping("/getAllDishes")
     public ResponseEntity<List<Dish>> getAllDishes() {
         return ResponseEntity.ok().body(dishService.getAllDishes());
     }
-//    @GetMapping("/")
-
 }

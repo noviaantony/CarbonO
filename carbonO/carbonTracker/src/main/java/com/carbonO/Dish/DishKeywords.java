@@ -23,12 +23,12 @@ public class DishKeywords {
             generator = "dish_sequence"
     )
     private Long id;
+    private String keyword;
 
     @ManyToOne
     @JoinColumn(name = "dish_Id")
     @JsonBackReference
     private Dish dish;
-    private String keyword;
 
     public DishKeywords(Dish dish, String keyword) {
         this.dish = dish;

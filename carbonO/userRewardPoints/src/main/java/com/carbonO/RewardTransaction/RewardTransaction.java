@@ -1,7 +1,7 @@
 package com.carbonO.RewardTransaction;
 
 import com.carbonO.Rewards.Reward;
-import com.carbonO.UserReward.UserReward;
+import com.carbonO.userReward.UserReward;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,7 +26,6 @@ public class RewardTransaction {
             generator = "reward_transaction_sequence"
     )
     private Long id;
-
     private Date dataOfTransaction;
 
     @ManyToOne
