@@ -4,6 +4,7 @@ import DonationCard from "../components/donate/DonationCard";
 
 
 const Donate = () => {
+
   return (
     <>
       <div className="h-max">
