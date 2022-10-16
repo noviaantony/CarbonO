@@ -7,17 +7,13 @@
 > - [Ariff](http://github.com/KimmyChanga/)
 > - [Alison](https://github.com/alisonhow194) 
 
+Code submission for [SMU CS203]
+
 ##  Our Solution
 CarbonO is an application whereby users can claim e-credits when they consume foods with lower carbon footprints. User can browse a page of dishes and compare the carbon emissions of the various dishes through their "carbon rating". Users can upload receipt for a selected dish and upload a receipt for the dish in order to claim "e-credits". When a dish has a higher carbon-rating, users can claim more e-credits for that dish. The receipts are validated using Optical Character Recognition (OCR) with the help of the Google Vision API. Lastly, users can convieniently use accumulated e-credits to claim rewards or donate to organizations fighting climate change. 
 
 [NOTE: the uploaded receipts will be validated using using QR code moving forward as the team felt that it prevents loopholes in the system]
 
-## Cloning Repo
-> Open your git cmd console, cd to the directory of your choosing example cd C:/users/(name)/Desktop/
-> Thereafter, enter git clone https://github.com/Chen-ZhaoXing/CS203-Team-2.git
-> After clone enter cd cs203-team-2 to access the repo
-
-Code submission for [SMU CS203]
 
 ## Core Features
 
@@ -54,3 +50,12 @@ Code submission for [SMU CS203]
 - [Google Vision AI API](https://cloud.google.com/vision)
 - [pgAdmin](https://www.pgadmin.org/)
 - [Chart.js](https://www.chartjs.org/)
+
+---
+
+## Cloning Repo
+> Open your git cmd console, cd to the directory of your choosing example cd C:/users/(name)/Desktop/
+> Thereafter, enter git clone https://github.com/Chen-ZhaoXing/CS203-Team-2.git
+> After clone enter cd cs203-team-2 to access the repo
+
+
