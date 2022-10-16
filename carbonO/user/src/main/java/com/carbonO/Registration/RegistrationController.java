@@ -13,7 +13,7 @@ public class RegistrationController {
     @PostMapping
     public ResponseEntity<String> register(@RequestBody RegistrationRequest request) {
         try {
-            return ResponseEntity.ok().body(registrationService.register(request));
+            return ResponseEntity.status(201).body(registrationService.register(request));
         } catch (IllegalStateException e) {
             if (e.getMessage().equals("email taken")) {
                 return ResponseEntity.status(403).body("email taken");
