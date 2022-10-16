@@ -1,8 +1,8 @@
 package com.carbonO;
 
 
-import com.carbonO.Registration.RegistrationRequest;
-import com.carbonO.Registration.token.ConfirmationTokenRepository;
+import com.carbonO.Security.Registration.RegistrationRequest;
+import com.carbonO.Security.Registration.token.ConfirmationTokenRepository;
 import com.carbonO.User.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -119,6 +119,23 @@ public class UserIntegrationTest {
 
         System.out.println(token);
     }
+
+    @Test
+    public void registration_duplicateEmail_Failure() throws Exception{
+
+        RegistrationRequest request = new RegistrationRequest("testing1", "testing", "testing1@gmail.com", "123");
+
+        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/registration");
+
+        ResponseEntity<String> result = restTemplate.postForEntity(uri,request,String.class);
+
+        ResponseEntity<String> result2 = restTemplate.postForEntity(uri,request,String.class);
+
+        Assertions.assertEquals(403,result2.getStatusCode().value());
+
+
+    }
+
 
 
 
