@@ -6,10 +6,10 @@ import Hero from "../components/landingpage/Hero";
 const Landing = () => {
 
   return (
-    <div>
-      <Hero />
-      <Features />
-    </div>
+    <>
+        <Hero />
+        <Features />
+    </>
   );
 };
 

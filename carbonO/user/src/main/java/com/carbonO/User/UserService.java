@@ -30,13 +30,12 @@ public class UserService implements UserDetailsService {
 
     @Override
     public User loadUserByUsername(String email) throws UsernameNotFoundException {
-//        User user = userRepository.findByEmail(email);
         return userRepository.findByEmail(email).orElseThrow(() ->
                 new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
     }
 
     public String signUpUser(User user) {
-        //checks for duplicate are done in registration service
+        //checks for duplicate and other verifications are done in the registration service
 
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
 

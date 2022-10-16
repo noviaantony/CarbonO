@@ -17,7 +17,6 @@ public class UserCarbonTrackerController {
     private final UserCarbonTrackerService userCarbonTrackerService;
     private final DishRepository dishRepository;
     private final DishService dishService;
-//    private final RestTemplate restTemplate;
 
     @Autowired
     public UserCarbonTrackerController(UserCarbonTrackerService userCarbonTrackerService, DishRepository dishRepository, DishService dishService, WebClient.Builder webClientBuilder) {
@@ -31,13 +30,13 @@ public class UserCarbonTrackerController {
         return ResponseEntity.ok().body(userCarbonTrackerService.getUserDishedConsumed(userId));
     }
 
-    //Get all user total carbon consumption
+    //Get a specific user's total carbon consumption since the beginning
     @GetMapping("/getUserTotalCarbonConsumption")
     public ResponseEntity<Double> getUserTotalCarbonConsumption(@RequestParam("userId") Long userId, @RequestHeader("Authorization") String token ) {
             return ResponseEntity.ok().body(userCarbonTrackerService.getUserTotalCarbonConsumption(userId, token));
     }
 
-    //Post user dish consumed
+    //Add the dish consumed by a user
     //Note: To add Authorization header to request, currently not needed to allow initial testing of just the method logic
     @PostMapping("/addUserDishConsumed")
     public void addUserDishConsumed(@RequestParam("userId") Long userId, @RequestParam("dishId") Long dishId) {
@@ -45,12 +44,6 @@ public class UserCarbonTrackerController {
         userCarbonTrackerService.addUserDishConsumed(userId, dish);
     }
 
-    //Get user total carbon consumption for a day or between a certain period of time
-
-    @GetMapping("/dishes")
-    public ResponseEntity<List<Dish>> getAllDishes() {
-        List<Dish> dishList = dishRepository.findAll();
-        return ResponseEntity.ok().body(dishList);
-    }
+    //Todo: Get user total carbon consumption for a day or between a certain time period
 
 }

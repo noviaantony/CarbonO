@@ -1,7 +1,7 @@
 import React, {useRef, useState, useEffect, useContext} from 'react'
 import { HiMail, HiLockClosed } from "react-icons/hi";
 import { ReactComponent as SignInSvg } from "./SignInSvg.svg";
-import {Navigate ,Link, useNavigate} from "react-router-dom";
+import {Navigate ,Link } from "react-router-dom";
 import AuthContext from "../../context/AuthProvider";
 import axios from "axios";
 import CarbonTrackerService from "../../services/CarbonTrackerService";
@@ -30,8 +30,7 @@ const LogInForm = () => {
 
 const handleSubmit = async (e) => {
     e.preventDefault();
-    // const url = require('http://localhost:8080/api/v1/carbonO/user/login');
-    // const params = new url.URLSearchParams({ username: email, password: password });
+
 
     const params = new URLSearchParams();
     params.append('username', email);
@@ -40,14 +39,13 @@ const handleSubmit = async (e) => {
     try {
         const loginResponse = await axios.post(LOGIN_URL,
             params);
-        // console.log(JSON.stringify(response?.data))
         localStorage.setItem('token', loginResponse?.data?.access_token);
 
         const userIdResponse = await axios.get(USER_ID_URL, {params: {email: email},
             headers :{Authorization: `${localStorage.getItem('token')}`}
         });
         localStorage.setItem('userId', userIdResponse.data.id);
-        //setauth to store user details for retrieval of data moving forward
+
         setAuth({"authenticated": true, "accessToken": loginResponse?.data?.access_token, "userId": userIdResponse.data.id, "firstName": userIdResponse.data.firstName});
 
         setSuccess(true);
@@ -155,22 +153,9 @@ const handleSubmit = async (e) => {
             </div>
             </form>
           </div>
-          {/* Right Section */}
           <div className="w-2/5 bg-[#5E9387]  text-white rounded-tr-2xl rounded-br-2xl py-36 px-12">
-            {/* <h2 className="text-3xl font-bold mb-2">Start your </h2>
-            <div className="border-2 w-10 border-white inline-block mb-2"></div>
-            <p className="mb-10">Start your journey with us today</p>
-            <SignInSvg width="15rem" />
-            <a
-              href=""
-              className="roup relative flex w-full justify-center rounded-md border border-transparent text-sm text-gray-700 focus:outline-none transition duration-300 px-7 py-3  bg-white text-center marker:sm:w-auto font-bold hover:shadow-md hover:bg-gray-700 hover:text-white"
-            >
-              Sign Up
-            </a>{" "} */}
             <SignInSvg width="16rem" />
           </div>
-
-          {/* Right Section */}
         </div>
       </main>
     </div>

@@ -44,20 +44,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        return http
-//                .cors().and().csrf().disable()
-//                .sessionManagement().sessionCreationPolicy(STATELESS)
-//                .and().authorizeRequests().antMatchers("/api/v1/carbonO/login/**").permitAll()
-//                .and().authorizeRequests().antMatchers("/api/v1/carbonO/**").hasAnyAuthority("ADMIN")
-//                .and().oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
-//                .build();
-//    }
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
-//    }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(daoAuthenticationProvider());

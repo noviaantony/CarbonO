@@ -1,4 +1,4 @@
-package com.carbonO.UserReward;
+package com.carbonO.userReward;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

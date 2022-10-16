@@ -1,19 +1,19 @@
 import React, {useContext, useState} from "react";
 import axios from "axios";
-import FileUploader from "./FileUploader";
 import { IoLeafOutline, IoLeafSharp } from "react-icons/io5";
+import FileUploader from "./FileUploader";
 import ViewInformationAccordion from "./ViewInformationAccordion";
 import CarbonTrackerService from "../../services/CarbonTrackerService";
 import AuthContext from "../../context/AuthProvider";
 
 
-const Card = ({DishId, DishTitle, DishImage, DishRating, DishKeywords, DishIngredients, DishCarbonFootprint, DishCredit}) => {
+const Card = ({dishId, dishTitle, dishImage, dishRating, dishKeywords, dishIngredients, dishCarbonFootprint, dishCredit}) => {
+
   const {auth} = useContext(AuthContext);
+
   const [showDishInfo, setshowDishInfo] = React.useState(false);
   const [showReceiptUpload, setshowReceiptUpload] = React.useState(false);
-
   const [selectedFile, setSelectedFile] = useState(null);
-
   const [successMessage, setSuccessMessage] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState(false);
 
@@ -54,13 +54,13 @@ const Card = ({DishId, DishTitle, DishImage, DishRating, DishKeywords, DishIngre
               if (
                 response.data.responses[0].textAnnotations[
                   i
-                ].description.toLowerCase() === DishKeywords[0].keyword.toLowerCase() &&
+                ].description.toLowerCase() === dishKeywords[0].keyword.toLowerCase() &&
                 response.data.responses[0].textAnnotations[
                   i + 1
-                ].description.toLowerCase() === DishKeywords[1].keyword.toLowerCase()
+                ].description.toLowerCase() === dishKeywords[1].keyword.toLowerCase()
               ) {
-                console.log(DishId);
-                CarbonTrackerService.postDishConsumed(DishId, auth.accessToken, auth.userId).then((response) => {
+                console.log(dishId);
+                CarbonTrackerService.postDishConsumed(dishId, auth.accessToken, auth.userId).then((response) => {
                   console.log(response);
                   setSuccessMessage(true);
                 });
@@ -80,32 +80,32 @@ const Card = ({DishId, DishTitle, DishImage, DishRating, DishKeywords, DishIngre
   };
 
   
-  // Render Dish Carbon Rating
-  const renderedDishRating = [];
-  for (let i = 0; i < DishRating ; i++) {
-    renderedDishRating.push(<IoLeafSharp size={30} color="gray-700" />);
+
+  const rendereddishRating = [];
+  for (let i = 0; i < dishRating ; i++) {
+    rendereddishRating.push(<IoLeafSharp size={30} color="gray-700" />);
   }
-  for (let i = 0; i < (5 - DishRating) ; i++) {
-    renderedDishRating.push(<IoLeafOutline size={30} color="gray-700" />);
+  for (let i = 0; i < (5 - dishRating) ; i++) {
+    rendereddishRating.push(<IoLeafOutline size={30} color="gray-700" />);
   }
 
   return (
     <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 font-default">
       <article class="overflow-hidden rounded-lg bg-white">
-        <img alt={DishTitle} class="block h-72 w-full" src={DishImage} />
+        <img alt={dishTitle} class="block h-72 w-full" src={dishImage} />
         <header class="flex items-left leading-tight p-2 md:p-4 ">
-          <h1 class="text-2xl font-bold">{DishTitle}</h1>
+          <h1 class="text-2xl font-bold">{dishTitle}</h1>
         </header>
         <div>
           <span class="text-m font-semibold inline-block py-1 px-2 uppercase rounded-full text-[#5E9387] bg-[#5e938733] ml-4">
-            {DishCarbonFootprint}g CO2
+            {dishCarbonFootprint}g CO2
           </span>
           <span class="text-m font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200 ml-4">
-            {DishCredit} E-Credits
+            {dishCredit} E-Credits
           </span>
         </div>
         <div className="flex items-center justify-items-start leading-tight p-2 md:p-4">
-          {renderedDishRating}
+          {rendereddishRating}
         </div>
 
         <footer class="flex items-center justify-between leading-none p-2 md:p-4 bg-white">
@@ -139,7 +139,7 @@ const Card = ({DishId, DishTitle, DishImage, DishRating, DishKeywords, DishIngre
                   <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                     {/*header*/}
                     <div className="text-center items-start justify-between p-3 border-b border-solid border-slate-200 rounded-t">
-                      <h3 className="text-3xl font-semibold">{DishTitle}</h3>
+                      <h3 className="text-3xl font-semibold">{dishTitle}</h3>
                       <button
                         className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                         onClick={() => setshowDishInfo(false)}
@@ -153,7 +153,7 @@ const Card = ({DishId, DishTitle, DishImage, DishRating, DishKeywords, DishIngre
                     <div className="relative p-6 flex-auto">
                       <p className="my-4 text-slate-500 text-lg leading-relaxed">
                         <ViewInformationAccordion
-                          DishIngredients={DishIngredients}
+                          dishIngredients={dishIngredients}
                         />
                       </p>
                     </div>
@@ -183,7 +183,7 @@ const Card = ({DishId, DishTitle, DishImage, DishRating, DishKeywords, DishIngre
                   <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                     {/*header*/}
                     <div className="text-center items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                      <h3 className="text-3xl font-semibold">{DishTitle}</h3>
+                      <h3 className="text-3xl font-semibold">{dishTitle}</h3>
                       <button
                         className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                         onClick={() => setshowReceiptUpload(false)}

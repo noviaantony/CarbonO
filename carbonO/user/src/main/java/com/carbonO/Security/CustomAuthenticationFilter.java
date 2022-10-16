@@ -47,11 +47,11 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
-        User user = (User) authentication.getPrincipal(); // the User is referring to our created user instead of the spring user
-        Algorithm algorithm = Algorithm.HMAC256("secret".getBytes()); //in real world practice you will encrypt secret
+        User user = (User) authentication.getPrincipal();
+        Algorithm algorithm = Algorithm.HMAC256("secret".getBytes()); //"secret" is a temporary key, in actual deployment will be encrypted
         String access_token = JWT.create()
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000)) // expires in 10 mins, but plan to remove to simplify the application.yml
+                .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000)) // expires in 10 mins
                 .withIssuer(request.getRequestURL().toString())
                 .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .sign(algorithm);
@@ -64,7 +64,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 //        response.setHeader("access_token", access_token);
 //        response.setHeader("refresh_token", refresh_token);
 
-        //to pass the token back to the user in a response body, NOTE for Frontend: need to store the access_token, i think can ignore refresh token
+        //to pass the token back to the user in a response body for frontend to store as a cookie
         Map<String, String> tokens = new HashMap<>();
         tokens.put("access_token", access_token);
         tokens.put("refresh_token", refresh_token);
