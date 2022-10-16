@@ -1,51 +1,29 @@
 package com.carbonO;
 
 
-import com.carbonO.Security.Registration.RegistrationRequest;
-import com.carbonO.Security.Registration.token.ConfirmationTokenRepository;
+import com.carbonO.Registration.RegistrationRequest;
+import com.carbonO.Registration.token.ConfirmationTokenRepository;
 import com.carbonO.User.*;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.JsonObject;
-import com.netflix.discovery.shared.Application;
-import org.junit.jupiter.api.AfterEach;
+
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 
 import org.springframework.boot.test.context.SpringBootTest;
-
 import org.springframework.boot.test.web.client.TestRestTemplate;
-
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 //@ActiveProfiles(value = "test")
 //@AutoConfigureMockMvc(addFilters = false)
@@ -61,6 +39,7 @@ public class UserIntegrationTest {
 //    private WebApplicationContext webApplicationContext;
 
     private final String baseurl = "http://localhost:";
+
 
     private RegistrationRequest registrationRequest;
 
@@ -90,8 +69,9 @@ public class UserIntegrationTest {
         URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/registration");
 
         ResponseEntity<String> result = restTemplate.postForEntity(uri,request,String.class);
+        int statusCode = result.getStatusCodeValue();
 
-        Assertions.assertEquals(201,result.getStatusCode().value());
+        Assertions.assertEquals(201,statusCode);
 
         String token = result.getBody();
 
@@ -123,7 +103,7 @@ public class UserIntegrationTest {
     @Test
     public void registration_duplicateEmail_Failure() throws Exception{
 
-        RegistrationRequest request = new RegistrationRequest("testing1", "testing", "testing1@gmail.com", "123");
+        RegistrationRequest request = new RegistrationRequest("testing3", "testing", "testing3@gmail.com", "123");
 
         URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/registration");
 
