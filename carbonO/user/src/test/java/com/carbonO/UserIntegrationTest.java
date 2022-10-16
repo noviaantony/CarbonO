@@ -37,8 +37,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.server.handler.ExceptionHandlingWebHandler;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -99,8 +101,25 @@ public class UserIntegrationTest {
     public void loginTesting() {
 
 
+    }
+
+
+    @Test
+    public void registration_duplicateEmail_Failure() throws Exception {
+
+        RegistrationRequest request = new RegistrationRequest("testing1", "testing", "testing1@gmail.com", "123");
+
+        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/registration");
+
+        ResponseEntity<String> result = restTemplate.postForEntity(uri,request,String.class);
+
+        ResponseEntity<String> result2 = restTemplate.postForEntity(uri,request,String.class);
+
+        Assertions.assertEquals(403,result2.getStatusCode().value());
+
 
     }
+
 
 
 
