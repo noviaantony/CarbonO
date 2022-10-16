@@ -1,21 +1,19 @@
 package com.carbonO;
 
 
-import com.carbonO.Security.Registration.RegistrationRequest;
-import com.carbonO.Security.Registration.token.ConfirmationTokenRepository;
+import com.carbonO.Registration.RegistrationRequest;
+import com.carbonO.Registration.token.ConfirmationTokenRepository;
 import com.carbonO.User.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
 import com.netflix.discovery.shared.Application;
-import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -25,6 +23,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
 import org.springframework.http.ResponseEntity;
@@ -36,9 +36,12 @@ import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -96,10 +99,25 @@ public class UserIntegrationTest {
 
     }
 
-    public void loginTesting() {
+    @Test
+    public void loginTesting() throws Exception {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
+        map.add("username", "novia@gmail.com");
+        map.add("password", "123");
 
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
 
+        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/login");
 
+        ResponseEntity<String> result = restTemplate.postForEntity(uri,request,String.class);
+
+        Assertions.assertEquals(200,result.getStatusCode().value());
+
+        String token = result.getBody();
+
+        System.out.println(token);
     }
 
 
