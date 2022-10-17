@@ -1,27 +1,23 @@
 import React, {useContext, useState, useRef, useEffect} from 'react'
+import { ThreeDots } from "react-loader-spinner";
 import Card from "../components/carbontracker/Card";
-import AuthContext from "../context/AuthProvider";
-import carbonTrackerService from "../services/CarbonTrackerService";
+import CarbonTrackerService from "../services/CarbonTrackerService";
 import Header from "../components/misc/Header";
-import { Circles } from "react-loader-spinner";
+import AuthContext from "../context/AuthProvider";
 
-const CARBON_TRACKER_URL = 'http://localhost:8080/api/v1/carbonO/carbonTracker/'
-// const ref = useRef(null);
 
 const  CarbonTracker = () => {
 
   const {auth} = useContext(AuthContext);
   const [searchTerm, setSearchTerm] = useState("");
-  // console.log("from carbon tracker");
-  // console.log(auth);
   const [foodList, setFoodList] = useState([]);
-    const [todo, setTodo] = useState({});
-    const [loading, setLoading] = useState(false);
+  const [todo, setTodo] = useState({});
+  const [loading, setLoading] = useState(false);
 
 
   useEffect(()=> {
       setLoading(true);
-     carbonTrackerService.getAllDishes()
+     CarbonTrackerService.getAllDishes()
          .then((response) => {
            setFoodList(response);
          }).then((data) => {
@@ -37,17 +33,20 @@ const  CarbonTracker = () => {
         Description="upload a valid receipt for a dish and claim e-credits to redeem rewards or donate!"
       />
       {loading ? (
-        <div className="flex justify-center h-screen mt-20">
-          <Circles
-            visible={true}
-            height="400"
-            width="400"
-            ariaLabel="blocks-loading"
-            wrapperStyle={{}}
-            wrapperClass="blocks-wrapper"
-            color="#000"
-          />
-        </div>
+        <>
+          <div className="flex justify-center h-screen mt-20">
+            <ThreeDots
+              height="300"
+              width="300"
+              radius="9"
+              color="#000"
+              ariaLabel="three-dots-loading"
+              wrapperStyle={{}}
+              wrapperClassName=""
+              visible={true}
+            />
+          </div>
+        </>
       ) : (
         <div className="items-center">
           <form className="m-10 mx-50">
@@ -104,14 +103,14 @@ const  CarbonTracker = () => {
                 .map((dish) => {
                   return (
                     <Card
-                      DishId={dish.id}
-                      DishTitle={dish.dishName}
-                      DishImage={dish.photo}
-                      DishRating={dish.carbonRating}
-                      DishKeywords={dish.dishKeywords}
-                      DishIngredients={dish.recipeIngredients}
-                      DishCarbonFootprint={dish.totalCarbonFootprint.toFixed(0)}
-                      DishCredit={dish.dishRewardPoints}
+                      dishId={dish.id}
+                      dishTitle={dish.dishName}
+                      dishImage={dish.photo}
+                      dishRating={dish.carbonRating}
+                      dishKeywords={dish.dishKeywords}
+                      dishIngredients={dish.recipeIngredients}
+                      dishCarbonFootprint={dish.totalCarbonFootprint.toFixed(0)}
+                      dishCredit={dish.dishRewardPoints}
                     />
                   );
                 })}
@@ -123,4 +122,4 @@ const  CarbonTracker = () => {
   );
 };
 
-export default CarbonTracker
+export default CarbonTracker;

@@ -25,14 +25,9 @@ public class DishService {
     public Dish getDishById(Long id){
         return dishRepository.findById(id).orElseThrow(()-> new DishNotFoundException("Dish by id " + id + " was not found"));
     }
-    //get dish by keywords
 
-    //create a new dish
-//    public Dish addNewDish(String dishName) {
-//        Dish dish = new Dish(dishName);
-//
-//        return dishRepository.save(dish);
-//    }
+    //Todo: creating of a new dish
+    //Todo: deletion of a dish
 
     @Transactional
     public void updateTotalCarbonFootprint() {

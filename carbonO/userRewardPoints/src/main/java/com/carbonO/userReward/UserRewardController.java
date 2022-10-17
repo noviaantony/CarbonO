@@ -1,4 +1,4 @@
-package com.carbonO.UserReward;
+package com.carbonO.userReward;
 
 import com.carbonO.Common.ApiResponse;
 import org.springframework.http.HttpStatus;

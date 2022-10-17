@@ -27,24 +27,23 @@ public class Dish {
     )
     private Long id;
     private String dishName;
+    private Double totalCarbonFootprint;
+    private String photo;
+    private Integer carbonRating;
+    private Integer dishRewardPoints;
 
+    //@JsonManagedReference and @JsonBackReference are used to avoid infinite recursion when serializing and deserializing objects
     @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<DishRecipe> recipeIngredients;
-    private Double totalCarbonFootprint;
 
     @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<DishKeywords> dishKeywords;
-    private String photo;
 
     @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonBackReference
     private List<UserCarbonTracker> userCarbonTrackers;
-
-    private Integer carbonRating;
-
-    private Integer dishRewardPoints;
 
     public Dish() {
     }

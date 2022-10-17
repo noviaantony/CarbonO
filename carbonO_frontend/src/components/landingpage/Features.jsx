@@ -1,10 +1,8 @@
 import React from 'react'
-import {ReactComponent as FoodSvg} from './FoodSvg.svg';
-import {ReactComponent as MobileSvg} from './AppsSvg.svg';
-import {ReactComponent as PolarBearSvg} from './PolarBearSvg.svg';
 
 
-const Features2 = () => {
+const Features = () => {
+  
   return (
     <div>
       <section class="bg-white border-b py-8 font-default">
@@ -26,12 +24,18 @@ const Features2 = () => {
               </p>
             </div>
             <div class="w-full sm:w-1/2 p-6">
-              <FoodSvg width="19rem" />
+              <img
+                src={process.env.PUBLIC_URL + "/svg/Food.svg"}
+                className="w-9/12"
+              />
             </div>
           </div>
           <div class="flex flex-wrap flex-col-reverse sm:flex-row">
             <div class="w-full sm:w-1/2 p-6 mt-6">
-              <MobileSvg width="19rem" />
+              <img
+                src={process.env.PUBLIC_URL + "/svg/Mobile.svg"}
+                className="w-9/12"
+              />
             </div>
             <div class="w-full sm:w-1/2 p-6 mt-6 ">
               <div class="align-middle my-20">
@@ -58,7 +62,10 @@ const Features2 = () => {
               </p>
             </div>
             <div class="w-full sm:w-1/2 p-6">
-              <PolarBearSvg width="19rem" />
+              <img
+                src={process.env.PUBLIC_URL + "/svg/PolarBear.svg"}
+                className="w-9/12"
+              />
             </div>
           </div>
         </div>
@@ -67,4 +74,4 @@ const Features2 = () => {
   );
 }
 
-export default Features2
+export default Features

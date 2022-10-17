@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class DishRewardPoints {
 
+    //Method to calculate the reward points for a dish base on the dishCarbonRating
     public int getDishRewardPoints(Integer dishCarbonRating){
 
         if(dishCarbonRating == 1){

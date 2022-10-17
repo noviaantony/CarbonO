@@ -21,7 +21,7 @@ const ViewInformationAccordion = (DishIngredients) => {
           What are the ingredients in this dish?
         </AccordionHeader>
         <AccordionBody>
-          meow
+          * insert ingredients here *
         </AccordionBody>
       </Accordion>
       <Accordion open={open === 2}>
