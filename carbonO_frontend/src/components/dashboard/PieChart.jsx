@@ -1,5 +1,6 @@
 import React from "react";
 import { Pie } from "react-chartjs-2";
+import 'chart.js/auto';
 import { Chart, LineController, LineElement, PointElement, LinearScale, Title,CategoryScale } from 'chart.js';
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale);

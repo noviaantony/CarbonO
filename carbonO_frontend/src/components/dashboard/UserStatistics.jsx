@@ -4,9 +4,9 @@ import { useState, useRef, useContext } from "react";
 import DonutChart from "../dashboard/DonutChart";
 import LineChart from "../dashboard/LineChart";
 import PieChart from "./PieChart";
-import TestChart from "./TestChart";
 import initialDatesArr from "./getInitialDates";
 import actualDates from "./getDates";
+import { FaFilter } from "react-icons/fa";
 
 const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
   const [isClickedCredit, setIsClickedCredit] = React.useState(false);
@@ -31,29 +31,35 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
   const indexEnd = initialDates.indexOf(endDate);
   newDates.current = initialDates.slice(indexStart, indexEnd + 1);
 
+  //filter function appears if there is a chart
   const hasChart = () => {
     if (isClickedCarbon || isClickedCredit || isClickedReceipt) {
       return (
-        <form action="" className="h-0 ml-7">
-          <label htmlFor="" className="font-bold text-base">
-            Filter by:
-          </label>
-          <input
-            type="date"
-            id="startDate"
-            onChange={handleChangeFirst}
-            value={startDate}
-            class={"ml-3 text-center"}
-          />
-          to
-          <input
-            type="date"
-            id="endDate"
-            onChange={handleChangeEnd}
-            value={endDate}
-            class={"text-center"}
-          />
-        </form>
+        <>
+          <div className="p-4 w-15 rounded-lg bg-white flex border border-gray-800">
+            <div>
+              <FaFilter size={13} className = "ml-2 mt-2 -mr-3" />
+            </div>
+
+            <input
+              type="date"
+              id="startDate"
+              onChange={handleChangeFirst}
+              value={startDate}
+              class={"ml-3 text-center"}
+            />
+            <label htmlFor="endDate" className="ml-3 font-bold">
+              To
+            </label>
+            <input
+              type="date"
+              id="endDate"
+              onChange={handleChangeEnd}
+              value={endDate}
+              class={"text-center"}
+            />
+          </div>
+        </>
       );
     }
   };
@@ -63,7 +69,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
     if (isClickedCarbon && isClickedCredit && isClickedReceipt) {
       return (
         <div class="flex flex-wrap space-x-12">
-          <TestChart />
+          <DonutChart />
           <LineChart />
           <PieChart />
         </div>
@@ -71,14 +77,14 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
     } else if (isClickedCarbon && isClickedCredit) {
       return (
         <div class="flex flex-wrap space-x-12" style={{ width: "162%" }}>
-          <TestChart />
+          <DonutChart />
           <LineChart />
         </div>
       );
     } else if (isClickedCredit && isClickedReceipt) {
       return (
         <div class="flex flex-wrap space-x-12" style={{ width: "162%" }}>
-          <TestChart />
+          <DonutChart />
           <PieChart />
         </div>
       );
@@ -92,7 +98,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
     } else if (isClickedCredit) {
       return (
         <div class="flex flex-wrap space-x-12" style={{ width: "345%" }}>
-          <TestChart />
+          <DonutChart />
         </div>
       );
     } else if (isClickedCarbon) {
@@ -176,6 +182,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
 
       <actualDates.Provider value={newDates.current}>
         <div>{hasChart()}</div>
+
         <div>{returnCharts()}</div>
       </actualDates.Provider>
     </>
