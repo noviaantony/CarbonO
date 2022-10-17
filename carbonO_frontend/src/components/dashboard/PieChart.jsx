@@ -9,7 +9,7 @@ Chart.defaults.font.size = 20;
 const PieChart = () => {
   return (
     <div style={{ width: "28%", height: "30%" }}
-    className="bg-white rounded-lg h-auto p-6 flex items-stretch m-6 shadow-md font-default">
+    className="bg-white rounded-lg h-auto p-6 flex items-stretch m-6 font-default">
       <Pie
         data={{
           //labels on x-axis

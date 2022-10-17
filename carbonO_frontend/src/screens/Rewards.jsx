@@ -1,4 +1,3 @@
-import Blank from "./";
 import React from "react";
 import RewardCard from "../components/rewards/RewardCard";
 import Header from "../components/misc/Header";
