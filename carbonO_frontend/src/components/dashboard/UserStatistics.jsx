@@ -1,23 +1,75 @@
 import React from "react";
 import { FaWallet, FaReceipt, FaLeaf } from "react-icons/fa";
+import { useState, useRef, useContext } from "react";
 import DonutChart from "../dashboard/DonutChart";
 import LineChart from "../dashboard/LineChart";
 import PieChart from "./PieChart";
-import TestChart from "./TestChart";
-// import Split from "react-split";
-
+import initialDatesArr from "./getInitialDates";
+import actualDates from "./getDates";
+import { FaFilter } from "react-icons/fa";
 
 const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
   const [isClickedCredit, setIsClickedCredit] = React.useState(false);
   const [isClickedCarbon, setIsClickedCarbon] = React.useState(false);
   const [isClickedReceipt, setIsClickedReceipt] = React.useState(false);
- 
 
+  const initialDates = useContext(initialDatesArr);
+
+  const [startDate, setstartDate] = useState(initialDates[0]);
+  const [endDate, setendDate] = useState(initialDates[initialDates.length - 1]);
+
+  let newDates = useRef([]);
+  const handleChangeFirst = (event) => {
+    setstartDate(event.target.value);
+  };
+
+  const handleChangeEnd = (event) => {
+    setendDate(event.target.value);
+  };
+
+  const indexStart = initialDates.indexOf(startDate);
+  const indexEnd = initialDates.indexOf(endDate);
+  newDates.current = initialDates.slice(indexStart, indexEnd + 1);
+
+  //filter function appears if there is a chart
+  const hasChart = () => {
+    if (isClickedCarbon || isClickedCredit || isClickedReceipt) {
+      return (
+        <>
+          <div className="p-4 w-15 rounded-lg bg-white flex border border-gray-800">
+            <div>
+              <FaFilter size={13} className = "ml-2 mt-2 -mr-3" />
+            </div>
+
+            <input
+              type="date"
+              id="startDate"
+              onChange={handleChangeFirst}
+              value={startDate}
+              class={"ml-3 text-center"}
+            />
+            <label htmlFor="endDate" className="ml-3 font-bold">
+              To
+            </label>
+            <input
+              type="date"
+              id="endDate"
+              onChange={handleChangeEnd}
+              value={endDate}
+              class={"text-center"}
+            />
+          </div>
+        </>
+      );
+    }
+  };
+
+  //display charts based on click
   const returnCharts = () => {
     if (isClickedCarbon && isClickedCredit && isClickedReceipt) {
       return (
         <div class="flex flex-wrap space-x-12">
-          <TestChart />
+          <DonutChart />
           <LineChart />
           <PieChart />
         </div>
@@ -25,14 +77,14 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
     } else if (isClickedCarbon && isClickedCredit) {
       return (
         <div class="flex flex-wrap space-x-12" style={{ width: "162%" }}>
-          <TestChart />
+          <DonutChart />
           <LineChart />
         </div>
       );
     } else if (isClickedCredit && isClickedReceipt) {
       return (
         <div class="flex flex-wrap space-x-12" style={{ width: "162%" }}>
-          <TestChart />
+          <DonutChart />
           <PieChart />
         </div>
       );
@@ -46,7 +98,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
     } else if (isClickedCredit) {
       return (
         <div class="flex flex-wrap space-x-12" style={{ width: "345%" }}>
-          <TestChart />
+          <DonutChart />
         </div>
       );
     } else if (isClickedCarbon) {
@@ -63,6 +115,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
       );
     }
   };
+
   return (
     <>
       <div class="flex flex-wrap -mx-1 lg:-mx-4">
@@ -127,26 +180,11 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
         </div>
       </div>
 
-      <div>{returnCharts()}</div>
+      <actualDates.Provider value={newDates.current}>
+        <div>{hasChart()}</div>
 
-      {/* <Split
-        collapsed={collapsedIndex}
-        className="flex "
-        sizes={[40, 40, 40]}
-        minSize={[0, 0, 0]}
-        style={{ height: "400px" }}
-      >
-        <div>
-          <DonutChart />
-        </div>
-        <div>
-          <LineChart />
-        </div>
-        <div>
-          <TestChart />
-        </div>
-      </Split> */}
-  
+        <div>{returnCharts()}</div>
+      </actualDates.Provider>
     </>
   );
 };
