@@ -8,30 +8,43 @@ import AuthContext from "../context/AuthProvider";
 import carbonTrackerService from "../services/CarbonTrackerService";
 import Header from "../components/misc/Header";
 //import LineChart from "../components/dashboard/LineChart";
-
+import initialDatesArr from "../components/dashboard/getInitialDates";
 const Dashboard = () => {
   const [historicalData, setHistoricalData] = useState([]);
   const [totalCarbon, setTotalCarbon] = useState(0);
-  const {auth} = useContext(AuthContext);
+  const { auth } = useContext(AuthContext);
 
   useEffect(() => {
-    carbonTrackerService.getDishConsumed(auth.userId, auth.accessToken).then((response) => {
-      console.log("Table response")
-      console.log(response)
-      setHistoricalData(response);
-      console.log(historicalData);
-    });
-  }, [])
+    carbonTrackerService
+      .getDishConsumed(auth.userId, auth.accessToken)
+      .then((response) => {
+        console.log("Table response");
+        console.log(response);
+        setHistoricalData(response);
+        console.log(historicalData);
+      });
+  }, []);
 
   useEffect(() => {
-    carbonTrackerService.getUserTotalCarbonConsumption(auth.userId, auth.accessToken).then((response) => {
-      console.log("Carbon response")
-      console.log(response)
-      setTotalCarbon(response);
-      console.log(totalCarbon);
-    });
+    carbonTrackerService
+      .getUserTotalCarbonConsumption(auth.userId, auth.accessToken)
+      .then((response) => {
+        console.log("Carbon response");
+        console.log(response);
+        setTotalCarbon(response);
+        console.log(totalCarbon);
+      });
+  }, []);
 
-  }, [])
+  let dates = [
+    "2022-10-16",
+    "2022-10-17",
+    "2022-10-18",
+    "2022-10-19",
+    "2022-10-20",
+    "2022-10-21",
+    "2022-10-22",
+  ];
   return (
     <>
       <Header
@@ -43,7 +56,9 @@ const Dashboard = () => {
           Welcome Back, {auth.firstName}!
         </h1> */}
         {/* <Wallet /> */}
-        <UserStatistics TotalCarbon={totalCarbon.toFixed(0)} />
+        <initialDatesArr.Provider value={dates}>
+          <UserStatistics TotalCarbon={totalCarbon.toFixed(0)} />
+        </initialDatesArr.Provider>
         <Table historicalData={historicalData} />
         {/* <div class="flex flex-wrap -mx-1 lg:-mx-4">
           <DonutChart />

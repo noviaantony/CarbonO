@@ -1,19 +1,64 @@
 import React from "react";
 import { FaWallet, FaReceipt, FaLeaf } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useRef, useContext } from "react";
 import DonutChart from "../dashboard/DonutChart";
 import LineChart from "../dashboard/LineChart";
 import PieChart from "./PieChart";
 import TestChart from "./TestChart";
-import Split from "react-split";
-
+import initialDatesArr from "./getInitialDates";
+import actualDates from "./getDates";
 
 const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
   const [isClickedCredit, setIsClickedCredit] = React.useState(false);
   const [isClickedCarbon, setIsClickedCarbon] = React.useState(false);
   const [isClickedReceipt, setIsClickedReceipt] = React.useState(false);
- 
 
+  const initialDates = useContext(initialDatesArr);
+
+  const [startDate, setstartDate] = useState(initialDates[0]);
+  const [endDate, setendDate] = useState(initialDates[initialDates.length - 1]);
+
+  let newDates = useRef([]);
+  const handleChangeFirst = (event) => {
+    setstartDate(event.target.value);
+  };
+
+  const handleChangeEnd = (event) => {
+    setendDate(event.target.value);
+  };
+
+  const indexStart = initialDates.indexOf(startDate);
+  const indexEnd = initialDates.indexOf(endDate);
+  newDates.current = initialDates.slice(indexStart, indexEnd + 1);
+
+  const hasChart = () => {
+    if (isClickedCarbon || isClickedCredit || isClickedReceipt) {
+      return (
+        <form action="" className="h-0 ml-7">
+          <label htmlFor="" className="font-bold text-base">
+            Filter by:
+          </label>
+          <input
+            type="date"
+            id="startDate"
+            onChange={handleChangeFirst}
+            value={startDate}
+            class={"ml-3 text-center"}
+          />
+          to
+          <input
+            type="date"
+            id="endDate"
+            onChange={handleChangeEnd}
+            value={endDate}
+            class={"text-center"}
+          />
+        </form>
+      );
+    }
+  };
+
+  //display charts based on click
   const returnCharts = () => {
     if (isClickedCarbon && isClickedCredit && isClickedReceipt) {
       return (
@@ -64,6 +109,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
       );
     }
   };
+
   return (
     <>
       <div class="flex flex-wrap -mx-1 lg:-mx-4">
@@ -128,26 +174,10 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
         </div>
       </div>
 
-      <div>{returnCharts()}</div>
-
-      {/* <Split
-        collapsed={collapsedIndex}
-        className="flex "
-        sizes={[40, 40, 40]}
-        minSize={[0, 0, 0]}
-        style={{ height: "400px" }}
-      >
-        <div>
-          <DonutChart />
-        </div>
-        <div>
-          <LineChart />
-        </div>
-        <div>
-          <TestChart />
-        </div>
-      </Split> */}
-  
+      <actualDates.Provider value={newDates.current}>
+        <div>{hasChart()}</div>
+        <div>{returnCharts()}</div>
+      </actualDates.Provider>
     </>
   );
 };
