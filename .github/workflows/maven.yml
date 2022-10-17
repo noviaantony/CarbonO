@@ -26,3 +26,12 @@ jobs:
       run: |
         cd ./carbonO
         mvn clean install -DskipTests
+    - name: Build & push Docker image
+      uses: mr-smithers-excellent/docker-build-push@v5
+      with:
+        image: newbieshine/springboot-images-new
+        tags: latest
+        registry: docker.io
+        dockerfile: Dockerfile
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
