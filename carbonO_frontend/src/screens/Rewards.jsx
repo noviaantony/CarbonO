@@ -1,7 +1,7 @@
-import React from 'react'
+import Blank from "./";
+import React from "react";
 import RewardCard from "../components/rewards/RewardCard";
 import Header from "../components/misc/Header";
-
 
 const Rewards = () => {
   const [openTab, setOpenTab] = React.useState(1);
@@ -154,9 +154,6 @@ const Rewards = () => {
       </div>
     </>
   );
-
-}
+};
 
 export default Rewards;
-
-
