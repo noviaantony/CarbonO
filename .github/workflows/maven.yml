@@ -25,4 +25,4 @@ jobs:
     - name: Build with Maven
       run: |
         cd ./carbonO
-        mvn clean install
+        mvn clean install -DskipTests
