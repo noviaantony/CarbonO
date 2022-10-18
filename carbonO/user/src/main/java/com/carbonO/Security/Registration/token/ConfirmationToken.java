@@ -1,4 +1,4 @@
-package com.carbonO.Registration.token;
+package com.carbonO.Security.Registration.token;
 
 
 import com.carbonO.User.User;

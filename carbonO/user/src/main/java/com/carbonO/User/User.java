@@ -1,6 +1,7 @@
 package com.carbonO.User;
 
 
+import com.carbonO.Security.Registration.token.ConfirmationToken;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @Entity
 @Table (name = "users")
@@ -41,6 +43,9 @@ public class User implements UserDetails {
     private Boolean locked = false;
 
     private Boolean enabled = true; //temporarily set to true
+
+    @OneToMany (mappedBy = "user", cascade = CascadeType.ALL)
+    private List<ConfirmationToken> confirmationToken;
 
     public User() {
     }

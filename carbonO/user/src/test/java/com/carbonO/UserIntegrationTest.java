@@ -4,6 +4,7 @@ package com.carbonO;
 import com.carbonO.Security.Registration.RegistrationRequest;
 import com.carbonO.Security.Registration.token.ConfirmationTokenRepository;
 import com.carbonO.User.*;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,7 @@ public class UserIntegrationTest {
 //    public void setup() {
 //        this.mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 //    }
+
     @Test
     public void createTestingUser() throws Exception{
 
@@ -58,9 +60,10 @@ public class UserIntegrationTest {
 
         Assertions.assertEquals(201,result.getStatusCode().value());
 
-        String token = result.getBody();
+        User user = userRepository.findByEmail("testing123@gmail.com").get();
 
-        System.out.println(token);
+        userRepository.deleteById(user.getId());
+
 
     }
 
@@ -98,6 +101,9 @@ public class UserIntegrationTest {
 
         Assertions.assertEquals(403,result2.getStatusCode().value());
 
+        User user = userRepository.findByEmail("testing1@gmail.com").get();
+
+        userRepository.deleteById(user.getId());
 
     }
 
