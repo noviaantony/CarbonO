@@ -3,7 +3,7 @@ services:
     container_name: user
     image: postgres
     environment:
-      POSTGRES_USER: xxhea
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: zhaoxing
       PGDATA: /data/postgres
     volumes:

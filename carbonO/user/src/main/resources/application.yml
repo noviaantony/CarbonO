@@ -5,8 +5,8 @@ spring:
             name: user
     datasource:
         password: zhaoxing
-        url: jdbc:postgresql://localhost:5432/user
-        username: xxhea
+        url: jdbc:postgresql://54.151.197.252:5432/user
+        username: postgres
     jpa:
         hibernate:
             ddl-auto: create-drop
