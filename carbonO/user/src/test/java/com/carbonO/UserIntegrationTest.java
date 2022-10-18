@@ -1,28 +1,21 @@
 package com.carbonO;
 
 
-import com.carbonO.Registration.RegistrationRequest;
-import com.carbonO.Registration.token.ConfirmationTokenRepository;
+import com.carbonO.Security.Registration.RegistrationRequest;
+import com.carbonO.Security.Registration.token.ConfirmationTokenRepository;
 import com.carbonO.User.*;
-
-
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-
 import java.net.URI;
 
 //@ActiveProfiles(value = "test")
@@ -40,14 +33,7 @@ public class UserIntegrationTest {
 
     private final String baseurl = "http://localhost:";
 
-
     private RegistrationRequest registrationRequest;
-
-//    @Autowired
-//    private ObjectMapper objectMapper;
-//
-//    @Autowired
-//    private MockMvc mvc;
 
     private TestRestTemplate restTemplate = new TestRestTemplate();
 
@@ -64,14 +50,13 @@ public class UserIntegrationTest {
     @Test
     public void createTestingUser() throws Exception{
 
-        RegistrationRequest request = new RegistrationRequest("testing1", "testing", "testing1@gmail.com", "123");
+        RegistrationRequest request = new RegistrationRequest("testing1", "testing", "testing123@gmail.com", "123");
 
         URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/registration");
 
         ResponseEntity<String> result = restTemplate.postForEntity(uri,request,String.class);
-        int statusCode = result.getStatusCodeValue();
 
-        Assertions.assertEquals(201,statusCode);
+        Assertions.assertEquals(201,result.getStatusCode().value());
 
         String token = result.getBody();
 
@@ -103,7 +88,7 @@ public class UserIntegrationTest {
     @Test
     public void registration_duplicateEmail_Failure() throws Exception{
 
-        RegistrationRequest request = new RegistrationRequest("testing3", "testing", "testing3@gmail.com", "123");
+        RegistrationRequest request = new RegistrationRequest("testing1", "testing", "testing1@gmail.com", "123");
 
         URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/registration");
 
