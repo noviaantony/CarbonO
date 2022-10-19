@@ -4,9 +4,9 @@ spring:
     application:
             name: userReward
     datasource:
-        password: zhaoxing
+        password: 123
         url: jdbc:postgresql://localhost:5432/userReward
-        username: xxhea
+        username: chong
     jpa:
         hibernate:
             ddl-auto: create-drop

@@ -1,10 +1,10 @@
 package com.carbonO;
 
 
-import com.carbonO.Security.Registration.RegistrationRequest;
-import com.carbonO.Security.Registration.token.ConfirmationTokenRepository;
+
+import com.carbonO.Registration.RegistrationRequest;
+import com.carbonO.Registration.token.ConfirmationTokenRepository;
 import com.carbonO.User.*;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.carbonO.User;
 
 
-import com.carbonO.Security.Registration.token.ConfirmationToken;
+import com.carbonO.Registration.token.ConfirmationToken;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
