@@ -6,7 +6,7 @@
 	<modules>
 		<module>user</module>
         <module>userRewardPoints</module>
-        <module>CarbonTracker</module>
+        <module>carbonTracker</module>
         <module>api-gateway</module>
 		<module>eureka-server</module>
 	</modules>
