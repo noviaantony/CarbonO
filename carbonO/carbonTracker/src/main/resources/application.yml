@@ -5,8 +5,8 @@ spring:
             name: carbonTracker
     datasource:
         password: zhaoxing
-        url: jdbc:postgresql://54.151.197.252:5432/carbontracker
-        username: postgres
+        url: jdbc:postgresql://localhost:5432/carbonTracker
+        username: xxhea
     jpa:
         hibernate:
             ddl-auto: create-drop
