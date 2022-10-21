@@ -22,7 +22,7 @@ public class DishService {
         this.ingredientRepository = ingredientRepository;
     }
     //get dish by id
-    public Dish getDishById(Long id){
+    public Dish findDishById(Long id){
         return dishRepository.findById(id).orElseThrow(()-> new DishNotFoundException("Dish by id " + id + " was not found"));
     }
 

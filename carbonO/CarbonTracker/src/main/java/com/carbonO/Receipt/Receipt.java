@@ -24,12 +24,12 @@ public class Receipt {
             generator = "receipt_sequence"
     )
     private Long receiptId;
-    private Long dishConsumed;
+    private Long dishConsumedId;
     private Date dateOfReceipt;
     private boolean isRedeemed;
 
     public Receipt(Long dishConsumed, Date dateOfReceipt) {
-        this.dishConsumed = dishConsumed;
+        this.dishConsumedId = dishConsumed;
         this.dateOfReceipt = dateOfReceipt;
         this.isRedeemed = false;
     }
