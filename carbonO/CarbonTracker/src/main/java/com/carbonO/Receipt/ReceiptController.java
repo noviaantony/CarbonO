@@ -27,10 +27,6 @@ public class ReceiptController {
 
     @GetMapping("/generateQRReceipt")
     public ResponseEntity<Receipt> getQRCode(@RequestParam("dishId") Long dishId){
-//        String medium="https://rahul26021999.medium.com/";
-        String github="https://github.com/rahul26021999";
-//        JSONObject jsonObject=new JSONObject();
-//        jsonObject.put("",github);
         Receipt receipt = receiptService.addReceipt(dishId);
         JSONObject jsonObject=new JSONObject(receipt);
         byte[] image = new byte[0];
@@ -46,7 +42,13 @@ public class ReceiptController {
             e.printStackTrace();
         }
         // Convert Byte Array into Base64 Encode String
-        String qrcode = Base64.getEncoder().encodeToString(image);
+//        String qrcode = Base64.getEncoder().encodeToString(image);
         return ResponseEntity.ok().body(receipt);
     }
+
+    @GetMapping("/getReceipt")
+    public ResponseEntity<Receipt> getReceipt(@RequestParam("receiptId") Long receiptId){
+        return ResponseEntity.ok().body(receiptService.findReceiptById(receiptId));
+    }
+
 }
