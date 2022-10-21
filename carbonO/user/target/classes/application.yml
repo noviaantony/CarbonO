@@ -5,7 +5,7 @@ spring:
             name: user
     datasource:
         password: zhaoxing
-        url: jdbc:postgresql://54.151.197.252:5432/user
+        url: jdbc:postgresql://54.151.137.8:5432/user
         username: postgres
     jpa:
         hibernate:
@@ -18,6 +18,9 @@ spring:
 eureka:
     client:
         service-url:
-            defaultZone: http://localhost:8761/eureka/
+            defaultZone: http://54.151.137.8:8761/eureka/
         fetch-registry: true
         register-with-eureka: true
+    instance:
+        prefer-ip-address: true
+        ip-address: 54.151.137.8:localhost:user
