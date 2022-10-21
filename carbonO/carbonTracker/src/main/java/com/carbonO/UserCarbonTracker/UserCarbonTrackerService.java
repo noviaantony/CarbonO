@@ -2,6 +2,7 @@ package com.carbonO.UserCarbonTracker;
 
 import com.carbonO.Dish.Dish;
 import com.carbonO.Dish.DishService;
+import com.carbonO.JWTAuth.JWTAuthService;
 import com.carbonO.Receipt.ReceiptRepository;
 import com.carbonO.Receipt.ReceiptService;
 import org.springframework.stereotype.Service;
@@ -16,13 +17,15 @@ public class UserCarbonTrackerService {
     private final WebClient webClient;
     private final ReceiptService receiptService;
     private final DishService dishService;
+    private final JWTAuthService jwtAuthService;
 
 
     public UserCarbonTrackerService(UserCarbonTrakerRepository userCarbonTrakerRepository, WebClient.Builder webClientBuilder,
-                                    ReceiptService receiptService, DishService dishService) {
+                                    ReceiptService receiptService, DishService dishService, JWTAuthService jwtAuthService) {
         this.dishService = dishService;
         this.receiptService = receiptService;
         this.userCarbonTrakerRepository = userCarbonTrakerRepository;
+        this.jwtAuthService = jwtAuthService;
         this.webClient = webClientBuilder.baseUrl("http://localhost:8080/api/v1/carbonO/user/").build();
     }
 
@@ -34,7 +37,9 @@ public class UserCarbonTrackerService {
 //                .uri("/authorizeUser")
 //                .header("Authorization", "Bearer " + token)
 //                .retrieve().bodyToMono(String.class).block();
-
+        if (!jwtAuthService.authorizeUser(token)){
+            throw new RuntimeException("User is not authorized to access this data");
+        }
         List<UserCarbonTracker> userCarbonTransactions = userCarbonTrakerRepository.findAllByUserId(userId);
         Double totalCarbonConsumption = 0.0;
 
