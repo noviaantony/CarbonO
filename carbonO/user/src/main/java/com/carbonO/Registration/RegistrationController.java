@@ -1,7 +1,10 @@
 package com.carbonO.Registration;
 
+import com.carbonO.Mailing.MailingService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -9,11 +12,21 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class RegistrationController {
     private final RegistrationService registrationService;
+    @Autowired
+    private MailingService mailingService;
+
+    private static final String baseUrl = "";
 
     @PostMapping
     public ResponseEntity<String> register(@RequestBody RegistrationRequest request) {
+        String token = "";
+        String confirmationLink = "";
         try {
-            return ResponseEntity.status(201).body(registrationService.register(request));
+            token = registrationService.register(request);
+            String email = request.getEmail();
+            confirmationLink = baseUrl + "/confirm?token=" + token;
+            mailingService.sendConfirmationEmail(email, confirmationLink);
+
         } catch (IllegalStateException e) {
             if (e.getMessage().equals("email taken")) {
                 return ResponseEntity.status(403).body("email taken");
@@ -21,11 +34,15 @@ public class RegistrationController {
                 return ResponseEntity.badRequest().body("email not found");
             }
             return ResponseEntity.badRequest().body("error");
+        } catch (Exception e) {
+            return ResponseEntity.status(550).body("Error sending email");
         }
+        return ResponseEntity.status(201).body(token);
     }
 
     @GetMapping(path = "confirm")
     public String confirm(@RequestParam("token") String token) {
         return registrationService.confirmToken(token);
     }
+
 }

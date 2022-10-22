@@ -21,15 +21,15 @@ public class UserConfig {
 
         String encodedPassword = bCryptPasswordEncoder.encode("123");
         return args -> {
-            User novia = new User(
-                    "Novia",
-                    "Antony",
-                    "novia@gmail.com",
+            User xz = new User(
+                    "Zhao Xing",
+                    "Chen",
+                    "chenzhaoxing.98@gmail.com",
                     encodedPassword,
                     UserRole.ADMIN
             );
             repository.saveAll(
-                    List.of(novia)
+                    List.of(xz)
             );
         };
     }

@@ -47,6 +47,9 @@ public class User implements UserDetails {
     @OneToMany (mappedBy = "user", cascade = CascadeType.ALL)
     private List<ConfirmationToken> confirmationToken;
 
+    @Column(length = 45)
+    private String resetPasswordToken;
+
     public User() {
     }
 

@@ -1,13 +1,24 @@
 Server:
     port: 8081
 spring:
+    mail:
+        host: smtp.gmail.com
+        username: carbonohelp@gmail.com
+        password:
+        port: 587
+        properties:
+            mail:
+                smtp:
+                    auth: true
+                    starttls:
+                        enable: true
     application:
             name: user
     datasource:
-        password: zhaoxing
+        password: 123
 #        url: jdbc:postgresql://54.151.137.8:5432/user
         url: jdbc:postgresql://localhost:5432/user
-        username: xxhea
+        username: chong
     jpa:
         hibernate:
             ddl-auto: create-drop
