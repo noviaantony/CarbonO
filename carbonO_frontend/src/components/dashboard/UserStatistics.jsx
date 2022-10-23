@@ -6,7 +6,6 @@ import LineChart from "../dashboard/LineChart";
 import PieChart from "./PieChart";
 import initialDatesArr from "./getInitialDates";
 import actualDates from "./getDates";
-import { FaFilter } from "react-icons/fa";
 
 const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
   const [isClickedCredit, setIsClickedCredit] = React.useState(false);
@@ -91,24 +90,6 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
                 />
               </div>
             </div>
-
-            {/* <input
-              type="date"
-              id="startDate"
-              onChange={handleChangeFirst}
-              value={startDate}
-              className="ml-3 text-center"
-            />
-            <label htmlFor="endDate" className="ml-3 font-bold">
-              To
-            </label>
-            <input
-              type="date"
-              id="endDate"
-              onChange={handleChangeEnd}
-              value={endDate}
-              className="ml-3 text-center"
-            /> */}
           </div>
         </>
       );
