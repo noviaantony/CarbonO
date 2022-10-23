@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -14,7 +15,7 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
+@NoArgsConstructor
 public class RewardTransaction {
     @Id
     @SequenceGenerator(
@@ -27,17 +28,20 @@ public class RewardTransaction {
             generator = "reward_transaction_sequence"
     )
     private Long id;
-    private Date dataOfTransaction;
+    private Date dateOfTransaction;
 
     @ManyToOne
     @JoinColumn (name = "userReward_id")
     @JsonBackReference
     private UserReward userReward;
 
-    @OneToOne (mappedBy = "rewardTransaction", cascade = CascadeType.ALL )
+    @OneToOne
+    @JoinColumn(name = "reward_id")
     private Reward reward;
 
-    public RewardTransaction() {
-
+    public RewardTransaction(Date dateOfTransaction, UserReward userReward, Reward reward) {
+        this.dateOfTransaction = dateOfTransaction;
+        this.userReward = userReward;
+        this.reward = reward;
     }
 }

@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "api/v1/carbonO/userReward/")
 public class UserRewardController {
@@ -18,5 +20,10 @@ public class UserRewardController {
     public ResponseEntity<ApiResponse> addNewUserReward(@RequestParam("userID") Long userID) {
         userRewardService.addNewUserReward(userID);
         return new ResponseEntity<>(new ApiResponse(true, "New user reward added"), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/getUserReward")
+    public ResponseEntity<UserReward> getUserReward(@RequestParam("userId") Long userID) {
+        return ResponseEntity.ok().body(userRewardService.getAllRewardsByUser(userID));
     }
 }

@@ -63,6 +63,10 @@ public class RegistrationService {
         confirmationTokenService.setConfirmedAt(token);
         userService.enableAppUser(
                 confirmationToken.getUser().getEmail());
+
+        //create a user reward account after user confirmed their email, through an internal api call to userReward microservice
+
+
         return "confirmed";
     }
 }

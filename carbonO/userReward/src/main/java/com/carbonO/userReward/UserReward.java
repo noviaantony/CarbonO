@@ -25,15 +25,15 @@ public class UserReward {
             generator = "user_Reward_sequence"
     )
     private Long userRewardId;
-    private Long userID;
+    private Long userId;
     private Integer rewardPoints;
 
     @OneToMany(mappedBy = "userReward", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<RewardTransaction> rewardTransactions;
 
-    public UserReward(Long userID, Integer rewardPoints) {
-        this.userID = userID;
+    public UserReward(Long userId, Integer rewardPoints) {
+        this.userId = userId;
         this.rewardPoints = rewardPoints;
     }
 }

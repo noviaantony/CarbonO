@@ -16,10 +16,6 @@ const RewardsTable = ({ historicalData }) => {
             <th scope="col" className="py-3 px-6">
               E-Credits Used
             </th>
-
-            <th scope="col" className="py-3 px-6">
-              Receipt
-            </th>
           </tr>
         </thead>
         <tbody>
@@ -30,23 +26,12 @@ const RewardsTable = ({ historicalData }) => {
                   scope="row"
                   className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  {data.dish.dishName}
+                  {data.reward.brandName.substring(0, data.reward.brandName.length - 2)}
                 </th>
                 <td className="py-4 px-6">
-                  {data.dateConsumed.substring(0, 10)}
+                  {data.dateOfTransaction.substring(0, 10)}
                 </td>
-                <td className="py-4 px-6">{data.dish.carbonRating}</td>
-                <td className="py-4 px-6">
-                  {data.dish.totalCarbonFootprint.toFixed(0) + "g"}
-                </td>
-                <td className="py-4 px-6">
-                  <a
-                    href="#"
-                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                  >
-                    -
-                  </a>
-                </td>
+                <td className="py-4 px-6">{data.reward.redemptionPointsRequired}</td>
               </tr>
             );
           })}

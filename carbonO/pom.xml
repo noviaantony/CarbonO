@@ -5,7 +5,7 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>user</module>
-        <module>userRewardPoints</module>
+        <module>userReward</module>
         <module>carbonTracker</module>
         <module>api-gateway</module>
 		<module>eureka-server</module>

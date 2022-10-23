@@ -6,23 +6,27 @@ import AuthContext from "../context/AuthProvider";
 import CarbonTrackerService from "../services/CarbonTrackerService";
 import Header from "../components/misc/Header";
 import initialDatesArr from "../components/dashboard/getInitialDates";
+import UserRewardService from "../services/UserRewardService";
 const Dashboard = () => {
 
-  const [historicalData, setHistoricalData] = useState([]);
+  const [consumptionData, setConsumptionData] = useState([]);
+  const [rewardData, setRewardData] = useState([]);
   const [totalCarbon, setTotalCarbon] = useState(0);
   const {auth} = useContext(AuthContext);
-  
+
+  // get all dish consumed by user
   useEffect(() => {
     CarbonTrackerService
       .getDishConsumed(auth.userId, auth.accessToken)
       .then((response) => {
         console.log("Table response");
         console.log(response);
-        setHistoricalData(response);
-        console.log(historicalData);
+        setConsumptionData(response);
+        console.log(consumptionData);
       });
   }, []);
 
+  //get user total carbon consumed
   useEffect(() => {
     CarbonTrackerService
       .getUserTotalCarbonConsumption(auth.userId, auth.accessToken)
@@ -33,6 +37,17 @@ const Dashboard = () => {
         console.log(totalCarbon);
       });
   }, []);
+
+  //get rewards claimed by user
+    useEffect(() => {
+        UserRewardService
+            .getUserRewards(auth.userId, auth.accessToken)
+            .then((response) => {
+                console.log("User Reward response");
+                console.log(response);
+                setRewardData(response.rewardTransactions);
+            });
+    }, []);
 
   let dates = [
     "2022-10-16",
@@ -53,8 +68,8 @@ const Dashboard = () => {
         <initialDatesArr.Provider value={dates}>
           <UserStatistics TotalCarbon={totalCarbon.toFixed(0)} />
         </initialDatesArr.Provider>
-        <CarbonTrackerTable historicalData={historicalData} />
-        <RewardsTable historicalData={historicalData} />
+        <CarbonTrackerTable historicalData={consumptionData} />
+        <RewardsTable historicalData={rewardData} />
       </div>
     </>
   );

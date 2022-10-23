@@ -32,8 +32,7 @@ public class Reward {
     private String imageAddress;
     private String rewardType;
 
-    @OneToOne
-    @JoinColumn(name = "rewardTransacton_Id")
+    @OneToOne (mappedBy = "reward", cascade = CascadeType.ALL)
     @JsonBackReference
     private RewardTransaction rewardTransaction;
 

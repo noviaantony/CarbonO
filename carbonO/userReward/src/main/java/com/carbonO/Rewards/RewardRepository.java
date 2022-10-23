@@ -8,7 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface RewardRepository extends JpaRepository<Reward, Long> {
-    @Override
-    Optional<Reward> findById(Long rewardId);
-
+    Optional<Reward> findByRewardName(String rewardName);
 }
