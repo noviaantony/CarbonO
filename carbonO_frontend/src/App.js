@@ -14,7 +14,8 @@ import AuthNavbar from './components/navigation/AuthNavbar';
 import NotAuthNavbar from './components/navigation/NotAuthNavbar';
 import PageNotFound from './screens/PageNotFound';
 import ForgotPassword from './components/registration/ForgotPassword';
-
+import EnterEmail from './components/registration/EnterEmail';
+import EnterToken from './components/registration/EnterToken';
 
 
 function App() {
@@ -28,7 +29,8 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/CarbonTracker" element={<CarbonTracker />} />
         <Route path="/Login" element={<LogInForm />} />
-        <Route path="/ResetPassword" element={<ForgotPassword />} />
+        <Route path="/ResetPassword" element={<EnterEmail />} />
+        <Route path="/EnterToken" element={<EnterToken />} />
         <Route path="/Signup" element={<SignUpForm />} />
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/Donate" element={<Donate />} />
