@@ -237,6 +237,7 @@ const Card = ({dishId, dishTitle, dishImage, dishRating, dishKeywords, dishIngre
               <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
             </>
           ) : null}
+          
         </footer>
       </article>
     </div>
