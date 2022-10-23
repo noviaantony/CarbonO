@@ -1,104 +1,84 @@
-import React, {useState} from 'react'
-import { ConfirmDialog } from 'primereact/confirmdialog'; // To use <ConfirmDialog> tag
-import { confirmDialog } from 'primereact/confirmdialog'; // To use confirmDialog method
+import React, {useState} from 'react';
 
 const RewardCard = ({
-  RewardImage,
-  RewardTitle,
-  RewardDescription,
-  CompanyName,
-  CompanyWebsite,
-  progressPercentage
+  // RewardBrandName,
+  // RewardBrandWebsite,
+  // RewardItemName,
+  // RewardImage, 
+  // RewardCredits,
+  // RewardDescription,
+  // progressPercentage
 }) => {
 
+
   let claimable = true;
+
+  let progressPercentage = 90;
 
   if (progressPercentage < 100) {
     claimable = false;
   }
 
-  const acceptReward = () => {
-    console.log("claimed reward!");
-  }
+  //  <div className="h-1 w-full bg-gray-300 mt-5">
+     
+  //  </div>;
 
-  const rejectReward = () => {
-    console.log("not claiming reward!");
-  };
-
-  const claimRewardConfirmation = () => {
-
-    confirmDialog({
-      message: "Are you sure you want to proceed?",
-      header: "Confirmation",
-      icon: "pi pi-exclamation-triangle",
-      accept: () => acceptReward(),
-      reject: () => rejectReward(),
-    });
-
-
-  }
+  
 
   return (
-    <div className="mb-5 w-full grid place-items-center">
-      <div className="flex justify-center">
-        <div className="bg-[#8000000]"></div>
-        {/* <div className={`flex flex-col md:flex-row md:max-w-xl rounded-lg shadow-lg ${claimable  ? "bg-white " : "bg-[#404040]"}`}> */}
-        <div className="flex flex-col md:flex-row md:max-w-xl rounded-lg shadow-lg bg-white">
-          <img
-            className=" w-full h-98 md:h-52  md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg object-fill"
-            src={RewardImage}
-            alt=""
-          />
-
-          <div className="p-6 flex flex-col justify-start">
-            <h5 className="text-gray-900 text-xl font-bold mb-2">
-              {RewardTitle}
-            </h5>
-            <p className="text-gray-700 text-base mb-2">{RewardDescription}</p>
-            <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-lg text-blue-600 bg-blue-200 w-fit mb-2">
-              50 E-Credits
-            </span>
-
-            {claimable ? (
-              <>
-                <button
-                  className="items-center py-2 px-3 text-xs font-xs text-center text-white bg-[#5E9387] rounded-lg  focus:outline-none transition duration-300 mr-3 font-semibold hover:bg-gray-700 hover:text-white mb-3"
-                  onClick={() => claimRewardConfirmation()}
-                >
-                  {" "}
-                  Claim Reward
-                </button>
-                <ConfirmDialog breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '50vw'}} />
-              </>
-            ) : (
-              <button
-                className="items-center py-2 px-3 text-xs font-xs text-center text-black bg-[#EBEBE4] rounded-lg focus:outline-none transition mr-3 font-semibold mb-3"
-                disabled={!claimable}
-              >
-                Claim Reward
-              </button>
-            )}
-
-            <a
-              href={CompanyWebsite}
-              className="text-xs font-semibold hover:underline-offset-2"
-            >
-              Visit {CompanyName}
-            </a>
-
-            <div className="h-1 w-full bg-gray-300 mt-5">
-              <div
-                style={{ width: `${progressPercentage}%` }}
-                className={`h-full ${
-                  progressPercentage < 70 ? "bg-red-600" : "bg-green-600"
-                }`}
-              ></div>
-            </div>
+    <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 font-default">
+      <article class="overflow-hidden rounded-lg bg-white">
+        <img
+          alt="meow"
+          class="block h-72 w-full"
+          src="https://cdn.eatigo.com/eatigo_VeganBurg_20170502120655_0518.jpg "
+        />
+        <header class="flex items-left leading-tight p-2 md:p-4 ">
+          <h1 class="text-2xl font-bold">Vegan Burg</h1>
+        </header>
+        <div>
+          <span class="text-m font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200 ml-4">
+            50 E-Credits
+          </span>
+        </div>
+        <div className="flex items-center justify-items-start leading-tight p-2 md:p-4">
+          meow
+        </div>
+        <div className="flex items-center justify-items-start leading-tight p-2 md:p-4">
+          <h2 className="font-semibold">Progress:</h2>
+          <div className="h-1 w-9/12 ml-5 mb-4  bg-gray-300 mt-5">
+            <div
+              style={{ width: `${progressPercentage}%` }}
+              className={`h-full w-9/12 ${
+                progressPercentage < 70 ? "bg-red-600" : "bg-green-600"
+              }`}
+            ></div>
           </div>
         </div>
-      </div>
+
+        <footer class="flex items-center justify-between leading-none p-2 md:p-4 bg-white">
+          <div class="flex items-center no-underline  text-black" href="#">
+            <button
+              to="/ClaimReward"
+              className="inline-flex items-center py-2 px-3 text-xs font-xs text-center text-white bg-[#5E9387] rounded-lg  focus:outline-none transition duration-300 mr-3 font-semibold hover:bg-gray-700 hover:text-white
+          "
+              type="button"
+            >
+              Claim Reward
+            </button>
+            <button
+              href="https://cats.com/"
+              className="inline-flex items-center py-1.5 px-3 text-xs font-xs text-center bg-white text-[#5E9387] rounded-md focus:outline-none transition duration-300 mr-3 font-semibold border-[#5E9387] border-2 border-solid hover:bg-gray-100
+          "
+              type="button"
+            >
+              Visit Brand Website
+            </button>
+          </div>
+        </footer>
+      </article>
     </div>
   );
 };
 
-export default RewardCard
+export default RewardCard;
