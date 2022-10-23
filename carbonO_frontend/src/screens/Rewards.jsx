@@ -4,6 +4,43 @@ import Header from "../components/misc/Header";
 
 const Rewards = () => {
   const [openTab, setOpenTab] = React.useState(1);
+
+  const rewardList = [
+    {
+      brandName: "Tokyo Bags",
+      rewardName: "some fashion",
+      redemptionPointsRequired: 6000,
+      rewardDescription: "meow",
+      rewardQuantity: 3000,
+      website: "cats.com",
+      imageAddress:
+        "https://cdn.eatigo.com/eatigo_VeganBurg_20170502120655_0518.jpg",
+      rewardType: "Fashion",
+    },
+    {
+      brandName: "Vegan Burg",
+      rewardName: "mou",
+      redemptionPointsRequired: 6000,
+      rewardDescription: "meow",
+      rewardQuantity: 3000,
+      website: "cats.com",
+      imageAddress:
+        "https://cdn.eatigo.com/eatigo_VeganBurg_20170502120655_0518.jpg",
+      rewardType: "Food",
+    },
+    {
+      brandName: "Grab",
+      rewardName: "mmeowww",
+      redemptionPointsRequired: 6000,
+      rewardDescription: "meow",
+      rewardQuantity: 3000,
+      website: "cats.com",
+      imageAddress:
+        "https://cdn.eatigo.com/eatigo_VeganBurg_20170502120655_0518.jpg",
+      rewardType: "Transport",
+    },
+  ];
+
   return (
     <>
       <div className="h-max">
@@ -79,17 +116,35 @@ const Rewards = () => {
             <div className="relative flex flex-col min-w-0 break-words  w-full mb-6  rounded">
               <div className="px-4 py-5 flex-auto">
                 <div className="tab-content tab-space">
-                  {/*  */}
                   <div
                     className={openTab === 1 ? "block" : "hidden"}
                     id="link1"
                   >
+                    {/* Fashion Rewards */}
                     <div class="container my-12 mx-auto px-4 md:px-12">
                       <div class="flex flex-wrap -mx-1 lg:-mx-4">
-                        <RewardCard />
-                        <RewardCard />
-                        <RewardCard />
-                        <RewardCard />
+                        {rewardList
+                          .filter((reward) => {
+                            if (reward.rewardType == "Fashion") {
+                              return reward;
+                            }
+                          })
+                          .map((reward) => {
+                            return (
+                              <RewardCard
+                                RewardBrandName={reward.brandName}
+                                RewardName={reward.rewardName}
+                                RewardPointsRequired={
+                                  reward.redemptionPointsRequired
+                                }
+                                RewardImage={reward.imageAddress}
+                                RewardDescription={
+                                  reward.rewardDescription
+                                }
+                                RewardWebsite={reward.website}
+                              />
+                            );
+                          })}
                       </div>
                     </div>
                   </div>
@@ -98,11 +153,29 @@ const Rewards = () => {
                     className={openTab === 2 ? "block" : "hidden"}
                     id="link2"
                   >
+                    {/* Food Rewards */}
                     <div class="container my-12 mx-auto px-4 md:px-12">
                       <div class="flex flex-wrap -mx-1 lg:-mx-4">
-                        <RewardCard />
-                        <RewardCard />
-                        
+                        {rewardList
+                          .filter((reward) => {
+                            if (reward.rewardType == "Food") {
+                              return reward;
+                            }
+                          })
+                          .map((reward) => {
+                            return (
+                              <RewardCard
+                                RewardBrandName={reward.brandName}
+                                RewardName={reward.rewardName}
+                                RewardPointsRequired={
+                                  reward.redemptionPointsRequired
+                                }
+                                RewardImage={reward.imageAddress}
+                                RewardDescription={reward.rewardDescription}
+                                RewardWebsite={reward.website}
+                              />
+                            );
+                          })}
                       </div>
                     </div>
                   </div>
@@ -111,12 +184,29 @@ const Rewards = () => {
                     className={openTab === 3 ? "block" : "hidden"}
                     id="link3"
                   >
+                    {/* Transport Rewards */}
                     <div class="container my-12 mx-auto px-4 md:px-12">
                       <div class="flex flex-wrap -mx-1 lg:-mx-4">
-                        <RewardCard />
-                        <RewardCard />
-                        <RewardCard />
-                        
+                        {rewardList
+                          .filter((reward) => {
+                            if (reward.rewardType == "Transport") {
+                              return reward;
+                            }
+                          })
+                          .map((reward) => {
+                            return (
+                              <RewardCard
+                                RewardBrandName={reward.brandName}
+                                RewardName={reward.rewardName}
+                                RewardPointsRequired={
+                                  reward.redemptionPointsRequired
+                                }
+                                RewardImage={reward.imageAddress}
+                                RewardDescription={reward.rewardDescription}
+                                RewardWebsite={reward.website}
+                              />
+                            );
+                          })}
                       </div>
                     </div>
                   </div>
