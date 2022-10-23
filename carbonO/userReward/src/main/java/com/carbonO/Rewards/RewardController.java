@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path="api/v1/carbonO/userRewardPoints/reward")
+@RequestMapping(path="api/v1/carbonO/userReward/reward")
 public class RewardController {
 
     private final RewardService rewardService;

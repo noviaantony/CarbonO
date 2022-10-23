@@ -4,9 +4,9 @@ spring:
     application:
             name: userReward
     datasource:
-        password: 123
+        password: zhaoxing
         url: jdbc:postgresql://localhost:5432/userReward
-        username: chong
+        username: xxhea
     jpa:
         hibernate:
             ddl-auto: create-drop
@@ -15,5 +15,14 @@ spring:
                 dialect: org.hibernate.dialect.PostgreSQLDialect
                 format_sql: true
         show-sql: true
+eureka:
+    client:
+        service-url:
+            #            defaultZone: http://54.151.137.8:8761/eureka/
+            defaultZone: http://localhost:8761/eureka/
+            fetch-registry: true
+            register-with-eureka: true
+    instance:
+        prefer-ip-address: true
 
 

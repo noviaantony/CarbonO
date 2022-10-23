@@ -3,6 +3,7 @@ package com.carbonO.RewardTransaction;
 import com.carbonO.Rewards.Reward;
 import com.carbonO.userReward.UserReward;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,10 +31,10 @@ public class RewardTransaction {
 
     @ManyToOne
     @JoinColumn (name = "userReward_id")
-    @JsonBackReference
+    @JsonManagedReference
     private UserReward userReward;
 
-    @OneToOne (mappedBy = "reward", cascade = CascadeType.ALL )
+    @OneToOne (mappedBy = "rewardTransaction", cascade = CascadeType.ALL )
     private Reward reward;
 
     public RewardTransaction() {

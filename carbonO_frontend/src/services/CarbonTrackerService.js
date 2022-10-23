@@ -23,13 +23,13 @@ class CarbonTrackerService {
     return response.data;
   }
 
-  async postDishConsumed(dishId, userToken, userId) {
+  async postDishConsumed(userToken, userId, receiptId) {
     console.log('posting dish');
     const response = await axios.post(
       `${CARBON_TRACKER_API_URL}/addUserDishConsumed`,
       null,
       {
-        params: { dishId, userId },
+        params: { userId, receiptId },
         headers: { Authorization: userToken },
       },
     );

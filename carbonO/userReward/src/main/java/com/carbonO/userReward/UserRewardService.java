@@ -13,10 +13,10 @@ public class UserRewardService {
     }
 
     //if it is a new user, create a new reward point for the user
-    public UserReward addNewUserReward(Integer userID) {
+    public void addNewUserReward(Long userID) {
 
         UserReward userReward = new UserReward(userID, 0);
-        return userRewardRepository.save(userReward);
+        userRewardRepository.save(userReward);
     }
     //create another method to edit reward points (set points)
 }

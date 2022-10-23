@@ -1,6 +1,7 @@
 package com.carbonO.userReward;
 
 import com.carbonO.RewardTransaction.RewardTransaction;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
@@ -28,10 +29,11 @@ public class UserReward {
     private Integer rewardPoints;
 
     @OneToMany(mappedBy = "userReward", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonBackReference
     private List<RewardTransaction> rewardTransactions;
 
-    public UserReward(Integer userID, int i) {
-
+    public UserReward(Long userID, Integer rewardPoints) {
+        this.userID = userID;
+        this.rewardPoints = rewardPoints;
     }
 }
