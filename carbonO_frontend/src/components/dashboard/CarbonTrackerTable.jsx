@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import carbonTrackerService from "../../services/CarbonTrackerService";
 
-const Table = ({historicalData}) => {
+const CarbonTrackerTable = ({historicalData}) => {
 
   return (
     <div className="overflow-x-auto relative shadow-md sm:rounded-lg  m-6 font-default">
@@ -55,4 +55,4 @@ const Table = ({historicalData}) => {
   );
 }
 
-export default Table
+export default CarbonTrackerTable;

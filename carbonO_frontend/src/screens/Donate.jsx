@@ -13,7 +13,7 @@ const Donate = () => {
           Description="use the e-credits you earned to donate to climate change campaigns, we make donating easy for you."
         />
 
-        <div class="container my-12 mx-auto px-4 md:px-12">
+        <div class="container my-12 mx-auto px-4 md:px-1 h-screen">
           <div class="flex flex-wrap -mx-1 lg:-mx-4">
             <DonationCard
               Title="Cool Earth: Protecting the World’s Rainforests"

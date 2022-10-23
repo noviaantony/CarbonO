@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext }  from "react";
-import Table from "../components/dashboard/Table";
+import CarbonTrackerTable from "../components/dashboard/CarbonTrackerTable";
+import RewardsTable from "../components/dashboard/RewardsTable";
 import UserStatistics from "../components/dashboard/UserStatistics";
 import AuthContext from "../context/AuthProvider";
 import CarbonTrackerService from "../services/CarbonTrackerService";
@@ -48,12 +49,12 @@ const Dashboard = () => {
         Title="John Doe's Dashboard"
         Description="keep track of you receipt uploads, carbon foodprint, reward claims and donation here"
       />
-      <div>
+      <div className="h-screen">
         <initialDatesArr.Provider value={dates}>
           <UserStatistics TotalCarbon={totalCarbon.toFixed(0)} />
         </initialDatesArr.Provider>
-        <Table historicalData={historicalData} />
-       
+        <CarbonTrackerTable historicalData={historicalData} />
+        <RewardsTable historicalData={historicalData} />
       </div>
     </>
   );
