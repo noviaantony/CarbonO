@@ -1,45 +1,60 @@
-import React from "react";
+import React, {useContext, useState, useRef, useEffect} from "react";
+import { ThreeDots } from "react-loader-spinner";
 import RewardCard from "../components/rewards/RewardCard";
 import Header from "../components/misc/Header";
+import CarbonTrackerService from "../services/CarbonTrackerService";
+import UserRewardService from "../services/UserRewardService";
 
 const Rewards = () => {
   const [openTab, setOpenTab] = React.useState(1);
+  const [rewardList, setRewardList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const rewardList = [
-    {
-      brandName: "Tokyo Bags",
-      rewardName: "some fashion",
-      redemptionPointsRequired: 6000,
-      rewardDescription: "meow",
-      rewardQuantity: 3000,
-      website: "cats.com",
-      imageAddress:
-        "https://cdn.eatigo.com/eatigo_VeganBurg_20170502120655_0518.jpg",
-      rewardType: "Fashion",
-    },
-    {
-      brandName: "Vegan Burg",
-      rewardName: "mou",
-      redemptionPointsRequired: 6000,
-      rewardDescription: "meow",
-      rewardQuantity: 3000,
-      website: "cats.com",
-      imageAddress:
-        "https://cdn.eatigo.com/eatigo_VeganBurg_20170502120655_0518.jpg",
-      rewardType: "Food",
-    },
-    {
-      brandName: "Grab",
-      rewardName: "mmeowww",
-      redemptionPointsRequired: 6000,
-      rewardDescription: "meow",
-      rewardQuantity: 3000,
-      website: "cats.com",
-      imageAddress:
-        "https://cdn.eatigo.com/eatigo_VeganBurg_20170502120655_0518.jpg",
-      rewardType: "Transport",
-    },
-  ];
+  useEffect(()=> {
+    setLoading(true);
+    UserRewardService.getAllRewards()
+        .then((response) => {
+          setRewardList(response);
+        }).then((data) => {
+      setLoading(false);
+    })
+  },[])
+
+  // const rewardList = [
+  //   {
+  //     brandName: "Tokyo Bags",
+  //     rewardName: "some fashion",
+  //     redemptionPointsRequired: 6000,
+  //     rewardDescription: "meow",
+  //     rewardQuantity: 3000,
+  //     website: "cats.com",
+  //     imageAddress:
+  //       "https://cdn.eatigo.com/eatigo_VeganBurg_20170502120655_0518.jpg",
+  //     rewardType: "Fashion",
+  //   },
+  //   {
+  //     brandName: "Vegan Burg",
+  //     rewardName: "mou",
+  //     redemptionPointsRequired: 6000,
+  //     rewardDescription: "meow",
+  //     rewardQuantity: 3000,
+  //     website: "cats.com",
+  //     imageAddress:
+  //       "https://cdn.eatigo.com/eatigo_VeganBurg_20170502120655_0518.jpg",
+  //     rewardType: "Food",
+  //   },
+  //   {
+  //     brandName: "Grab",
+  //     rewardName: "mmeowww",
+  //     redemptionPointsRequired: 6000,
+  //     rewardDescription: "meow",
+  //     rewardQuantity: 3000,
+  //     website: "cats.com",
+  //     imageAddress:
+  //       "https://cdn.eatigo.com/eatigo_VeganBurg_20170502120655_0518.jpg",
+  //     rewardType: "Transport",
+  //   },
+  // ];
 
   return (
     <>
@@ -48,6 +63,22 @@ const Rewards = () => {
           Title="Claim Rewards, Save the Earth"
           Description="claim discount codes, free items from sustainable companies using your e-credits!"
         />
+        {loading ? (
+                <>
+                  <div className="flex justify-center h-screen mt-20">
+                    <ThreeDots
+                        height="300"
+                        width="300"
+                        radius="9"
+                        color="#000"
+                        ariaLabel="three-dots-loading"
+                        wrapperStyle={{}}
+                        wrapperClassName=""
+                        visible={true}
+                    />
+                  </div>
+                </>
+        ) : (
         <div className="flex flex-wrap">
           <div className="w-full">
             <ul
@@ -215,7 +246,8 @@ const Rewards = () => {
             </div>
           </div>
         </div>
-      </div>
+        )}
+      </div>)}
     </>
   );
 };

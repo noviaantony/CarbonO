@@ -28,7 +28,7 @@ const RewardCard = ({
           src={RewardImage}
         />
         <header class="flex items-left leading-tight p-2 md:p-4 ">
-          <h1 class="text-2xl font-bold">{RewardBrandName} : {RewardName}</h1>
+          <h1 class="text-2xl font-bold">{RewardBrandName} {RewardName}</h1>
         </header>
         <div>
           <span class="text-m font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200 ml-4">

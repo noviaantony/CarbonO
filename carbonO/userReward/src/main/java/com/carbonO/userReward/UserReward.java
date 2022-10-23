@@ -29,7 +29,7 @@ public class UserReward {
     private Integer rewardPoints;
 
     @OneToMany(mappedBy = "userReward", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonManagedReference
     private List<RewardTransaction> rewardTransactions;
 
     public UserReward(Long userID, Integer rewardPoints) {

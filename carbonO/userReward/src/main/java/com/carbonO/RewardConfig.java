@@ -18,45 +18,45 @@ public class RewardConfig {
             Set<Reward> rewardSet = new HashSet<>();
 
             //Fashion rewards
-            rewardSet.add(new Reward("NOST", "Artisan Lounge wear", 4500,
+            rewardSet.add(new Reward("Another Sole :", "Paloma Fog Shoe", 7500,
                     "10% Discount", 300,
-                    "https://www.nostshop.com/", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZrS6jolKfZU3vWBbytwy5in6ycTcF_AWaiA&usqp=CAU",
+                    "https://sg.anothersole.com/", "https://cdn.shopify.com/s/files/1/2006/0543/products/Paloma_-_Fog_lifestyle__Cropped_540x.png?v=1644807797",
                     "Fashion"));
 
-            rewardSet.add(new Reward("Esse", "Loose Tee", 9000,
-                    "Complementary free-size top", 500,
-                    "https://www.essethelabel.com/", "https://www.essethelabel.com/collections/tops/products/down-to-a-tee-1",
+            rewardSet.add(new Reward("The Eco Gem :", "Upcycled Earrings", 9000,
+                    "Complementary Earrings", 500,
+                    "https://www.facebook.com/theecogem/", "https://i.pinimg.com/originals/0b/52/0a/0b520a348452a8b418911d8131296b87.jpg ",
                     "Fashion"));
 
-            rewardSet.add(new Reward("Zerrin", "Black & White Bucket Bag", 6000,
+            rewardSet.add(new Reward("Zerrin :", "Black & White Bucket Bag", 6000,
                     "10% Discount", 300,
                     "https://shop.zerrin.com/", "https://cdn.shopify.com/s/files/1/1543/3741/products/Frankitas-Gaya-Bucket-Bag-in-Black-_-White-handbags-online-singapore-sustainable-fashion-artisan-made-frankitas-zerrin2_540x.png?v=1665642758",
                     "Fashion"));
 
-            rewardSet.add(new Reward("GRAYE", "Seamline Curved Pocket Panel Top", 6500,
+            rewardSet.add(new Reward("GRAYE :", "Seamline Curved Pocket Panel Top", 6500,
                     "20% Discount", 200,
                     "https://grayestudio.com/ ", "https://cdn.shopify.com/s/files/1/1414/1076/products/52064546067_a1a0dab85d_kcopy_550x.jpg?v=1653030012",
                     "Fashion"));
 
-            rewardSet.add(new Reward("GRAYE", "Padded Ankle Socks", 1000,
+            rewardSet.add(new Reward("GRAYE :", "Padded Ankle Socks", 1000,
                     "Free", 200,
                     "https://grayestudio.com/", "https://cdn.shopify.com/s/files/1/1414/1076/products/DSC05022copy_1680x.jpg?v=1644910099",
                     "Fashion"));
 
-            rewardSet.add(new Reward("GRAYE", "Padded Ankle Socks", 10000,
+            rewardSet.add(new Reward("GRAYE :", "Padded Ankle Socks", 10000,
                     "Free", 100,
                     "https://grayestudio.com/", "https://cdn.shopify.com/s/files/1/1414/1076/products/49058766003_0deefbbae7_k_1100x.jpg?v=1573660433",
                     "Fashion"));
 
-            rewardSet.add(new Reward("Tokyo Bags", "Dark Brown Backpack", 9000,
+            rewardSet.add(new Reward("Tokyo Bags :", "Dark Brown Backpack", 9000,
                     "20% Discount", 250,
                     "https://tokyobags.co/", "https://n.nordstrommedia.com/id/sr3/5c768a97-1600-4812-8dd2-1cf0c1233dc6.jpeg?h=365&w=240&dpr=2",
                     "Fashion"));
 
             //Food rewards
-            rewardSet.add(new Reward("Afterglow", "", 4000,
-                    "10% off total bill on any weekday*", 1000,
-                    "http://www.afterglow.sg/ ", "https://images.squarespace-cdn.com/content/v1/5e37b4e70d293653e01382fc/07947823-26c8-44cd-b021-6bbd4c8feddc/Afterglow+Menu+-+3011213.jpg?format=2500w",
+            rewardSet.add(new Reward("Elemen", "", 7000,
+                    "5% off total bill on any weekday*", 1000,
+                    "https://www.elemengroup.com.sg/", "https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img,w_450,h_300/https://danielfooddiary.com/wp-content/uploads/2017/06/elemen1.jpg",
                     "Food"));
 
             rewardSet.add(new Reward("Real Food", "", 4000,

@@ -31,7 +31,7 @@ public class RewardTransaction {
 
     @ManyToOne
     @JoinColumn (name = "userReward_id")
-    @JsonManagedReference
+    @JsonBackReference
     private UserReward userReward;
 
     @OneToOne (mappedBy = "rewardTransaction", cascade = CascadeType.ALL )

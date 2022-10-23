@@ -1,6 +1,7 @@
 package com.carbonO.Rewards;
 
 import com.carbonO.RewardTransaction.RewardTransaction;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -33,6 +34,7 @@ public class Reward {
 
     @OneToOne
     @JoinColumn(name = "rewardTransacton_Id")
+    @JsonBackReference
     private RewardTransaction rewardTransaction;
 
     public Reward(String brandName, String rewardName, Integer redemptionPointsRequired,
