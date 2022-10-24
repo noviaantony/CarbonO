@@ -11,6 +11,7 @@ class QRScan extends React.Component {
     this.setState({
       result: data
     });
+    console.log(data) //this can be removed, its just a test to see if the data from qr scan is collected
   };
 
   handleError = (err) => {
@@ -26,7 +27,7 @@ class QRScan extends React.Component {
           onError={this.handleError}
           onScan={this.handleScan}
         />
-        <p>{this.state.result}</p>
+        {/* <p>{this.state.result}</p> */}
       </div>
     );
   }
