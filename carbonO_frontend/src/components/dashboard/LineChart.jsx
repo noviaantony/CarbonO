@@ -43,22 +43,25 @@ const LineChart = () => {
             labels: data,
             datasets: [
               {
-                label: "c02 consumed",
+                label: " total C02 / day",
                 data: datapoints,
                 backgroundColor: "rgba(255, 99, 132, 0.2)",
                 borderColor: "rgba(255, 99, 132, 1)",
                 borderWidth: 1,
+                font: {
+                  size: 5
+                }
               },
             ],
           }}
-          height={400}
+          height={300}
           width={600}
           options={{
             maintainAspectRatio: false,
             plugins: {
               title: {
                 display: true,
-                text: "C02 Consumed",
+                text: "Total CO2 Consumed",
               },
             },
             scales: {

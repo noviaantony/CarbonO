@@ -100,7 +100,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
   const returnCharts = () => {
     if (isClickedCarbon && isClickedCredit && isClickedReceipt) {
       return (
-        <div class="flex flex-wrap mx-10">
+        <div class="flex flex-row justify-evenly">
           <DonutChart />
           <LineChart />
           <PieChart />
@@ -108,40 +108,40 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
       );
     } else if (isClickedCarbon && isClickedCredit) {
       return (
-        <div class="flex flex-wrap mx-10" style={{ width: "162%" }}>
-          <DonutChart />
+        <div class="flex flex-row justify-evenly">
+          <DonutChart  />
           <LineChart />
         </div>
       );
     } else if (isClickedCredit && isClickedReceipt) {
       return (
-        <div className="flex flex-wrap mx-10" style={{ width: "162%" }}>
+        <div className="flex flex-row justify-evenly">
           <DonutChart />
           <PieChart />
         </div>
       );
     } else if (isClickedCarbon && isClickedReceipt) {
       return (
-        <div className="flex flex-wrap mx-10" style={{ width: "162%" }}>
+        <div className="flex flex-row justify-evenly">
           <LineChart />
           <PieChart />
         </div>
       );
     } else if (isClickedCredit) {
       return (
-        <div className="flex flex-wrap mx-10" style={{ width: "345%" }}>
+        <div className="flex flex-row justify-evenly" >
           <DonutChart />
         </div>
       );
     } else if (isClickedCarbon) {
       return (
-        <div className="flex flex-wrap mx-10" style={{ width: "345%" }}>
+        <div className="flex flex-row justify-evenly">
           <LineChart />
         </div>
       );
     } else if (isClickedReceipt) {
       return (
-        <div className="flex flex-wrap mx-10" style={{ width: "345%" }}>
+        <div className="flex flex-row justify-evenly">
           <PieChart />
         </div>
       );
@@ -150,7 +150,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
 
   return (
     <>
-      <div class="flex flex-wrap -mx-1 lg:-mx-4">
+      <div class="flex flex-wrap -mx-1 lg:mx-36">
         {/* first */}
         <div
           class="px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 font-default"
@@ -162,7 +162,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
             }
           }}
         >
-          <div className="p-4 text-sm text-[#5e938780] bg-white rounded-lg dark:bg-gray-700 dark:text-gray-300 flex items-stretch m-6 shadow-md font-default">
+          <div className="p-4 text-sm text-[#5e938780] bg-white rounded-lg dark:bg-gray-700 dark:text-gray-300 flex items-stretch m-6 drop-shadow-sm font-default cursor-pointer">
             <FaWallet size={60} />
             <div className="ml-20 mt-2 text-xl text-center font-semibold text-gray-700">
               <h1 class="text-4xl font-bold"> - </h1>
@@ -182,7 +182,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
             }
           }}
         >
-          <div className="p-4 text-sm text-[#5e938780] bg-white rounded-lg dark:bg-gray-700 dark:text-gray-300 flex items-stretch m-6 shadow-md font-default">
+          <div className="p-4 text-sm text-[#5e938780] bg-white rounded-lg dark:bg-gray-700 dark:text-gray-300 flex items-stretch m-6 drop-shadow-sm font-default cursor-pointer">
             <FaLeaf size={60} />
             <div className="ml-12 mt-2 text-xl font-semibold text-gray-700">
               <h1 class="text-4xl text-center font-bold"> {TotalCarbon} </h1>
@@ -202,7 +202,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
             }
           }}
         >
-          <div className="p-4 text-sm text-[#5e938780] bg-white rounded-lg dark:bg-gray-700 dark:text-gray-300 flex items-stretch m-6 shadow-md font-default">
+          <div className="p-4 text-sm text-[#5e938780] bg-white rounded-lg dark:bg-gray-700 dark:text-gray-300 flex items-stretch m-6 drop-shadow-sm font-default cursor-pointer">
             <FaReceipt size={60} />
             <div className="ml-10 mt-2 text-xl font-semibold text-gray-700">
               <h1 class="text-4xl text-center font-bold">-</h1>
@@ -213,9 +213,9 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
       </div>
 
       <actualDates.Provider value={newDates.current}>
-        <div>{hasChart()}</div>
+        <div className="mx-36">{hasChart()}</div>
 
-        <div>{returnCharts()}</div>
+        <div className="mx-36">{returnCharts()}</div>
       </actualDates.Provider>
     </>
   );

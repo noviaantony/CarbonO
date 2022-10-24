@@ -22,7 +22,7 @@ Chart.register(
 
 Chart.defaults.font.size = 20;
 
-const TestChart = () => {
+const DonutChart = () => {
   return (
     <div
       style={{ width: "28%", height: "30%" }}
@@ -50,7 +50,7 @@ const TestChart = () => {
             },
           ],
         }}
-        height={400}
+        height={300}
         width={600}
         options={{
           maintainAspectRatio: false,
@@ -74,4 +74,4 @@ const TestChart = () => {
   );
 };
 
-export default TestChart;
+export default DonutChart;

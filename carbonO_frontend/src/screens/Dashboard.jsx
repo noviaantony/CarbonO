@@ -68,8 +68,10 @@ const Dashboard = () => {
         <initialDatesArr.Provider value={dates}>
           <UserStatistics TotalCarbon={totalCarbon.toFixed(0)} />
         </initialDatesArr.Provider>
-        <CarbonTrackerTable historicalData={consumptionData} />
-        <RewardsTable historicalData={rewardData} />
+        <div className="flex flex-row justify-center mx-10">
+          <CarbonTrackerTable historicalData={consumptionData} />
+          <RewardsTable historicalData={rewardData} />
+        </div>
       </div>
     </>
   );

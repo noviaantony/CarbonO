@@ -13,7 +13,7 @@ const PieChart = () => {
       <Pie
         data={{
           //labels on x-axis
-          labels: ["Category 1", "Category 2", "Category 3"],
+          labels: ["1", "2", "3"], // add 4,5
           datasets: [
             {
               label: "Receipts",
@@ -32,14 +32,14 @@ const PieChart = () => {
             },
           ],
         }}
-        height={400}
+        height={300}
         width={600}
         options={{
           maintainAspectRatio: false,
           plugins : {
             title : {
                 display: true,
-                text: 'Total Receipts Uploaded'
+                text: 'Carbon Rating Summary'
             }
           }
         }}
