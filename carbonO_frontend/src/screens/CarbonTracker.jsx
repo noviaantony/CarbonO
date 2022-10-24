@@ -4,6 +4,7 @@ import Card from "../components/carbontracker/Card";
 import CarbonTrackerService from "../services/CarbonTrackerService";
 import Header from "../components/misc/Header";
 import AuthContext from "../context/AuthProvider";
+import QRScanner from "../components/carbontracker/QRScanner";
 
 
 const  CarbonTracker = () => {
