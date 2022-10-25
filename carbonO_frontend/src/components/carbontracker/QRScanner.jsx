@@ -1,17 +1,37 @@
 import React from "react";
 import QrReader from "react-qr-scanner";
 
-class QRScan extends React.Component {
+class QRScanner extends React.Component {
+
+
+  // use state for qr code message
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: "",
+    };
+  }
+
   state = {
-    delay: 100,
-    result: "No result"
+    delay: 10,
+    result: "No result",
   };
 
   handleScan = (data) => {
     this.setState({
-      result: data
+      result: data,
     });
-    console.log(data) //this can be removed, its just a test to see if the data from qr scan is collected
+    console.log(data); //this can be removed, its just a test to see if the data from qr scan is collected
+
+    if (data != null) {
+      this.setState({
+        message:
+          this.state.message + "you have successfully claimed your reward!",
+      });
+    }
+
+    
+    
   };
 
   handleError = (err) => {
@@ -27,10 +47,13 @@ class QRScan extends React.Component {
           onError={this.handleError}
           onScan={this.handleScan}
         />
-        {/* <p>{this.state.result}</p> */}
+        <p>{this.state.message}</p>
       </div>
     );
   }
 }
 
-export default QRScan;
+export default QRScanner;
+
+
+

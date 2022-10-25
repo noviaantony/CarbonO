@@ -1,10 +1,10 @@
 import React, {useContext, useState} from "react";
 import axios from "axios";
 import { IoLeafOutline, IoLeafSharp } from "react-icons/io5";
-import FileUploader from "./FileUploader";
 import ViewInformationAccordion from "./ViewInformationAccordion";
 import CarbonTrackerService from "../../services/CarbonTrackerService";
 import AuthContext from "../../context/AuthProvider";
+import QRScanner from './QRScanner'
 
 
 const Card = ({dishId, dishTitle, dishImage, dishRating, dishKeywords, dishIngredients, dishCarbonFootprint, dishCredit}) => {
@@ -117,7 +117,7 @@ const Card = ({dishId, dishTitle, dishImage, dishRating, dishKeywords, dishIngre
               type="button"
               onClick={() => setshowReceiptUpload(true)}
             >
-              Claim Reward
+              Scan QR Code
             </button>
             <button
               href="#"
@@ -183,7 +183,7 @@ const Card = ({dishId, dishTitle, dishImage, dishRating, dishKeywords, dishIngre
                   <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                     {/*header*/}
                     <div className="text-center items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                      <h3 className="text-3xl font-semibold">{dishTitle}</h3>
+                      <h3 className="text-3xl font-semibold">Scan your QR Code</h3>
                       <button
                         className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                         onClick={() => setshowReceiptUpload(false)}
@@ -193,27 +193,10 @@ const Card = ({dishId, dishTitle, dishImage, dishRating, dishKeywords, dishIngre
                     <div className="relative p-6 flex-auto">
                       <p className="my-4 text-slate-500 text-lg leading-relaxed">
                         <form>
-                          <FileUploader
-                            onFileSelectSuccess={(file) =>
-                              setSelectedFile(file)
-                            }
-                            onFileSelectError={({ error }) => alert(error)}
-                          />
+                          <QRScanner/>
                         </form>
                       </p>
                     </div>
-                    {/* uploaded status */}
-                    {successMessage ? (
-                      <span class="text-m font-semibold inline-block py-1 px-2 uppercase rounded-full text-green-600 bg-green-200 m-4">
-                        You have claimed your reward!
-                      </span>
-                    ) : null}
-
-                    {errorMessage ? (
-                      <span class="text-m font-semibold inline-block py-1 px-2 uppercase rounded-full text-red-600 bg-red-200 m-4">
-                        Something went wrong :(
-                      </span>
-                    ) : null}
 
                     {/*footer*/}
                     <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
@@ -223,12 +206,6 @@ const Card = ({dishId, dishTitle, dishImage, dishRating, dishKeywords, dishIngre
                         onClick={() => {setshowReceiptUpload(false); setSuccessMessage(false); setErrorMessage(false);}}
                       >
                         Close
-                      </button>
-                      <button
-                        className="text-green-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                        onClick={submitReceipt}
-                      >
-                        Submit
                       </button>
                     </div>
                   </div>

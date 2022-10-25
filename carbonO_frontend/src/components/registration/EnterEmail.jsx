@@ -11,16 +11,18 @@ const EnterEmail = () => {
         <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
           <div className="bg-white rounded-2xl shadow-2xl flex w-2/3 max-w-4xl">
             <div className="w-3/5 p-5 mt-10">
-            <button className="mx-15" onClick={() => navigate(-1)}>
-              <FaArrowLeft size={18} />
-            </button>
-              <div>
-                <a
-                  className="toggleColour text-[#5E9387] my-4 leading-tight no-underline hover:no-underline font-bold text-xl lg:text-2xl"
-                  href="#"
-                >
-                  CarbonO
-                </a>
+              <div className="flex flex-row">
+                <button className="mr-32 ml-10" onClick={() => navigate(-1)}>
+                  <FaArrowLeft size={18} />
+                </button>
+                <div>
+                  <a
+                    className="toggleColour text-[#5E9387] my-4 leading-tight no-underline hover:no-underline font-bold text-xl lg:text-2xl"
+                    href="#"
+                  >
+                    CarbonO
+                  </a>
+                </div>
               </div>
 
               <div className="py-10">
@@ -43,9 +45,10 @@ const EnterEmail = () => {
                       required
                     />
                   </div>
-                  <Link 
-                   to="/EnterToken"
-                  className="signIn px-7 py-3 w-64 justify-center rounded-md border border-transparent text-sm focus:outline-none transition duration-300 bg-[#5E9387] hover:bg-gray-700  text-center marker:sm:w-auto font-bold text-white">
+                  <Link
+                    to="/EnterToken"
+                    className="signIn px-7 py-3 w-64 justify-center rounded-md border border-transparent text-sm focus:outline-none transition duration-300 bg-[#5E9387] hover:bg-gray-700  text-center marker:sm:w-auto font-bold text-white"
+                  >
                     Get Token
                   </Link>
                 </div>
