@@ -1,7 +1,7 @@
 import React from 'react'
-import { ReactComponent as EnterEmailSvg } from "./EnterEmail.svg";
+import { ReactComponent as ResetPasswordSvg } from "./ResetPassword.svg";
 import { HiMail, HiCheckCircle } from "react-icons/hi";
-import { Navigate, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 const EnterEmail = () => {
   const navigate = useNavigate();
@@ -40,7 +40,19 @@ const EnterEmail = () => {
                     <input
                       type="email"
                       name="email"
-                      placeholder="enter your email"
+                      placeholder="new password"
+                      className="bg-gray-100 outline-none text-m flex-1"
+                      required
+                    />
+                  </div>
+                  <div className="bg-gray-100 w-64 p-2 flex items-center rounded mb-3">
+                    <div className="bg-gray-100 w-64 p-2">
+                      <HiMail className="text-grey-100 m-2" />
+                    </div>
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="confirm new password"
                       className="bg-gray-100 outline-none text-m flex-1"
                       required
                     />
@@ -49,13 +61,13 @@ const EnterEmail = () => {
                     to="/EnterToken"
                     className="signIn px-7 py-3 w-64 justify-center rounded-md border border-transparent text-sm focus:outline-none transition duration-300 bg-[#5E9387] hover:bg-gray-700  text-center marker:sm:w-auto font-bold text-white"
                   >
-                    Get Token
+                    Reset Password
                   </Link>
                 </div>
               </form>
             </div>
             <div className="w-2/5 bg-[#5E9387]  text-white rounded-tr-2xl rounded-br-2xl py-36 px-12">
-              <EnterEmailSvg width="16rem" />
+              <ResetPasswordSvg width="16rem" />
             </div>
           </div>
         </main>
