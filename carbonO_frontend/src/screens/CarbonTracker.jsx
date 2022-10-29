@@ -32,8 +32,8 @@ const  CarbonTracker = () => {
         Title="Reduce Your Carbon Foodprint Today!"
         Description="scan the QR Code for a dish and claim e-credits to redeem rewards or donate!"
       />
-      <Card/>
-      {/* {loading ? (
+
+      {loading ? (
         <>
           <div className="flex justify-center h-screen mt-20">
             <ThreeDots
@@ -118,7 +118,7 @@ const  CarbonTracker = () => {
             </div>
           </div>
         </div>
-      )} */}
+      )}
     </>
   );
 };

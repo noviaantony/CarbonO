@@ -24,20 +24,22 @@ class QRScanner extends React.Component {
       result: data,
     });
      //this can be removed, its just a test to see if the data from qr scan is collected
-
+    let result = "";
     if (data != null) {
       const response = JSON.parse(data.text);
       console.log(response);
       console.log(this.context.auth.userId);
-      CarbonTrackerService.postDishConsumed(this.context.auth.accessToken, this.context.auth.userId, response.id).then(r => console.log(r));
-      // this.setState({
-      //   message:
-      //     this.state.message + "you have successfully claimed your reward!",
-      // });
+      CarbonTrackerService.postDishConsumed(this.context.auth.accessToken, this.context.auth.userId, response.id).then(response => result = response);
+
+      this.setState({
+        message:
+          this.state.message + result,
+      });
       return prev_state;
     }
 
   };
+
 
   handleError = (err) => {
     console.error(err);
@@ -52,6 +54,7 @@ class QRScanner extends React.Component {
           onError={this.handleError}
           onScan={this.handleScan}
         />
+
         <p>{this.state.message}</p>
       </div>
     );

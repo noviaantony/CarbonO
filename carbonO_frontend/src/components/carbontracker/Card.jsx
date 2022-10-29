@@ -18,6 +18,7 @@ const Card = ({dishId, dishTitle, dishImage, dishRating, dishKeywords, dishIngre
   const [errorMessage, setErrorMessage] = React.useState(false);
 
 
+
   const submitReceipt = () => {
     const encodeImageURI = require("encode-image-uri");
     encodeImageURI(selectedFile)
@@ -89,6 +90,16 @@ const Card = ({dishId, dishTitle, dishImage, dishRating, dishKeywords, dishIngre
     rendereddishRating.push(<IoLeafOutline size={30} color="gray-700" />);
   }
 
+  function testingJson() {
+    // try {
+      CarbonTrackerService.postDishConsumed(auth.accessToken, auth.userId, 4).then((response) => {
+        console.log(response);
+      });
+    // } catch (error) {
+    //     console.log(error);
+    // }
+  }
+
   return (
     <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 font-default">
       <article class="overflow-hidden rounded-lg bg-white">
@@ -128,6 +139,9 @@ const Card = ({dishId, dishTitle, dishImage, dishRating, dishKeywords, dishIngre
             >
               More Info
             </button>
+            <button
+                onClick={() => testingJson()}
+            >Test</button>
           </div>
 
           {/* more info modal */}
