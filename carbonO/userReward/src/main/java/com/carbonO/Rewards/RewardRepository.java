@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface RewardRepository extends JpaRepository<Reward, Long> {
     Optional<Reward> findByRewardName(String rewardName);
+
 }

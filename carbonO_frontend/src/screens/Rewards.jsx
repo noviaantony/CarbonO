@@ -2,13 +2,16 @@ import React, {useContext, useState, useRef, useEffect} from "react";
 import { ThreeDots } from "react-loader-spinner";
 import RewardCard from "../components/rewards/RewardCard";
 import Header from "../components/misc/Header";
-import CarbonTrackerService from "../services/CarbonTrackerService";
 import UserRewardService from "../services/UserRewardService";
+import AuthContext from "../context/AuthProvider";
 
 const Rewards = () => {
   const [openTab, setOpenTab] = React.useState(1);
   const [rewardList, setRewardList] = useState([]);
   const [loading, setLoading] = useState(false);
+  // const [userRewardPoints, setUserRewardPoints] = useState(0);
+  const {auth} = useContext(AuthContext);
+    let userRewardPoints = 0;
 
   useEffect(()=> {
     setLoading(true);
@@ -20,6 +23,15 @@ const Rewards = () => {
     })
   },[])
 
+    // get userReward account information
+    useEffect(() => {
+      UserRewardService
+          .getUserReward(auth.userId, auth.accessToken)
+          .then((response) => {
+            userRewardPoints = response.rewardPoints;
+            console.log(userRewardPoints);
+          });
+    }, []);
   // const rewardList = [
   //   {
   //     brandName: "Tokyo Bags",
@@ -79,7 +91,7 @@ const Rewards = () => {
                   </div>
                 </>
         ) : (
-        <div className="flex flex-wrap h-screen">
+        <div className="flex flex-wrap ">
           <div className="w-full">
             <ul
               className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row mx-36 mt-12"
@@ -204,6 +216,7 @@ const Rewards = () => {
                                 RewardImage={reward.imageAddress}
                                 RewardDescription={reward.rewardDescription}
                                 RewardWebsite={reward.website}
+                                UserPoints={userRewardPoints}
                               />
                             );
                           })}

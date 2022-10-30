@@ -1,4 +1,7 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
+import AuthContext from "../../context/AuthProvider";
+import CarbonTrackerService from "../../services/CarbonTrackerService";
+import UserRewardService from "../../services/UserRewardService";
 
 const RewardCard = ({
   RewardBrandName,
@@ -7,13 +10,14 @@ const RewardCard = ({
   RewardDescription,
   RewardQuantity,
   RewardWebsite,
-  RewardImage
+  RewardImage,
+    UserPoints
 }) => {
 
-  
+
   let claimable = true;
 
-  let progressPercentage = 90;
+  let progressPercentage = (UserPoints / RewardPointsRequired) * 100;
 
   if (progressPercentage < 100) {
     claimable = false;
