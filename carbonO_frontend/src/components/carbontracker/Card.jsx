@@ -12,73 +12,73 @@ const Card = ({dishId, dishTitle, dishImage, dishRating, dishKeywords, dishIngre
   const {auth} = useContext(AuthContext);
 
   const [showDishInfo, setshowDishInfo] = React.useState(false);
-  const [showReceiptUpload, setshowReceiptUpload] = React.useState(false);
+  // const [showReceiptUpload, setshowReceiptUpload] = React.useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [successMessage, setSuccessMessage] = React.useState(false);
-  const [errorMessage, setErrorMessage] = React.useState(false);
+  // const [successMessage, setSuccessMessage] = React.useState(false);
+  // const [errorMessage, setErrorMessage] = React.useState(false);
 
 
 
-  const submitReceipt = () => {
-    const encodeImageURI = require("encode-image-uri");
-    encodeImageURI(selectedFile)
-      .then((base64) => {
-        let body = {
-          requests: [
-            {
-              image: {
-                content: base64.substring(23, base64.length),
-              },
-              features: [
-                {
-                  type: "TEXT_DETECTION",
-                },
-              ],
-            },
-          ],
-        };
+  // const submitReceipt = () => {
+  //   const encodeImageURI = require("encode-image-uri");
+  //   encodeImageURI(selectedFile)
+  //     .then((base64) => {
+  //       let body = {
+  //         requests: [
+  //           {
+  //             image: {
+  //               content: base64.substring(23, base64.length),
+  //             },
+  //             features: [
+  //               {
+  //                 type: "TEXT_DETECTION",
+  //               },
+  //             ],
+  //           },
+  //         ],
+  //       };
 
-        let resp = null;
+  //       let resp = null;
 
-        axios
-          .post(
-            "https://vision.googleapis.com/v1/images:annotate?key=AIzaSyC3rJnOOPzFe0snLWmBrgukHmSqFxlimU8",
-            body
-          )
-          .then(function (response) {
-            console.log(response)
-            for (
-              let i = 0;
-              i < response.data.responses[0].textAnnotations.length - 1;
-              i++
-            ) {
-              if (
-                response.data.responses[0].textAnnotations[
-                  i
-                ].description.toLowerCase() === dishKeywords[0].keyword.toLowerCase() &&
-                response.data.responses[0].textAnnotations[
-                  i + 1
-                ].description.toLowerCase() === dishKeywords[1].keyword.toLowerCase()
-              ) {
-                console.log(dishId);
-                CarbonTrackerService.postDishConsumed(dishId, auth.accessToken, auth.userId).then((response) => {
-                  console.log(response);
-                  setSuccessMessage(true);
-                });
-                return;
-              }
-            }
+  //       axios
+  //         .post(
+  //           "https://vision.googleapis.com/v1/images:annotate?key=AIzaSyC3rJnOOPzFe0snLWmBrgukHmSqFxlimU8",
+  //           body
+  //         )
+  //         .then(function (response) {
+  //           console.log(response)
+  //           for (
+  //             let i = 0;
+  //             i < response.data.responses[0].textAnnotations.length - 1;
+  //             i++
+  //           ) {
+  //             if (
+  //               response.data.responses[0].textAnnotations[
+  //                 i
+  //               ].description.toLowerCase() === dishKeywords[0].keyword.toLowerCase() &&
+  //               response.data.responses[0].textAnnotations[
+  //                 i + 1
+  //               ].description.toLowerCase() === dishKeywords[1].keyword.toLowerCase()
+  //             ) {
+  //               console.log(dishId);
+  //               CarbonTrackerService.postDishConsumed(dishId, auth.accessToken, auth.userId).then((response) => {
+  //                 console.log(response);
+  //                 setSuccessMessage(true);
+  //               });
+  //               return;
+  //             }
+  //           }
 
-            setErrorMessage(true);
-          })
-          .catch((error) => {
-            setErrorMessage(true);
-          });
-      })
-      .catch((error) => {
-        setErrorMessage(true);
-      });
-  };
+  //           setErrorMessage(true);
+  //         })
+  //         .catch((error) => {
+  //           setErrorMessage(true);
+  //         });
+  //     })
+  //     .catch((error) => {
+  //       setErrorMessage(true);
+  //     });
+  // };
 
   
 
@@ -121,7 +121,7 @@ const Card = ({dishId, dishTitle, dishImage, dishRating, dishKeywords, dishIngre
 
         <footer class="flex items-center justify-between leading-none p-2 md:p-4 bg-white">
           <div class="flex items-center no-underline  text-black" href="#">
-            <button
+            {/* <button
               to="/ClaimReward"
               className="inline-flex items-center py-2 px-3 text-xs font-xs text-center text-white bg-[#5E9387] rounded-lg  focus:outline-none transition duration-300 mr-3 font-semibold hover:bg-gray-700 hover:text-white
           "
@@ -129,7 +129,7 @@ const Card = ({dishId, dishTitle, dishImage, dishRating, dishKeywords, dishIngre
               onClick={() => setshowReceiptUpload(true)}
             >
               Scan QR Code
-            </button>
+            </button> */}
             <button
               href="#"
               className="inline-flex items-center py-1.5 px-3 text-xs font-xs text-center bg-white text-[#5E9387] rounded-md focus:outline-none transition duration-300 mr-3 font-semibold border-[#5E9387] border-2 border-solid hover:bg-gray-100
@@ -189,13 +189,11 @@ const Card = ({dishId, dishTitle, dishImage, dishRating, dishKeywords, dishIngre
           ) : null}
 
           {/* receipt upload modal */}
-          {showReceiptUpload ? (
+          {/* {showReceiptUpload ? (
             <>
               <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
                 <div className="relative w-auto my-6 mx-auto max-w-sm">
-                  {/*content*/}
                   <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                    {/*header*/}
                     <div className="text-center items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                       <h3 className="text-3xl font-semibold">Scan your QR Code</h3>
                       <button
@@ -203,7 +201,6 @@ const Card = ({dishId, dishTitle, dishImage, dishRating, dishKeywords, dishIngre
                         onClick={() => setshowReceiptUpload(false)}
                       ></button>
                     </div>
-                    {/*body*/}
                     <div className="relative p-6 flex-auto">
                       <p className="my-4 text-slate-500 text-lg leading-relaxed">
                         <form>
@@ -211,8 +208,6 @@ const Card = ({dishId, dishTitle, dishImage, dishRating, dishKeywords, dishIngre
                         </form>
                       </p>
                     </div>
-
-                    {/*footer*/}
                     <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                       <button
                         className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -227,7 +222,7 @@ const Card = ({dishId, dishTitle, dishImage, dishRating, dishKeywords, dishIngre
               </div>
               <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
             </>
-          ) : null}
+          ) : null} */}
           
         </footer>
       </article>

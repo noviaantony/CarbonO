@@ -23,7 +23,7 @@ const AuthNavbar = () => {
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
               <Link
                 class="toggleColour text-white my-4 leading-tight no-underline hover:no-underline font-bold text-xl lg:text-3xl"
-                to="*"
+                to=""
               >
                 <img src={process.env.PUBLIC_URL + '/images/logo.png'} width="90rem" alt="" />
               </Link>
