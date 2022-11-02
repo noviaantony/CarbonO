@@ -50,6 +50,7 @@ const Dashboard = () => {
             });
     }, []);
 
+    //initial dates of the chart
   let dates = [
     "2022-10-16",
     "2022-10-17",
