@@ -19,4 +19,8 @@ public class RewardService {
     public List<Reward> getAllRewards(){
         return rewardRepository.findAll();
     }
+
+    public Reward getRewardByName(String name){
+        return rewardRepository.findByRewardName(name).orElseThrow(() -> new IllegalStateException("Reward with name " + name + " does not exist"));
+    }
 }

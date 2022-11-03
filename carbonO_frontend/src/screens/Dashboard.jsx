@@ -7,6 +7,7 @@ import CarbonTrackerService from "../services/CarbonTrackerService";
 import Header from "../components/misc/Header";
 import initialDatesArr from "../components/dashboard/getInitialDates";
 import UserRewardService from "../services/UserRewardService";
+
 const Dashboard = () => {
 
   const [consumptionData, setConsumptionData] = useState([]);
@@ -41,7 +42,7 @@ const Dashboard = () => {
   //get rewards claimed by user
     useEffect(() => {
         UserRewardService
-            .getUserRewards(auth.userId, auth.accessToken)
+            .getUserReward(auth.userId, auth.accessToken)
             .then((response) => {
                 console.log("User Reward response");
                 console.log(response);
@@ -49,6 +50,7 @@ const Dashboard = () => {
             });
     }, []);
 
+    //initial dates of the chart
   let dates = [
     "2022-10-16",
     "2022-10-17",

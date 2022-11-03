@@ -2,18 +2,21 @@ import React, {useContext, useState, useRef, useEffect} from "react";
 import { ThreeDots } from "react-loader-spinner";
 import RewardCard from "../components/rewards/RewardCard";
 import Header from "../components/misc/Header";
-import CarbonTrackerService from "../services/CarbonTrackerService";
 import UserRewardService from "../services/UserRewardService";
 import Modal from "react-modal";
 import "../styles/styles.css";
 
 
 
+import AuthContext from "../context/AuthProvider";
 
 const Rewards = () => {
   const [openTab, setOpenTab] = React.useState(1);
   const [rewardList, setRewardList] = useState([]);
   const [loading, setLoading] = useState(false);
+  // const [userRewardPoints, setUserRewardPoints] = useState(0);
+  const {auth} = useContext(AuthContext);
+    let userRewardPoints = 0;
 
   useEffect(()=> {
     setLoading(true);
@@ -31,6 +34,50 @@ const Rewards = () => {
     setIsOpen(!isOpen);
   }
 
+    // get userReward account information
+    useEffect(() => {
+      UserRewardService
+          .getUserReward(auth.userId, auth.accessToken)
+          .then((response) => {
+            userRewardPoints = response.rewardPoints;
+            console.log(userRewardPoints);
+          });
+    }, []);
+  // const rewardList = [
+  //   {
+  //     brandName: "Tokyo Bags",
+  //     rewardName: "some fashion",
+  //     redemptionPointsRequired: 6000,
+  //     rewardDescription: "meow",
+  //     rewardQuantity: 3000,
+  //     website: "cats.com",
+  //     imageAddress:
+  //       "https://cdn.eatigo.com/eatigo_VeganBurg_20170502120655_0518.jpg",
+  //     rewardType: "Fashion",
+  //   },
+  //   {
+  //     brandName: "Vegan Burg",
+  //     rewardName: "mou",
+  //     redemptionPointsRequired: 6000,
+  //     rewardDescription: "meow",
+  //     rewardQuantity: 3000,
+  //     website: "cats.com",
+  //     imageAddress:
+  //       "https://cdn.eatigo.com/eatigo_VeganBurg_20170502120655_0518.jpg",
+  //     rewardType: "Food",
+  //   },
+  //   {
+  //     brandName: "Grab",
+  //     rewardName: "mmeowww",
+  //     redemptionPointsRequired: 6000,
+  //     rewardDescription: "meow",
+  //     rewardQuantity: 3000,
+  //     website: "cats.com",
+  //     imageAddress:
+  //       "https://cdn.eatigo.com/eatigo_VeganBurg_20170502120655_0518.jpg",
+  //     rewardType: "Transport",
+  //   },
+  // ];
 
   return (
     <>
@@ -73,70 +120,70 @@ const Rewards = () => {
             </div>
           </>
         ) : (
-          <div className="flex flex-wrap h-screen">
-            <div className="w-full">
-              <ul
-                className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row mx-36 mt-12"
-                role="tablist"
-              >
-                <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                  <a
-                    className={
-                      "text-xs font-bold uppercase px-5 py-3 rounded block leading-normal " +
-                      (openTab === 1
-                        ? "text-white bg-[#5E9387]"
-                        : "text-grey-700 bg-white")
-                    }
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setOpenTab(1);
-                    }}
-                    data-toggle="tab"
-                    href="#link1"
-                    role="tablist"
-                  >
-                    Fashion
-                  </a>
-                </li>
-                <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                  <a
-                    className={
-                      "text-xs font-bold uppercase px-5 py-3 rounded block leading-normal " +
-                      (openTab === 2
-                        ? "text-white bg-[#5E9387]"
-                        : "text-grey-700 bg-white")
-                    }
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setOpenTab(2);
-                    }}
-                    data-toggle="tab"
-                    href="#link2"
-                    role="tablist"
-                  >
-                    Food
-                  </a>
-                </li>
-                <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                  <a
-                    className={
-                      "text-xs font-bold uppercase px-5 py-3 rounded block leading-normal " +
-                      (openTab === 3
-                        ? "text-white bg-[#5E9387]"
-                        : "text-grey-700 bg-white")
-                    }
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setOpenTab(3);
-                    }}
-                    data-toggle="tab"
-                    href="#link3"
-                    role="tablist"
-                  >
-                    Transport
-                  </a>
-                </li>
-              </ul>
+        <div className="flex flex-wrap ">
+          <div className="w-full">
+            <ul
+              className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row mx-36 mt-12"
+              role="tablist"
+            >
+              <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                <a
+                  className={
+                    "text-xs font-bold uppercase px-5 py-3 rounded block leading-normal " +
+                    (openTab === 1
+                      ? "text-white bg-[#5E9387]"
+                      : "text-grey-700 bg-white")
+                  }
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setOpenTab(1);
+                  }}
+                  data-toggle="tab"
+                  href="#link1"
+                  role="tablist"
+                >
+                  Fashion
+                </a>
+              </li>
+              <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                <a
+                  className={
+                    "text-xs font-bold uppercase px-5 py-3 rounded block leading-normal " +
+                    (openTab === 2
+                      ? "text-white bg-[#5E9387]"
+                      : "text-grey-700 bg-white")
+                  }
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setOpenTab(2);
+                  }}
+                  data-toggle="tab"
+                  href="#link2"
+                  role="tablist"
+                >
+                  Food
+                </a>
+              </li>
+              <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                <a
+                  className={
+                    "text-xs font-bold uppercase px-5 py-3 rounded block leading-normal " +
+                    (openTab === 3
+                      ? "text-white bg-[#5E9387]"
+                      : "text-grey-700 bg-white")
+                  }
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setOpenTab(3);
+                  }}
+                  data-toggle="tab"
+                  href="#link3"
+                  role="tablist"
+                >
+                  Transport
+                </a>
+              </li>
+            </ul>
 
               <div className="relative flex flex-col min-w-0 break-words  w-full mb-6  rounded">
                 <div className="px-4 py-5 flex-auto">
@@ -172,6 +219,37 @@ const Rewards = () => {
                       </div>
                     </div>
 
+                  <div
+                    className={openTab === 2 ? "block" : "hidden"}
+                    id="link2"
+                  >
+                    {/* Food Rewards */}
+                    <div class="container my-12 mx-auto px-4 md:px-12">
+                      <div class="flex flex-wrap -mx-1 lg:-mx-4">
+                        {rewardList
+                          .filter((reward) => {
+                            if (reward.rewardType == "Food") {
+                              return reward;
+                            }
+                          })
+                          .map((reward) => {
+                            return (
+                              <RewardCard
+                                RewardBrandName={reward.brandName}
+                                RewardName={reward.rewardName}
+                                RewardPointsRequired={
+                                  reward.redemptionPointsRequired
+                                }
+                                RewardImage={reward.imageAddress}
+                                RewardDescription={reward.rewardDescription}
+                                RewardWebsite={reward.website}
+                                UserPoints={userRewardPoints}
+                              />
+                            );
+                          })}
+                      </div>
+                    </div>
+                  </div>
                     <div
                       className={openTab === 2 ? "block" : "hidden"}
                       id="link2"

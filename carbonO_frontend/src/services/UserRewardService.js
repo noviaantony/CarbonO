@@ -11,7 +11,7 @@ class UserRewardService{
         return response.data;
 
     }
-    async getUserRewards(userId, userToken) {
+    async getUserReward(userId, userToken) {
         console.log('grabbing user rewards');
         console.log(`userID:${userId}`);
         const response = await axios.get(
