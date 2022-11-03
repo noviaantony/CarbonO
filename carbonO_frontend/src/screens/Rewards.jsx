@@ -57,6 +57,8 @@ const Rewards = () => {
           Title="Claim Rewards, Save the Earth"
           Description="claim discount codes, free items from sustainable companies using your e-credits!"
         />
+        <RewardCard/>
+        
 
         {loading ? (
           <>
