@@ -32,7 +32,7 @@ public class UserIntegrationTest {
 //    @Autowired
 //    private WebApplicationContext webApplicationContext;
 
-    private final String baseurl = "http://localhost:";
+    private final String baseurl = "https://localhost:";
 
     private RegistrationRequest registrationRequest;
 
