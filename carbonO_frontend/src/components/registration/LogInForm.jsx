@@ -129,7 +129,7 @@ const handleSubmit = async (e) => {
 
                     <div className="flex justify-between w-64 mb-5">
                       <Link
-                        to="/ResetPassword"
+                        to="/ForgetPassword"
                         className="text-xs font-bold text-gray-700 hover:text-[#5E9387] transition duration-300"
                       >
                         Forgot Password

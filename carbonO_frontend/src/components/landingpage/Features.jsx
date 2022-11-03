@@ -24,18 +24,22 @@ const Features = () => {
               </p>
             </div>
             <div class="w-full sm:w-1/2 p-6">
-              <img
-                src={process.env.PUBLIC_URL + "/svg/Food.svg"}
-                className="w-9/12"
-              />
+              <div className="flex flex-row justify-center">
+                <img
+                  src={process.env.PUBLIC_URL + "/svg/Food.svg"}
+                  className="w-9/12"
+                />
+              </div>
             </div>
           </div>
           <div class="flex flex-wrap flex-col-reverse sm:flex-row">
             <div class="w-full sm:w-1/2 p-6 mt-6">
-              <img
-                src={process.env.PUBLIC_URL + "/svg/Mobile.svg"}
-                className="w-9/12"
-              />
+              <div className="flex flex-row justify-center">
+                <img
+                  src={process.env.PUBLIC_URL + "/svg/Mobile.svg"}
+                  className="w-9/12"
+                />
+              </div>
             </div>
             <div class="w-full sm:w-1/2 p-6 mt-6 ">
               <div class="align-middle my-20">
@@ -62,10 +66,12 @@ const Features = () => {
               </p>
             </div>
             <div class="w-full sm:w-1/2 p-6">
-              <img
-                src={process.env.PUBLIC_URL + "/svg/PolarBear.svg"}
-                className="w-9/12"
-              />
+              <div className="flex flex-row justify-center">
+                <img
+                  src={process.env.PUBLIC_URL + "/svg/PolarBear.svg"}
+                  className="w-9/12"
+                />
+              </div>
             </div>
           </div>
         </div>

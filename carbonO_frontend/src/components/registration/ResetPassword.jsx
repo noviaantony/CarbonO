@@ -15,16 +15,7 @@ const EnterEmail = () => {
                 <button className="mr-32 ml-10" onClick={() => navigate(-1)}>
                   <FaArrowLeft size={18} />
                 </button>
-                <div>
-                  <a
-                    className="toggleColour text-[#5E9387] my-4 leading-tight no-underline hover:no-underline font-bold text-xl lg:text-2xl"
-                    href="#"
-                  >
-                    CarbonO
-                  </a>
-                </div>
               </div>
-
               <div className="py-10">
                 <h2 className="text-2xl font-bold text-gray-700 mb-2">
                   Reset Your Password
