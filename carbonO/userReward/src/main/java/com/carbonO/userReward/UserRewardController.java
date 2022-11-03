@@ -26,4 +26,9 @@ public class UserRewardController {
     public ResponseEntity<UserReward> getUserReward(@RequestParam("userId") Long userID) {
         return ResponseEntity.ok().body(userRewardService.getAllRewardsByUser(userID));
     }
+    @PostMapping("/claimReward")
+    public ResponseEntity<ApiResponse> claimReward(@RequestParam("userId") Long userID, @RequestParam("rewardId") Long rewardId) {
+        userRewardService.claimReward(userID, rewardId);
+        return new ResponseEntity<>(new ApiResponse(true, "Reward claimed"), HttpStatus.CREATED);
+    }
 }

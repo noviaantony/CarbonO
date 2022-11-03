@@ -17,6 +17,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
   const [startDate, setstartDate] = useState(initialDates[0]);
   const [endDate, setendDate] = useState(initialDates[initialDates.length - 1]);
 
+  //updates new dates used in charts
   let newDates = useRef([]);
   const handleChangeFirst = (event) => {
     setstartDate(event.target.value);
@@ -28,6 +29,8 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
 
   const indexStart = initialDates.indexOf(startDate);
   const indexEnd = initialDates.indexOf(endDate);
+
+  //slices the dates based on dates filtered by user
   newDates.current = initialDates.slice(indexStart, indexEnd + 1);
 
   //filter function appears if there is a chart
@@ -59,7 +62,6 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
                   onChange={handleChangeFirst}
                   value={startDate}
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
-                  
                   placeholder="Select date start"
                 />
               </div>
@@ -109,7 +111,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
     } else if (isClickedCarbon && isClickedCredit) {
       return (
         <div class="flex flex-row justify-evenly">
-          <DonutChart  />
+          <DonutChart />
           <LineChart />
         </div>
       );
@@ -129,7 +131,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
       );
     } else if (isClickedCredit) {
       return (
-        <div className="flex flex-row justify-evenly" >
+        <div className="flex flex-row justify-evenly">
           <DonutChart />
         </div>
       );
@@ -148,6 +150,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
     }
   };
 
+  //returns each chart with different size, based on number of charts clicked
   return (
     <>
       <div class="flex flex-wrap -mx-1 lg:mx-36">
@@ -212,6 +215,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
         </div>
       </div>
 
+      {/* updates charts with new dates */}
       <actualDates.Provider value={newDates.current}>
         <div className="mx-36">{hasChart()}</div>
 
