@@ -20,20 +20,21 @@ const RewardCard = ({
   let progressPercentage = (UserPoints / RewardPointsRequired) * 100;
   console.log(UserPoints)
   console.log(RewardPointsRequired);
+  console.log(progressPercentage)
   if (progressPercentage < 100) {
     claimable = false;
+  } else {
+    progressPercentage = 100;
   }
 
   return (
     <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 font-default">
       <article class="overflow-hidden rounded-lg bg-white">
-        <img
-          alt="meow"
-          class="block h-72 w-full"
-          src={RewardImage}
-        />
+        <img alt="meow" class="block h-72 w-full" src={RewardImage} />
         <header class="flex items-left leading-tight p-2 md:p-4 ">
-          <h1 class="text-2xl font-bold">{RewardBrandName} {RewardName}</h1>
+          <h1 class="text-2xl font-bold">
+            {RewardBrandName} {RewardName}
+          </h1>
         </header>
         <div>
           <span class="text-m font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200 ml-4">
@@ -45,11 +46,13 @@ const RewardCard = ({
         </div>
         <div className="flex items-center justify-items-start leading-tight p-2 md:p-4">
           <h2 className="font-semibold">Progress:</h2>
-          <div className="h-1 w-9/12 ml-5 mb-4  bg-gray-300 mt-5" style={{ width: 100 }}>
+          <div className="h-3 w-11/12 ml-5 mb-4 bg-gray-300 mt-5 rounded-xl">
             <div
               style={{ width: `${progressPercentage}%` }}
-              className={`h-full w-5/12 ${
-                progressPercentage < 70 ? "bg-red-600" : "bg-green-600"
+              className={`h-3 w-9/12  ${
+                claimable
+                  ? "bg-green-600 rounded-xl"
+                  : "bg-red-600 rounded-l-xl"
               }`}
             ></div>
           </div>
