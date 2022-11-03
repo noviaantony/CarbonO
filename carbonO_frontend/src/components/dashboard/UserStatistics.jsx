@@ -1,13 +1,14 @@
 import React from "react";
 import { FaWallet, FaReceipt, FaLeaf } from "react-icons/fa";
 import { useState, useRef, useContext } from "react";
+import { MdQrCodeScanner } from "react-icons/md";
 import DonutChart from "../dashboard/DonutChart";
 import LineChart from "../dashboard/LineChart";
 import PieChart from "./PieChart";
 import initialDatesArr from "./getInitialDates";
 import actualDates from "./getDates";
 
-const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
+const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned}) => {
   const [isClickedCredit, setIsClickedCredit] = React.useState(false);
   const [isClickedCarbon, setIsClickedCarbon] = React.useState(false);
   const [isClickedReceipt, setIsClickedReceipt] = React.useState(false);
@@ -168,7 +169,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
           <div className="p-4 text-sm text-[#5e938780] bg-white rounded-lg dark:bg-gray-700 dark:text-gray-300 flex items-stretch m-6 drop-shadow-sm font-default cursor-pointer">
             <FaWallet size={60} />
             <div className="ml-20 mt-2 text-xl text-center font-semibold text-gray-700">
-              <h1 class="text-4xl font-bold"> - </h1>
+              <h1 class="text-4xl font-bold"> {Ecredits} </h1>
               <h5 class="text-xs"> E-Credits Currently </h5>
             </div>
           </div>
@@ -206,10 +207,10 @@ const UserStatistics = ({ Ecredits, TotalCarbon, NoOfReceipts }) => {
           }}
         >
           <div className="p-4 text-sm text-[#5e938780] bg-white rounded-lg dark:bg-gray-700 dark:text-gray-300 flex items-stretch m-6 drop-shadow-sm font-default cursor-pointer">
-            <FaReceipt size={60} />
+            <MdQrCodeScanner size={60} />
             <div className="ml-10 mt-2 text-xl font-semibold text-gray-700">
-              <h1 class="text-4xl text-center font-bold">-</h1>
-              <h5 class="text-xs">Receipts Uploaded this month</h5>
+              <h1 class="text-4xl text-center font-bold">{}</h1>
+              <h5 class="text-xs">Total Receipts Scanned</h5>
             </div>
           </div>
         </div>

@@ -97,7 +97,7 @@ const  CarbonTracker = () => {
               </div>
             </div>
           </form>
-          {/* <div class="container my-12 mx-auto px-4 md:px-12">
+            <div class="container my-12 mx-auto px-4 md:px-12">
             <div class="flex flex-wrap -mx-1 lg:-mx-4">
               {foodList
                 .filter((dish) => {
@@ -126,7 +126,7 @@ const  CarbonTracker = () => {
                   );
                 })}
             </div>
-          </div> */}
+          </div>
         </div>
       )}
     </>

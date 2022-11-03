@@ -3,6 +3,7 @@ import AuthContext from "../../context/AuthProvider";
 import CarbonTrackerService from "../../services/CarbonTrackerService";
 import UserRewardService from "../../services/UserRewardService";
 import Modal from "react-modal";
+import {Navigate, useNavigate} from "react-router-dom";
 
 const RewardCard = ({
   RewardBrandName,
@@ -21,11 +22,73 @@ const RewardCard = ({
   const {auth} = useContext(AuthContext);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isClaimed, setIsClaimed] = useState(false);
 
-  const hasError = true;
+
+  function checkError() {
+      for (let i = 0; i < UserTransactions.length; i++) {
+        if (UserTransactions[i].reward.rewardId === RewardId) {
+          console.log("error");
+          setIsClaimed(true)
+          return;
+        }
+      }
+  }
+
+  function ErrorMessage(){
+    if (isClaimed) {
+        return (
+          <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+            Oops there's an error! This reward has already been claim by you.
+          </h3>
+        );
+    } else {
+      return (
+        <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+          Are you sure you would like to claim this reward?
+        </h3>
+      );
+    }
+  }
+
+  function Buttons(){
+    if (isClaimed) {
+        return (
+            <button
+                data-modal-toggle="popup-modal"
+                type="button"
+                className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                onClick={toggleConfirmationModal}
+            >
+              Okay
+            </button>
+        );
+    } else {
+      return (
+          <>
+          <button
+              data-modal-toggle="popup-modal"
+              type="button"
+              className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+              onClick={claimReward}
+          >
+            Yes, I'm sure
+          </button>
+          <button
+              data-modal-toggle="popup-modal"
+              type="button"
+              className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+              onClick={toggleConfirmationModal}
+          >
+            No, cancel
+          </button>
+        </>
+      )
+    }
+  }
 
   function ModalIcon() {
-    if (hasError) {
+    if (isClaimed) {
       return (
         <svg
           class="mx-auto mb-4 w-14 h-14 text-red-600 dark:text-gray-200"
@@ -61,17 +124,17 @@ const RewardCard = ({
           ></path>
         </svg>
       );
-
     }
   }
 
-  function togleConfirmationModal() {
+  function toggleConfirmationModal() {
     setIsOpen(!isOpen);
   }
-
+  const navigate = useNavigate();
   function claimReward() {
     UserRewardService.redeemReward(auth.userId, RewardId, auth.accessToken ).then((response) => {
       console.log(response);
+      navigate("/dashboard");
     });
   }
 
@@ -90,7 +153,7 @@ const RewardCard = ({
       {/* Confirmation Modal */}
       <Modal
         isOpen={isOpen}
-        onRequestClose={togleConfirmationModal}
+        onRequestClose={toggleConfirmationModal}
         contentLabel="My dialog"
         className="mymodal"
         overlayClassName="myoverlay"
@@ -101,7 +164,7 @@ const RewardCard = ({
             type="button"
             class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
             data-modal-toggle="popup-modal"
-            onClick={togleConfirmationModal}
+            onClick={toggleConfirmationModal}
           >
             <svg
               aria-hidden="true"
@@ -121,25 +184,8 @@ const RewardCard = ({
           </button>
           <div class="p-6 text-center">
             <ModalIcon/>
-            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-              Are you sure you would like to claim this reward?
-            </h3>
-            <button
-              data-modal-toggle="popup-modal"
-              type="button"
-              class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-              onClick={claimReward}
-            >
-              Yes, I'm sure
-            </button>
-            <button
-              data-modal-toggle="popup-modal"
-              type="button"
-              class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-              onClick={togleConfirmationModal}
-            >
-              No, cancel
-            </button>
+            <ErrorMessage/>
+            <Buttons/>
           </div>
         </div>
       </Modal>
@@ -181,7 +227,10 @@ const RewardCard = ({
                 className="inline-flex items-center py-2 px-3 text-xs font-xs text-center text-white bg-[#5E9387] rounded-lg  focus:outline-none transition duration-300 mr-3 font-semibold hover:bg-gray-700 hover:text-white
           "
                 type="button"
-                onClick={togleConfirmationModal}
+                onClick={() => {
+                  checkError();
+                  toggleConfirmationModal();
+                }}
               >
                 Claim Reward
               </button>

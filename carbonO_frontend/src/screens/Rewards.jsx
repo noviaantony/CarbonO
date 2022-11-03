@@ -36,19 +36,11 @@ const Rewards = () => {
         UserRewardService
             .getUserReward(auth.userId, auth.accessToken)
             .then((response) => {
+                setUserTransactions(response.rewardTransactions);
                 setUserRewardPoints(response.rewardPoints);
                 console.log(userRewardPoints);
             });
     }, []);
-
-    useEffect(()=> {
-        UserRewardService.getUserReward(auth.userId, auth.accessToken)
-            .then((response) => {
-                setUserTransactions(response);
-                console.log(userTransactions);
-            }).then((data) => {
-        })
-    },[])
 
   return (
     <>
@@ -57,8 +49,6 @@ const Rewards = () => {
           Title="Claim Rewards, Save the Earth"
           Description="claim discount codes, free items from sustainable companies using your e-credits!"
         />
-        <RewardCard/>
-        
 
         {loading ? (
           <>

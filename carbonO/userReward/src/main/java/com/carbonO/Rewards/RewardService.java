@@ -17,7 +17,7 @@ public class RewardService {
     }
 
     public List<Reward> getAllRewards(){
-        return rewardRepository.findAll();
+        return rewardRepository.findAllByOrderByRewardIdAsc();
     }
 
     public Reward getRewardById(Long id){

@@ -13,6 +13,7 @@ const Dashboard = () => {
   const [consumptionData, setConsumptionData] = useState([]);
   const [rewardData, setRewardData] = useState([]);
   const [totalCarbon, setTotalCarbon] = useState(0);
+  const [userCredits, setUserCredits] = useState(0);
   const {auth} = useContext(AuthContext);
 
   // get all dish consumed by user
@@ -47,6 +48,7 @@ const Dashboard = () => {
                 console.log("User Reward response");
                 console.log(response);
                 setRewardData(response.rewardTransactions);
+                setUserCredits(response.rewardPoints);
             });
     }, []);
 
@@ -60,15 +62,19 @@ const Dashboard = () => {
     "2022-10-21",
     "2022-10-22",
   ];
+
+  let title = auth.firstName + "'s Dashboard";
+
   return (
     <>
       <Header
-        Title="John Doe's Dashboard"
+        Title= {title}
         Description="keep track of you receipt uploads, carbon foodprint, reward claims and donation here"
       />
       <div className="h-screen">
         <initialDatesArr.Provider value={dates}>
-          <UserStatistics TotalCarbon={totalCarbon.toFixed(0)} />
+          <UserStatistics TotalCarbon={totalCarbon.toFixed(0)}
+                          Ecredits= {userCredits}/>
         </initialDatesArr.Provider>
         <div className="flex flex-row justify-center mx-10">
           <CarbonTrackerTable historicalData={consumptionData} />
