@@ -7,8 +7,8 @@ import axios from "axios";
 import CarbonTrackerService from "../../services/CarbonTrackerService";
 
 
-const LOGIN_URL = 'http://localhost:8080/api/v1/carbonO/user/login'
-const USER_ID_URL = 'http://localhost:8080/api/v1/carbonO/user/getUser'
+const LOGIN_URL = 'http://18.136.163.9:8080/api/v1/carbonO/user/login'
+const USER_ID_URL = 'http://18.136.163.9:8080/api/v1/carbonO/user/getUser'
 
 const LogInForm = () => {
   const {setAuth} = useContext(AuthContext);

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const CARBON_TRACKER_API_URL = 'http://localhost:8080/api/v1/carbonO/carbonTracker';
+const CARBON_TRACKER_API_URL = 'http://18.136.163.9:8080/api/v1/carbonO/carbonTracker';
 
 class CarbonTrackerService {
   // moving forward should be grabbed from useContext
