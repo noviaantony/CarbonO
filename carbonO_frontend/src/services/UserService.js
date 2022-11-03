@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const USER_API_URL = 'http://localhost:8080/api/v1/carbonO/user';
+const USER_API_URL = 'http://18.136.163.9:8080/api/v1/carbonO/user';
 
 class UserService{
     async forgotPassword(email){

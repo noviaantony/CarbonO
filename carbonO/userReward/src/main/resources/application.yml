@@ -6,7 +6,7 @@ spring:
     datasource:
         password: zhaoxing
 #        url: jdbc:postgresql://localhost:5432/userReward
-        url: jdbc:postgresql://3.0.239.64:5432/userreward
+        url: jdbc:postgresql://18.136.163.9:5432/userreward
         username: postgres
     jpa:
         hibernate:
@@ -19,7 +19,7 @@ spring:
 eureka:
     client:
         service-url:
-            defaultZone: http://3.0.239.64:8761/eureka/
+            defaultZone: http://18.136.163.9:8761/eureka/
 #            defaultZone: http://localhost:8761/eureka/
             fetch-registry: true
             register-with-eureka: true

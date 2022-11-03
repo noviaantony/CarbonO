@@ -16,7 +16,7 @@ spring:
             name: user
     datasource:
         password: zhaoxing
-        url: jdbc:postgresql://3.0.239.64:5432/user
+        url: jdbc:postgresql://18.136.163.9:5432/carbonouser
 #        url: jdbc:postgresql://localhost:5432/user
         username: postgres
         #username need to change to postgres when deploying (ec2 is postgres)
@@ -31,7 +31,7 @@ spring:
 eureka:
     client:
         service-url:
-            defaultZone: http://3.0.239.64:8761/eureka/
+            defaultZone: http://18.136.163.9:8761/eureka/
 #            defaultZone: http://localhost:8761/eureka/
         fetch-registry: true
         register-with-eureka: true
