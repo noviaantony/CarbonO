@@ -28,10 +28,8 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/CarbonTracker" element={<CarbonTracker />} />
         <Route path="/Login" element={<LogInForm />} />
-
         <Route path="/ResetPassword" element={<ResetPassword />} />
         <Route path="/ForgetPassword" element={<ForgotPassword />} />
-
         <Route path="/Signup" element={<SignUpForm />} />
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/Donate" element={<Donate />} />

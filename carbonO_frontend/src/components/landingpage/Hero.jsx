@@ -1,17 +1,21 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import { ReactComponent as HeroSvg } from "./Hero.svg";
+import { motion } from "framer-motion";
 
 
 const Hero3 = () => {
   return (
     <div>
       <div className="max-w-screen-2xl mx-auto pt-15 font-default">
-        {/* <Navbar /> */}
         <div className="relative">
           <div className="max-w-screen-lg mx-auto py-20 lg:py-24">
             <div className="flex items-center flex-col lg:flex-row">
-              <div className="text-center lg:text-left">
+              <motion.div
+                className="text-center lg:text-left actions"
+                animate={{ opacity: 1 }}
+                initial={{ opacity: 0 }}
+              >
                 <h5 className="text-primary-500 max-w-3xl lg:max-w-4xl lg:text-left text-[#5E9387] my-4 text-5xl font-bold leading-tight">
                   Reduce your carbon footprint today for
                   <span className="text-gray-700"> a better tomorrow</span>
@@ -28,16 +32,19 @@ const Hero3 = () => {
                 >
                   Save the earth today!
                 </Link>
-              </div>
-              <div className=" lg:w-1/2 mt-16 lg:mt-0 lg:ml-16 ">
-                <HeroSvg classname="w-144 ml-auto" width="40rem" />
-         
-              </div>
+              </motion.div>
+              <motion.div
+                className=" lg:w-1/2 mt-16 lg:mt-0 lg:ml-16 actions"
+                animate={{ opacity: 1 }}
+                initial={{ opacity: 0 }}
+              >
+                <HeroSvg className="w-144 ml-auto" width="40rem" />
+              </motion.div>
             </div>
           </div>
         </div>
       </div>
-      <div className="relative -mt-12 lg:-mt-24">
+      <div className="relative -mt-12 lg:-mt-24 ">
         <svg
           viewBox="0 0 1428 174"
           version="1.1"
