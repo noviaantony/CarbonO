@@ -4,7 +4,7 @@ spring:
     mail:
         host: smtp.gmail.com
         username: carbonohelp@gmail.com
-        password:
+        password: pddwnpzrdirnhfph
         port: 587
         properties:
             mail:
@@ -16,9 +16,10 @@ spring:
             name: user
     datasource:
         password: zhaoxing
-#        url: jdbc:postgresql://54.151.137.8:5432/user
+#        url: jdbc:postgresql://3.0.239.64:5432/user
         url: jdbc:postgresql://localhost:5432/user
         username: xxhea
+        #username need to change to postgres when deploying (ec2 is postgres)
     jpa:
         hibernate:
             ddl-auto: create-drop
@@ -30,7 +31,7 @@ spring:
 eureka:
     client:
         service-url:
-#            defaultZone: http://54.151.137.8:8761/eureka/
+#            defaultZone: http://3.0.239.64:8761/eureka/
             defaultZone: http://localhost:8761/eureka/
         fetch-registry: true
         register-with-eureka: true

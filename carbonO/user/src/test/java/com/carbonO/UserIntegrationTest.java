@@ -72,7 +72,7 @@ public class UserIntegrationTest {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
-        map.add("username", "novia@gmail.com");
+        map.add("username", "chenzhaoxing.98@gmail.com");
         map.add("password", "123");
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);

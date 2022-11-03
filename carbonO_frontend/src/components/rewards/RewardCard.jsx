@@ -18,7 +18,8 @@ const RewardCard = ({
   let claimable = true;
 
   let progressPercentage = (UserPoints / RewardPointsRequired) * 100;
-
+  console.log(UserPoints)
+  console.log(RewardPointsRequired);
   if (progressPercentage < 100) {
     claimable = false;
   }
@@ -44,10 +45,10 @@ const RewardCard = ({
         </div>
         <div className="flex items-center justify-items-start leading-tight p-2 md:p-4">
           <h2 className="font-semibold">Progress:</h2>
-          <div className="h-1 w-9/12 ml-5 mb-4  bg-gray-300 mt-5">
+          <div className="h-1 w-9/12 ml-5 mb-4  bg-gray-300 mt-5" style={{ width: 100 }}>
             <div
               style={{ width: `${progressPercentage}%` }}
-              className={`h-full w-9/12 ${
+              className={`h-full w-5/12 ${
                 progressPercentage < 70 ? "bg-red-600" : "bg-green-600"
               }`}
             ></div>

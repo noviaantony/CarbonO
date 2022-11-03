@@ -20,6 +20,9 @@ public class RewardService {
         return rewardRepository.findAll();
     }
 
+    public Reward getRewardById(Long id){
+        return rewardRepository.findById(id).orElseThrow(() -> new IllegalStateException("Reward with id " + id + " does not exist"));
+    }
     public Reward getRewardByName(String name){
         return rewardRepository.findByRewardName(name).orElseThrow(() -> new IllegalStateException("Reward with name " + name + " does not exist"));
     }

@@ -34,11 +34,11 @@ public class UserRewardService {
     }
 
     @Transactional
-    public void claimReward(Long userID, String rewardName) {
+    public void claimReward(Long userID, Long rewardId) {
         //retrieve user's reward account
         UserReward userReward = userRewardRepository.findByUserId(userID);
         //retrieve reward
-        Reward reward = rewardService.getRewardByName(rewardName);
+        Reward reward = rewardService.getRewardById(rewardId);
         //Add reward transaction to the user's reward account
         rewardTransactionService.addNewRewardTransaction(userReward, reward);
         userReward.setRewardPoints((int) (userReward.getRewardPoints() - reward.getRedemptionPointsRequired()));
