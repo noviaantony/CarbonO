@@ -57,5 +57,4 @@ public class ReceiptController {
     public ResponseEntity<Receipt> getReceipt(@RequestParam("receiptId") Long receiptId){
         return ResponseEntity.ok().body(receiptService.findReceiptById(receiptId));
     }
-
 }
