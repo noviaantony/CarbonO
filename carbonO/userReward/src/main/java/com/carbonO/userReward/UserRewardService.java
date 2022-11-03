@@ -39,6 +39,10 @@ public class UserRewardService {
         UserReward userReward = userRewardRepository.findByUserId(userID);
         //retrieve reward
         Reward reward = rewardService.getRewardById(rewardId);
+        //check if user has enough points to claim reward
+        if (userReward.getRewardPoints() < reward.getRedemptionPointsRequired()) {
+            throw new IllegalStateException("Not enough points to claim reward");
+        }
         //Add reward transaction to the user's reward account
         rewardTransactionService.addNewRewardTransaction(userReward, reward);
         userReward.setRewardPoints((int) (userReward.getRewardPoints() - reward.getRedemptionPointsRequired()));

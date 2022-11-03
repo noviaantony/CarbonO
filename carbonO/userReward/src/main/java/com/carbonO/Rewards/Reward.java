@@ -14,13 +14,13 @@ import javax.persistence.*;
 public class Reward {
     @Id
     @SequenceGenerator(
-            name = "user_Reward_sequence",
-            sequenceName = "user_Reward_sequence",
+            name = "reward_sequence",
+            sequenceName = "reward_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "user_Reward_sequence"
+            generator = "reward_sequence"
     )
     private Long rewardId;
     private String brandName;

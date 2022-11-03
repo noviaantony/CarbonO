@@ -20,5 +20,15 @@ class UserRewardService{
         );
         return response.data;
     }
+    async redeemReward(userId, rewardId, userToken) {
+        console.log('redeeming reward');
+        console.log(`userID:${userId}`);
+        const response = await axios.post(
+            `${USER_REWARD_API_URL}/claimReward`,
+            null,
+            { params: { userId, rewardId }, headers: { Authorization: userToken } },
+        );
+        return response.data;
+    }
 }
 export default new UserRewardService();

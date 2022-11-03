@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import AuthContext from "../../context/AuthProvider";
 import CarbonTrackerService from "../../services/CarbonTrackerService";
 import UserRewardService from "../../services/UserRewardService";
+import Modal from "react-modal";
 
 const RewardCard = ({
   RewardBrandName,
@@ -11,16 +12,27 @@ const RewardCard = ({
   RewardQuantity,
   RewardWebsite,
   RewardImage,
-    UserPoints
+    UserPoints,
+    RewardId,
+    UserTransactions,
 }) => {
 
+  const [isOpen, setIsOpen] = useState(false);
+  const {auth} = useContext(AuthContext);
+
+  function toggleModal() {
+    setIsOpen(!isOpen);
+  }
+  function claimReward() {
+    UserRewardService.redeemReward(auth.userId, RewardId, auth.accessToken ).then((response) => {
+      console.log(response);
+    });
+  }
 
   let claimable = true;
 
   let progressPercentage = (UserPoints / RewardPointsRequired) * 100;
-  console.log(UserPoints)
-  console.log(RewardPointsRequired);
-  console.log(progressPercentage)
+  console.log(UserTransactions);
   if (progressPercentage < 100) {
     claimable = false;
   } else {
@@ -28,6 +40,75 @@ const RewardCard = ({
   }
 
   return (
+      <>
+        <Modal
+            isOpen={isOpen}
+            onRequestClose={toggleModal}
+            contentLabel="My dialog"
+            className="mymodal"
+            overlayClassName="myoverlay"
+            closeTimeoutMS={500}
+        >
+          <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+            <button
+                type="button"
+                class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                data-modal-toggle="popup-modal"
+                onClick={toggleModal}
+            >
+              <svg
+                  aria-hidden="true"
+                  class="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                    fill-rule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                ></path>
+              </svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+            <div class="p-6 text-center">
+              <svg
+                  aria-hidden="true"
+                  class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+              <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                Are you sure you want to delete this product?
+              </h3>
+              <button
+                  data-modal-toggle="popup-modal"
+                  type="button"
+                  class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                    onClick={claimReward}
+              >
+                Yes, I'm sure
+              </button>
+              <button
+                  data-modal-toggle="popup-modal"
+                  type="button"
+                  class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                  onClick={toggleModal}
+              >
+                No, cancel
+              </button>
+            </div>
+          </div>
+        </Modal>
     <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 font-default">
       <article class="overflow-hidden rounded-lg bg-white">
         <img alt="meow" class="block h-72 w-full" src={RewardImage} />
@@ -65,6 +146,7 @@ const RewardCard = ({
               className="inline-flex items-center py-2 px-3 text-xs font-xs text-center text-white bg-[#5E9387] rounded-lg  focus:outline-none transition duration-300 mr-3 font-semibold hover:bg-gray-700 hover:text-white
           "
               type="button"
+              onClick={toggleModal}
             >
               Claim Reward
             </button>
@@ -80,6 +162,7 @@ const RewardCard = ({
         </footer>
       </article>
     </div>
+      </>
   );
 };
 
