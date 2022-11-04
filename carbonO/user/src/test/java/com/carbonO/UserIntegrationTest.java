@@ -5,8 +5,8 @@ package com.carbonO;
 import com.carbonO.Registration.RegistrationRequest;
 import com.carbonO.Registration.token.ConfirmationTokenRepository;
 import com.carbonO.User.*;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import net.bytebuddy.utility.RandomString;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -34,6 +34,8 @@ public class UserIntegrationTest {
 
     private final String baseurl = "http://localhost:";
 
+    private final String ec2_BaseUrl = "http://18.136.163.9:";
+
     private RegistrationRequest registrationRequest;
 
     private TestRestTemplate restTemplate = new TestRestTemplate();
@@ -44,10 +46,6 @@ public class UserIntegrationTest {
     @Autowired
     private ConfirmationTokenRepository confirmationTokenRepository;
 
-//    @BeforeEach
-//    public void setup() {
-//        this.mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-//    }
 
     @Test
     public void createTestingUser() throws Exception{
@@ -63,7 +61,6 @@ public class UserIntegrationTest {
         User user = userRepository.findByEmail("testing123@gmail.com").get();
 
         userRepository.deleteById(user.getId());
-
 
     }
 
@@ -106,77 +103,108 @@ public class UserIntegrationTest {
         userRepository.deleteById(user.getId());
 
     }
+    @Test
+    public void forgotPassword_CorrectEmail_Pass() throws Exception {
+
+        RegistrationRequest request = new RegistrationRequest("testing1", "testing", "testing123@gmail.com", "123");
+
+        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/registration");
+
+        ResponseEntity<String> result = restTemplate.postForEntity(uri,request,String.class);
+
+        Assertions.assertEquals(201,result.getStatusCode().value());
+
+        String email = "testing123@gmail.com";
+
+        uri = new URI(baseurl + port + "/api/v1/carbonO/user/forgotPassword?email=" + email);
+
+        ResponseEntity<String> result2 = restTemplate.postForEntity(uri,email,String.class);
+
+        Assertions.assertEquals(200,result2.getStatusCode().value());
+
+        User user = userRepository.findByEmail(email).get();
+
+        user.setResetPasswordToken(null);
+
+        userRepository.save(user);
+
+        userRepository.delete(user);
+    }
+    @Test
+    public void forgotPassword_WrongEmail_Failure() throws Exception {
+        String email = "testing123@gmail.com";
+
+        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/forgotPassword?email=" + email);
+
+        ResponseEntity<String> result = restTemplate.postForEntity(uri,email,String.class);
+
+        Assertions.assertEquals(404,result.getStatusCode().value());
+    }
+
+    @Test
+    public void resetPassword_CorrectEmail_Pass() throws Exception {
+        RegistrationRequest request = new RegistrationRequest("testing1", "testing", "testing123@gmail.com", "123");
+
+        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/registration");
+
+        ResponseEntity<String> result = restTemplate.postForEntity(uri,request,String.class);
+
+        String email = "testing123@gmail.com";
+
+        uri = new URI(baseurl + port + "/api/v1/carbonO/user/forgotPassword?email=" + email);
+
+        ResponseEntity<String> result2 = restTemplate.postForEntity(uri,email,String.class);
+
+        String token = result2.getBody().substring(65);
+
+        System.out.println(token);
+
+        uri = new URI(baseurl + port + "/api/v1/carbonO/user/resetPassword?token=" + token);
+
+        ResponseEntity<String> result3 = restTemplate.getForEntity(uri, String.class);
+
+        Assertions.assertEquals(200, result3.getStatusCode().value());
+
+        User user = userRepository.findByEmail(email).get();
+
+        userRepository.delete(user);
+
+    }
+    @Test
+    public void resetPassword_WrongEmail_Fail() throws Exception{
+        String token = null;
+
+        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/resetPassword?token=" + token);
+
+        ResponseEntity<String> result = restTemplate.getForEntity(uri, String.class);
+
+        Assertions.assertEquals(404,result.getStatusCode().value());
+    }
+
+//    public void processResetPassword_CorrectToken_Pass() throws Exception {
+//        RegistrationRequest request = new RegistrationRequest("testing1", "testing", "testing123@gmail.com", "123");
+//
+//        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/registration");
+//
+//        ResponseEntity<String> result = restTemplate.postForEntity(uri,request,String.class);
+//
+//        String email = "testing123@gmail.com";
+//
+//        User user = userRepository.findByEmail(email).get();
+//
+//        String token = RandomString.make(45);
+//        user.setResetPasswordToken(token);
+//
+//        String newPassword = "123456";
+//
+//        uri = new URI(baseurl + port + "/api/v1/carbonO/user/processResetPassword?newPassword=" + newPassword
+//        + "&token=" + token);
+//
+//        ResponseEntity<String> result2 = restTemplate.put(uri.toString(),null,newPassword,token);
+//
+//        Assertions.assertEquals(200, result2.getStatusCode().value());
+//    }
 
 
-
-
-//    @Test
-//    @BeforeEach
-//    public void testingProfile() throws Exception {
-//
-//        RegistrationRequest request = new RegistrationRequest("testing1", "testing", "testing1@gmail.com", "123");
-//        String json = objectMapper.writeValueAsString(request);
-//
-//        mvc.perform(MockMvcRequestBuilders
-//                .post("/api/v1/carbonO/user/registration")
-//                .content(json)
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .accept(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isCreated());
-////                .andExpect(MockMvcResultMatchers.jsonPath("$.userId").exists());
-//    }
-//
-//    @AfterEach
-//    public void tearDown() {
-//        userRepository.deleteAll();
-//        confirmationTokenRepository.deleteAll();
-//    }
-//
-//
-//    @Test
-//    public void getUser_InvalidUserEmail_Failure() throws Exception {
-////        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/getUser?email=usernotfound@gmail.com");
-////
-////        ResponseEntity<User> result = restTemplate.getForEntity(uri, User.class);
-//
-//        mvc.perform(MockMvcRequestBuilders.get("/getUser")
-//                 .queryParam("email","emailnotfound@gmail.com")
-//                .accept(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isNotFound());
-//
-////        Assertions.assertEquals(404, result.getStatusCode().value());
-//
-//    }
-//
-//    @Test
-//    public void getUser_ValidUserEmail_Pass() throws Exception {
-////        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/getUser?email=noiva@gmail.com");
-////
-////        ResponseEntity<User> result = restTemplate.getForEntity(uri, User.class);
-//
-//
-//
-//        mvc.perform(MockMvcRequestBuilders.get("/getUser")
-//                        .queryParam("email","novia@gmail.com")
-//                        .accept(MediaType.APPLICATION_JSON))
-//                        .andExpect(status().isOk());
-//
-////        Assertions.assertEquals(200, result.getStatusCode().value());
-//
-//    }
-//
-//    @Test
-//    public void getAllUsers_Pass() throws Exception {
-//
-//
-//        mvc.perform(MockMvcRequestBuilders
-//                        .get("/getAllUsers")
-//                        .accept(MediaType.APPLICATION_JSON))
-//                        .andDo(print())
-//                        .andExpect(status().isOk());
-////                .andExpect(MockMvcResultMatchers.jsonPath("$.getAllUsers").exists())
-////                .andExpect(MockMvcResultMatchers.jsonPath("$.getAllUsers[*].userId").isNotEmpty());
-//
-//    }
 
 }
