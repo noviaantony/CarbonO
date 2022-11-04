@@ -14,19 +14,18 @@ const CARD_OPTIONS = {
   hidePostalCode: true,
   style: {
     base: {
-      iconColor: "#c4f0ff",
-      color: "#000",
-      fontWeight: 500,
-      fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
-      fontSize: "16px",
-      fontSmoothing: "antialiased",
-      ":-webkit-autofill": { color: "#000" },
-      "::placeholder": { color: "#000" },
-
+      iconColor: "#5E9387",
+      color: "#1F2937",
+      fontWeight: 20,
+      fontFamily: "Open Sans, sans-serif",
+      // fontSize: "0.875rem",
+      // fontSmoothing: "antialiased",
+      ":-webkit-autofill": { color: "#9CA3AF" },
+      "::placeholder": { color: "#9CA3AF" },
     },
     invalid: {
-      iconColor: "#ffc7ee",
-      color: "#ffc7ee",
+      //   iconColor: "#ffc7ee",
+      color: "#000",
     },
   },
 };
@@ -37,36 +36,34 @@ const PaymentForm = () => {
   const elements = useElements();
 
   const handleSubmit = async (e) => {
+    // We don't want to let default form submission happen here,
+    // which would refresh the page.
     e.preventDefault();
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: "card",
-      card: elements.getElement(CardElement),
-    });
 
-    if (!error) {
-      try {
-        const { id } = paymentMethod;
-        const response = await axios.post("http://localhost:3000/Payment", {
-          amount: 1000,
-          id,
-        });
-
-        if (response.data.success) {
-          console.log("Successful payment");
-          setSuccess(true);
-        }
-      } catch (error) {
-        console.log("Error", error);
+    //create payment intent on server
+    const { error: backendError, clientSecret } = await fetch(
+      "/create-payment-intent",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          paymentMethodType: "card",
+          currency: "usd",
+        }),
       }
-    } else {
-      console.log(error.message);
-    }
+    ).then((r) => r.json());
+
+    //confirm payment on the client
+    const { paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardElement),
+      },
+    });
   };
 
-  //when donate button is clicked
-  const handleDonate = () => {
 
-  }
   const [name, setName] = useState("");
   const handleChangeName = (event) => {
     setName(event.target.value);
@@ -219,36 +216,29 @@ const PaymentForm = () => {
                     </div>
                   </div>
 
-                  {/* <!-- Card Details --> */}
-                  <div>
+                 {/* <!-- Card Details --> */}
+                 <div>
                     <label
-                      class="block text-sm font-medium mb-1"
+                      class="block text-sm font-medium mb-1 mt-4"
                       for="card-email"
                     >
                       Card Details <span class="text-red-500">*</span>
                     </label>
-                    
-                    {!success ? (
-                      <form onSubmit={handleSubmit}>
-                        <CardElement options={CARD_OPTIONS}
-                        
-                        />
-                        <div class="mt-6">
-                          <div class="mb-4">
-                            {/* on click, modal should show success payment */}
-                            <button class="font-medium text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out w-full bg-[#5E9387] hover:bg-gray-700 text-white focus:outline-none focus-visible:ring-2">
-                              Donate
-                            </button>
-                          </div>
-                        </div>
-                      </form>
-                    ) : (
-                      <div>
-                        <h2>Success</h2>
-                      </div>
-                    )}
                   </div>
 
+                  <form className="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full">
+                    <CardElement options={CARD_OPTIONS} />
+                  </form>
+                  <div class="mt-6">
+                    <div class="mb-4">
+                      <button
+                        class="font-medium text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out w-full bg-[#5E9387] hover:bg-gray-700 text-white focus:outline-none focus-visible:ring-2"
+                        
+                      >
+                        Donate
+                      </button>
+                    </div>
+                  </div>
                   {/* <div class="mt-6">
                       <div class="mb-4">
                         
