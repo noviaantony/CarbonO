@@ -10,7 +10,7 @@ import QRScanner from './QRScanner'
 const Card = ({dishId, dishTitle, dishImage, dishRating, dishKeywords, dishIngredients, dishCarbonFootprint, dishCredit}) => {
 
   const {auth} = useContext(AuthContext);
-
+//test
   const [showDishInfo, setshowDishInfo] = React.useState(false);
   // const [showReceiptUpload, setshowReceiptUpload] = React.useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
