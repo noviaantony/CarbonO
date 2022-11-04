@@ -2,6 +2,8 @@ package com.carbonO.Registration.token;
 
 
 import com.carbonO.User.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -36,6 +38,7 @@ public class ConfirmationToken {
             nullable = false,
             name = "user_id"
     )
+    @JsonBackReference
     private User user;
 
     public ConfirmationToken(String token, LocalDateTime createdAt, LocalDateTime expiresAt, User user) {

@@ -14,7 +14,16 @@ const Dashboard = () => {
   const [rewardData, setRewardData] = useState([]);
   const [totalCarbon, setTotalCarbon] = useState(0);
   const [userCredits, setUserCredits] = useState(0);
-  const {auth} = useContext(AuthContext);
+  const {auth, setAuth} = useContext(AuthContext);
+
+    //persist state of user
+    // useEffect(() => {
+    //     const token = localStorage.getItem("token");
+    //     setAuth({"authenticated": localStorage.getItem("authenticated"),"accessToken": localStorage.getItem("token")
+    //             , "userId": localStorage.getItem("userId"), "firstName": localStorage.getItem("firstName")});
+    //     console.log("auth", auth.authenticated);
+    //
+    // },[]);
 
   // get all dish consumed by user
   useEffect(() => {

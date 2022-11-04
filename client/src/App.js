@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, {useContext, useEffect} from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Landing from './screens/Landing';
 import SignUpForm from './components/registration/SignUpForm';
@@ -19,8 +19,14 @@ import ForgotPassword from "./components/registration/ForgotPassword";
 
 function App() {
   
-  const { auth } = useContext(AuthContext);
-  console.log(auth.authenticated);
+  const { auth, setAuth } = useContext(AuthContext);
+  // useEffect(() => {
+  //
+  //     setAuth({"authenticated": localStorage.getItem("authenticated"),"accessToken": localStorage.getItem("token")
+  //       , "userId": localStorage.getItem("userId"), "firstName": localStorage.getItem("firstName")});
+  //     console.log("nav bar auth: ", auth.accessToken);
+  // },[])
+
   return (
     <>
       {auth.authenticated ? <AuthNavbar /> : <NotAuthNavbar />}

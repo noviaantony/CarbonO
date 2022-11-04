@@ -15,11 +15,7 @@ const NotAuthNavbar = () => {
               class="toggleColour text-white my-4 leading-tight no-underline hover:no-underline font-bold text-xl lg:text-3xl"
               to=""
             >
-              <img
-                src={window.location.origin + "/images/logo.png"}
-                width="90rem"
-                alt=""
-              />
+              <img src={require("./Logo.png")} width="90rem" alt="" />
             </Link>
             <div className="md:hidden">
               <button

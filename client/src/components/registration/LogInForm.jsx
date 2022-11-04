@@ -7,8 +7,8 @@ import axios from "axios";
 import CarbonTrackerService from "../../services/CarbonTrackerService";
 
 
-const LOGIN_URL = 'https://ec2-18-136-163-9.ap-southeast-1.compute.amazonaws.com/api/v1/carbonO/user/login'
-const USER_ID_URL = 'https://ec2-18-136-163-9.ap-southeast-1.compute.amazonaws.com0/api/v1/carbonO/user/getUser'
+const LOGIN_URL = 'http://18.136.163.9:8080/api/v1/carbonO/user/login'
+const USER_ID_URL = 'http://18.136.163.9:8080/api/v1/carbonO/user/getUser'
 
 const LogInForm = () => {
   const {setAuth} = useContext(AuthContext);
@@ -37,14 +37,18 @@ const handleSubmit = async (e) => {
     params.append('password', password);
 
     try {
+        console.log("Logging in...");
         const loginResponse = await axios.post(LOGIN_URL,
             params);
+        //store token in local storage
         localStorage.setItem('token', loginResponse?.data?.access_token);
-
+        localStorage.setItem('authenticated', "true");
         const userIdResponse = await axios.get(USER_ID_URL, {params: {email: email},
             headers :{Authorization: `${localStorage.getItem('token')}`}
         });
+        //store user id and first name of the user
         localStorage.setItem('userId', userIdResponse.data.id);
+        localStorage.setItem('firstName', userIdResponse.data.firstName);
 
         setAuth({"authenticated": true, "accessToken": loginResponse?.data?.access_token, "userId": userIdResponse.data.id, "firstName": userIdResponse.data.firstName});
 

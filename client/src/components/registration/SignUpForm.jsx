@@ -6,7 +6,7 @@ import {Link, Navigate} from "react-router-dom";
 import axios from "axios";
 
 
-const REGISTER_URL = 'http://localhost:8080/api/v1/carbonO/user/registration'
+const REGISTER_URL = 'http://18.136.163.9:8080/api/v1/carbonO/user/registration'
 
 const SignUpForm = () => {
   const userRef = useRef();
