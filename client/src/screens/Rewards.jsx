@@ -15,7 +15,7 @@ const Rewards = () => {
   const [rewardList, setRewardList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [userRewardPoints, setUserRewardPoints] = useState(0);
-    const [userTransactions, setUserTransactions] = useState([]);
+  const [userTransactions, setUserTransactions] = useState([]);
   const {auth} = useContext(AuthContext);
     // let userRewardPoints = 0;
 

@@ -3,10 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@headlessui/react": "^1.7.3",
     "@heroicons/react": "^2.0.12",
     "@material-tailwind/html": "^1.2.2",
     "@material-tailwind/react": "^1.2.4",
+    "@mui/material": "^5.10.12",
+    "@mui/styled-engine-sc": "^5.10.6",
     "@snaily-cad/image-data-uri": "^3.1.0",
     "@stripe/react-stripe-js": "^1.14.1",
     "@stripe/stripe-js": "^1.42.1",
@@ -17,7 +21,6 @@
     "axios": "^0.27.2",
     "chart.js": "^3.9.1",
     "encode-image-uri": "^2.0.0",
-    "eslint-plugin-disable": "^2.0.3",
     "flowbite": "^1.5.3",
     "formik": "^2.2.9",
     "fs-extra": "^10.1.0",
@@ -25,6 +28,7 @@
     "mime-types": "^2.1.35",
     "primeicons": "^6.0.1",
     "primereact": "^8.6.1",
+    "rc-slider": "^10.0.1",
     "react": "^18.2.0",
     "react-chartjs-2": "^4.3.1",
     "react-collapse": "^5.1.1",
@@ -36,10 +40,12 @@
     "react-modal": "^3.16.1",
     "react-password-checklist": "^1.4.2",
     "react-qr-scanner": "^1.0.0-alpha.11",
+    "react-range": "^1.8.14",
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
     "react-scroll": "^1.8.7",
-    "styled-components": "^5.3.5",
+    "react-slider": "^2.0.4",
+    "styled-components": "^5.3.6",
     "sweetalert": "^2.1.2",
     "sweetalert2": "^11.5.1",
     "twin.macro": "^2.8.2",
@@ -47,10 +53,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start",
-    "build": "DISABLE_ESLINT_PLUGIN=true react-scripts build",
-    "test": "DISABLE_ESLINT_PLUGIN=true react-scripts test",
-    "eject": "DISABLE_ESLINT_PLUGIN=true react-scripts eject"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+      "eject": "react-scripts eject"
   },
   "browserslist": {
     "production": [
@@ -68,6 +74,7 @@
     "@faker-js/faker": "^7.5.0",
     "autoprefixer": "^10.4.8",
     "eslint": "^8.26.0",
+    "eslint-plugin-disable": "^2.0.3",
     "eslint-plugin-react": "^7.31.10",
     "file-loader": "^6.2.0",
     "postcss": "^8.4.16",
