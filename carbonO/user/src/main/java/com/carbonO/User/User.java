@@ -2,6 +2,7 @@ package com.carbonO.User;
 
 
 import com.carbonO.Registration.token.ConfirmationToken;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -45,6 +46,7 @@ public class User implements UserDetails {
     private Boolean enabled = true; //temporarily set to true
 
     @OneToMany (mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<ConfirmationToken> confirmationToken;
 
     @Column(length = 45)
