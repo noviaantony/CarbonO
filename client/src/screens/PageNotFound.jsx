@@ -1,5 +1,6 @@
 import React from 'react';
 import { ReactComponent as PageNotFoundSvg } from '../components/pagenotfound/PageNotFound.svg';
+import {Link} from "react-router-dom"
 import Header from "../components/misc/Header";
 
 const PageNotFound = () => {
@@ -15,12 +16,13 @@ const PageNotFound = () => {
               <PageNotFoundSvg classname="" width="35rem" />
             </p>
             <div className="flex flex-row justify-center mt-0">
-              <button
+              <Link
+                to = "/"
                 className='text-white bg-[#5E9387] focus:bg-primary-700 focus:text-gray-200 focus:shadow-outline focus:outline-none transition duration-300
                  w-full  text-center text-3xl p-6 px-8 shadow-xs rounded-md block sm:w-auto font-bold hover:bg-gray-700 hover:text-[#5E9387]'
               >
                 Go Back To Home
-              </button>
+              </Link>
             </div>
           </div>
         </div>

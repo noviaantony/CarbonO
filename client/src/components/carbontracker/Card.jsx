@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect, Fragment } from "react";
 import axios from "axios";
 import { IoLeafOutline, IoLeafSharp } from "react-icons/io5";
-import ViewInformationAccordion from "./ViewInformationAccordion";
 import CarbonTrackerService from "../../services/CarbonTrackerService";
 import AuthContext from "../../hooks/AuthProvider";
 import QRScanner from "./QRScanner";
+import { Accordion, AccordionHeader, AccordionBody } from "@material-tailwind/react";
 
 const Card = ({
   dishId,
@@ -16,9 +16,36 @@ const Card = ({
   dishCarbonFootprint,
   dishCredit,
 }) => {
+
+   const [open, setOpen] = useState(1);
+
+   const handleOpen = (value) => {
+     setOpen(open === value ? 0 : value);
+   };
+
+  //  array with object 
+  // id, ingredientName, carbonFootprint, dishRecipe.quantity (g)
+
+
   const { auth } = useContext(AuthContext);
 
   const [showDishInfo, setshowDishInfo] = React.useState(false);
+  const [ingredients, setIngredients] = useState([]);
+  const ingredientArr = [];
+
+  useEffect(() => {
+  CarbonTrackerService.getAllIngredientsFromDish(dishId)
+    .then((response) => {
+
+      console.log(response);
+      for (let i = 0; i < response.length(); i++) {
+        ingredientArr.push(response[i].ingredientName);
+      }
+      setIngredients(ingredientArr);
+    })
+  } , []);
+
+
 
   const rendereddishRating = [];
   for (let i = 0; i < dishRating; i++) {
@@ -82,9 +109,31 @@ const Card = ({
                     {/*body*/}
                     <div className="relative p-6 flex-auto">
                       <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                        <ViewInformationAccordion
-                          dishIngredients={dishIngredients}
-                        />
+                        <Fragment>
+                          <Accordion open={open === 1}>
+                            <AccordionHeader onClick={() => handleOpen(1)}>
+                              What are the ingredients in this dish?
+                            </AccordionHeader>
+                            <AccordionBody>{ingredients}</AccordionBody>
+                          </Accordion>
+                          {/* <Accordion open={open === 2}>
+                            <AccordionHeader onClick={() => handleOpen(2)}>
+                              Ingredient Quanities
+                            </AccordionHeader>
+                            <AccordionBody>
+                              * we will add this in later *
+                            </AccordionBody>
+                          </Accordion> */}
+                          {/* <Accordion open={open === 3}>
+                            <AccordionHeader onClick={() => handleOpen(2)}>
+                              What is the carbon emission breakdown per
+                              ingredient?
+                            </AccordionHeader>
+                            <AccordionBody>
+                              * we will add this in later *
+                            </AccordionBody>
+                          </Accordion> */}
+                        </Fragment>
                       </p>
                     </div>
                     {/*footer*/}

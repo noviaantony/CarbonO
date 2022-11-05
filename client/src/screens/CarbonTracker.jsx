@@ -19,12 +19,14 @@ const CarbonTracker = () => {
     setLoading(true);
     CarbonTrackerService.getAllDishes()
       .then((response) => {
-        setFoodList(response);
+        setFoodList(response); 
       })
       .then((data) => {
         setLoading(false);
       });
   }, []);
+
+
 
   return (
     <>

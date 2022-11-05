@@ -1,11 +1,9 @@
-import React, {useState} from 'react'
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Modal from "react-modal";
-// import Slider, { Range } from "rc-slider";
-import Slider from "@mui/material/Slider";
-// import Slider from "./Slider"
-
-
+// // import Slider, { Range } from "rc-slider";
+// import Slider from "@mui/material/Slider";
+// // import Slider from "./Slider"
 
 const DonationCard = ({Title, Image, Description, Website, UserCredits}) => {
 
@@ -117,38 +115,35 @@ const DonationCard = ({Title, Image, Description, Website, UserCredits}) => {
           <p className="flex items-left leading-tight p-2 md:p-4 text-sm">
             {Description}
           </p>
+          <a href={Website} className="flex justify-end text-sm">
+            <div className="pr-5 underline underline-offset-1">Visit Website</div>
+          </a>
 
           <footer class="flex items-center justify-between leading-none p-2 md:p-4 bg-white">
             <div class="flex items-center no-underline  text-black" href="#">
               <button
                 to="/ClaimReward"
-                className="inline-flex items-center py-2 px-3 text-xs font-xs text-center text-white bg-[#5E9387] rounded-lg  focus:outline-none transition duration-300 mr-3 font-semibold hover:bg-gray-700 hover:text-white
+                className="inline-flex items-center py-2 px-10 text-xs font-xs text-center text-white bg-[#5E9387] rounded-lg  focus:outline-none transition duration-300 mr-3 font-semibold hover:bg-gray-700 hover:text-white
           "
                 type="button"
                 onClick={toggleConfirmationModal}
               >
                 Donate E-Credits
               </button>
+
+
               <Link
                 to="/Payment"
-                className="inline-flex items-center py-2 px-3 text-xs font-xs text-center text-white bg-[#5E9387] rounded-lg  focus:outline-none transition duration-300 mr-3 font-semibold hover:bg-gray-700 hover:text-white"
+                className="inline-flex items-center py-2 px-10 text-xs font-xs text-center text-[#5E9387] bg-white rounded-lg  focus:outline-none transition duration-300 mr-3 font-semibold border-[#5E9387] border-2 border-solid hover:bg-gray-700 hover:text-white"
               >
                 Donate Cash
               </Link>
-              <a
-                href={Website}
-                className="inline-flex items-center py-1.5 px-3 text-xs font-xs text-center bg-white text-[#5E9387] rounded-md focus:outline-none transition duration-300 mr-3 font-semibold border-[#5E9387] border-2 border-solid hover:bg-gray-100
-          "
-                type="button"
-              >
-                Visit Website
-              </a>
             </div>
           </footer>
         </article>
       </div>
     </>
   );
-}
+};
 
 export default DonationCard;

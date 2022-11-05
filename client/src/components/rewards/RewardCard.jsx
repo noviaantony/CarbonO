@@ -36,7 +36,7 @@ const RewardCard = ({
     if (isClaimed) {
       return (
         <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-          Oops there's an error! This reward has already been claim by you.
+          Oops there's an error! This reward has already been claimed by you.
         </h3>
       );
     } else {

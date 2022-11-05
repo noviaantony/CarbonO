@@ -63,9 +63,9 @@ const LogInForm = () => {
         setErrMsg("Missing Username or password");
       } else if (err.response.status === 401) {
         // unauthorized
-        setErrMsg("Incorrect password! Try again."); 
+        setErrMsg("Something went wrong! Ensure you have verified your account and that your password is correct"); 
       } else {
-        setErrMsg("Unable to login");
+        setErrMsg("Something went wrong! Try again.");
       }
       errRef.current.focus();
     }
@@ -86,6 +86,10 @@ const LogInForm = () => {
             <div className="bg-white rounded-2xl shadow-2xl flex w-2/3 max-w-4xl">
               <div className="w-3/5 p-5">
                 <div className="py-10">
+                  <h2 className="text-2xl font-bold text-gray-700 mb-2">
+                    Sign in to your account
+                  </h2>
+                  <div className="border-2 w-10 border-gray-700 bg-gray-700 inline-block mb-2"></div>
                   <p
                     ref={errRef}
                     className={
@@ -97,10 +101,6 @@ const LogInForm = () => {
                   >
                     {errMsg}
                   </p>
-                  <h2 className="text-2xl font-bold text-gray-700 mb-2">
-                    Sign in to your account
-                  </h2>
-                  <div className="border-2 w-10 border-gray-700 bg-gray-700 inline-block mb-2"></div>
                 </div>
                 <form onSubmit={handleSubmit}>
                   <div className="flex flex-col items-center">
