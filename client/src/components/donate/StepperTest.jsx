@@ -5,7 +5,8 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-
+import { ReactComponent as TickSvg } from "./Tick.svg";
+import { ReactComponent as WarningSvg } from "./Warning.svg";
 const steps = ["Amount to Donate", "Confirmation", "Success"];
 
 const StepperTest = () => {
@@ -69,7 +70,7 @@ const StepperTest = () => {
       return (
         <div class="p-6 text-center">
           <h2 className="mb-5 text-2xl font-bold text-text-black  dark:text-gray-400">
-            How many e-credits would you like to donate?
+           To: Organisation Y
           </h2>
           {/* number input  */}
           <div className="flex justify-center">
@@ -98,14 +99,21 @@ const StepperTest = () => {
                 placeholder="Number input"
               />
             </div>
+            
           </div>
+          <p>
+              Please input the amount you would like to donate.
+            </p>
         </div>
       );
     } else if (activeStep + 1 == 2) {
       return (
         <div>
+          <div class="grid place-items-center py-1">
+          <WarningSvg  width="4rem" />
+              </div>  
           <p className="mb-5 text-2xl text-center font-bold text-text-black  dark:text-gray-400">
-            You are about to make a donation of x amount.
+            You are about to make a donation of x amount to y organisation.
           </p>
           <p className="text-center">Changes cannot be made after this point.</p>
           <p className="text-center">Would you like to confirm your donation?</p>
@@ -114,6 +122,9 @@ const StepperTest = () => {
     } else {
       return (
         <div>
+          <div class="grid place-items-center py-3">
+            <TickSvg  width="4rem" />   
+              </div>  
 <h2 className="mb-5 text-2xl text-center font-bold text-text-black  dark:text-gray-400">
             Donation Success!
           </h2>
