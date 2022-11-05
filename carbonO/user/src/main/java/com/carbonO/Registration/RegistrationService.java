@@ -80,9 +80,8 @@ public class RegistrationService {
 
     public void createUserRewardAccount(Long userId) {
         webClient
-                .get()
-                .uri("/addNewUserReward")
-                .header("userId", String.valueOf(userId))
+                .post()
+                .uri("/addNewUserReward?userID=" + userId)
                 .retrieve().bodyToMono(String.class).block();
     }
 }

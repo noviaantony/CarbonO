@@ -4,7 +4,7 @@ import com.carbonO.Dish.*;
 import com.carbonO.Ingredient.Ingredient;
 import com.carbonO.Ingredient.IngredientRepository;
 import com.carbonO.UserCarbonTracker.UserCarbonTracker;
-import com.carbonO.UserCarbonTracker.UserCarbonTrakerRepository;
+import com.carbonO.UserCarbonTracker.UserCarbonTrackerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -25,7 +25,7 @@ public class CarbonTrackerConfig {
 
     @Bean
     CommandLineRunner commandLineRunner(DishRepository dishRepository, IngredientRepository ingredientRepository,
-                                        DishRecipeRepository dishRecipeRepository, UserCarbonTrakerRepository userCarbonTrakerRepository,
+                                        DishRecipeRepository dishRecipeRepository, UserCarbonTrackerRepository userCarbonTrackerRepository,
                                         DishKeywordsRepository dishKeywordsRepository, DishRewardPoints dishRewardPoints) {
 
         return args -> {
@@ -895,7 +895,7 @@ public class CarbonTrackerConfig {
                     new Date()
             );
 
-            userCarbonTrakerRepository.saveAll(
+            userCarbonTrackerRepository.saveAll(
                     List.of(userCarbonTracker1)
             );
 

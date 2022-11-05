@@ -3,8 +3,8 @@ package com.carbonO.UserCarbonTracker;
 import com.carbonO.Dish.Dish;
 import com.carbonO.Dish.DishService;
 import com.carbonO.JWTAuth.JWTAuthService;
-import com.carbonO.Receipt.ReceiptRepository;
 import com.carbonO.Receipt.ReceiptService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -13,18 +13,18 @@ import java.util.List;
 
 @Service
 public class UserCarbonTrackerService {
-    private final UserCarbonTrakerRepository userCarbonTrakerRepository;
+    private final UserCarbonTrackerRepository userCarbonTrackerRepository;
     private final WebClient webClient;
     private final ReceiptService receiptService;
     private final DishService dishService;
     private final JWTAuthService jwtAuthService;
 
-
-    public UserCarbonTrackerService(UserCarbonTrakerRepository userCarbonTrakerRepository, WebClient.Builder webClientBuilder,
+    @Autowired
+    public UserCarbonTrackerService(UserCarbonTrackerRepository userCarbonTrackerRepository, WebClient.Builder webClientBuilder,
                                     ReceiptService receiptService, DishService dishService, JWTAuthService jwtAuthService) {
         this.dishService = dishService;
         this.receiptService = receiptService;
-        this.userCarbonTrakerRepository = userCarbonTrakerRepository;
+        this.userCarbonTrackerRepository = userCarbonTrackerRepository;
         this.jwtAuthService = jwtAuthService;
         this.webClient = webClientBuilder.baseUrl("http://localhost:8080/api/v1/carbonO/user/").build();
     }
@@ -40,7 +40,7 @@ public class UserCarbonTrackerService {
         if (!jwtAuthService.authorizeUser(token)){
             throw new RuntimeException("User is not authorized to access this data");
         }
-        List<UserCarbonTracker> userCarbonTransactions = userCarbonTrakerRepository.findAllByUserId(userId);
+        List<UserCarbonTracker> userCarbonTransactions = userCarbonTrackerRepository.findAllByUserId(userId);
         Double totalCarbonConsumption = 0.0;
 
         for (UserCarbonTracker userCarbonTransaction : userCarbonTransactions) {
@@ -54,10 +54,10 @@ public class UserCarbonTrackerService {
 
         Dish dish = dishService.findDishById(dishId);
         UserCarbonTracker userCarbonTracker = new UserCarbonTracker(userId, dish,new Date());
-        userCarbonTrakerRepository.save(userCarbonTracker);
+        userCarbonTrackerRepository.save(userCarbonTracker);
     }
 
     public List<UserCarbonTracker> getUserDishedConsumed(Long userId) {
-        return userCarbonTrakerRepository.findAllByUserId(userId);
+        return userCarbonTrackerRepository.findAllByUserId(userId);
     }
 }

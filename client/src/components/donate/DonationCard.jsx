@@ -1,17 +1,33 @@
-import React, { useState } from "react";
+import React, {useContext, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Modal from "react-modal";
-// import Slider, { Range } from "rc-slider";
-import Slider from "@mui/material/Slider";
-// import Slider from "./Slider"
+import DonationService from "../../services/DonationService";
+import AuthContext from "../../hooks/AuthProvider";
+// // import Slider, { Range } from "rc-slider";
+// import Slider from "@mui/material/Slider";
+// // import Slider from "./Slider"
 import Stepper from "./StepperTest";
 
-const DonationCard = ({ Title, Image, Description, Website }) => {
+const DonationCard = ({organisationId, Title, Image, Description, Website, UserCredits}) => {
+
+
+
   const [isOpen, setIsOpen] = useState(false);
   const [donationAmount, setDonationAmount] = useState(0);
+  const { auth, setAuth } = useContext(AuthContext);
+  const [message, setMessage] = useState("");
 
-  const handleDonationAmount = (newAmount: number) => {
-    setDonationAmount(newAmount);
+  const donatePoints = () => {
+    DonationService.donatePoints(auth.userId, donationAmount, organisationId, auth.accessToken)
+    .then((response) => {
+        console.log(response);
+        setMessage("You have successfully donated " + donationAmount + " points to " + Title);
+        // setIsOpen(false);
+      // <span
+      //     className=" text-red-800 text-sm mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900 font-bold mb-3">
+      //             {errMsg}
+      //           </span>
+    });
   };
 
   function toggleConfirmationModal() {
@@ -91,6 +107,9 @@ const DonationCard = ({ Title, Image, Description, Website }) => {
                   "
                   id="exampleNumber0"
                   placeholder="Number input"
+
+                    // value={donationAmount}
+                    onChange={(e) => setDonationAmount(e.target.value)}
                 />
               </div>
             </div> */}
@@ -102,9 +121,9 @@ const DonationCard = ({ Title, Image, Description, Website }) => {
               data-modal-toggle="popup-modal"
               type="button"
               className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-              // onClick={claimReward}
+              onClick={donatePoints}
             >
-              Next
+              Confirm Donation
             </button>
             <button
               data-modal-toggle="popup-modal"

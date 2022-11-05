@@ -32,7 +32,7 @@ public class Ingredient {
     //todo: add a field for description of the dish
 
     @OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonManagedReference("ingredient_Id")
     private List<DishRecipe> dishRecipe;
 
     public Ingredient(String ingredientName, Double carbonFootprint) {

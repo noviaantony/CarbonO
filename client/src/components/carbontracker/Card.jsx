@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect, Fragment } from "react";
 import axios from "axios";
 import { IoLeafOutline, IoLeafSharp } from "react-icons/io5";
-import ViewInformationAccordion from "./ViewInformationAccordion";
 import CarbonTrackerService from "../../services/CarbonTrackerService";
 import AuthContext from "../../hooks/AuthProvider";
 import QRScanner from "./QRScanner";

@@ -17,7 +17,7 @@ public class UserRewardController {
     }
 
     @PostMapping("/addNewUserReward")
-    public ResponseEntity<ApiResponse> addNewUserReward(@RequestParam("userId") Long userID) {
+    public ResponseEntity<ApiResponse> addNewUserReward(@RequestParam("userID") Long userID) {
         userRewardService.addNewUserReward(userID);
         return new ResponseEntity<>(new ApiResponse(true, "New user reward added"), HttpStatus.CREATED);
     }
@@ -30,5 +30,11 @@ public class UserRewardController {
     public ResponseEntity<ApiResponse> claimReward(@RequestParam("userId") Long userID, @RequestParam("rewardId") Long rewardId) {
         userRewardService.claimReward(userID, rewardId);
         return new ResponseEntity<>(new ApiResponse(true, "Reward claimed"), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/donateRewardPoints")
+    public ResponseEntity<ApiResponse> donateRewardPoints(@RequestParam("userId") Long userID, @RequestParam("pointsToDonate") Integer pointsToDonate, @RequestParam("organisationId") Long organisationId) {
+        userRewardService.donateRewardPoints(userID, pointsToDonate, organisationId);
+        return new ResponseEntity<>(new ApiResponse(true, "Reward points successfully donated"), HttpStatus.OK);
     }
 }

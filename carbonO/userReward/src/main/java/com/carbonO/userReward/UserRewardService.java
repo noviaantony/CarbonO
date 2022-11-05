@@ -24,7 +24,9 @@ public class UserRewardService {
 
     //if it is a new user, create a new reward point for the user
     public void addNewUserReward(Long userID) {
+        //todo: check if user ID already has a reward point
 
+        //create a new reward point for the user
         UserReward userReward = new UserReward(userID, 0);
         userRewardRepository.save(userReward);
     }
@@ -45,9 +47,27 @@ public class UserRewardService {
         }
         //Add reward transaction to the user's reward account
         rewardTransactionService.addNewRewardTransaction(userReward, reward);
+
+        //update user's reward points
         userReward.setRewardPoints((int) (userReward.getRewardPoints() - reward.getRedemptionPointsRequired()));
         userRewardRepository.save(userReward);
     }
 
-    //create another method to edit reward points (set points)
+    public void donateRewardPoints(Long userID, int pointsToDonate, Long organisationId) {
+        //retrieve user's reward account
+        UserReward userReward = userRewardRepository.findByUserId(userID);
+
+        //check if user has enough points to donate
+        if (userReward.getRewardPoints() < pointsToDonate)  {
+            throw new IllegalStateException("Not enough points to claim reward");
+        }
+
+        //Add reward transaction to the user's reward account
+        rewardTransactionService.addNewDonationTransaction(userReward, null, pointsToDonate,true, organisationId);
+
+        //deduct points from user's reward account
+        userReward.setRewardPoints(userReward.getRewardPoints() - pointsToDonate);
+        userRewardRepository.save(userReward);
+    }
+
 }
