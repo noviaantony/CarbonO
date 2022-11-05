@@ -7,7 +7,7 @@ import UserService from "../../services/UserService";
 
 
 const ForgotPassword = () => {
-  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
 
     const navigate = useNavigate();
