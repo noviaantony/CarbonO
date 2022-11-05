@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class DishService {
@@ -23,7 +24,19 @@ public class DishService {
     }
     //get dish by id
     public Dish findDishById(Long id){
-        return dishRepository.findById(id).orElseThrow(()-> new DishNotFoundException("Dish by id " + id + " was not found"));
+        try {
+            return dishRepository.findById(id).get();
+        } catch (NoSuchElementException e) {
+            throw new DishNotFoundException("Dish by id " + id + " was not found");
+        }
+    }
+
+    public Dish findByDishName(String dishName) {
+        try {
+            return dishRepository.findByDishName(dishName).get();
+        } catch (NoSuchElementException e) {
+            throw new DishNotFoundException("Dish name: " + dishName + " was not found");
+        }
     }
 
     //Todo: creating of a new dish
