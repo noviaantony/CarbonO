@@ -9,14 +9,24 @@ import UserService from "../../services/UserService";
 const ForgotPassword = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
 
     const navigate = useNavigate();
 
     const forgetPassword = async (e) => {
       e.preventDefault();
-      UserService.forgotPassword(email).then(r => {
-        console.log(r);
+
+      try {
+        UserService.forgotPassword(email).then(resp => {
+        console.log(resp);
       })
+      } catch {
+        setError("Email does not exist")
+      }
+
+
+      
+      
     };
   return (
     <>
@@ -34,6 +44,9 @@ const ForgotPassword = () => {
                 <h2 className="text-2xl font-bold text-gray-700 mb-2">
                   Reset Your Password
                 </h2>
+                <p className="text-red-800 text-sm mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900 font-bold">
+                  {error}
+                </p>
                 <div className="border-2 w-10 border-gray-700 bg-gray-700 inline-block mb-2"></div>
               </div>
               <form onSubmit={forgetPassword}>
@@ -49,10 +62,10 @@ const ForgotPassword = () => {
                       className="bg-gray-100 outline-none text-m flex-1"
                       required
                       onChange={(e) => setEmail(e.target.value)}
-                      value = {email}
+                      value={email}
                     />
                   </div>
-                  
+
                   <button className="signIn px-7 py-3 w-64 justify-center rounded-md border border-transparent text-sm focus:outline-none transition duration-300 bg-[#5E9387] hover:bg-gray-700  text-center marker:sm:w-auto font-bold text-white">
                     Reset Password
                   </button>

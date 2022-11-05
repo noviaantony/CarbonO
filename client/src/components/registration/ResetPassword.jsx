@@ -9,6 +9,7 @@ import UserService from "../../services/UserService";
 const EnterEmail = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -17,11 +18,20 @@ const EnterEmail = () => {
 
   const resetPassword = async (e) => {
     e.preventDefault();
-    console.log(token);
-    UserService.resetPassword(token, newPassword, confirmPassword).then(r => {
-      console.log(r);
-      Navigator.navigate("/login");
-    });
+    try {
+      // console.log(token);
+      UserService.resetPassword(token, newPassword, confirmPassword).then(
+        (resp) => {
+          console.log(resp);
+          setMessage("Your password has been reset!")
+          Navigator.navigate("/login");
+        }
+      );
+
+    } catch {
+      setMessage("Something went wrong, request for password reset again.")
+    }
+    
   };
 
   return (
@@ -39,6 +49,9 @@ const EnterEmail = () => {
                 <h2 className="text-2xl font-bold text-gray-700 mb-2">
                   Reset Your Password
                 </h2>
+                <p className="text-red-800 text-sm mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900 font-bold">
+                  {message}
+                </p>
                 <div className="border-2 w-10 border-gray-700 bg-gray-700 inline-block mb-2"></div>
               </div>
               <form onSubmit={resetPassword}>
@@ -53,8 +66,8 @@ const EnterEmail = () => {
                       placeholder="new password"
                       className="bg-gray-100 outline-none text-m flex-1"
                       required
-                        onChange={(e) => setNewPassword(e.target.value)}
-                        value = {newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      value={newPassword}
                     />
                   </div>
                   <div className="bg-gray-100 w-64 p-2 flex items-center rounded mb-3">
@@ -67,13 +80,11 @@ const EnterEmail = () => {
                       placeholder="confirm new password"
                       className="bg-gray-100 outline-none text-m flex-1"
                       required
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        value = {confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      value={confirmPassword}
                     />
                   </div>
-                  <button
-                    className="signIn px-7 py-3 w-64 justify-center rounded-md border border-transparent text-sm focus:outline-none transition duration-300 bg-[#5E9387] hover:bg-gray-700  text-center marker:sm:w-auto font-bold text-white"
-                  >
+                  <button className="signIn px-7 py-3 w-64 justify-center rounded-md border border-transparent text-sm focus:outline-none transition duration-300 bg-[#5E9387] hover:bg-gray-700  text-center marker:sm:w-auto font-bold text-white">
                     Reset Password
                   </button>
                 </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactComponent as TickSvg } from "./Tick.svg";
-const ThankYou = () => {
 
+const ThankYou = () => {
   return (     
     <div className="flex items-center min-h-full justify-center font-default text-center">       
             <div className="bg-white rounded-2xl shadow-2xl w-1/2 py-2">    
