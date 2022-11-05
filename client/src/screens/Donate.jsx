@@ -1,10 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import Header from "../components/misc/Header";
 import DonationCard from "../components/donate/DonationCard";
-import GreenSpace from "./GreenSpace.jpeg";
-import CleanAir from "./CleanAir.jpeg";
-import Technology from "./Technology.jpeg";
-import Agriculture from "./Agriculture.jpeg";
 import CarbonTrackerService from "../services/CarbonTrackerService";
 import DonationService from "../services/DonationService";
 import {ThreeDots} from "react-loader-spinner";
@@ -66,6 +62,7 @@ const Donate = () => {
             {organisationList.map((organisation) => {
             return (
             <DonationCard
+                organisationId={organisation.id}
               Title={organisation.organisationName}
                 Description={organisation.organisationDescription}
                 Image={organisation.organisationImage}
