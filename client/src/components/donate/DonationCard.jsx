@@ -6,8 +6,11 @@ import AuthContext from "../../hooks/AuthProvider";
 // // import Slider, { Range } from "rc-slider";
 // import Slider from "@mui/material/Slider";
 // // import Slider from "./Slider"
+import Stepper from "./StepperTest";
 
 const DonationCard = ({organisationId, Title, Image, Description, Website, UserCredits}) => {
+
+
 
   const [isOpen, setIsOpen] = useState(false);
   const [donationAmount, setDonationAmount] = useState(0);
@@ -42,6 +45,18 @@ const DonationCard = ({organisationId, Title, Image, Description, Website, UserC
         closeTimeoutMS={500}
       >
         <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+          <Stepper />
+        </div>
+      </Modal>
+      {/* <Modal
+        isOpen={isOpen}
+        onRequestClose={toggleConfirmationModal}
+        contentLabel="My dialog"
+        className="mymodal"
+        overlayClassName="myoverlay"
+        closeTimeoutMS={500}
+      > */}
+      {/* <div class="relative p-4 w-full max-w-md h-full md:h-auto">
           <button
             type="button"
             class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
@@ -69,7 +84,7 @@ const DonationCard = ({organisationId, Title, Image, Description, Website, UserC
               How many e-credits would you like to donate?
             </h2>
             {/* number input */}
-            <div className="flex justify-center">
+      {/* <div className="flex justify-center">
               <div className="mb-3 xl:w-96">
                 <input
                   type="number"
@@ -97,12 +112,12 @@ const DonationCard = ({organisationId, Title, Image, Description, Website, UserC
                     onChange={(e) => setDonationAmount(e.target.value)}
                 />
               </div>
-            </div>
-            {/* <h2 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+            </div> */}
+      {/* <h2 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
               You have chosen to donate {donationAmount}
             </h2> */}
 
-            <button
+      {/* <button
               data-modal-toggle="popup-modal"
               type="button"
               className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
@@ -118,9 +133,9 @@ const DonationCard = ({organisationId, Title, Image, Description, Website, UserC
             >
               Cancel
             </button>
-          </div>
-        </div>
-      </Modal>
+          </div> */}
+      {/* </div>
+      </Modal>} */}
 
       <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 font-default">
         <article class="overflow-hidden rounded-lg bg-white">
@@ -132,7 +147,9 @@ const DonationCard = ({organisationId, Title, Image, Description, Website, UserC
             {Description}
           </p>
           <a href={Website} className="flex justify-end text-sm">
-            <div className="pr-5 underline underline-offset-1">Visit Website</div>
+            <div className="pr-5 underline underline-offset-1">
+              Visit Website
+            </div>
           </a>
 
           <footer class="flex items-center justify-between leading-none p-2 md:p-4 bg-white">
@@ -146,8 +163,6 @@ const DonationCard = ({organisationId, Title, Image, Description, Website, UserC
               >
                 Donate E-Credits
               </button>
-
-
               <Link
                 to="/Payment"
                 className="inline-flex items-center py-2 px-10 text-xs font-xs text-center text-[#5E9387] bg-white rounded-lg  focus:outline-none transition duration-300 mr-3 font-semibold border-[#5E9387] border-2 border-solid hover:bg-gray-700 hover:text-white"
