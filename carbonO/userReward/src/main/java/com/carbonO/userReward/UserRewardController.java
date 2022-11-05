@@ -17,7 +17,7 @@ public class UserRewardController {
     }
 
     @PostMapping("/addNewUserReward")
-    public ResponseEntity<ApiResponse> addNewUserReward(@RequestParam("userID") Long userID) {
+    public ResponseEntity<ApiResponse> addNewUserReward(@RequestParam("userId") Long userID) {
         userRewardService.addNewUserReward(userID);
         return new ResponseEntity<>(new ApiResponse(true, "New user reward added"), HttpStatus.CREATED);
     }

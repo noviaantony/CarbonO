@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 @Service
@@ -67,13 +68,15 @@ public class UserService implements UserDetailsService {
     }
 
     public void updateResetPasswordToken(String token, String email) throws UserNotFoundException {
-        User user = userRepository.findByEmail(email).get();
-        if (user != null) {
+        try {
+            User user = userRepository.findByEmail(email).get();
             user.setResetPasswordToken(token);
             userRepository.save(user);
-        } else {
-            throw new UserNotFoundException("Could not find any user with the email " + email);
         }
+        catch (NoSuchElementException e) {
+            throw new UserNotFoundException("Could not find any user with the email: " + email);
+        }
+
     }
 
     public void updatePassword(User user, String newPassword) {

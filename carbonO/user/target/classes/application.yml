@@ -1,10 +1,12 @@
 Server:
     port: 8081
 spring:
+#    config:
+#        import: optional:secrets.yml
     mail:
         host: smtp.gmail.com
-        username: carbonohelp@gmail.com
-        password: pddwnpzrdirnhfph
+        username: ${CARBONO_USERNAME}
+        password: ${CARBONO_PASSWORD}
         port: 587
         properties:
             mail:

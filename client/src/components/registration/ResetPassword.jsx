@@ -1,10 +1,29 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { ReactComponent as ResetPasswordSvg } from "./ResetPassword.svg";
 import { HiMail, HiCheckCircle } from "react-icons/hi";
-import { Link, useNavigate } from "react-router-dom";
+import {Link, useNavigate, useParams, useSearchParams} from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import UserService from "../../services/UserService";
+// import {Properties as a} from "react-file-base64/public/app";
+
 const EnterEmail = () => {
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
   const navigate = useNavigate();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const token = searchParams.get("token")
+
+  const resetPassword = async (e) => {
+    e.preventDefault();
+    console.log(token);
+    UserService.resetPassword(token, newPassword, confirmPassword).then(r => {
+      console.log(r);
+      Navigator.navigate("/login");
+    });
+  };
+
   return (
     <>
       <div className="flex flex-col items-center justify-center min-h-screen py-2 font-default">
@@ -22,18 +41,20 @@ const EnterEmail = () => {
                 </h2>
                 <div className="border-2 w-10 border-gray-700 bg-gray-700 inline-block mb-2"></div>
               </div>
-              <form>
+              <form onSubmit={resetPassword}>
                 <div className="flex flex-col items-center">
                   <div className="bg-gray-100 w-64 p-2 flex items-center rounded mb-3">
                     <div className="bg-gray-100 w-64 p-2">
                       <HiMail className="text-grey-100 m-2" />
                     </div>
                     <input
-                      type="email"
-                      name="email"
+                      type="password"
+                      name="password"
                       placeholder="new password"
                       className="bg-gray-100 outline-none text-m flex-1"
                       required
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        value = {newPassword}
                     />
                   </div>
                   <div className="bg-gray-100 w-64 p-2 flex items-center rounded mb-3">
@@ -41,19 +62,20 @@ const EnterEmail = () => {
                       <HiMail className="text-grey-100 m-2" />
                     </div>
                     <input
-                      type="email"
-                      name="email"
+                      type="password"
+                      name="confirmPassword"
                       placeholder="confirm new password"
                       className="bg-gray-100 outline-none text-m flex-1"
                       required
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        value = {confirmPassword}
                     />
                   </div>
-                  <Link
-                    to="/EnterToken"
+                  <button
                     className="signIn px-7 py-3 w-64 justify-center rounded-md border border-transparent text-sm focus:outline-none transition duration-300 bg-[#5E9387] hover:bg-gray-700  text-center marker:sm:w-auto font-bold text-white"
                   >
                     Reset Password
-                  </Link>
+                  </button>
                 </div>
               </form>
             </div>

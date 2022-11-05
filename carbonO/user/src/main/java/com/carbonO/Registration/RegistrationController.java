@@ -38,14 +38,18 @@ public class RegistrationController {
                 return ResponseEntity.badRequest().body("email not found");
             }
             return ResponseEntity.badRequest().body("error");
+            // catch mailing exceptions
         } catch (Exception e) {
-            return ResponseEntity.status(550).body("Error sending email");
+            return ResponseEntity.status(550).body(e.getMessage());
         }
         return ResponseEntity.status(201).body(token);
     }
 
     @GetMapping(path = "confirm")
     public void confirm(@RequestParam("token") String token, HttpServletResponse response) throws IOException {
+        Long userId = registrationService.confirmToken(token);
+        //create a new user reward account after confirmation
+        registrationService.createUserRewardAccount(userId);
         response.sendRedirect("http://18.136.163.9:8085/login");
     }
 
