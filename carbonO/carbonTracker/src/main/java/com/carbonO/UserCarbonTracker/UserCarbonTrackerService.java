@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -57,7 +58,13 @@ public class UserCarbonTrackerService {
         userCarbonTrackerRepository.save(userCarbonTracker);
     }
 
-    public List<UserCarbonTracker> getUserDishedConsumed(Long userId) {
-        return userCarbonTrackerRepository.findAllByUserId(userId);
+    public List<Dish> getUserDishedConsumed(Long userId) {
+        List<UserCarbonTracker> userCarbonTrackerList = userCarbonTrackerRepository.findAllByUserId(userId);
+
+        List<Dish> dishConsumed = new ArrayList<>();
+        for (UserCarbonTracker userCarbonTracker : userCarbonTrackerList){
+            dishConsumed.add(userCarbonTracker.getDish());
+        }
+        return dishConsumed;
     }
 }

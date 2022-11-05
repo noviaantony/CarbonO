@@ -26,14 +26,14 @@ public class UserCarbonTrackerController {
     }
     //Get all dishes consumed by a user
     @GetMapping("/getUserDishedConsumed")
-    public ResponseEntity<List<UserCarbonTracker>> getUserDishedConsumed(@RequestParam("userId") Long userId){
+    public ResponseEntity<List<Dish>> getUserDishedConsumed(@RequestParam("userId") Long userId){
 
-            List<UserCarbonTracker> userCarbonTrackerList = userCarbonTrackerService.getUserDishedConsumed(userId);
+            List<Dish> userCarbonTrackerDishList = userCarbonTrackerService.getUserDishedConsumed(userId);
 
-            if (userCarbonTrackerList.isEmpty()) {
+            if (userCarbonTrackerDishList.isEmpty()) {
                 return ResponseEntity.status(404).body(null);
             } else {
-                return ResponseEntity.ok().body(userCarbonTrackerList);
+                return ResponseEntity.ok().body(userCarbonTrackerDishList);
             }
 
     }
