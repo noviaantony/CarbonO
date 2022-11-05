@@ -1,7 +1,7 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import QrReader from "react-qr-scanner";
 import CarbonTrackerService from "../../services/CarbonTrackerService";
-import AuthContext from "../../context/AuthProvider";
+import AuthContext from "../../hooks/AuthProvider";
 
 class QRScanner extends React.Component {
   static contextType = AuthContext;
@@ -23,23 +23,24 @@ class QRScanner extends React.Component {
     this.setState({
       result: data,
     });
-     //this can be removed, its just a test to see if the data from qr scan is collected
+    //this can be removed, its just a test to see if the data from qr scan is collected
     let result = "";
     if (data != null) {
       const response = JSON.parse(data.text);
       console.log(response);
       console.log(this.context.auth.userId);
-      CarbonTrackerService.postDishConsumed(this.context.auth.accessToken, this.context.auth.userId, response.id).then(response => result = response);
+      CarbonTrackerService.postDishConsumed(
+        this.context.auth.accessToken,
+        this.context.auth.userId,
+        response.id
+      ).then((response) => (result = response));
 
       this.setState({
-        message:
-          this.state.message + result,
+        message: this.state.message + result,
       });
       return prev_state;
     }
-
   };
-
 
   handleError = (err) => {
     console.error(err);
@@ -62,6 +63,3 @@ class QRScanner extends React.Component {
 }
 
 export default QRScanner;
-
-
-
