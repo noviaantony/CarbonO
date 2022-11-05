@@ -15,6 +15,7 @@ import NotAuthNavbar from "./components/navigation/NotAuthNavbar";
 import PageNotFound from "./screens/PageNotFound";
 import ResetPassword from "./components/registration/ResetPassword";
 import ForgotPassword from "./components/registration/ForgotPassword";
+import ThankYou from "./components/registration/ThankYou";
 
 function App() {
   const { auth, setAuth } = useContext(AuthContext);
@@ -34,6 +35,7 @@ function App() {
         <Route path="/Login" element={<LogInForm />} />
         <Route path="/ResetPassword" element={<ResetPassword />} />
         <Route path="/ForgetPassword" element={<ForgotPassword />} />
+        <Route path="/ThankYou" element={<ThankYou />} />
         <Route path="/Signup" element={<SignUpForm />} />
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/Donate" element={<Donate />} />

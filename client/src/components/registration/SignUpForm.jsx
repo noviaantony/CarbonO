@@ -205,8 +205,8 @@ const SignUpForm = () => {
                     />
                     {/* password section */}
                     <button
-                      // href=""
-                      className="px-7 py-3 w-64 justify-center rounded-md border border-transparent text-sm focus:outline-none transition duration-300 bg-[#5E9387] hover:bg-gray-700  text-center marker:sm:w-auto font-bold text-white mt-8"
+                     className="px-7 py-3 w-64 justify-center rounded-md border border-transparent text-sm focus:outline-none transition duration-300 bg-[#5E9387] hover:bg-gray-700  text-center marker:sm:w-auto font-bold text-white mt-8"
+                     onClick={<Navigate to="/ThankYou" />}
                     >
                       Sign Up
                     </button>
