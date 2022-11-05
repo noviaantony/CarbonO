@@ -99,10 +99,10 @@ const SignUpForm = () => {
                   <h2 className="text-2xl font-bold text-gray-700 mb-2">
                     Sign up for an account
                   </h2>
+                  <div className="border-2 w-10 border-gray-700 bg-gray-700 inline-block mb-2"></div>
                   <span class=" text-red-800 text-sm mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900 font-bold">
                     {errMsg}
                   </span>
-                  <div className="border-2 w-10 border-gray-700 bg-gray-700 inline-block mb-2"></div>
                 </div>
                 <form onSubmit={handleSubmit}>
                   <div className="flex flex-col items-center">
