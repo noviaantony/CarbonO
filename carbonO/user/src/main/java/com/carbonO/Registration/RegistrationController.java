@@ -8,6 +8,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 @RestController
 @RequestMapping(path = "api/v1/carbonO/user/registration")
 @AllArgsConstructor
@@ -16,7 +19,7 @@ public class RegistrationController {
     @Autowired
     private MailingService mailingService;
 
-    private static final String baseUrl = "";
+    private static final String baseUrl = "http://18.136.163.9:8080/api/v1/carbonO/user/registration";
 
     @PostMapping
     public ResponseEntity<String> register(@RequestBody RegistrationRequest request) {
@@ -42,8 +45,8 @@ public class RegistrationController {
     }
 
     @GetMapping(path = "confirm")
-    public String confirm(@RequestParam("token") String token) {
-        return registrationService.confirmToken(token);
+    public void confirm(@RequestParam("token") String token, HttpServletResponse response) throws IOException {
+        response.sendRedirect("http://18.136.163.9:8085/login");
     }
 
 }

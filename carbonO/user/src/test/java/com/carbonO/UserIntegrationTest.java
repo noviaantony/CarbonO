@@ -27,7 +27,7 @@ import java.net.URI;
 public class UserIntegrationTest {
 
     @LocalServerPort
-    private int port = 5432;
+    private int port = 8081;
 
 //    @Autowired
 //    private WebApplicationContext webApplicationContext;
@@ -49,63 +49,63 @@ public class UserIntegrationTest {
 //        this.mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 //    }
 
-    @Test
-    public void createTestingUser() throws Exception{
-
-        RegistrationRequest request = new RegistrationRequest("testing1", "testing", "testing123@gmail.com", "123");
-
-        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/registration");
-
-        ResponseEntity<String> result = restTemplate.postForEntity(uri,request,String.class);
-
-        Assertions.assertEquals(201,result.getStatusCode().value());
-
-        User user = userRepository.findByEmail("testing123@gmail.com").get();
-
-        userRepository.deleteById(user.getId());
-
-
-    }
-
-    @Test
-    public void loginTesting() throws Exception {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
-        map.add("username", "chenzhaoxing.98@gmail.com");
-        map.add("password", "123");
-
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
-
-        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/login");
-
-        ResponseEntity<String> result = restTemplate.postForEntity(uri,request,String.class);
-
-        Assertions.assertEquals(200,result.getStatusCode().value());
-
-        String token = result.getBody();
-
-        System.out.println(token);
-    }
-
-    @Test
-    public void registration_duplicateEmail_Failure() throws Exception{
-
-        RegistrationRequest request = new RegistrationRequest("testing1", "testing", "testing1@gmail.com", "123");
-
-        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/registration");
-
-        ResponseEntity<String> result = restTemplate.postForEntity(uri,request,String.class);
-
-        ResponseEntity<String> result2 = restTemplate.postForEntity(uri,request,String.class);
-
-        Assertions.assertEquals(403,result2.getStatusCode().value());
-
-        User user = userRepository.findByEmail("testing1@gmail.com").get();
-
-        userRepository.deleteById(user.getId());
-
-    }
+//    @Test
+//    public void createTestingUser() throws Exception{
+//
+//        RegistrationRequest request = new RegistrationRequest("testing1", "testing", "testing123@gmail.com", "123");
+//
+//        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/registration");
+//
+//        ResponseEntity<String> result = restTemplate.postForEntity(uri,request,String.class);
+//
+//        Assertions.assertEquals(201,result.getStatusCode().value());
+//
+//        User user = userRepository.findByEmail("testing123@gmail.com").get();
+//
+//        userRepository.deleteById(user.getId());
+//
+//
+//    }
+//
+//    @Test
+//    public void loginTesting() throws Exception {
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+//        MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
+//        map.add("username", "chenzhaoxing.98@gmail.com");
+//        map.add("password", "123");
+//
+//        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
+//
+//        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/login");
+//
+//        ResponseEntity<String> result = restTemplate.postForEntity(uri,request,String.class);
+//
+//        Assertions.assertEquals(200,result.getStatusCode().value());
+//
+//        String token = result.getBody();
+//
+//        System.out.println(token);
+//    }
+//
+//    @Test
+//    public void registration_duplicateEmail_Failure() throws Exception{
+//
+//        RegistrationRequest request = new RegistrationRequest("testing1", "testing", "testing1@gmail.com", "123");
+//
+//        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/registration");
+//
+//        ResponseEntity<String> result = restTemplate.postForEntity(uri,request,String.class);
+//
+//        ResponseEntity<String> result2 = restTemplate.postForEntity(uri,request,String.class);
+//
+//        Assertions.assertEquals(403,result2.getStatusCode().value());
+//
+//        User user = userRepository.findByEmail("testing1@gmail.com").get();
+//
+//        userRepository.deleteById(user.getId());
+//
+//    }
 
 
 
