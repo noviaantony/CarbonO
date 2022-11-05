@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 @RestController
@@ -26,7 +27,15 @@ public class UserCarbonTrackerController {
     //Get all dishes consumed by a user
     @GetMapping("/getUserDishedConsumed")
     public ResponseEntity<List<UserCarbonTracker>> getUserDishedConsumed(@RequestParam("userId") Long userId){
-        return ResponseEntity.ok().body(userCarbonTrackerService.getUserDishedConsumed(userId));
+
+            List<UserCarbonTracker> userCarbonTrackerList = userCarbonTrackerService.getUserDishedConsumed(userId);
+
+            if (userCarbonTrackerList.isEmpty()) {
+                return ResponseEntity.status(404).body(null);
+            } else {
+                return ResponseEntity.ok().body(userCarbonTrackerList);
+            }
+
     }
 
     //Get a specific user's total carbon consumption since the beginning

@@ -32,7 +32,7 @@ public class UserCarbonTracker {
 
     @ManyToOne
     @JoinColumn(name="dish_id")
-    @JsonManagedReference
+    @JsonBackReference("dish_userCarbonTracker")
     private Dish dish;
 
     public UserCarbonTracker() {

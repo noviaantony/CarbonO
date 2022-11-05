@@ -27,7 +27,7 @@ public class DishKeywords {
 
     @ManyToOne
     @JoinColumn(name = "dish_Id")
-    @JsonBackReference
+    @JsonBackReference("dish_dishKeyWords")
     private Dish dish;
 
     public DishKeywords(Dish dish, String keyword) {
