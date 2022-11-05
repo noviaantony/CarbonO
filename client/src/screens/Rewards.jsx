@@ -3,6 +3,7 @@ import { ThreeDots } from "react-loader-spinner";
 import RewardCard from "../components/rewards/RewardCard";
 import Header from "../components/misc/Header";
 import UserRewardService from "../services/UserRewardService";
+import { motion } from "framer-motion";
 import Modal from "react-modal";
 import "../styles/styles.css";
 
@@ -66,7 +67,9 @@ const Rewards = () => {
             </div>
           </>
         ) : (
-          <div className="flex flex-wrap ">
+          <div
+            className="flex flex-wrap"
+          >
             <div className="w-full">
               <ul
                 className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row mx-36 mt-12"
@@ -139,8 +142,10 @@ const Rewards = () => {
                       id="link1"
                     >
                       {/* Fashion Rewards */}
-                      <div class="container my-12 mx-auto px-4 md:px-12">
-                        <div class="flex flex-wrap -mx-1 lg:-mx-4">
+                      <motion.div class="container my-12 mx-auto px-4 md:px-12">
+                        <div
+                          class="flex flex-wrap -mx-1 lg:-mx-4"
+                        >
                           {rewardList
                             .filter((reward) => {
                               if (reward.rewardType == "Fashion") {
@@ -150,7 +155,7 @@ const Rewards = () => {
                             .map((reward) => {
                               return (
                                 <RewardCard
-                                    RewardId={reward.rewardId}
+                                  RewardId={reward.rewardId}
                                   RewardBrandName={reward.brandName}
                                   RewardName={reward.rewardName}
                                   RewardPointsRequired={
@@ -160,12 +165,12 @@ const Rewards = () => {
                                   RewardDescription={reward.rewardDescription}
                                   RewardWebsite={reward.website}
                                   UserPoints={userRewardPoints}
-                                    UserTransactions={userTransactions}
+                                  UserTransactions={userTransactions}
                                 />
                               );
                             })}
                         </div>
-                      </div>
+                      </motion.div>
                     </div>
 
                     <div
@@ -174,7 +179,9 @@ const Rewards = () => {
                     >
                       {/* Food Rewards */}
                       <div class="container my-12 mx-auto px-4 md:px-12">
-                        <div class="flex flex-wrap -mx-1 lg:-mx-4">
+                        <div
+                          className="flex flex-wrap -mx-1 lg:-mx-4"
+                        >
                           {rewardList
                             .filter((reward) => {
                               if (reward.rewardType == "Food") {
@@ -184,7 +191,7 @@ const Rewards = () => {
                             .map((reward) => {
                               return (
                                 <RewardCard
-                                    RewardId={reward.rewardId}
+                                  RewardId={reward.rewardId}
                                   RewardBrandName={reward.brandName}
                                   RewardName={reward.rewardName}
                                   RewardPointsRequired={
@@ -194,7 +201,7 @@ const Rewards = () => {
                                   RewardDescription={reward.rewardDescription}
                                   RewardWebsite={reward.website}
                                   UserPoints={userRewardPoints}
-                                    UserTransactions={userTransactions}
+                                  UserTransactions={userTransactions}
                                 />
                               );
                             })}
@@ -207,7 +214,9 @@ const Rewards = () => {
                     >
                       {/* Transport Rewards */}
                       <div class="container my-12 mx-auto px-4 md:px-12">
-                        <div class="flex flex-wrap -mx-1 lg:-mx-4">
+                        <div
+                          className="flex flex-wrap -mx-1 lg:-mx-4"
+                        >
                           {rewardList
                             .filter((reward) => {
                               if (reward.rewardType == "Transport") {
@@ -217,7 +226,7 @@ const Rewards = () => {
                             .map((reward) => {
                               return (
                                 <RewardCard
-                                    RewardId={reward.rewardId}
+                                  RewardId={reward.rewardId}
                                   RewardBrandName={reward.brandName}
                                   RewardName={reward.rewardName}
                                   RewardPointsRequired={
@@ -227,7 +236,7 @@ const Rewards = () => {
                                   RewardDescription={reward.rewardDescription}
                                   RewardWebsite={reward.website}
                                   UserPoints={userRewardPoints}
-                                    UserTransactions={userTransactions}
+                                  UserTransactions={userTransactions}
                                 />
                               );
                             })}

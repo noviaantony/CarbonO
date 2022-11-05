@@ -6,6 +6,7 @@ import CarbonTrackerService from "../services/CarbonTrackerService";
 import Header from "../components/misc/Header";
 import AuthContext from "../context/AuthProvider";
 import QRScanner from "../components/carbontracker/QRScanner";
+import {motion} from "framer-motion"
 
 
 const  CarbonTracker = () => {
@@ -100,7 +101,11 @@ const  CarbonTracker = () => {
             </div>
           </form>
           <div class="container my-12 mx-auto px-4 md:px-12">
-            <div class="flex flex-wrap -mx-1 lg:-mx-4">
+            <motion.div
+              className="text-center lg:text-left actions flex flex-wrap -mx-1 lg:-mx-4"
+              animate={{ opacity: 1 }}
+              initial={{ opacity: 0 }}
+            >
               {foodList
                 .filter((dish) => {
                   if (searchTerm == "") {
@@ -127,7 +132,7 @@ const  CarbonTracker = () => {
                     />
                   );
                 })}
-            </div>
+            </motion.div>
           </div>
           {showReceiptUpload ? (
             <>

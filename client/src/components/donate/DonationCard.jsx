@@ -57,18 +57,36 @@ const DonationCard = ({Title, Image, Description, Website}) => {
             <h2 className="mb-5 text-3xl font-bold text-text-black  dark:text-gray-400">
               How many e-credits would you like to donate?
             </h2>
-            <Slider
-              defaultValue={50}
-              aria-label="Default"
-              valueLabelDisplay="auto"
-              min={50}
-              max={10000}
-              onChange={handleDonationAmount}
-              value = {donationAmount}
-            />
-            <h2 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+            {/* number inpit */}
+            <div className="flex justify-center">
+              <div className="mb-3 xl:w-96">
+                <input
+                  type="number"
+                  className="
+                    form-control
+                    block
+                    w-full
+                    px-3
+                    py-1.5
+                    text-base
+                    font-normal
+                    text-gray-700
+                    bg-white bg-clip-padding
+                    border border-solid border-gray-300
+                    rounded
+                    transition
+                    ease-in-out
+                    m-0
+                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                  "
+                  id="exampleNumber0"
+                  placeholder="Number input"
+                />
+              </div>
+            </div>
+            {/* <h2 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
               You have chosen to donate {donationAmount}
-            </h2>
+            </h2> */}
 
             <button
               data-modal-toggle="popup-modal"
