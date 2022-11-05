@@ -4,7 +4,7 @@ import { ReactComponent as HeroSvg } from "./Hero.svg";
 import { motion } from "framer-motion";
 
 
-const Hero3 = () => {
+const Hero = () => {
   return (
     <div>
       <div className="max-w-screen-2xl mx-auto pt-15 font-default">
@@ -85,4 +85,4 @@ const Hero3 = () => {
   );
 }
 
-export default Hero3
+export default Hero;
