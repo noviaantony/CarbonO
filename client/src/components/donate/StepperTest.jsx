@@ -76,6 +76,7 @@ const StepperTest = () => {
             <div className="mb-3 xl:w-96">
               <input
                 type="number"
+                min = "0"
                 className="
                 form-control
                 block
@@ -112,9 +113,13 @@ const StepperTest = () => {
       );
     } else {
       return (
-        <h2 className="mb-5 text-2xl text-center font-bold text-text-black  dark:text-gray-400">
-            Thank you for donating x amount to y organisation!
+        <div>
+<h2 className="mb-5 text-2xl text-center font-bold text-text-black  dark:text-gray-400">
+            Donation Success!
           </h2>
+          <p className="text-center">You have made a successful donation of x amount to y organisation</p>
+        </div>
+        
       )
     }
   };
