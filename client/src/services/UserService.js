@@ -17,13 +17,13 @@ class UserService{
         }
     }
 
-    async resetPassword(newPassword, token){
+    async resetPassword(token, newPassword){
         console.log('reset password');
         try {
             const response = await axios.put(
                 `${USER_API_URL}/processResetPassword`,
                 null,
-                {params: {newPassword,token}}
+                {params: {token, newPassword}}
             );
             return response.data;
         } catch (error) {

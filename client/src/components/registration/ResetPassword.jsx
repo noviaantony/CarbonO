@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
 import { ReactComponent as ResetPasswordSvg } from "./ResetPassword.svg";
 import { HiMail, HiCheckCircle } from "react-icons/hi";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams, useSearchParams} from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import UserService from "../../services/UserService";
+// import {Properties as a} from "react-file-base64/public/app";
 
 const EnterEmail = () => {
   const [newPassword, setNewPassword] = useState("");
@@ -11,12 +12,15 @@ const EnterEmail = () => {
 
   const navigate = useNavigate();
 
-  const { token } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const token = searchParams.get("token")
 
   const resetPassword = async (e) => {
     e.preventDefault();
+    console.log(token);
     UserService.resetPassword(token, newPassword, confirmPassword).then(r => {
       console.log(r);
+      Navigator.navigate("/login");
     });
   };
 
@@ -67,12 +71,11 @@ const EnterEmail = () => {
                         value = {confirmPassword}
                     />
                   </div>
-                  <Link
-                    to="/EnterToken"
+                  <button
                     className="signIn px-7 py-3 w-64 justify-center rounded-md border border-transparent text-sm focus:outline-none transition duration-300 bg-[#5E9387] hover:bg-gray-700  text-center marker:sm:w-auto font-bold text-white"
                   >
                     Reset Password
-                  </Link>
+                  </button>
                 </div>
               </form>
             </div>
