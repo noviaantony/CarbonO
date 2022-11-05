@@ -7,7 +7,7 @@ import Slider from "@mui/material/Slider";
 
 
 
-const DonationCard = ({Title, Image, Description, Website}) => {
+const DonationCard = ({Title, Image, Description, Website, UserCredits}) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [donationAmount, setDonationAmount] = useState(0);

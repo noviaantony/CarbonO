@@ -29,6 +29,8 @@ public class RewardTransaction {
     )
     private Long id;
     private Date dateOfTransaction;
+    private boolean isDonation = false;
+    private Long organisationId;
 
     @ManyToOne
     @JoinColumn (name = "userReward_id")
@@ -43,5 +45,12 @@ public class RewardTransaction {
         this.dateOfTransaction = dateOfTransaction;
         this.userReward = userReward;
         this.reward = reward;
+    }
+    public RewardTransaction(Date dateOfTransaction, UserReward userReward, Reward reward, boolean isDonation, Long organisationId) {
+        this.dateOfTransaction = dateOfTransaction;
+        this.userReward = userReward;
+        this.reward = reward;
+        this.isDonation = isDonation;
+        this.organisationId = organisationId;
     }
 }

@@ -26,9 +26,17 @@ public class RewardTransactionService {
 
         //Create a new reward transaction
         RewardTransaction rewardTransaction = new RewardTransaction(new Date(),userReward, reward);
-
         reward.setRewardQuantity(reward.getRewardQuantity() - 1);
         rewardRepository.save(reward);
+
+
+        rewardTransactionRepository.save(rewardTransaction);
+    }
+
+    public void addNewDonationTransaction(UserReward userReward, Reward reward, boolean isDonation, Long organisationId) {
+
+        //Create a new donation transaction
+        RewardTransaction    rewardTransaction = new RewardTransaction(new Date(), userReward,null, true, organisationId);
 
         rewardTransactionRepository.save(rewardTransaction);
     }

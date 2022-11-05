@@ -12,7 +12,6 @@ const CarbonTracker = () => {
   const { auth } = useContext(AuthContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [foodList, setFoodList] = useState([]);
-  const [todo, setTodo] = useState({});
   const [loading, setLoading] = useState(false);
   const [showReceiptUpload, setshowReceiptUpload] = useState(false);
 
@@ -23,7 +22,6 @@ const CarbonTracker = () => {
         setFoodList(response);
       })
       .then((data) => {
-        setTodo(data);
         setLoading(false);
       });
   }, []);
