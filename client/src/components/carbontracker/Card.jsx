@@ -12,13 +12,6 @@ const Card = ({dishId, dishTitle, dishImage, dishRating, dishKeywords, dishIngre
   const {auth} = useContext(AuthContext);
 
   const [showDishInfo, setshowDishInfo] = React.useState(false);
-  // const [showReceiptUpload, setshowReceiptUpload] = React.useState(false);
-  const [selectedFile, setSelectedFile] = useState(null);
-  // const [successMessage, setSuccessMessage] = React.useState(false);
-  // const [errorMessage, setErrorMessage] = React.useState(false);
-
-
-  
 
   const rendereddishRating = [];
   for (let i = 0; i < dishRating ; i++) {
@@ -28,15 +21,6 @@ const Card = ({dishId, dishTitle, dishImage, dishRating, dishKeywords, dishIngre
     rendereddishRating.push(<IoLeafOutline size={30} color="gray-700" />);
   }
 
-  function testingJson() {
-    // try {
-      CarbonTrackerService.postDishConsumed(auth.accessToken, auth.userId, 4).then((response) => {
-        console.log(response);
-      });
-    // } catch (error) {
-    //     console.log(error);
-    // }
-  }
 
   return (
     <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 font-default">
@@ -69,9 +53,6 @@ const Card = ({dishId, dishTitle, dishImage, dishRating, dishKeywords, dishIngre
             >
               More Info
             </button>
-            <button
-                onClick={() => testingJson()}
-            >Test</button>
           </div>
 
           {/* more info modal */}
@@ -82,7 +63,7 @@ const Card = ({dishId, dishTitle, dishImage, dishRating, dishKeywords, dishIngre
                   {/*content*/}
                   <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                     {/*header*/}
-                    <div className="text-center items-start justify-between p-3 border-b border-solid border-slate-200 rounded-t">
+                    <div className="text-center items-start justify-between p-3 border-b border-solid border-slate-200 rounded-t mt-5">
                       <h3 className="text-3xl font-semibold">{dishTitle}</h3>
                       <button
                         className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
@@ -117,8 +98,6 @@ const Card = ({dishId, dishTitle, dishImage, dishRating, dishKeywords, dishIngre
               <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
             </>
           ) : null}
-
-          {/* receipt upload modal */}
 
           
         </footer>
