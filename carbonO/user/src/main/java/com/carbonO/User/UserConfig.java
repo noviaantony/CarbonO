@@ -28,8 +28,15 @@ public class UserConfig {
                     encodedPassword,
                     UserRole.ADMIN
             );
+            User tester = new User(
+                    "CarbonO",
+                    "Testing",
+                    "carbonohelp@gmail.com",
+                    encodedPassword,
+                    UserRole.ADMIN
+            );
             repository.saveAll(
-                    List.of(xz)
+                    List.of(xz,tester)
             );
         };
     }

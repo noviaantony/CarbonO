@@ -1,7 +1,5 @@
 package com.carbonO;
 
-
-
 import com.carbonO.Registration.RegistrationRequest;
 import com.carbonO.Registration.token.ConfirmationTokenRepository;
 import com.carbonO.User.*;
@@ -46,11 +44,10 @@ public class UserIntegrationTest {
     @Autowired
     private ConfirmationTokenRepository confirmationTokenRepository;
 
-
     @Test
-    public void createTestingUser() throws Exception{
+    public void registration_NewEmail_Pass() throws Exception{
 
-        RegistrationRequest request = new RegistrationRequest("testing1", "testing", "testing123@gmail.com", "123");
+        RegistrationRequest request = new RegistrationRequest("testing", "user", "carbonohelp2@gmail.com", "123");
 
         URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/registration");
 
@@ -58,14 +55,14 @@ public class UserIntegrationTest {
 
         Assertions.assertEquals(201,result.getStatusCode().value());
 
-        User user = userRepository.findByEmail("testing123@gmail.com").get();
+        User user = userRepository.findByEmail(request.getEmail()).get();
 
-        userRepository.deleteById(user.getId());
+        userRepository.delete(user);
 
     }
 
     @Test
-    public void loginTesting() throws Exception {
+    public void loginTesting_Pass() throws Exception {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
@@ -88,7 +85,7 @@ public class UserIntegrationTest {
     @Test
     public void registration_duplicateEmail_Failure() throws Exception{
 
-        RegistrationRequest request = new RegistrationRequest("testing1", "testing", "testing1@gmail.com", "123");
+        RegistrationRequest request = new RegistrationRequest("testing", "user2", "carbonohelp@gmail.com", "123");
 
         URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/registration");
 
@@ -98,25 +95,13 @@ public class UserIntegrationTest {
 
         Assertions.assertEquals(403,result2.getStatusCode().value());
 
-        User user = userRepository.findByEmail("testing1@gmail.com").get();
-
-        userRepository.deleteById(user.getId());
-
     }
     @Test
     public void forgotPassword_CorrectEmail_Pass() throws Exception {
 
-        RegistrationRequest request = new RegistrationRequest("testing1", "testing", "testing123@gmail.com", "123");
+        String email = "carbonohelp@gmail.com";
 
-        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/registration");
-
-        ResponseEntity<String> result = restTemplate.postForEntity(uri,request,String.class);
-
-        Assertions.assertEquals(201,result.getStatusCode().value());
-
-        String email = "testing123@gmail.com";
-
-        uri = new URI(baseurl + port + "/api/v1/carbonO/user/forgotPassword?email=" + email);
+        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/forgotPassword?email=" + email);
 
         ResponseEntity<String> result2 = restTemplate.postForEntity(uri,email,String.class);
 
@@ -128,11 +113,10 @@ public class UserIntegrationTest {
 
         userRepository.save(user);
 
-        userRepository.delete(user);
     }
     @Test
     public void forgotPassword_WrongEmail_Failure() throws Exception {
-        String email = "testing123@gmail.com";
+        String email = "carbonohelp2@gmail.com";
 
         URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/forgotPassword?email=" + email);
 
@@ -143,31 +127,26 @@ public class UserIntegrationTest {
 
     @Test
     public void resetPassword_CorrectEmail_Pass() throws Exception {
-        RegistrationRequest request = new RegistrationRequest("testing1", "testing", "testing123@gmail.com", "123");
 
-        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/registration");
+        String token = RandomString.make(45);
 
-        ResponseEntity<String> result = restTemplate.postForEntity(uri,request,String.class);
-
-        String email = "testing123@gmail.com";
-
-        uri = new URI(baseurl + port + "/api/v1/carbonO/user/forgotPassword?email=" + email);
-
-        ResponseEntity<String> result2 = restTemplate.postForEntity(uri,email,String.class);
-
-        String token = result2.getBody().substring(65);
-
-        System.out.println(token);
-
-        uri = new URI(baseurl + port + "/api/v1/carbonO/user/resetPassword?token=" + token);
-
-        ResponseEntity<String> result3 = restTemplate.getForEntity(uri, String.class);
-
-        Assertions.assertEquals(200, result3.getStatusCode().value());
+        String email = "carbonohelp@gmail.com";
 
         User user = userRepository.findByEmail(email).get();
 
-        userRepository.delete(user);
+        user.setResetPasswordToken(token);
+
+        userRepository.save(user);
+
+        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/resetPassword?token=" + token);
+
+        ResponseEntity<String> result = restTemplate.getForEntity(uri, String.class);
+
+        Assertions.assertEquals(200, result.getStatusCode().value());
+
+        user.setResetPasswordToken(null);
+
+        userRepository.save(user);
 
     }
     @Test
