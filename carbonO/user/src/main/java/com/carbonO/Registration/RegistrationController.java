@@ -35,8 +35,9 @@ public class RegistrationController {
                 return ResponseEntity.badRequest().body("email not found");
             }
             return ResponseEntity.badRequest().body("error");
+            // catch mailing exceptions
         } catch (Exception e) {
-            return ResponseEntity.status(550).body("Error sending email");
+            return ResponseEntity.status(550).body(e.getMessage());
         }
         return ResponseEntity.status(201).body(token);
     }
