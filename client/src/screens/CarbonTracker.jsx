@@ -20,8 +20,7 @@ const CarbonTracker = () => {
     CarbonTrackerService.getAllDishes()
       .then((response) => {
         setFoodList(response); 
-      })
-      .then((data) => {
+      }).then((data) => {
         setLoading(false);
       });
   }, []);

@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 
@@ -28,7 +30,7 @@ public class UserCarbonTrackerController {
     @GetMapping("/getUserDishedConsumed")
     public ResponseEntity<List<Dish>> getUserDishedConsumed(@RequestParam("userId") Long userId){
 
-            List<Dish> userCarbonTrackerDishList = userCarbonTrackerService.getUserDishedConsumed(userId);
+            List<Dish>  userCarbonTrackerDishList = userCarbonTrackerService.getUserDishedConsumed(userId);
 
             if (userCarbonTrackerDishList.isEmpty()) {
                 return ResponseEntity.status(404).body(null);

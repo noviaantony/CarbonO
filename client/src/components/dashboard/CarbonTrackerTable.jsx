@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react'
 import carbonTrackerService from "../../services/CarbonTrackerService";
 
 const CarbonTrackerTable = ({historicalData}) => {
-
   return (
     <div className="overflow-x-auto relative sm:rounded-lg  m-6 font-default w-6/12">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -33,11 +32,11 @@ const CarbonTrackerTable = ({historicalData}) => {
                   scope="row"
                   className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
               >
-                {data.dish.dishName}
+                {data.dishName}
               </th>
-              <td className="py-4 px-6">{data.dateConsumed.substring(0,10)}</td>
-              <td className="py-4 px-6">{data.dish.carbonRating}</td>
-              <td className="py-4 px-6">{data.dish.totalCarbonFootprint.toFixed(0) + 'g'}</td>
+              <td className="py-4 px-6">{data.userCarbonTrackers[0].dateConsumed.substring(0,10)}</td>
+              <td className="py-4 px-6">{data.carbonRating}</td>
+              <td className="py-4 px-6">{data.totalCarbonFootprint.toFixed(0) + 'g'}</td>
               <td className="py-4 px-6">
                 <a
                     href="#"
