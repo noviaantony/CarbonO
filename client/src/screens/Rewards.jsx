@@ -1,4 +1,4 @@
-import React, {useContext, useState, useRef, useEffect} from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import RewardCard from "../components/rewards/RewardCard";
 import Header from "../components/misc/Header";
@@ -7,9 +7,7 @@ import { motion } from "framer-motion";
 import Modal from "react-modal";
 import "../styles/styles.css";
 
-
-
-import AuthContext from "../context/AuthProvider";
+import AuthContext from "../hooks/AuthProvider";
 
 const Rewards = () => {
   const [openTab, setOpenTab] = React.useState(1);
@@ -17,31 +15,30 @@ const Rewards = () => {
   const [loading, setLoading] = useState(false);
   const [userRewardPoints, setUserRewardPoints] = useState(0);
   const [userTransactions, setUserTransactions] = useState([]);
-  const {auth} = useContext(AuthContext);
-    // let userRewardPoints = 0;
+  const { auth } = useContext(AuthContext);
+  // let userRewardPoints = 0;
 
-  React.useEffect(()=> {
+  React.useEffect(() => {
     setLoading(true);
     UserRewardService.getAllRewards()
-        .then((response) => {
-          setRewardList(response);
-        }).then((data) => {
-      setLoading(false);
-    })
-  },[])
+      .then((response) => {
+        setRewardList(response);
+      })
+      .then((data) => {
+        setLoading(false);
+      });
+  }, []);
 
-
-
-    // get userReward account information
-    useEffect(() => {
-        UserRewardService
-            .getUserReward(auth.userId, auth.accessToken)
-            .then((response) => {
-                setUserTransactions(response.rewardTransactions);
-                setUserRewardPoints(response.rewardPoints);
-                console.log(userRewardPoints);
-            });
-    }, []);
+  // get userReward account information
+  useEffect(() => {
+    UserRewardService.getUserReward(auth.userId, auth.accessToken).then(
+      (response) => {
+        setUserTransactions(response.rewardTransactions);
+        setUserRewardPoints(response.rewardPoints);
+        console.log(userRewardPoints);
+      }
+    );
+  }, []);
 
   return (
     <>
@@ -67,9 +64,7 @@ const Rewards = () => {
             </div>
           </>
         ) : (
-          <div
-            className="flex flex-wrap"
-          >
+          <div className="flex flex-wrap">
             <div className="w-full">
               <ul
                 className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row mx-36 mt-12"
@@ -143,9 +138,7 @@ const Rewards = () => {
                     >
                       {/* Fashion Rewards */}
                       <motion.div class="container my-12 mx-auto px-4 md:px-12">
-                        <div
-                          class="flex flex-wrap -mx-1 lg:-mx-4"
-                        >
+                        <div class="flex flex-wrap -mx-1 lg:-mx-4">
                           {rewardList
                             .filter((reward) => {
                               if (reward.rewardType == "Fashion") {
@@ -179,9 +172,7 @@ const Rewards = () => {
                     >
                       {/* Food Rewards */}
                       <div class="container my-12 mx-auto px-4 md:px-12">
-                        <div
-                          className="flex flex-wrap -mx-1 lg:-mx-4"
-                        >
+                        <div className="flex flex-wrap -mx-1 lg:-mx-4">
                           {rewardList
                             .filter((reward) => {
                               if (reward.rewardType == "Food") {
@@ -214,9 +205,7 @@ const Rewards = () => {
                     >
                       {/* Transport Rewards */}
                       <div class="container my-12 mx-auto px-4 md:px-12">
-                        <div
-                          className="flex flex-wrap -mx-1 lg:-mx-4"
-                        >
+                        <div className="flex flex-wrap -mx-1 lg:-mx-4">
                           {rewardList
                             .filter((reward) => {
                               if (reward.rewardType == "Transport") {

@@ -1,71 +1,74 @@
-import React, {useRef, useState, useEffect, useContext} from 'react'
+import React, { useRef, useState, useEffect, useContext } from "react";
 import { HiMail, HiLockClosed } from "react-icons/hi";
 import { ReactComponent as SignInSvg } from "./SignInSvg.svg";
-import {Navigate ,Link } from "react-router-dom";
-import AuthContext from "../../context/AuthProvider";
+import { Navigate, Link } from "react-router-dom";
+import AuthContext from "../../hooks/AuthProvider";
 import axios from "axios";
 import CarbonTrackerService from "../../services/CarbonTrackerService";
 
-
-const LOGIN_URL = 'http://18.136.163.9:8080/api/v1/carbonO/user/login'
-const USER_ID_URL = 'http://18.136.163.9:8080/api/v1/carbonO/user/getUser'
+const LOGIN_URL = "http://18.136.163.9:8080/api/v1/carbonO/user/login";
+const USER_ID_URL = "http://18.136.163.9:8080/api/v1/carbonO/user/getUser";
 
 const LogInForm = () => {
-  const {setAuth} = useContext(AuthContext);
+  const { setAuth } = useContext(AuthContext);
   const userRef = useRef();
   const errRef = useRef();
 
-  const[email, setEmail] = useState('');
-  const[password, setPassword] = useState('');
-  const[errMsg, setErrMsg] = useState('');
-  const[success, setSuccess] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errMsg, setErrMsg] = useState("");
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     userRef.current.focus();
-  }, [])
+  }, []);
 
   useEffect(() => {
     setErrMsg();
-  }, [email, password])
+  }, [email, password]);
 
-const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-
     const params = new URLSearchParams();
-    params.append('username', email);
-    params.append('password', password);
+    params.append("username", email);
+    params.append("password", password);
 
     try {
-        console.log("Logging in...");
-        const loginResponse = await axios.post(LOGIN_URL,
-            params);
-        //store token in local storage
-        localStorage.setItem('token', loginResponse?.data?.access_token);
-        localStorage.setItem('authenticated', "true");
-        const userIdResponse = await axios.get(USER_ID_URL, {params: {email: email},
-            headers :{Authorization: `${localStorage.getItem('token')}`}
-        });
-        //store user id and first name of the user
-        localStorage.setItem('userId', userIdResponse.data.id);
-        localStorage.setItem('firstName', userIdResponse.data.firstName);
+      console.log("Logging in...");
+      const loginResponse = await axios.post(LOGIN_URL, params);
+      //store token in local storage
+      localStorage.setItem("token", loginResponse?.data?.access_token);
+      localStorage.setItem("authenticated", "true");
+      const userIdResponse = await axios.get(USER_ID_URL, {
+        params: { email: email },
+        headers: { Authorization: `${localStorage.getItem("token")}` },
+      });
+      //store user id and first name of the user
+      localStorage.setItem("userId", userIdResponse.data.id);
+      localStorage.setItem("firstName", userIdResponse.data.firstName);
 
-        setAuth({"authenticated": true, "accessToken": loginResponse?.data?.access_token, "userId": userIdResponse.data.id, "firstName": userIdResponse.data.firstName});
+      setAuth({
+        authenticated: true,
+        accessToken: loginResponse?.data?.access_token,
+        userId: userIdResponse.data.id,
+        firstName: userIdResponse.data.firstName,
+      });
 
-        setSuccess(true);
-    } catch (err){
-        if (!err?.response){
-            setErrMsg('Unable to connect to server');
-        } else if (err.response.status === 400){
-            setErrMsg('Missing Username or password');
-        } else if (err.response.status === 401){
-            setErrMsg('Unauthorized');
-        } else {
-            setErrMsg('Unable to login');
-        }
-        errRef.current.focus();
+      setSuccess(true);
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg("Unable to connect to server");
+      } else if (err.response.status === 400) {
+        setErrMsg("Missing Username or password");
+      } else if (err.response.status === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg("Unable to login");
+      }
+      errRef.current.focus();
     }
-}
+  };
 
   return (
     <>
@@ -164,6 +167,6 @@ const handleSubmit = async (e) => {
       )}
     </>
   );
-}
+};
 
 export default LogInForm;

@@ -1,34 +1,32 @@
-import React, {useContext, useState, useEffect} from 'react'
+import React, { useContext, useState, useEffect } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { MdQrCodeScanner } from "react-icons/md";
 import Card from "../components/carbontracker/Card";
 import CarbonTrackerService from "../services/CarbonTrackerService";
 import Header from "../components/misc/Header";
-import AuthContext from "../context/AuthProvider";
+import AuthContext from "../hooks/AuthProvider";
 import QRScanner from "../components/carbontracker/QRScanner";
-import {motion} from "framer-motion"
+import { motion } from "framer-motion";
 
-
-const  CarbonTracker = () => {
-
-  const {auth} = useContext(AuthContext);
+const CarbonTracker = () => {
+  const { auth } = useContext(AuthContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [foodList, setFoodList] = useState([]);
   const [todo, setTodo] = useState({});
   const [loading, setLoading] = useState(false);
-  const [showReceiptUpload, setshowReceiptUpload] =useState(false);
+  const [showReceiptUpload, setshowReceiptUpload] = useState(false);
 
-
-  useEffect(()=> {
-      setLoading(true);
-     CarbonTrackerService.getAllDishes()
-         .then((response) => {
-           setFoodList(response);
-         }).then((data) => {
-          setTodo(data);
-          setLoading(false);
+  useEffect(() => {
+    setLoading(true);
+    CarbonTrackerService.getAllDishes()
+      .then((response) => {
+        setFoodList(response);
       })
-  },[])
+      .then((data) => {
+        setTodo(data);
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <>
