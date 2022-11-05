@@ -35,7 +35,7 @@ const LineChart = () => {
     <>
       <div
         style={{ width: "28%", height: "80%" }}
-        className="bg-white rounded-lg h-auto p-6 flex items-stretch m-6 font-default"
+        className="bg-white rounded-lg h-auto p-6 flex items-stretch m-6 font-default text-xs"
       >
         <Line
           data={{
@@ -43,7 +43,7 @@ const LineChart = () => {
             labels: data,
             datasets: [
               {
-                label: " total C02 / day",
+                label: " total carbon emission / day",
                 data: datapoints,
                 backgroundColor: "rgba(255, 99, 132, 0.2)",
                 borderColor: "rgba(255, 99, 132, 1)",
@@ -61,7 +61,7 @@ const LineChart = () => {
             plugins: {
               title: {
                 display: true,
-                text: "Total CO2 Consumed",
+                text: "Total Carbon Emission",
               },
             },
             scales: {
@@ -74,7 +74,7 @@ const LineChart = () => {
               labels: {
                 // specific font property overrides the global property
                 font: {
-                  size: 14,
+                  size: 8,
                 },
               },
             },

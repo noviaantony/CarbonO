@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Modal from "react-modal";
-// import Slider, { Range } from "rc-slider";
-import Slider from "@mui/material/Slider";
-// import Slider from "./Slider"
+// // import Slider, { Range } from "rc-slider";
+// import Slider from "@mui/material/Slider";
+// // import Slider from "./Slider"
 
 const DonationCard = ({ Title, Image, Description, Website }) => {
   const [isOpen, setIsOpen] = useState(false);

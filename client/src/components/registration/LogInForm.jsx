@@ -63,9 +63,9 @@ const LogInForm = () => {
         setErrMsg("Missing Username or password");
       } else if (err.response.status === 401) {
         // unauthorized
-        setErrMsg("Incorrect password! Try again."); 
+        setErrMsg("Something went wrong! Ensure you have verified your account and that your password is correct"); 
       } else {
-        setErrMsg("Unable to login");
+        setErrMsg("Something went wrong! Try again.");
       }
       errRef.current.focus();
     }
