@@ -1,75 +1,129 @@
-import React, {useEffect, useRef, useState} from 'react'
-import {HiMail, HiLockClosed, HiUser} from "react-icons/hi";
+import React, { useEffect, useRef, useState } from "react";
+import { HiMail, HiLockClosed, HiUser } from "react-icons/hi";
 import { ReactComponent as SignUpSvg } from "./SignUpSvg.svg";
-import PasswordChecklist from "react-password-checklist"
-import {Link, Navigate} from "react-router-dom";
+import PasswordChecklist from "react-password-checklist";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
+import Modal from "react-modal";
+import { ReactComponent as TickSvg } from "./Tick.svg";
 
-
-const REGISTER_URL = 'http://18.136.163.9:8080/api/v1/carbonO/user/registration'
+const REGISTER_URL =
+  "http://18.136.163.9:8080/api/v1/carbonO/user/registration";
 
 const SignUpForm = () => {
   const userRef = useRef();
   const errRef = useRef();
 
-  const[firstName, setFirstName] = useState('');
-  const[lastName, setLastName] = useState('');
-  const[email, setEmail] = useState('');
-  const[password, setPassword] = useState('');
-  const[confirmPassword, setConfirmPassword] = useState('');
-  const[errMsg, setErrMsg] = useState('');
-  const[success, setSuccess] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errMsg, setErrMsg] = useState("");
+  const [success, setSuccess] = useState(false);
 
-  const [pw, setPw] = useState("")
-	const [confirmPw, setConfirmPw] = useState("")
-
-
-
+  const [pw, setPw] = useState("");
+  const [confirmPw, setConfirmPw] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  function toggleConfirmationModal() {
+    setIsOpen(!isOpen);
+    console.log(isOpen);
+  }
 
   useEffect(() => {
     userRef.current.focus();
-  }, [])
+  }, []);
 
   useEffect(() => {
     setErrMsg();
-  }, [firstName,lastName, email, password])
+  }, [firstName, lastName, email, password]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setFirstName("");
+    setLastName("");
+    setConfirmPassword("");
+    setPassword("");
+    setEmail("");
 
     const jsonRegistrationInfo = JSON.stringify({
-            "firstName": firstName,
-            "lastName": lastName,
-            "email": email,
-            "password": password}
-    );
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+    });
 
-    if (password !== confirmPassword){
-        setErrMsg('Passwords do not match');
-        console.log(errMsg)
-        errRef.current.focus();
+    if (password !== confirmPassword) {
+      setErrMsg("Passwords do not match");
+      console.log(errMsg);
+      errRef.current.focus();
     }
 
-    try{
-        const response = await axios.post(REGISTER_URL,
-            jsonRegistrationInfo,
-            {headers: {'Content-Type': 'application/json'}});
-        console.log(response)
-        setSuccess(true);
-    }catch (err){
-        if (!err?.response){
-            setErrMsg("Oops! Unable to connect to server.");
-        }  else if (err.response.status === 403){
-            setErrMsg('Oops! This email is taken.');
-        } else {
-            setErrMsg('Unable to signup, please check if your email exists.');
-        }
-        console.log(errMsg)
-        errRef.current.focus();
+    try {
+      const response = await axios.post(REGISTER_URL, jsonRegistrationInfo, {
+        headers: { "Content-Type": "application/json" },
+      });
+      console.log(response);
+      setSuccess(true);
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg("Oops! Unable to connect to server.");
+      } else if (err.response.status === 403) {
+        setErrMsg("Oops! This email is taken.");
+      } else {
+        setErrMsg("Unable to signup, please check if your email exists.");
+      }
+      console.log(errMsg);
+      errRef.current.focus();
     }
-  }
+   
+  };
   return (
     <>
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={toggleConfirmationModal}
+        contentLabel="My dialog"
+        className="mymodal"
+        overlayClassName="myoverlay"
+        closeTimeoutMS={500}
+      >
+        <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+          <button
+            type="button"
+            class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+            data-modal-toggle="popup-modal"
+            onClick={toggleConfirmationModal}
+          >
+            <svg
+              aria-hidden="true"
+              class="w-5 h-5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+          <div class="p-6 text-center">
+          <div class="grid place-items-center py-3">
+            <TickSvg  width="4rem" />   
+              </div> 
+            <h2 class="text-2xl text-center font-bold text-gray-700 py-5">
+              Thank You for Signing Up with Carbono!
+            </h2>
+            <p className="py-5">
+              A verification email will be sent to you within 1 working day
+            </p>
+          </div>
+        </div>
+      </Modal>
+
       {success ? (
         <section>
           <div
@@ -80,9 +134,7 @@ const SignUpForm = () => {
             your account to access CarbonO
           </div>
           <br />
-          <p>
-            <Navigate to="/login" />
-          </p>
+       
         </section>
       ) : (
         <div className="flex flex-col items-center justify-center min-h-screen py-2 font-default">
@@ -206,7 +258,7 @@ const SignUpForm = () => {
                     {/* password section */}
                     <button
                       className="px-7 py-3 w-64 justify-center rounded-md border border-transparent text-sm focus:outline-none transition duration-300 bg-[#5E9387] hover:bg-gray-700  text-center marker:sm:w-auto font-bold text-white mt-8"
-                      onClick={<Navigate to="/ThankYou" />}
+                      onClick={toggleConfirmationModal}
                     >
                       Sign Up
                     </button>
@@ -228,6 +280,6 @@ const SignUpForm = () => {
       )}
     </>
   );
-}
+};
 
-export default SignUpForm
+export default SignUpForm;
