@@ -1,12 +1,10 @@
 package com.carbonO;
 
-
-
 import com.carbonO.Registration.RegistrationRequest;
 import com.carbonO.Registration.token.ConfirmationTokenRepository;
 import com.carbonO.User.*;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import net.bytebuddy.utility.RandomString;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -27,12 +25,14 @@ import java.net.URI;
 public class UserIntegrationTest {
 
     @LocalServerPort
-    private int port = 8081;
+    private int port = 5432;
 
 //    @Autowired
 //    private WebApplicationContext webApplicationContext;
 
     private final String baseurl = "http://localhost:";
+
+    private final String ec2_BaseUrl = "http://18.136.163.9:";
 
     private RegistrationRequest registrationRequest;
 
@@ -44,139 +44,146 @@ public class UserIntegrationTest {
     @Autowired
     private ConfirmationTokenRepository confirmationTokenRepository;
 
-//    @BeforeEach
-//    public void setup() {
-//        this.mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-//    }
+    @Test
+    public void registration_NewEmail_Pass() throws Exception{
 
-//    @Test
-//    public void createTestingUser() throws Exception{
-//
+        RegistrationRequest request = new RegistrationRequest("testing", "user", "carbonohelp2@gmail.com", "123");
+
+        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/registration");
+
+        ResponseEntity<String> result = restTemplate.postForEntity(uri,request,String.class);
+
+        Assertions.assertEquals(201,result.getStatusCode().value());
+
+        User user = userRepository.findByEmail(request.getEmail()).get();
+
+        userRepository.delete(user);
+
+    }
+
+    @Test
+    public void loginTesting_Pass() throws Exception {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
+        map.add("username", "chenzhaoxing.98@gmail.com");
+        map.add("password", "123");
+
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
+
+        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/login");
+
+        ResponseEntity<String> result = restTemplate.postForEntity(uri,request,String.class);
+
+        Assertions.assertEquals(200,result.getStatusCode().value());
+
+        String token = result.getBody();
+
+        System.out.println(token);
+    }
+
+    @Test
+    public void registration_duplicateEmail_Failure() throws Exception{
+
+        RegistrationRequest request = new RegistrationRequest("testing", "user2", "carbonohelp@gmail.com", "123");
+
+        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/registration");
+
+        ResponseEntity<String> result = restTemplate.postForEntity(uri,request,String.class);
+
+        ResponseEntity<String> result2 = restTemplate.postForEntity(uri,request,String.class);
+
+        Assertions.assertEquals(403,result2.getStatusCode().value());
+
+    }
+    @Test
+    public void forgotPassword_CorrectEmail_Pass() throws Exception {
+
+        String email = "carbonohelp@gmail.com";
+
+        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/forgotPassword?email=" + email);
+
+        ResponseEntity<String> result2 = restTemplate.postForEntity(uri,email,String.class);
+
+        Assertions.assertEquals(200,result2.getStatusCode().value());
+
+        User user = userRepository.findByEmail(email).get();
+
+        user.setResetPasswordToken(null);
+
+        userRepository.save(user);
+
+    }
+    @Test
+    public void forgotPassword_WrongEmail_Failure() throws Exception {
+        String email = "carbonohelp2@gmail.com";
+
+        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/forgotPassword?email=" + email);
+
+        ResponseEntity<String> result = restTemplate.postForEntity(uri,email,String.class);
+
+        Assertions.assertEquals(404,result.getStatusCode().value());
+    }
+
+    @Test
+    public void resetPassword_CorrectEmail_Pass() throws Exception {
+
+        String token = RandomString.make(45);
+
+        String email = "carbonohelp@gmail.com";
+
+        User user = userRepository.findByEmail(email).get();
+
+        user.setResetPasswordToken(token);
+
+        userRepository.save(user);
+
+        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/resetPassword?token=" + token);
+
+        ResponseEntity<String> result = restTemplate.getForEntity(uri, String.class);
+
+        Assertions.assertEquals(200, result.getStatusCode().value());
+
+        user.setResetPasswordToken(null);
+
+        userRepository.save(user);
+
+    }
+    @Test
+    public void resetPassword_WrongEmail_Fail() throws Exception{
+        String token = null;
+
+        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/resetPassword?token=" + token);
+
+        ResponseEntity<String> result = restTemplate.getForEntity(uri, String.class);
+
+        Assertions.assertEquals(404,result.getStatusCode().value());
+    }
+
+//    public void processResetPassword_CorrectToken_Pass() throws Exception {
 //        RegistrationRequest request = new RegistrationRequest("testing1", "testing", "testing123@gmail.com", "123");
 //
 //        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/registration");
 //
 //        ResponseEntity<String> result = restTemplate.postForEntity(uri,request,String.class);
 //
-//        Assertions.assertEquals(201,result.getStatusCode().value());
+//        String email = "testing123@gmail.com";
 //
-//        User user = userRepository.findByEmail("testing123@gmail.com").get();
+//        User user = userRepository.findByEmail(email).get();
 //
-//        userRepository.deleteById(user.getId());
+//        String token = RandomString.make(45);
+//        user.setResetPasswordToken(token);
 //
+//        String newPassword = "123456";
 //
-//    }
+//        uri = new URI(baseurl + port + "/api/v1/carbonO/user/processResetPassword?newPassword=" + newPassword
+//        + "&token=" + token);
 //
-//    @Test
-//    public void loginTesting() throws Exception {
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-//        MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
-//        map.add("username", "chenzhaoxing.98@gmail.com");
-//        map.add("password", "123");
+//        ResponseEntity<String> result2 = restTemplate.put(uri.toString(),null,newPassword,token);
 //
-//        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
-//
-//        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/login");
-//
-//        ResponseEntity<String> result = restTemplate.postForEntity(uri,request,String.class);
-//
-//        Assertions.assertEquals(200,result.getStatusCode().value());
-//
-//        String token = result.getBody();
-//
-//        System.out.println(token);
-//    }
-//
-//    @Test
-//    public void registration_duplicateEmail_Failure() throws Exception{
-//
-//        RegistrationRequest request = new RegistrationRequest("testing1", "testing", "testing1@gmail.com", "123");
-//
-//        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/registration");
-//
-//        ResponseEntity<String> result = restTemplate.postForEntity(uri,request,String.class);
-//
-//        ResponseEntity<String> result2 = restTemplate.postForEntity(uri,request,String.class);
-//
-//        Assertions.assertEquals(403,result2.getStatusCode().value());
-//
-//        User user = userRepository.findByEmail("testing1@gmail.com").get();
-//
-//        userRepository.deleteById(user.getId());
-//
+//        Assertions.assertEquals(200, result2.getStatusCode().value());
 //    }
 
 
-
-
-//    @Test
-//    @BeforeEach
-//    public void testingProfile() throws Exception {
-//
-//        RegistrationRequest request = new RegistrationRequest("testing1", "testing", "testing1@gmail.com", "123");
-//        String json = objectMapper.writeValueAsString(request);
-//
-//        mvc.perform(MockMvcRequestBuilders
-//                .post("/api/v1/carbonO/user/registration")
-//                .content(json)
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .accept(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isCreated());
-////                .andExpect(MockMvcResultMatchers.jsonPath("$.userId").exists());
-//    }
-//
-//    @AfterEach
-//    public void tearDown() {
-//        userRepository.deleteAll();
-//        confirmationTokenRepository.deleteAll();
-//    }
-//
-//
-//    @Test
-//    public void getUser_InvalidUserEmail_Failure() throws Exception {
-////        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/getUser?email=usernotfound@gmail.com");
-////
-////        ResponseEntity<User> result = restTemplate.getForEntity(uri, User.class);
-//
-//        mvc.perform(MockMvcRequestBuilders.get("/getUser")
-//                 .queryParam("email","emailnotfound@gmail.com")
-//                .accept(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isNotFound());
-//
-////        Assertions.assertEquals(404, result.getStatusCode().value());
-//
-//    }
-//
-//    @Test
-//    public void getUser_ValidUserEmail_Pass() throws Exception {
-////        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/getUser?email=noiva@gmail.com");
-////
-////        ResponseEntity<User> result = restTemplate.getForEntity(uri, User.class);
-//
-//
-//
-//        mvc.perform(MockMvcRequestBuilders.get("/getUser")
-//                        .queryParam("email","novia@gmail.com")
-//                        .accept(MediaType.APPLICATION_JSON))
-//                        .andExpect(status().isOk());
-//
-////        Assertions.assertEquals(200, result.getStatusCode().value());
-//
-//    }
-//
-//    @Test
-//    public void getAllUsers_Pass() throws Exception {
-//
-//
-//        mvc.perform(MockMvcRequestBuilders
-//                        .get("/getAllUsers")
-//                        .accept(MediaType.APPLICATION_JSON))
-//                        .andDo(print())
-//                        .andExpect(status().isOk());
-////                .andExpect(MockMvcResultMatchers.jsonPath("$.getAllUsers").exists())
-////                .andExpect(MockMvcResultMatchers.jsonPath("$.getAllUsers[*].userId").isNotEmpty());
-//
-//    }
 
 }

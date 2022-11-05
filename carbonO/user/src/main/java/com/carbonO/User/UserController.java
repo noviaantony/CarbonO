@@ -25,7 +25,7 @@ public class UserController {
     @Autowired
     private MailingService mailingService;
 
-    private static final String baseUrl = "";
+    private static final String baseUrl = "http://18.136.163.9:8080/api/v1/carbonO/user";
 
     @Autowired
     public UserController(UserService userService){
