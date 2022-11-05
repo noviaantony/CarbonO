@@ -62,7 +62,8 @@ const LogInForm = () => {
       } else if (err.response.status === 400) {
         setErrMsg("Missing Username or password");
       } else if (err.response.status === 401) {
-        setErrMsg("Unauthorized");
+        // unauthorized
+        setErrMsg("Incorrect password! Try again."); 
       } else {
         setErrMsg("Unable to login");
       }
@@ -87,7 +88,11 @@ const LogInForm = () => {
                 <div className="py-10">
                   <p
                     ref={errRef}
-                    className={errMsg ? "errmsg" : "offscreen"}
+                    className={
+                      errMsg
+                        ? "text-red-800 text-sm mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900 font-bold"
+                        : "offscreen"
+                    }
                     aria-live="assertive"
                   >
                     {errMsg}

@@ -58,11 +58,11 @@ const SignUpForm = () => {
         setSuccess(true);
     }catch (err){
         if (!err?.response){
-            setErrMsg('Unable to connect to server');
+            setErrMsg("Oops! Unable to connect to server.");
         }  else if (err.response.status === 403){
-            setErrMsg('email already taken');
+            setErrMsg('Oops! This email is taken.');
         } else {
-            setErrMsg('Unable to login');
+            setErrMsg('Unable to signup, please check if your email exists.');
         }
         console.log(errMsg)
         errRef.current.focus();
@@ -89,19 +89,19 @@ const SignUpForm = () => {
           <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
             <div className="bg-white rounded-2xl shadow-2xl flex w-2/3 max-w-4xl">
               <div className="w-3/5 p-5">
-                
                 <div className="py-10">
                   <p
                     ref={errRef}
                     className={errMsg ? "errmsg" : "offscreen"}
                     aria-live="assertive"
-                  >
-                    {errMsg}
-                  </p>
+                  ></p>
                   {/*change this accordingly this is the error message*/}
                   <h2 className="text-2xl font-bold text-gray-700 mb-2">
                     Sign up for an account
                   </h2>
+                  <span class=" text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900 font-bold">
+                    {errMsg}
+                  </span>
                   <div className="border-2 w-10 border-gray-700 bg-gray-700 inline-block mb-2"></div>
                 </div>
                 <form onSubmit={handleSubmit}>
@@ -205,8 +205,8 @@ const SignUpForm = () => {
                     />
                     {/* password section */}
                     <button
-                     className="px-7 py-3 w-64 justify-center rounded-md border border-transparent text-sm focus:outline-none transition duration-300 bg-[#5E9387] hover:bg-gray-700  text-center marker:sm:w-auto font-bold text-white mt-8"
-                     onClick={<Navigate to="/ThankYou" />}
+                      className="px-7 py-3 w-64 justify-center rounded-md border border-transparent text-sm focus:outline-none transition duration-300 bg-[#5E9387] hover:bg-gray-700  text-center marker:sm:w-auto font-bold text-white mt-8"
+                      onClick={<Navigate to="/ThankYou" />}
                     >
                       Sign Up
                     </button>

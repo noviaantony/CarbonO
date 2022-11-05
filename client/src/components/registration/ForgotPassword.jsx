@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 
 const ForgotPassword = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <>
       <div className="flex flex-col items-center justify-center min-h-screen py-2 font-default">
