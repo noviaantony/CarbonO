@@ -130,7 +130,6 @@ const DonationCard = ({ Title, Image, Description, Website }) => {
                 Donate E-Credits
               </button>
 
-
               <Link
                 to="/Payment"
                 className="inline-flex items-center py-2 px-10 text-xs font-xs text-center text-[#5E9387] bg-white rounded-lg  focus:outline-none transition duration-300 mr-3 font-semibold border-[#5E9387] border-2 border-solid hover:bg-gray-700 hover:text-white"
