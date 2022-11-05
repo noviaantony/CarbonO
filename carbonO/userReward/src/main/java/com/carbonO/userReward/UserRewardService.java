@@ -63,7 +63,7 @@ public class UserRewardService {
         }
 
         //Add reward transaction to the user's reward account
-        rewardTransactionService.addNewDonationTransaction(userReward, null,true, organisationId);
+        rewardTransactionService.addNewDonationTransaction(userReward, null, pointsToDonate,true, organisationId);
 
         //deduct points from user's reward account
         userReward.setRewardPoints(userReward.getRewardPoints() - pointsToDonate);

@@ -33,10 +33,10 @@ public class RewardTransactionService {
         rewardTransactionRepository.save(rewardTransaction);
     }
 
-    public void addNewDonationTransaction(UserReward userReward, Reward reward, boolean isDonation, Long organisationId) {
+    public void addNewDonationTransaction(UserReward userReward, Reward reward, Integer pointsToDonate, boolean isDonation, Long organisationId) {
 
         //Create a new donation transaction
-        RewardTransaction    rewardTransaction = new RewardTransaction(new Date(), userReward,null, true, organisationId);
+        RewardTransaction rewardTransaction = new RewardTransaction(new Date(), userReward, reward, pointsToDonate, true, organisationId);
 
         rewardTransactionRepository.save(rewardTransaction);
     }
