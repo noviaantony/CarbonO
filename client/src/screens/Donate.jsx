@@ -1,10 +1,7 @@
 import React from "react";
 import Header from "../components/misc/Header";
 import DonationCard from "../components/donate/DonationCard";
-import GreenSpace from "./GreenSpace.jpeg";
-import CleanAir from "./CleanAir.jpeg";
-import Technology from "./Technology.jpeg";
-import Agriculture from "./Agriculture.jpeg";
+
 const Donate = () => {
   return (
     <>
@@ -26,28 +23,28 @@ const Donate = () => {
             <DonationCard
               Title="Clean Air Task Force: Reducing Carbon Emissions"
               Description="charity is dedicated to addressing climate change through the protection of rainforests, by giving control back to the people who live in them"
-              Image={CleanAir}
+              Image="https://as2.ftcdn.net/v2/jpg/03/73/58/69/1000_F_373586987_Cbsttxh4guQm9RJDgDFa1kw8L2XiF9EI.jpg"
               Website="https://www.catf.us/"
             />
 
             <DonationCard
               Title="Depave: Create More Green Spaces For All"
               Description="this charity aims to create more urban green spaces and free the environment from any injustice it has suffered "
-              Image={GreenSpace}
+              Image="https://as2.ftcdn.net/v2/jpg/05/31/71/39/1000_F_531713912_1nB95SShJ4BveRkFWuO7v02wGtOhpbr9.jpg"
               Website="https://depave.org/"
             />
 
             <DonationCard
               Title="The Carbon Underground: An Agricultural Combat Against Climate Change"
               Description="a driven organisation that seeks to transition to a regenerative argriculture through the focus of sustainable farms and grasslands "
-              Image={Agriculture}
+              Image="https://as2.ftcdn.net/v2/jpg/05/12/41/73/1000_F_512417375_Q8quk5IiZE84fpnaaRGqBfh76gqDpCDZ.jpg"
               Website="https://thecarbonunderground.org/"
             />
 
             <DonationCard
               Title="WattTime: Leveraging Technology to Save the Environment"
               Description="this organisation designs Automated Emissions Reduction solutions to empower all users to choose clean energy"
-              Image={Technology}
+              Image="https://as1.ftcdn.net/v2/jpg/04/71/77/90/1000_F_471779082_mHHJIPaFThAkAP7k7YBrBJ4uH48LmbGq.jpg"
               Website="https://www.watttime.org/"
             />
           </div>
