@@ -26,10 +26,19 @@ public class UserConfig {
                     "Chen",
                     "chenzhaoxing.98@gmail.com",
                     encodedPassword,
-                    UserRole.ADMIN
+                    UserRole.ADMIN,
+                    true
+            );
+            User tester = new User(
+                    "CarbonO",
+                    "Testing",
+                    "carbonohelp@gmail.com",
+                    encodedPassword,
+                    UserRole.ADMIN,
+                    true
             );
             repository.saveAll(
-                    List.of(xz)
+                    List.of(xz,tester)
             );
         };
     }

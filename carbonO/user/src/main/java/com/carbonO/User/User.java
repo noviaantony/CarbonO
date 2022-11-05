@@ -43,7 +43,7 @@ public class User implements UserDetails {
 
     private Boolean locked = false;
 
-    private Boolean enabled = true; //temporarily set to true
+    private Boolean enabled = false; //temporarily set to true
 
     @OneToMany (mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -62,6 +62,14 @@ public class User implements UserDetails {
         this.email = email;
         this.password = password;
         this.userRole = userRole;
+    }
+    public User(String firstName, String lastName, String email, String password, UserRole userRole, Boolean enabled) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.userRole = userRole;
+        this.enabled = enabled;
     }
 
     @Override

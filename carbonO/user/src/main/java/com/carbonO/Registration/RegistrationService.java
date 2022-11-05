@@ -9,10 +9,10 @@ import com.carbonO.User.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.time.LocalDateTime;
 @Service
-@AllArgsConstructor
 public class RegistrationService {
     private final UserService userService;
 
@@ -21,6 +21,17 @@ public class RegistrationService {
     private final EmailValidator emailValidator;
 
     private final UserRepository userRepository;
+
+    private final WebClient webClient;
+
+    public RegistrationService (UserService userService, ConfirmationTokenService confirmationTokenService, EmailValidator emailValidator, UserRepository userRepository, WebClient.Builder webClient) {
+        this.userService = userService;
+        this.confirmationTokenService = confirmationTokenService;
+        this.emailValidator = emailValidator;
+        this.userRepository = userRepository;
+        this.webClient = webClient.baseUrl("http://18.136.163.9:8080/api/v1/carbonO/userReward").build();
+    }
+
 
     public String register(RegistrationRequest request) {
         boolean isValid = emailValidator.test(request.getEmail());
@@ -44,7 +55,7 @@ public class RegistrationService {
     }
 
     @Transactional
-    public String confirmToken(String token) {
+    public Long confirmToken(String token) {
         ConfirmationToken confirmationToken = confirmationTokenService
                 .getToken(token)
                 .orElseThrow(() ->
@@ -64,9 +75,14 @@ public class RegistrationService {
         userService.enableAppUser(
                 confirmationToken.getUser().getEmail());
 
-        //create a user reward account after user confirmed their email, through an internal api call to userReward microservice
+        return confirmationToken.getUser().getId();
+    }
 
-
-        return "confirmed";
+    public void createUserRewardAccount(Long userId) {
+        webClient
+                .get()
+                .uri("/addNewUserReward")
+                .header("userId", String.valueOf(userId))
+                .retrieve().bodyToMono(String.class).block();
     }
 }

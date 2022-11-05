@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -25,27 +27,24 @@ public class UserController {
     @Autowired
     private MailingService mailingService;
 
-    private static final String baseUrl = "";
+    private static final String baseUrl = "http://18.136.163.9:8080/api/v1/carbonO/user";
 
     @Autowired
     public UserController(UserService userService){
         this.userService = userService;
     }
 
+    //Retrieve all user information
     @GetMapping("/getAllUsers")
     public ResponseEntity<List<User>> getUsers(){
         return ResponseEntity.ok().body(userService.getUsers());
-    }
-
-    @GetMapping("/authorizeUser")
-    public ResponseEntity<String> isAuthorize(){
-        return ResponseEntity.ok().body("Authorized");
     }
 
     @GetMapping("/getUser")
     public ResponseEntity<User> getUserId(@RequestParam String email){
         return ResponseEntity.ok().body(userService.loadUserByUsername(email));
     }
+
     @PostMapping("/forgotPassword")
     public ResponseEntity<String> processForgotPassword(@RequestParam String email) throws UserNotFoundException {
         String resetPasswordLink = null;
@@ -64,15 +63,12 @@ public class UserController {
         return ResponseEntity.ok().body(resetPasswordLink);
     }
     @GetMapping("/resetPassword")
-    public ResponseEntity<String> checkRestPassword(@RequestParam String token) {
-        User user = userService.findByResetPasswordToken(token);
+    public void checkRestPassword(@RequestParam String token, HttpServletResponse response) throws IOException {
+        userService.findByResetPasswordToken(token);
 
-        if (user == null) {
-            return ResponseEntity.status(404).body("User not found");
-        }
-
-        return ResponseEntity.ok().body("Reset Verified");
+        response.sendRedirect("http://18.136.163.9:8085/ResetPassword?token=" + token);
     }
+
     @PutMapping("/processResetPassword")
     public ResponseEntity<String> processResetPassword(@RequestParam String newPassword, String token) {
         User user = userService.findByResetPasswordToken(token);
