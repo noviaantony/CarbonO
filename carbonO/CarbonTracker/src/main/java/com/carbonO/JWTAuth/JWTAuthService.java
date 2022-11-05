@@ -32,10 +32,10 @@ public class JWTAuthService {
             stream(roles).forEach(role -> authorities.add(new SimpleGrantedAuthority(role)));
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, null, authorities);
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            return true;
         } catch (Exception exception) {
             return false;
         }
-        return true;
     }
 
 }
