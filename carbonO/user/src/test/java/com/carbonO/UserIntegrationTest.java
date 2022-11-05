@@ -125,40 +125,40 @@ public class UserIntegrationTest {
         Assertions.assertEquals(404,result.getStatusCode().value());
     }
 
-    @Test
-    public void resetPassword_CorrectEmail_Pass() throws Exception {
-
-        String token = RandomString.make(45);
-
-        String email = "carbonohelp@gmail.com";
-
-        User user = userRepository.findByEmail(email).get();
-
-        user.setResetPasswordToken(token);
-
-        userRepository.save(user);
-
-        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/resetPassword?token=" + token);
-
-        ResponseEntity<String> result = restTemplate.getForEntity(uri, String.class);
-
-        Assertions.assertEquals(200, result.getStatusCode().value());
-
-        user.setResetPasswordToken(null);
-
-        userRepository.save(user);
-
-    }
-    @Test
-    public void resetPassword_WrongEmail_Fail() throws Exception{
-        String token = null;
-
-        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/resetPassword?token=" + token);
-
-        ResponseEntity<String> result = restTemplate.getForEntity(uri, String.class);
-
-        Assertions.assertEquals(404,result.getStatusCode().value());
-    }
+//    @Test
+//    public void resetPassword_CorrectEmail_Pass() throws Exception {
+//
+//        String token = RandomString.make(45);
+//
+//        String email = "carbonohelp@gmail.com";
+//
+//        User user = userRepository.findByEmail(email).get();
+//
+//        user.setResetPasswordToken(token);
+//
+//        userRepository.save(user);
+//
+//        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/resetPassword?token=" + token);
+//
+//        ResponseEntity<String> result = restTemplate.getForEntity(uri, String.class);
+//
+//        Assertions.assertEquals(200, result.getStatusCode().value());
+//
+//        user.setResetPasswordToken(null);
+//
+//        userRepository.save(user);
+//
+//    }
+//    @Test
+//    public void resetPassword_WrongEmail_Fail() throws Exception{
+//        String token = null;
+//
+//        URI uri = new URI(baseurl + port + "/api/v1/carbonO/user/resetPassword?token=" + token);
+//
+//        ResponseEntity<String> result = restTemplate.getForEntity(uri, String.class);
+//
+//        Assertions.assertEquals(404,result.getStatusCode().value());
+//    }
 
 //    public void processResetPassword_CorrectToken_Pass() throws Exception {
 //        RegistrationRequest request = new RegistrationRequest("testing1", "testing", "testing123@gmail.com", "123");
