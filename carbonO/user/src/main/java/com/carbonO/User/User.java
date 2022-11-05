@@ -43,7 +43,7 @@ public class User implements UserDetails {
 
     private Boolean locked = false;
 
-    private Boolean enabled = true; //temporarily set to true
+    private Boolean enabled = false; //temporarily set to true
 
     @OneToMany (mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference

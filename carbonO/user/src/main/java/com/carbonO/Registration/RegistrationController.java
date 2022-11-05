@@ -47,6 +47,9 @@ public class RegistrationController {
 
     @GetMapping(path = "confirm")
     public void confirm(@RequestParam("token") String token, HttpServletResponse response) throws IOException {
+        Long userId = registrationService.confirmToken(token);
+        //create a new user reward account after confirmation
+        registrationService.createUserRewardAccount(userId);
         response.sendRedirect("http://18.136.163.9:8085/login");
     }
 
