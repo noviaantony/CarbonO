@@ -1,10 +1,6 @@
 import React from 'react'
 import { Fragment, useState } from "react";
-import {
-  Accordion,
-  AccordionHeader,
-  AccordionBody,
-} from "@material-tailwind/react";
+import { Accordion, AccordionHeader, AccordionBody } from "@material-tailwind/react";
 
 
 const ViewInformationAccordion = (DishIngredients) => {
@@ -21,7 +17,7 @@ const ViewInformationAccordion = (DishIngredients) => {
           What are the ingredients in this dish?
         </AccordionHeader>
         <AccordionBody>
-          * insert ingredients here *
+          {DishIngredients}
         </AccordionBody>
       </Accordion>
       <Accordion open={open === 2}>

@@ -5,7 +5,6 @@ import PasswordChecklist from "react-password-checklist"
 import {Link, Navigate} from "react-router-dom";
 import axios from "axios";
 
-
 const REGISTER_URL = 'http://18.136.163.9:8080/api/v1/carbonO/user/registration'
 
 const SignUpForm = () => {
@@ -20,10 +19,8 @@ const SignUpForm = () => {
   const[errMsg, setErrMsg] = useState('');
   const[success, setSuccess] = useState(false);
 
-  const [pw, setPw] = useState("")
-	const [confirmPw, setConfirmPw] = useState("")
-
-
+  const [pw, setPw] = useState("");
+	const [confirmPw, setConfirmPw] = useState("");
 
 
   useEffect(() => {
