@@ -41,8 +41,8 @@ const EnterEmail = () => {
                       <HiMail className="text-grey-100 m-2" />
                     </div>
                     <input
-                      type="email"
-                      name="email"
+                      type="password"
+                      name="confirmPassword"
                       placeholder="confirm new password"
                       className="bg-gray-100 outline-none text-m flex-1"
                       required
