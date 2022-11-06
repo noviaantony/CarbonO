@@ -9,7 +9,6 @@ import { ReactComponent as TickSvg } from "./Tick.svg";
 import { ReactComponent as WarningSvg } from "./Warning.svg";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-
 const theme = createTheme({
   palette: {
     primary: {
@@ -24,27 +23,11 @@ const steps = ["Amount to Donate", "Confirmation", "Success"];
 
 const MultiStepper = ({ organisation }) => {
   const [activeStep, setActiveStep] = React.useState(0);
-  const [skipped, setSkipped] = React.useState(new Set());
 
   const [donationAmount, setDonationAmount] = React.useState(0);
 
-  const isStepOptional = (step) => {
-    return step === 1;
-  };
-
-  const isStepSkipped = (step) => {
-    return skipped.has(step);
-  };
-
   const handleNext = () => {
-    let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
-    }
-
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
   };
 
   const handleBack = () => {
@@ -57,11 +40,11 @@ const MultiStepper = ({ organisation }) => {
 
   const handleButtonText = () => {
     if (activeStep === steps.length - 1) {
-      return <div class = "font-bold">Finish</div>;
+      return <div class="font-bold">Finish</div>;
     } else if (activeStep + 1 == 2) {
-      return <div class = "font-bold">Yes, confirm</div>;
+      return <div class="font-bold">Yes, confirm</div>;
     } else {
-      return <div class = "font-bold">Next</div>;
+      return <div class="font-bold">Next</div>;
     }
   };
 
@@ -166,7 +149,7 @@ const MultiStepper = ({ organisation }) => {
             <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
               <Button
                 color="inherit"
-                style={{fontWeight: 'bold'}}
+                style={{ fontWeight: "bold" }}
                 disabled={activeStep === 0}
                 onClick={handleBack}
                 sx={{ mr: 1 }}
