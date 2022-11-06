@@ -7,6 +7,15 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { ReactComponent as TickSvg } from "./Tick.svg";
 import { ReactComponent as WarningSvg } from "./Warning.svg";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#5E9387",
+    },
+  },
+});
 const steps = ["Amount to Donate", "Confirmation", "Success"];
 
 const StepperTest = () => {
@@ -70,14 +79,14 @@ const StepperTest = () => {
       return (
         <div class="p-6 text-center">
           <h2 className="mb-5 text-2xl font-bold text-text-black  dark:text-gray-400">
-           To: Organisation Y
+            To: Organisation Y
           </h2>
           {/* number input  */}
           <div className="flex justify-center">
             <div className="mb-3 xl:w-96">
               <input
                 type="number"
-                min = "0"
+                min="0"
                 className="
                 form-control
                 block
@@ -99,86 +108,90 @@ const StepperTest = () => {
                 placeholder="Number input"
               />
             </div>
-            
           </div>
-          <p>
-              Please input the amount you would like to donate.
-            </p>
+          <p>Please input the amount you would like to donate.</p>
         </div>
       );
     } else if (activeStep + 1 == 2) {
       return (
         <div>
           <div class="grid place-items-center py-1">
-          <WarningSvg  width="4rem" />
-              </div>  
+            <WarningSvg width="4rem" />
+          </div>
           <p className="mb-5 text-2xl text-center font-bold text-text-black  dark:text-gray-400">
             You are about to make a donation of x amount to y organisation.
           </p>
-          <p className="text-center">Changes cannot be made after this point.</p>
-          <p className="text-center">Would you like to confirm your donation?</p>
+          <p className="text-center">
+            Changes cannot be made after this point.
+          </p>
+          <p className="text-center">
+            Would you like to confirm your donation?
+          </p>
         </div>
       );
     } else {
       return (
         <div>
           <div class="grid place-items-center py-3">
-            <TickSvg  width="4rem" />   
-              </div>  
-<h2 className="mb-5 text-2xl text-center font-bold text-text-black  dark:text-gray-400">
+            <TickSvg width="4rem" />
+          </div>
+          <h2 className="mb-5 text-2xl text-center font-bold text-text-black  dark:text-gray-400">
             Donation Success!
           </h2>
-          <p className="text-center">You have made a successful donation of x amount to y organisation</p>
+          <p className="text-center">
+            You have made a successful donation of x amount to y organisation
+          </p>
         </div>
-        
-      )
+      );
     }
   };
   return (
-    <Box sx={{ width: "100%" }}>
-      <Stepper activeStep={activeStep} alternativeLabel>
-        {steps.map((label, index) => {
-          const stepProps = {};
-          const labelProps = {};
-          return (
-            <Step key={label} {...stepProps}>
-              <StepLabel {...labelProps}>{label}</StepLabel>
-            </Step>
-          );
-        })}
-      </Stepper>
-      {activeStep === steps.length ? (
-        <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
-          </Typography>
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-            <Box sx={{ flex: "1 1 auto" }} />
-            <Button onClick={handleReset}>Reset</Button>
-          </Box>
-        </React.Fragment>
-      ) : (
-        <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>
-            {/* Step {activeStep + 1} */}
-            {displayContent()}
-          </Typography>
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-            <Button
-              color="inherit"
-              disabled={activeStep === 0}
-              onClick={handleBack}
-              sx={{ mr: 1 }}
-            >
-              Back
-            </Button>
-            <Box sx={{ flex: "1 1 auto" }} />
+    <ThemeProvider theme={theme}>
+      <Box sx={{ width: "100%" }}>
+        <Stepper activeStep={activeStep} alternativeLabel>
+          {steps.map((label, index) => {
+            const stepProps = {};
+            const labelProps = {};
+            return (
+              <Step key={label} {...stepProps}>
+                <StepLabel {...labelProps}>{label}</StepLabel>
+              </Step>
+            );
+          })}
+        </Stepper>
+        {activeStep === steps.length ? (
+          <React.Fragment>
+            <Typography sx={{ mt: 2, mb: 1 }}>
+              All steps completed - you&apos;re finished
+            </Typography>
+            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+              <Box sx={{ flex: "1 1 auto" }} />
+              <Button onClick={handleReset}>Reset</Button>
+            </Box>
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <Typography sx={{ mt: 2, mb: 1 }}>
+              {/* Step {activeStep + 1} */}
+              {displayContent()}
+            </Typography>
+            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+              <Button
+                color="inherit"
+                disabled={activeStep === 0}
+                onClick={handleBack}
+                sx={{ mr: 1 }}
+              >
+                Back
+              </Button>
+              <Box sx={{ flex: "1 1 auto" }} />
 
-            <Button onClick={handleNext}>{handleButtonText()}</Button>
-          </Box>
-        </React.Fragment>
-      )}
-    </Box>
+              <Button onClick={handleNext}>{handleButtonText()}</Button>
+            </Box>
+          </React.Fragment>
+        )}
+      </Box>
+    </ThemeProvider>
   );
 };
 
