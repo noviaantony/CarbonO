@@ -21,7 +21,7 @@ class DonationService{
             const response = await axios.put(
                 `${USER_API_URL}/userReward/donateRewardPoints`,
                 null,
-                {params: {userId, pointsToDonate, organisationId}}
+                {params: {userId, pointsToDonate, organisationId}, headers: { Authorization: userToken }}
             );
             return response.data;
         } catch (error) {

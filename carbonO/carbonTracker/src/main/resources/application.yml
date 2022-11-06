@@ -5,8 +5,9 @@ spring:
             name: carbonTracker
     datasource:
         password: zhaoxing
-        url: jdbc:postgresql://3.0.21.36:5432/carbontracker
-#        url: jdbc:postgresql://localhost:5432/carbontracker
+#        url: jdbc:postgresql://3.0.21.36:5432/carbontracker
+#        url: jdbc:postgresql://18.136.163.9:5432/carbontracker
+        url: jdbc:postgresql://localhost:5432/carbontracker
         username: postgres
     jpa:
         hibernate:
@@ -28,5 +29,5 @@ eureka:
         register-with-eureka: true
     instance:
         prefer-ip-address: true
-        ip-address: 3.0.21.36
+#        ip-address: 3.0.21.36
 
