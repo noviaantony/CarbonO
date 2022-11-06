@@ -7,12 +7,14 @@ import CarbonTrackerService from "../services/CarbonTrackerService";
 import Header from "../components/misc/Header";
 import initialDatesArr from "../components/dashboard/getInitialDates";
 import UserRewardService from "../services/UserRewardService";
+import {ThreeDots} from "react-loader-spinner";
 
 const Dashboard = () => {
   const [consumptionData, setConsumptionData] = useState([]);
   const [rewardData, setRewardData] = useState([]);
   const [totalCarbon, setTotalCarbon] = useState(0);
   const [userCredits, setUserCredits] = useState(0);
+  const [loading, setLoading] = useState(false);
   const { auth, setAuth } = useContext(AuthContext);
 
   //persist state of user
@@ -26,18 +28,22 @@ const Dashboard = () => {
 
   // get all dish consumed by user
   useEffect(() => {
+      setLoading(true);
+
     CarbonTrackerService.getDishConsumed(auth.userId, auth.accessToken).then(
       (response) => {
-        console.log("Table response");
+        console.log("Dish response");
         console.log(response);
         setConsumptionData(response);
         console.log(consumptionData);
+        setLoading(false);
       }
     );
   }, []);
 
   //get user total carbon consumed
   useEffect(() => {
+      setLoading(true);
     CarbonTrackerService.getUserTotalCarbonConsumption(
       auth.userId,
       auth.accessToken
@@ -46,17 +52,21 @@ const Dashboard = () => {
       console.log(response);
       setTotalCarbon(response);
       console.log(totalCarbon);
+      setLoading(false);
     });
   }, []);
 
   //get rewards claimed by user
   useEffect(() => {
+      setLoading(true);
     UserRewardService.getUserReward(auth.userId, auth.accessToken).then(
       (response) => {
         console.log("User Reward response");
         console.log(response);
         setRewardData(response.rewardTransactions);
+        console.log(rewardData);
         setUserCredits(response.rewardPoints);
+        setLoading(false);
       }
     );
   }, []);
@@ -80,7 +90,23 @@ const Dashboard = () => {
         Title={title}
         Description="keep track of you receipt uploads, carbon foodprint, reward claims and donation here"
       />
-      <div className="h-screen">
+        {loading ? (
+            <>
+                <div className="flex justify-center h-screen mt-20">
+                    <ThreeDots
+                        height="300"
+                        width="300"
+                        radius="9"
+                        color="#000"
+                        ariaLabel="three-dots-loading"
+                        wrapperStyle={{}}
+                        wrapperClassName=""
+                        visible={true}
+                    />
+                </div>
+            </>
+        ) : (
+        <div className="h-screen">
         <initialDatesArr.Provider value={dates}>
           <UserStatistics
             TotalCarbon={totalCarbon.toFixed(0)}
@@ -92,6 +118,7 @@ const Dashboard = () => {
           <RewardsTable historicalData={rewardData} />
         </div>
       </div>
+        )}
     </>
   );
 };

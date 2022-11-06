@@ -1,7 +1,22 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import userRewardService from "../../services/UserRewardService";
 
 const RewardsTable = ({ historicalData }) => {
+    const [rewards, setRewards] = React.useState([]);
+
+
+    useEffect(() => {
+      console.log("rewards data:", historicalData)
+      let rewardTransaction = [];
+      historicalData.forEach((data) => {
+        if (data.donation === false) {
+          rewardTransaction.push(data);
+        }
+      });
+      setRewards(rewardTransaction)
+      console.log("rewards:",rewards);
+    }, []);
+
   return (
     <div className="overflow-x-auto relative sm:rounded-lg  m-6 font-default w-4/12">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -19,7 +34,7 @@ const RewardsTable = ({ historicalData }) => {
           </tr>
         </thead>
         <tbody>
-          {historicalData.map((data) => {
+          {rewards.map((data) => {
 
               return (
                     <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">

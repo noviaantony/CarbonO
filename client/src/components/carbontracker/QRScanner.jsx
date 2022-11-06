@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import QrReader from "react-qr-scanner";
 import CarbonTrackerService from "../../services/CarbonTrackerService";
 import AuthContext from "../../hooks/AuthProvider";
@@ -12,6 +12,7 @@ class QRScanner extends React.Component {
     this.state = {
       message: "",
     };
+    this.handleScan= this.handleScan.bind(this);
   }
 
   state = {
@@ -19,31 +20,48 @@ class QRScanner extends React.Component {
     result: "No result",
   };
 
+
+
   handleScan = (data) => {
     this.setState({
       result: data,
     });
-    //this can be removed, its just a test to see if the data from qr scan is collected
-    let result = "";
+
+
     if (data != null) {
+
+      let scannedMessage = "---";
+
       const response = JSON.parse(data.text);
       console.log(response);
       console.log(this.context.auth.userId);
-      CarbonTrackerService.postDishConsumed(
-        this.context.auth.accessToken,
-        this.context.auth.userId,
-        response.id
-      ).then((response) => (result = response));
+      //(scannedMessage = "successfully claimed reward!")
 
+
+
+        CarbonTrackerService.postDishConsumed(this.context.auth.accessToken,this.context.auth.userId,response.receiptId)
+          .then((response) => scannedMessage = response)
+        
       this.setState({
-        message: this.state.message + result,
+        message:
+          this.state.message + scannedMessage,
       });
+
+
       return prev_state;
     }
+
+
   };
 
   handleError = (err) => {
     console.error(err);
+
+    // this.setState({
+    //   message:
+    //     this.state.message + "this receipt has already been redeemed.",
+    // });
+
   };
 
   render() {
