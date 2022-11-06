@@ -8,6 +8,9 @@ import Typography from "@mui/material/Typography";
 import { ReactComponent as TickSvg } from "./Tick.svg";
 import { ReactComponent as WarningSvg } from "./Warning.svg";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import DonationService from "../../services/DonationService";
+import {useContext} from "react";
+import AuthContext from "../../hooks/AuthProvider";
 
 
 const theme = createTheme({
@@ -22,11 +25,11 @@ const theme = createTheme({
 });
 const steps = ["Amount to Donate", "Confirmation", "Success"];
 
-const MultiStepper = ({ organisation }) => {
+const MultiStepper = ({ organisation, organisationId }) => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
-
   const [donationAmount, setDonationAmount] = React.useState(0);
+  const { auth} = useContext(AuthContext);
 
   const isStepOptional = (step) => {
     return step === 1;
@@ -38,10 +41,7 @@ const MultiStepper = ({ organisation }) => {
 
   const handleNext = () => {
     let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
-    }
+
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
@@ -57,6 +57,9 @@ const MultiStepper = ({ organisation }) => {
 
   const handleButtonText = () => {
     if (activeStep === steps.length - 1) {
+      DonationService.donatePoints(auth.userId, donationAmount, organisationId, auth.token).then((response) => {
+        console.log(response);
+      });
       return <div class = "font-bold">Finish</div>;
     } else if (activeStep + 1 == 2) {
       return <div class = "font-bold">Yes, confirm</div>;

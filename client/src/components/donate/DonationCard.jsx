@@ -65,7 +65,8 @@ const DonationCard = ({organisationId, Title, Image, Description, Website, UserC
             </button>
             </div>
         <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-          <Stepper organisation = {Title.substring(0, Title.indexOf(':'))} />
+          <Stepper organisation = {Title.substring(0, Title.indexOf(':'))}
+                   organisationId={organisationId}/>
         </div>      
       </Modal>
 
@@ -92,6 +93,7 @@ const DonationCard = ({organisationId, Title, Image, Description, Website, UserC
           "
                 type="button"
                 onClick={toggleConfirmationModal}
+
               >
                 Donate E-Credits
               </button>
