@@ -28,7 +28,7 @@ const Dashboard = () => {
 
   // get all dish consumed by user
   useEffect(() => {
-      setLoading(true);
+    setLoading(true);
 
     CarbonTrackerService.getDishConsumed(auth.userId, auth.accessToken).then(
       (response) => {
@@ -57,6 +57,7 @@ const Dashboard = () => {
   }, []);
 
   //get rewards claimed by user
+  
   useEffect(() => {
       setLoading(true);
     UserRewardService.getUserReward(auth.userId, auth.accessToken).then(
