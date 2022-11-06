@@ -77,7 +77,7 @@ const LogInForm = () => {
         <section>
           <br />
           <p>
-            <Navigate to="/Donate" />
+            <Navigate to="/CarbonTracker" />
           </p>
         </section>
       ) : (

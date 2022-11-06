@@ -72,8 +72,7 @@ const Features = () => {
                   Track and Get Rewarded
                 </h3>
                 <p class="text-gray-600 mb-8">
-                  Ate a low-carbon food? Pick a dish from our menu and Download
-                  your receipt to claim CarbonO's e-credits! Accumulate your
+                  Ate a low-carbon food? Pick a dish from our menu and scan the QR code on your receipt (from our partner F&B businesses) to claim e-credits! Accumulate your
                   e-credits to claim attractive <i>and sustainable</i> rewards!
                 </p>
               </div>
@@ -86,8 +85,7 @@ const Features = () => {
               </h3>
               <p class="text-gray-600 mb-8">
                 Donate your e-credits to campaigns and organisations fighting
-                climate change. You can donate to the causes using your credits
-                cards as well.
+                climate change.
               </p>
             </div>
             <div class="w-full sm:w-1/2 p-6">
