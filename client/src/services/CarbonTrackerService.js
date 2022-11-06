@@ -24,10 +24,11 @@ class CarbonTrackerService {
 
   async getAllIngredientsFromDish(dishId) {
     try {
-      const repsonse = await axios.get(
+      const response = await axios.get(
         `${CARBON_TRACKER_API_URL}/dish/getAllIngredientsFromDish`,
         { params: { dishId } }
       );
+      console.log(response);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -60,12 +61,12 @@ class CarbonTrackerService {
         }
       );
       console.log(response.data)
-      return "successfully claimed e-credits!";
+      return response.data;
 
     } catch (error) {
       console.log("here");
       console.log(error.response.data);
-      return "this qr code has already been scanned & redeemed!";
+      return error.response.data;
     }
   }
 
@@ -83,5 +84,7 @@ class CarbonTrackerService {
       return error.response.data;
     }
   }
+
+
 }
 export default new CarbonTrackerService();
