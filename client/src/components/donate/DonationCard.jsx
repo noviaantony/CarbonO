@@ -10,8 +10,6 @@ import Stepper from "./MultiStepper";
 
 const DonationCard = ({organisationId, Title, Image, Description, Website, UserCredits}) => {
 
-
-
   const [isOpen, setIsOpen] = useState(false);
   const [donationAmount, setDonationAmount] = useState(0);
   const { auth, setAuth } = useContext(AuthContext);
@@ -67,7 +65,7 @@ const DonationCard = ({organisationId, Title, Image, Description, Website, UserC
             </button>
             </div>
         <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-          <Stepper />
+          <Stepper organisation = {Title} />
         </div>
        
       </Modal>

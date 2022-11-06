@@ -18,7 +18,7 @@ const theme = createTheme({
 });
 const steps = ["Amount to Donate", "Confirmation", "Success"];
 
-const StepperTest = () => {
+const MultiStepper = ({organisation}) => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
 
@@ -79,7 +79,7 @@ const StepperTest = () => {
       return (
         <div class="p-6 text-center">
           <h2 className="mb-5 text-2xl font-bold text-text-black  dark:text-gray-400">
-            To: Organisation Y
+            To: {organisation}
           </h2>
           {/* number input  */}
           <div className="flex justify-center">
@@ -119,7 +119,7 @@ const StepperTest = () => {
             <WarningSvg width="4rem" />
           </div>
           <p className="mb-5 text-2xl text-center font-bold text-text-black  dark:text-gray-400">
-            You are about to make a donation of x amount to y organisation.
+            You are about to make a donation of x amount to {organisation}
           </p>
           <p className="text-center">
             Changes cannot be made after this point.
@@ -195,4 +195,4 @@ const StepperTest = () => {
   );
 };
 
-export default StepperTest;
+export default MultiStepper;
