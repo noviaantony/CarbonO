@@ -12,6 +12,8 @@ const StepperTest = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
 
+  const [donationAmount, setDonationAmount] = React.useState(0);
+
   const isStepOptional = (step) => {
     return step === 1;
   };
@@ -96,6 +98,8 @@ const StepperTest = () => {
               "
                 id="exampleNumber0"
                 placeholder="Number input"
+                onChange={(e) => setDonationAmount(e.target.value)}
+
               />
             </div>
           </div>
@@ -105,7 +109,7 @@ const StepperTest = () => {
       return (
         <div>
           <p className="mb-5 text-2xl text-center font-bold text-text-black  dark:text-gray-400">
-            You are about to make a donation of x amount.
+            You are about to make a donation of {donationAmount} amount.
           </p>
           <p className="text-center">Changes cannot be made after this point.</p>
           <p className="text-center">Would you like to confirm your donation?</p>
@@ -117,7 +121,7 @@ const StepperTest = () => {
 <h2 className="mb-5 text-2xl text-center font-bold text-text-black  dark:text-gray-400">
             Donation Success!
           </h2>
-          <p className="text-center">You have made a successful donation of x amount to y organisation</p>
+          <p className="text-center">You have made a successful donation of {donationAmount}!</p>
         </div>
         
       )
