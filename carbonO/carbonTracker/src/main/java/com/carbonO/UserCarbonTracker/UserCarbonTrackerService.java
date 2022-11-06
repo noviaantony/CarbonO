@@ -20,16 +20,17 @@ public class UserCarbonTrackerService {
     private final ReceiptService receiptService;
     private final DishService dishService;
     private final JWTAuthService jwtAuthService;
+    private final WebClient webClient;
 
     @Autowired
     public UserCarbonTrackerService(UserCarbonTrackerRepository userCarbonTrackerRepository, CarbonTrackerTransactionService carbonTrackerTransactionService,
-                                    ReceiptService receiptService, DishService dishService, JWTAuthService jwtAuthService) {
+                                    ReceiptService receiptService, DishService dishService, JWTAuthService jwtAuthService, WebClient.Builder webClientBuilder) {
         this.userCarbonTrackerRepository = userCarbonTrackerRepository;
         this.carbonTrackerTransactionService = carbonTrackerTransactionService;
         this.receiptService = receiptService;
         this.dishService = dishService;
         this.jwtAuthService = jwtAuthService;
-
+        this.webClient = webClientBuilder.baseUrl("http://18.136.163.9:8080/api/v1/carbonO/").build();
     }
 
 
@@ -52,11 +53,15 @@ public class UserCarbonTrackerService {
     public void addUserDishConsumed(Long userId, Long receiptId) {
         Long dishId = receiptService.redeemReceiptById(receiptId).getDishConsumedId();
         Dish dish = dishService.findDishById(dishId);
+        Integer dishPoints = dish.getCarbonRating() * 10;
 
         //get  user carbon Tracker
         UserCarbonTracker userCarbonTracker = userCarbonTrackerRepository.findByUserId(userId);
         //add new carbon tracker transaction
-        CarbonTrackerTransaction carbonTrackerTransaction = new CarbonTrackerTransaction(new Date(),userCarbonTracker, dish);
+        CarbonTrackerTransaction carbonTrackerTransaction = new CarbonTrackerTransaction(new Date(),userCarbonTracker, dish, dishPoints);
+
+        //Internal Api call to update user points on reward
+        webClient.put().uri("userReward/updateUserPoints?userId=" + userId + "&pointsEarned=" + dishPoints).retrieve().bodyToMono(String.class).block();
 
         //save carbon tracker transaction by calling carbonTrackerTransactionService
         carbonTrackerTransactionService.saveCarbonTrackerTransaction(carbonTrackerTransaction);

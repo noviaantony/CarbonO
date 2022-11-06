@@ -26,6 +26,8 @@ const CarbonTracker = () => {
       });
   }, []);
 
+  
+
 
 
   return (

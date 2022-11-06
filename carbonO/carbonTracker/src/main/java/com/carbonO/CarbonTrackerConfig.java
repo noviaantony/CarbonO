@@ -898,7 +898,8 @@ public class CarbonTrackerConfig {
             CarbonTrackerTransaction carbonTrackerTransaction1 = new CarbonTrackerTransaction(
                     new Date(),
                     userCarbonTracker1,
-                    dish2
+                    dish2,
+                    dish2.getCarbonRating() * 10
             );
 
             userCarbonTrackerRepository.saveAll(

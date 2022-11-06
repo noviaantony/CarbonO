@@ -53,6 +53,7 @@ public class UserRewardService {
         userRewardRepository.save(userReward);
     }
 
+    @Transactional
     public void donateRewardPoints(Long userID, int pointsToDonate, Long organisationId) {
         //retrieve user's reward account
         UserReward userReward = userRewardRepository.findByUserId(userID);
@@ -70,4 +71,13 @@ public class UserRewardService {
         userRewardRepository.save(userReward);
     }
 
+    @Transactional
+    public void rewardPointsEarned(Long userID, Integer pointsEarned) {
+        //retrieve user's reward account
+        UserReward userReward = userRewardRepository.findByUserId(userID);
+
+        //update user's reward points
+        userReward.setRewardPoints(userReward.getRewardPoints() + pointsEarned);
+        userRewardRepository.save(userReward);
+    }
 }

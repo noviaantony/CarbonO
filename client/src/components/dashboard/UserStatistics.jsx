@@ -9,7 +9,7 @@ import initialDatesArr from "./getInitialDates";
 import actualDates from "./getDates";
 
 const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned}) => {
-  const [isClickedCredit, setIsClickedCredit] = React.useState(true);
+  const [, set] = React.useState(true);
   const [isClickedCarbon, setIsClickedCarbon] = React.useState(true);
   const [isClickedReceipt, setIsClickedReceipt] = React.useState(true);
 
@@ -36,7 +36,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned}) => {
 
   //filter function appears if there is a chart
   const hasChart = () => {
-    if (isClickedCarbon || isClickedCredit || isClickedReceipt) {
+    if (isClickedCarbon || isClickedReceipt) {
       return (
         <>
           <div className="p-4 w-15 rounded-lg bg-white flex border border-gray-800 mx-10  border-none">
@@ -101,45 +101,11 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned}) => {
 
   //display charts based on click
   const returnCharts = () => {
-    if (isClickedCarbon && isClickedCredit && isClickedReceipt) {
+    if (isClickedCarbon && isClickedReceipt) {
       return (
         <div class="flex flex-row justify-evenly">
-          <DonutChart />
           <LineChart />
           <PieChart />
-        </div>
-      );
-    } else if (isClickedCarbon && isClickedCredit) {
-      return (
-        <div class="flex flex-row justify-evenly">
-          <DonutChart />
-          <LineChart />
-        </div>
-      );
-    } else if (isClickedCredit && isClickedReceipt) {
-      return (
-        <div className="flex flex-row justify-evenly">
-          <DonutChart />
-          <PieChart />
-        </div>
-      );
-    } else if (isClickedCarbon && isClickedReceipt) {
-      return (
-        <div className="flex flex-row justify-evenly">
-          <LineChart />
-          <PieChart />
-        </div>
-      );
-    } else if (isClickedCredit) {
-      return (
-        <div className="flex flex-row justify-evenly">
-          <DonutChart />
-        </div>
-      );
-    } else if (isClickedCarbon) {
-      return (
-        <div className="flex flex-row justify-evenly">
-          <LineChart />
         </div>
       );
     } else if (isClickedReceipt) {
@@ -148,23 +114,22 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned}) => {
           <PieChart />
         </div>
       );
-    }
+    } else if (isClickedCarbon) {
+      return (
+        <div className="flex flex-row justify-evenly">
+          <LineChart />
+        </div>
+      );
+    } 
   };
 
-  //returns each chart with different size, based on number of charts clicked
+
   return (
     <>
       <div class="flex flex-wrap -mx-1 lg:mx-36">
         {/* first */}
         <div
           class="px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 font-default"
-          onClick={() => {
-            if (isClickedCredit === false) {
-              setIsClickedCredit(true);
-            } else {
-              setIsClickedCredit(false);
-            }
-          }}
         >
           <div className="p-4 text-sm text-[#5e938780] bg-white rounded-lg dark:bg-gray-700 dark:text-gray-300 flex items-stretch m-6 drop-shadow-sm font-default cursor-pointer">
             <FaWallet size={60} />

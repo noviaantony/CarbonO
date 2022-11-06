@@ -37,4 +37,10 @@ public class UserRewardController {
         userRewardService.donateRewardPoints(userID, pointsToDonate, organisationId);
         return new ResponseEntity<>(new ApiResponse(true, "Reward points successfully donated"), HttpStatus.OK);
     }
+
+    @PutMapping("/updateUserPoints")
+    public ResponseEntity<ApiResponse> rewardPointsEarned(@RequestParam("userId") Long userID, @RequestParam("pointsEarned") Integer pointsEarned) {
+        userRewardService.rewardPointsEarned(userID, pointsEarned);
+        return new ResponseEntity<>(new ApiResponse(true, "Reward points successfully donated"), HttpStatus.OK);
+    }
 }
