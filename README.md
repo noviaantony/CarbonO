@@ -1,6 +1,6 @@
 # CarbonO
 
-![alt text](http://localhost:3002/static/media/Logo.adc3ee63fee3907bc799.png)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/a8175a62e9504cf88bb33e2b5e29170a)](https://www.codacy.com/gh/Chen-ZhaoXing/CarbonO/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Chen-ZhaoXing/CarbonO&amp;utm_campaign=Badge_Grade)
 
 > Project By: SMU CS203 G2T2
 > - [Zhao Xing](https://github.com/Newbieshine/)
@@ -10,7 +10,7 @@
 > - [Alison](https://github.com/alisonhow194) 
 
 Code submission for [SMU CS203]
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/a8175a62e9504cf88bb33e2b5e29170a)](https://www.codacy.com/gh/Chen-ZhaoXing/CarbonO/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Chen-ZhaoXing/CarbonO&amp;utm_campaign=Badge_Grade)
+
 
 ---
 ##  Our Solution
