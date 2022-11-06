@@ -41,6 +41,8 @@ class QRScanner extends React.Component {
 
         CarbonTrackerService.postDishConsumed(this.context.auth.accessToken,this.context.auth.userId,response.receiptId)
           .then((response) => scannedMessage = response)
+
+          console.log(scannedMessage);
         
       this.setState({
         message:

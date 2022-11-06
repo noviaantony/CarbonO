@@ -3,7 +3,7 @@ import axios from "axios";
 import { IoLeafOutline, IoLeafSharp } from "react-icons/io5";
 import CarbonTrackerService from "../../services/CarbonTrackerService";
 import AuthContext from "../../hooks/AuthProvider";
-import QRScanner from "./QRScanner";
+// import QRScanner from "./QRScanner";
 import { Accordion, AccordionHeader, AccordionBody } from "@material-tailwind/react";
 
 const Card = ({
@@ -31,17 +31,20 @@ const Card = ({
 
   const [showDishInfo, setshowDishInfo] = React.useState(false);
   const [ingredients, setIngredients] = useState([]);
-  const ingredientArr = [];
 
   useEffect(() => {
-  CarbonTrackerService.getAllIngredientsFromDish(dishId)
+    CarbonTrackerService.getAllIngredientsFromDish(dishId)
     .then((response) => {
 
       console.log(response);
-      for (let i = 0; i < response.length(); i++) {
-        ingredientArr.push(response[i].ingredientName);
+      let ingredientArr = [];
+      for (let i = 0; i < response.length-1; i++) {
+        ingredientArr.push(response[i].ingredientName + ", ");
       }
+      ingredientArr.push(response[response.length - 1].ingredientName + " ");
+
       setIngredients(ingredientArr);
+      console.log(ingredients);
     })
   } , []);
 
