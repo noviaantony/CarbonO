@@ -5,8 +5,8 @@ spring:
             name: carbonTracker
     datasource:
         password: zhaoxing
-#        url: jdbc:postgresql://3.0.21.36:5432/carbontracker
-        url: jdbc:postgresql://localhost:5432/carbontracker
+        url: jdbc:postgresql://3.0.21.36:5432/carbontracker
+#        url: jdbc:postgresql://localhost:5432/carbontracker
         username: postgres
     jpa:
         hibernate:
