@@ -71,6 +71,8 @@ const Dashboard = () => {
     );
   }, []);
 
+  
+
   //initial dates of the chart
   let dates = [
     "2022-10-16",
@@ -83,6 +85,8 @@ const Dashboard = () => {
   ];
 
   let title = auth.firstName + "'s Dashboard";
+
+  console.log(consumptionData);
 
   return (
     <>
@@ -106,14 +110,14 @@ const Dashboard = () => {
                 </div>
             </>
         ) : (
-        <div className="h-screen">
+        <div className="">
         <initialDatesArr.Provider value={dates}>
           <UserStatistics
             TotalCarbon={totalCarbon.toFixed(0)}
             Ecredits={userCredits}
           />
         </initialDatesArr.Provider>
-        <div className="flex flex-row justify-center mx-10">
+        <div className="flex flex-row justify-center mx-20">
           <CarbonTrackerTable historicalData={consumptionData} />
           <RewardsTable historicalData={rewardData} />
         </div>

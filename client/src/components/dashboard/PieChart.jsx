@@ -1,12 +1,56 @@
-import React from "react";
+import React, {useState, useEffect, useContext} from "react";
 import { Pie } from "react-chartjs-2";
 import 'chart.js/auto';
 import { Chart, LineController, LineElement, PointElement, LinearScale, Title,CategoryScale } from 'chart.js';
+import CarbonTrackerService from "../../services/CarbonTrackerService";
+import AuthContext from "../../hooks/AuthProvider";
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale);
 
-Chart.defaults.font.size = 20;
+Chart.defaults.font.size = 8;
+
+// carbon rating summary
+
 const PieChart = () => {
+
+  const [consumptionData, setConsumptionData] = useState([]);
+
+  const { auth, setAuth } = useContext(AuthContext);
+
+  useEffect(() => {
+    CarbonTrackerService.getDishConsumed(auth.userId, auth.accessToken).then(
+      (response) => {
+        console.log("Dish response");
+        console.log(response);
+        setConsumptionData(response);
+        console.log(consumptionData);
+      //  setLoading(false);
+      }
+    );
+  }, []);
+
+  console.log("--", consumptionData);
+
+  const chartsData = [];
+
+  for (let i = 0; consumptionData.length; i++) {
+
+
+    if (chartsData.filter((data) => data.date === consumptionData[i].dateConsumed.substring(0, 10))) {
+      chartsData.push({
+        date: consumptionData[i].dateConsumed.substring(0, 10),
+        totalCarbonRating: consumptionData[i].totalCarbonRating + data.totalCarbonRating,
+      });
+    } else {
+      chartsData.push({
+        date: consumptionData[i].dateConsumed.substring(0, 10),
+        totalCarbonRating: consumptionData[i].totalCarbonRating,
+      });
+    }     
+  }
+
+  console.log(chartsData);
+
   return (
     <div
       style={{ width: "28%", height: "30%" }}
@@ -19,7 +63,7 @@ const PieChart = () => {
           datasets: [
             {
               label: "Receipts",
-              data: [12, 19, 3],
+              data: [12, 19, 3, 6,8],
               backgroundColor: [
                 "rgba(255, 99, 132, 0.2)",
                 "rgba(54, 162, 235, 0.2)",
@@ -38,8 +82,8 @@ const PieChart = () => {
             },
           ],
         }}
-        height={300}
-        width={600}
+        height={350}
+        width={900}
         options={{
           maintainAspectRatio: false,
           plugins: {

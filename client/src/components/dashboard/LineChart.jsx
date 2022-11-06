@@ -23,7 +23,7 @@ Chart.register(
   CategoryScale
 );
 
-Chart.defaults.font.size = 20;
+// Chart.defaults.font.size = 12;
 
 const LineChart = () => {
   const data = useContext(actualDates);
@@ -31,10 +31,12 @@ const LineChart = () => {
   //y-axis data
   const datapoints = [12, 19, 3, 18, 12, 3, 9, 7];
 
+  
+
   return (
     <>
       <div
-        style={{ width: "28%", height: "80%" }}
+        style={{ width: "70%", height: "80%" }}
         className="bg-white rounded-lg h-auto p-6 flex items-stretch m-6 font-default text-xs"
       >
         <Line
@@ -49,13 +51,13 @@ const LineChart = () => {
                 borderColor: "rgba(255, 99, 132, 1)",
                 borderWidth: 1,
                 font: {
-                  size: 5
+                  size: 35
                 }
               },
             ],
           }}
-          height={300}
-          width={600}
+          height={350}
+          width={300}
           options={{
             maintainAspectRatio: false,
             plugins: {
