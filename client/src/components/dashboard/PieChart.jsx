@@ -32,7 +32,7 @@ const PieChart = () => {
     { date: "", totalCarbonRating: 0 },
   ]);
 
-  const { auth, setAuth } = useContext(AuthContext);
+  // console.log("--", consumptionData);
 
   useEffect(() => {
     CarbonTrackerService.getDishConsumed(auth.userId, auth.accessToken).then(
@@ -46,7 +46,7 @@ const PieChart = () => {
     );
   }, []);
 
-  console.log("--", consumptionData);
+  // for (let i = 0; consumptionData.length; i++) {
 
   // const handleChange = (input) => {
   //   console.log("here")
