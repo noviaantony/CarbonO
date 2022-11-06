@@ -31,22 +31,27 @@ const PieChart = () => {
 
   console.log("--", consumptionData);
 
-  const chartsData = [];
+  const chartsData = new Map();
 
   for (let i = 0; consumptionData.length; i++) {
 
+    if (chartsData.has(consumptionData[i].dateConsumed.substring(0, 10))) {
+      let oldrating = chartsData.get(
+        consumptionData[i].dateConsumed.substring(0, 10)
+      );
+      chartsData.set(
+        consumptionData[i].dateConsumed.substring(0, 10),
+        consumptionData[i].totalCarbonRating + oldrating
+      );
 
-    if (chartsData.filter((data) => data.date === consumptionData[i].dateConsumed.substring(0, 10))) {
-      chartsData.push({
-        date: consumptionData[i].dateConsumed.substring(0, 10),
-        totalCarbonRating: consumptionData[i].totalCarbonRating + data.totalCarbonRating,
-      });
     } else {
-      chartsData.push({
-        date: consumptionData[i].dateConsumed.substring(0, 10),
-        totalCarbonRating: consumptionData[i].totalCarbonRating,
-      });
-    }     
+      chartsData.set(
+        consumptionData[i].dateConsumed.substring(0, 10),
+        consumptionData[i].totalCarbonRating
+      );
+
+    }      
+      
   }
 
   console.log(chartsData);
