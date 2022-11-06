@@ -1,31 +1,22 @@
 package com.carbonO.UserCarbonTracker;
 
 import com.carbonO.CarbonTrackerTransaction.CarbonTrackerTransaction;
-import com.carbonO.Dish.Dish;
-import com.carbonO.Dish.DishRepository;
-import com.carbonO.Dish.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.reactive.function.client.WebClient;
-
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
+
 
 
 @RestController
 @RequestMapping(path = "api/v1/carbonO/carbonTracker/")
 public class UserCarbonTrackerController {
     private final UserCarbonTrackerService userCarbonTrackerService;
-    private final DishService dishService;
 
     @Autowired
-    public UserCarbonTrackerController(UserCarbonTrackerService userCarbonTrackerService, DishService dishService) {
+    public UserCarbonTrackerController(UserCarbonTrackerService userCarbonTrackerService) {
         this.userCarbonTrackerService = userCarbonTrackerService;
-        this.dishService = dishService;
     }
     //Add new carbon tracker user
     @PostMapping(path = "addCarbonTrackerUser")

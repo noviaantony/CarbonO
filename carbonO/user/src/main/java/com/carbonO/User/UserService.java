@@ -4,13 +4,11 @@ import com.carbonO.Registration.token.ConfirmationToken;
 import com.carbonO.Registration.token.ConfirmationTokenService;
 import com.carbonO.User.Exception.UserNotFoundException;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;

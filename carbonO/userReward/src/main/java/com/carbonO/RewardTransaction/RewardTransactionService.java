@@ -2,13 +2,11 @@ package com.carbonO.RewardTransaction;
 
 import com.carbonO.Rewards.Reward;
 import com.carbonO.Rewards.RewardRepository;
-import com.carbonO.Rewards.RewardService;
 import com.carbonO.userReward.UserReward;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
 
 @Service
 public class RewardTransactionService {

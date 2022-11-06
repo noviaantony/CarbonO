@@ -20,8 +20,6 @@ public class MailingService {
     private JavaMailSender javaMailSender;
     @Autowired
     private UserService userService;
-    @Autowired
-    private RegistrationService registrationService;
 
     public void sendResetEmail(String recipientEmail, String link) throws MessagingException, UnsupportedEncodingException {
         MimeMessage message = javaMailSender.createMimeMessage();
