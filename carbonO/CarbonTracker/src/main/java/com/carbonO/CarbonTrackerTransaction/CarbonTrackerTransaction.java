@@ -30,6 +30,7 @@ public class CarbonTrackerTransaction {
     private Long id;
     @Column(name="date_of_consumption")
     private Date dateConsumed;
+    private Integer pointsEarned;
 
     @ManyToOne
     @JoinColumn(name="userCarbonTracker_id")
@@ -40,9 +41,10 @@ public class CarbonTrackerTransaction {
     @JoinColumn(name="dish_id")
     private Dish dish;
 
-    public CarbonTrackerTransaction(Date dateConsumed, UserCarbonTracker userCarbonTracker, Dish dish) {
+    public CarbonTrackerTransaction(Date dateConsumed, UserCarbonTracker userCarbonTracker, Dish dish, Integer pointsEarned) {
         this.dateConsumed = dateConsumed;
         this.userCarbonTracker = userCarbonTracker;
         this.dish = dish;
+        this.pointsEarned = pointsEarned;
     }
 }
