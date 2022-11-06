@@ -13,48 +13,48 @@ Chart.defaults.font.size = 8;
 
 const PieChart = () => {
 
-  const [consumptionData, setConsumptionData] = useState([]);
+  // const [consumptionData, setConsumptionData] = useState([]);
 
-  const { auth, setAuth } = useContext(AuthContext);
+  // const { auth, setAuth } = useContext(AuthContext);
 
-  useEffect(() => {
-    CarbonTrackerService.getDishConsumed(auth.userId, auth.accessToken).then(
-      (response) => {
-        console.log("Dish response");
-        console.log(response);
-        setConsumptionData(response);
-        console.log(consumptionData);
-      //  setLoading(false);
-      }
-    );
-  }, []);
+  // useEffect(() => {
+  //   CarbonTrackerService.getDishConsumed(auth.userId, auth.accessToken).then(
+  //     (response) => {
+  //       console.log("Dish response");
+  //       console.log(response);
+  //       setConsumptionData(response);
+  //       console.log(consumptionData);
+  //     //  setLoading(false);
+  //     }
+  //   );
+  // }, []);
 
-  console.log("--", consumptionData);
+  // console.log("--", consumptionData);
 
-  const chartsData = new Map();
+  // const chartsData = new Map();
 
-  for (let i = 0; consumptionData.length; i++) {
+  // for (let i = 0; consumptionData.length; i++) {
 
-    if (chartsData.has(consumptionData[i].dateConsumed.substring(0, 10))) {
-      let oldrating = chartsData.get(
-        consumptionData[i].dateConsumed.substring(0, 10)
-      );
-      chartsData.set(
-        consumptionData[i].dateConsumed.substring(0, 10),
-        consumptionData[i].totalCarbonRating + oldrating
-      );
+  //   if (chartsData.has(consumptionData[i].dateConsumed.substring(0, 10))) {
+  //     let oldrating = chartsData.get(
+  //       consumptionData[i].dateConsumed.substring(0, 10)
+  //     );
+  //     chartsData.set(
+  //       consumptionData[i].dateConsumed.substring(0, 10),
+  //       consumptionData[i].totalCarbonRating + oldrating
+  //     );
 
-    } else {
-      chartsData.set(
-        consumptionData[i].dateConsumed.substring(0, 10),
-        consumptionData[i].totalCarbonRating
-      );
+  //   } else {
+  //     chartsData.set(
+  //       consumptionData[i].dateConsumed.substring(0, 10),
+  //       consumptionData[i].totalCarbonRating
+  //     );
 
-    }      
+  //   }      
       
-  }
+  // }
 
-  console.log(chartsData);
+  // console.log(chartsData);
 
   return (
     <div

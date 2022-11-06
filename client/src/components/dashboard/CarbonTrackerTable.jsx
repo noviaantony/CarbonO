@@ -2,6 +2,9 @@ import React, {useEffect, useState} from 'react'
 import carbonTrackerService from "../../services/CarbonTrackerService";
 
 const CarbonTrackerTable = ({historicalData}) => {
+
+  console.log(historicalData);
+  
   return (
     <div className="overflow-x-auto relative sm:rounded-lg  m-6 font-default w-6/12">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
