@@ -9,6 +9,7 @@ import {
   useStripe, 
 } from "@stripe/react-stripe-js";
 import { motion } from "framer-motion";
+import { useLocation } from 'react-router-dom'
 
 //stripe template card details styling
 const CARD_OPTIONS = {
@@ -77,7 +78,8 @@ function ModalIcon() {
 const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-
+const location = useLocation();
+const { from } = location.state
   const handleSubmit = async (e) => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
@@ -220,6 +222,21 @@ const PaymentForm = () => {
               <div class="bg-white px-8 pb-6 rounded-xl pt-10 shadow-lg w-10/12  ">
                 <div x-show="card ">
                   <div class="space-y-4">
+                  <div className="">
+                      <label
+                        class="block text-sm font-medium mb-1"
+                        for="card-nr"
+                      >
+                        To
+                      </label>
+                      <input
+                        id="card-nr"
+                        class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full"
+                        type="text"                      
+                        value={from}
+                      />
+                    </div>
+
                     {/* <!-- Donation Amount --> */}
                     <div className="">
                       <label
