@@ -60,7 +60,7 @@ public class UserController {
     public void checkRestPassword(@RequestParam String token, HttpServletResponse response) throws IOException {
         userService.findByResetPasswordToken(token);
 
-        response.sendRedirect("http://18.136.163.9:8085/ResetPassword?token=" + token);
+        response.sendRedirect("http://18.136.163.9:80/ResetPassword?token=" + token);
     }
 
     @PutMapping("/processResetPassword")

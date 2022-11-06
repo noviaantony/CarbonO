@@ -81,14 +81,14 @@ public class RegistrationService {
     public void createUserRewardAccount(Long userId) {
         webClient
                 .post()
-                .uri("/userReward/addNewUserReward?userID=" + userId)
+                .uri("/userReward/addNewUserReward?userId=" + userId)
                 .retrieve().bodyToMono(String.class).block();
     }
 
     public void createCarbonTrackerAccount(Long userId) {
         webClient
                 .post()
-                .uri("/carbonTracker/addNewCarbonTracker?userID=" + userId)
+                .uri("/carbonTracker/addNewCarbonTracker?userId=" + userId)
                 .retrieve().bodyToMono(String.class).block();
     }
 }

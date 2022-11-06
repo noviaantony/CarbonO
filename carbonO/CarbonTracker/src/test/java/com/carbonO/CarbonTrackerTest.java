@@ -2,8 +2,6 @@ package com.carbonO;
 
 import com.carbonO.CarbonTrackerTransaction.CarbonTrackerTransaction;
 import com.carbonO.Receipt.ReceiptRepository;
-import com.carbonO.UserCarbonTracker.UserCarbonTracker;
-import com.carbonO.UserCarbonTracker.UserCarbonTrackerList;
 import com.carbonO.UserCarbonTracker.UserCarbonTrackerRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -17,7 +15,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
-import java.lang.reflect.Type;
 import java.net.URI;
 import java.util.List;
 

@@ -19,7 +19,7 @@ public class UserCarbonTrackerController {
         this.userCarbonTrackerService = userCarbonTrackerService;
     }
     //Add new carbon tracker user
-    @PostMapping(path = "addCarbonTrackerUser")
+    @PostMapping(path = "/addCarbonTrackerUser")
     public ResponseEntity<String> addCarbonTrackerUser(@RequestParam("userId") Long userId) {
         try {
             this.userCarbonTrackerService.addCarbonTrackerUser(userId);
