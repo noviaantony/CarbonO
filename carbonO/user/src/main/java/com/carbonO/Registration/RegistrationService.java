@@ -88,7 +88,7 @@ public class RegistrationService {
     public void createCarbonTrackerAccount(Long userId) {
         webClient
                 .post()
-                .uri("/carbonTracker/addNewCarbonTracker?userId=" + userId)
+                .uri("/carbonTracker/addCarbonTrackerUser?userId=" + userId)
                 .retrieve().bodyToMono(String.class).block();
     }
 }

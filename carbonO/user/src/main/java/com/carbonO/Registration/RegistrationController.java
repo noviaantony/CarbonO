@@ -47,9 +47,15 @@ public class RegistrationController {
     public void confirm(@RequestParam("token") String token, HttpServletResponse response) throws IOException {
         Long userId = registrationService.confirmToken(token);
         //create a new user reward account after confirmation
-        registrationService.createUserRewardAccount(userId);
-        registrationService.createCarbonTrackerAccount(userId);
-        response.sendRedirect("http://18.136.163.9:80/login");
+        try {
+            registrationService.createUserRewardAccount(userId);
+            registrationService.createCarbonTrackerAccount(userId);
+        } catch (Exception e) {
+            response.sendRedirect("http://carbono.life/registration-failed");
+        }
+
+        //Note: Change url to domain
+        response.sendRedirect("http://carbono.life/login");
     }
 
 }
