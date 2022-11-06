@@ -15,6 +15,7 @@ public class ReceiptService {
     public Receipt addReceipt(Long dishId) {
         return receiptRepository.save(new Receipt(dishId, new Date()));
     }
+
     public Receipt redeemReceiptById(Long receiptId) {
         Receipt receipt =  receiptRepository.findById(receiptId).orElseThrow(() -> new IllegalStateException("Receipt with id " + receiptId + " does not exist"));
         if (receipt.isRedeemed()){

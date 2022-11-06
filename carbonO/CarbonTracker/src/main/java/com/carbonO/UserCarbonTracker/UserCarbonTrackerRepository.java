@@ -6,7 +6,7 @@ import java.util.List;
 
 
 public interface UserCarbonTrackerRepository extends JpaRepository<UserCarbonTracker, Long> {
-    List<UserCarbonTracker> findAllByUserId(Long userId);
+    UserCarbonTracker findByUserId(Long userId);
 
 }
 

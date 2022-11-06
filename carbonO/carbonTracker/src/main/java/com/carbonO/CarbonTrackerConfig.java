@@ -1,5 +1,7 @@
 package com.carbonO;
 
+import com.carbonO.CarbonTrackerTransaction.CarbonTrackerTransaction;
+import com.carbonO.CarbonTrackerTransaction.CarbonTrackerTransactionRepository;
 import com.carbonO.Dish.*;
 import com.carbonO.Ingredient.Ingredient;
 import com.carbonO.Ingredient.IngredientRepository;
@@ -26,7 +28,8 @@ public class CarbonTrackerConfig {
     @Bean
     CommandLineRunner commandLineRunner(DishRepository dishRepository, IngredientRepository ingredientRepository,
                                         DishRecipeRepository dishRecipeRepository, UserCarbonTrackerRepository userCarbonTrackerRepository,
-                                        DishKeywordsRepository dishKeywordsRepository, DishRewardPoints dishRewardPoints) {
+                                        DishKeywordsRepository dishKeywordsRepository, DishRewardPoints dishRewardPoints,
+                                        CarbonTrackerTransactionRepository carbonTrackerTransactionRepository) {
 
         return args -> {
             //hashset of ingredients
@@ -890,15 +893,21 @@ public class CarbonTrackerConfig {
 
             //user sample for food consumed
             UserCarbonTracker userCarbonTracker1 = new UserCarbonTracker(
-                    1L,
-                    dish2,
-                    new Date()
+                    1L
+            );
+            CarbonTrackerTransaction carbonTrackerTransaction1 = new CarbonTrackerTransaction(
+                    new Date(),
+                    userCarbonTracker1,
+                    dish2
             );
 
             userCarbonTrackerRepository.saveAll(
                     List.of(userCarbonTracker1)
             );
 
+            carbonTrackerTransactionRepository.saveAll(
+                    List.of(carbonTrackerTransaction1)
+            );
         };
     }
 }

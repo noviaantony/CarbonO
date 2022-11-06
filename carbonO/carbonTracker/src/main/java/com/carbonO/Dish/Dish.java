@@ -1,10 +1,12 @@
 package com.carbonO.Dish;
 
+import com.carbonO.CarbonTrackerTransaction.CarbonTrackerTransaction;
 import com.carbonO.UserCarbonTracker.UserCarbonTracker;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -13,7 +15,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
+@NoArgsConstructor
 public class Dish {
     @Id
     @SequenceGenerator(
@@ -41,12 +43,13 @@ public class Dish {
     @JsonManagedReference("dish_dishKeyWords")
     private List<DishKeywords> dishKeywords;
 
-    @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference("dish_userCarbonTracker")
-    private List<UserCarbonTracker> userCarbonTrackers;
+//    @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JsonManagedReference("dish_userCarbonTracker")
+//    private List<UserCarbonTracker> userCarbonTrackers;
 
-    public Dish() {
-    }
+    @OneToOne(mappedBy = "dish", cascade = CascadeType.ALL)
+    @JsonBackReference("dish_carbonTrackerTransaction")
+    private CarbonTrackerTransaction carbonTrackerTransaction;
 
     public Dish(String dishName) {
         this.dishName = dishName;

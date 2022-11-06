@@ -50,6 +50,7 @@ public class RegistrationController {
         Long userId = registrationService.confirmToken(token);
         //create a new user reward account after confirmation
         registrationService.createUserRewardAccount(userId);
+        registrationService.createCarbonTrackerAccount(userId);
         response.sendRedirect("http://18.136.163.9:8085/login");
     }
 

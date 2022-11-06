@@ -54,7 +54,12 @@ public class ReceiptController {
     }
 
     @GetMapping("/getReceipt")
-    public ResponseEntity<Receipt> getReceipt(@RequestParam("receiptId") Long receiptId){
-        return ResponseEntity.ok().body(receiptService.findReceiptById(receiptId));
+    public ResponseEntity<Receipt> getReceipt(@RequestParam("receiptId") Long receiptId) {
+        try {
+            Receipt receipt = receiptService.findReceiptById(receiptId);
+            return ResponseEntity.ok().body(receipt);
+        } catch (Exception e) {
+            return ResponseEntity.status(404).body(null);
+        }
     }
 }

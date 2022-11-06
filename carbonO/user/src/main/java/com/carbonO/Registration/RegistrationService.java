@@ -29,7 +29,7 @@ public class RegistrationService {
         this.confirmationTokenService = confirmationTokenService;
         this.emailValidator = emailValidator;
         this.userRepository = userRepository;
-        this.webClient = webClient.baseUrl("http://18.136.163.9:8080/api/v1/carbonO/userReward").build();
+        this.webClient = webClient.baseUrl("http://18.136.163.9:8080/api/v1/carbonO/").build();
     }
 
 
@@ -81,7 +81,14 @@ public class RegistrationService {
     public void createUserRewardAccount(Long userId) {
         webClient
                 .post()
-                .uri("/addNewUserReward?userID=" + userId)
+                .uri("/userReward/addNewUserReward?userID=" + userId)
+                .retrieve().bodyToMono(String.class).block();
+    }
+
+    public void createCarbonTrackerAccount(Long userId) {
+        webClient
+                .post()
+                .uri("/carbonTracker/addNewCarbonTracker?userID=" + userId)
                 .retrieve().bodyToMono(String.class).block();
     }
 }
