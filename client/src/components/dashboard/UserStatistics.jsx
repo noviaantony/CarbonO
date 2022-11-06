@@ -9,9 +9,9 @@ import initialDatesArr from "./getInitialDates";
 import actualDates from "./getDates";
 
 const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned}) => {
-  const [isClickedCredit, setIsClickedCredit] = React.useState(false);
-  const [isClickedCarbon, setIsClickedCarbon] = React.useState(false);
-  const [isClickedReceipt, setIsClickedReceipt] = React.useState(false);
+  const [isClickedCredit, setIsClickedCredit] = React.useState(true);
+  const [isClickedCarbon, setIsClickedCarbon] = React.useState(true);
+  const [isClickedReceipt, setIsClickedReceipt] = React.useState(true);
 
   const initialDates = useContext(initialDatesArr);
 
