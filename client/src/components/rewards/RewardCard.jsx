@@ -24,11 +24,14 @@ const RewardCard = ({
 
   function checkError() {
     for (let i = 0; i < UserTransactions.length; i++) {
-      if (UserTransactions[i].reward.rewardId === RewardId) {
-        console.log("error");
-        setIsClaimed(true);
-        return;
+      if (UserTransactions[i].donation === false) {
+        if (UserTransactions[i].reward.rewardId === RewardId) {
+          console.log("error");
+          setIsClaimed(true);
+          return;
+        }
       }
+     
     }
   }
 
