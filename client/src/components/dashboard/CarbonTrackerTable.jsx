@@ -20,7 +20,7 @@ const CarbonTrackerTable = ({historicalData}) => {
               C02 consumed
             </th>
             <th scope="col" className="py-3 px-6">
-              Receipt
+              ECredits earned
             </th>
           </tr>
         </thead>
@@ -42,7 +42,7 @@ const CarbonTrackerTable = ({historicalData}) => {
                     href="#"
                     className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                 >
-                  -
+                  {data.dish.carbonRating * 10}
                 </a>
               </td>
             </tr>
