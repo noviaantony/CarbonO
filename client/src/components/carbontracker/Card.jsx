@@ -16,39 +16,52 @@ const Card = ({
   dishCarbonFootprint,
   dishCredit,
 }) => {
+  const [open, setOpen] = useState(1);
 
-   const [open, setOpen] = useState(1);
+  const handleOpen = (value) => {
+    setOpen(open === value ? 0 : value);
+  };
 
-   const handleOpen = (value) => {
-     setOpen(open === value ? 0 : value);
-   };
-
-  //  array with object 
+  //  array with object
   // id, ingredientName, carbonFootprint, dishRecipe.quantity (g)
-
 
   const { auth } = useContext(AuthContext);
 
   const [showDishInfo, setshowDishInfo] = React.useState(false);
   const [ingredients, setIngredients] = useState([]);
+  const [carbonFoodprintBreakdown, setCarbonFootprintBreakdown] = useState([]);
+
+  // useEffect(() => {
+  //   CarbonTrackerService.getAllIngredientsFromDish(dishId).then((response) => {
+  //     console.log(response);
+  //     let ingredientArr = [];
+  //     for (let i = 0; i < response.length - 1; i++) {
+  //       ingredientArr.push(response[i].ingredientName + ", ");
+  //     }
+  //     ingredientArr.push(response[response.length - 1].ingredientName + " ");
+  //     setIngredients(ingredientArr);
+  //   });
+  // }, []);
+
+  // response[i].carbonFootprint
 
   useEffect(() => {
-    CarbonTrackerService.getAllIngredientsFromDish(dishId)
-    .then((response) => {
-
+    CarbonTrackerService.getAllIngredientsFromDish(dishId).then((response) => {
       console.log(response);
-      let ingredientArr = [];
-      for (let i = 0; i < response.length-1; i++) {
-        ingredientArr.push(response[i].ingredientName + ", ");
+      let breakdownArr = [];
+      for (let i = 0; i < response.length - 1; i++) {
+        breakdownArr.push(response[i].ingredientName + "("  + ")" + ", ");
       }
-      ingredientArr.push(response[response.length - 1].ingredientName + " ");
+      breakdownArr.push(
+        response[response.length - 1].ingredientName +
+          "(" +
+          ")"
+      );
+      setCarbonFootprintBreakdown(breakdownArr);
+      console.log(carbonFoodprintBreakdown);
+    });
 
-      setIngredients(ingredientArr);
-      console.log(ingredients);
-    })
-  } , []);
-
-
+  }, []);
 
   const rendereddishRating = [];
   for (let i = 0; i < dishRating; i++) {
@@ -111,22 +124,30 @@ const Card = ({
                     </div>
                     {/*body*/}
                     <div className="relative p-6 flex-auto">
-                      <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                      <p className="my-4 text-gray-700 text-lg font-bold leading-relaxed">
                         <Fragment>
                           <Accordion open={open === 1}>
                             <AccordionHeader onClick={() => handleOpen(1)}>
                               What are the ingredients in this dish?
                             </AccordionHeader>
-                            <AccordionBody>{ingredients}</AccordionBody>
+                            <AccordionBody className="font-semibold">
+                              {ingredients}
+                            </AccordionBody>
                           </Accordion>
                           {/* <Accordion open={open === 2}>
                             <AccordionHeader onClick={() => handleOpen(2)}>
-                              Ingredient Quanities
+                              What is the breakdown of carbon foodprint per
+                              ingredient?
                             </AccordionHeader>
                             <AccordionBody>
-                              * we will add this in later *
+                              {carbonFoodprintBreakdown}
+                              meow
                             </AccordionBody>
                           </Accordion> */}
+                          <h3 className="text-gray-700 text-m font-light mt-5 ">
+                            Note: All data is based off the average quantity of
+                            ingredients used for one serving of the dish
+                          </h3>
                           {/* <Accordion open={open === 3}>
                             <AccordionHeader onClick={() => handleOpen(2)}>
                               What is the carbon emission breakdown per

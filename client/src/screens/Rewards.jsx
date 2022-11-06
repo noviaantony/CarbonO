@@ -31,13 +31,16 @@ const Rewards = () => {
 
   // get userReward account information
   useEffect(() => {
+      setLoading(true);
     UserRewardService.getUserReward(auth.userId, auth.accessToken).then(
       (response) => {
         setUserTransactions(response.rewardTransactions);
         setUserRewardPoints(response.rewardPoints);
         console.log(userRewardPoints);
       }
-    );
+    ).then((data) => {
+        setLoading(false);
+    });
   }, []);
 
   return (
