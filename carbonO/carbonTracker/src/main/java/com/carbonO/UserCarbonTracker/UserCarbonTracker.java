@@ -1,19 +1,23 @@
 package com.carbonO.UserCarbonTracker;
 
+import com.carbonO.CarbonTrackerTransaction.CarbonTrackerTransaction;
 import com.carbonO.Dish.Dish;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class UserCarbonTracker {
     @Id
     @SequenceGenerator(
@@ -27,21 +31,19 @@ public class UserCarbonTracker {
     )
     private Long id;
     private Long userId;
-    @Column(name="date_of_consumption")
-    private Date dateConsumed;
+//    @Column(name="date_of_consumption")
+//    private Date dateConsumed;
 
-    @ManyToOne
-    @JoinColumn(name="dish_id")
-    @JsonBackReference("dish_userCarbonTracker")
-    private Dish dish;
+//    @ManyToOne
+//    @JoinColumn(name="dish_id")
+//    @JsonBackReference("dish_userCarbonTracker")
+//    private Dish dish;
+    @OneToMany(mappedBy = "userCarbonTracker", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<CarbonTrackerTransaction> carbonTrackerTransaction;
 
-    public UserCarbonTracker() {
-
-    }
-    public UserCarbonTracker(Long userId, Dish dish, Date dateConsumed) {
+    public UserCarbonTracker(Long userId) {
         this.userId = userId;
-        this.dateConsumed = dateConsumed;
-        this.dish = dish;
     }
 
 

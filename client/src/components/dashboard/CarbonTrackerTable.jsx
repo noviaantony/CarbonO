@@ -32,11 +32,11 @@ const CarbonTrackerTable = ({historicalData}) => {
                   scope="row"
                   className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
               >
-                {data.dishName}
+                {data.dish.dishName}
               </th>
-              <td className="py-4 px-6">{data.userCarbonTrackers[0].dateConsumed.substring(0,10)}</td>
-              <td className="py-4 px-6">{data.carbonRating}</td>
-              <td className="py-4 px-6">{data.totalCarbonFootprint.toFixed(0) + 'g'}</td>
+              <td className="py-4 px-6">{data.dateConsumed.substring(0,10)}</td>
+              <td className="py-4 px-6">{data.dish.carbonRating}</td>
+              <td className="py-4 px-6">{data.dish.totalCarbonFootprint.toFixed(0) + 'g'}</td>
               <td className="py-4 px-6">
                 <a
                     href="#"
