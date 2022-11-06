@@ -59,10 +59,13 @@ class CarbonTrackerService {
           headers: { Authorization: userToken },
         }
       );
-      return response.data;
+      console.log(response.data)
+      return "successfully claimed e-credits!";
+
     } catch (error) {
-      console.log(error);
-      return error.response.data;
+      console.log("here");
+      console.log(error.response.data);
+      return "this qr code has already been scanned & redeemed!";
     }
   }
 

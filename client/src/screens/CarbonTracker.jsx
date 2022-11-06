@@ -17,6 +17,7 @@ const CarbonTracker = () => {
 
   useEffect(() => {
     setLoading(true);
+    
     CarbonTrackerService.getAllDishes()
       .then((response) => {
         setFoodList(response); 
