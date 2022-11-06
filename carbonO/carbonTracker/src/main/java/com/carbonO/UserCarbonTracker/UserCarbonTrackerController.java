@@ -1,5 +1,6 @@
 package com.carbonO.UserCarbonTracker;
 
+import com.carbonO.CarbonTrackerTransaction.CarbonTrackerTransaction;
 import com.carbonO.Dish.Dish;
 import com.carbonO.Dish.DishRepository;
 import com.carbonO.Dish.DishService;
@@ -26,18 +27,28 @@ public class UserCarbonTrackerController {
         this.userCarbonTrackerService = userCarbonTrackerService;
         this.dishService = dishService;
     }
+    //Add new carbon tracker user
+    @PostMapping(path = "addCarbonTrackerUser")
+    public ResponseEntity<String> addCarbonTrackerUser(@RequestParam("userId") Long userId) {
+        try {
+            this.userCarbonTrackerService.addCarbonTrackerUser(userId);
+            return ResponseEntity.status(201).body("Carbon tracker user added successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
+    }
+
     //Get all dishes consumed by a user
     @GetMapping("/getUserDishedConsumed")
-    public ResponseEntity<List<Dish>> getUserDishedConsumed(@RequestParam("userId") Long userId){
+    public ResponseEntity<List<CarbonTrackerTransaction>> getUserDishedConsumed(@RequestParam("userId") Long userId){
 
-            List<Dish>  userCarbonTrackerDishList = userCarbonTrackerService.getUserDishedConsumed(userId);
+        List<CarbonTrackerTransaction>   userCarbonTrackerDishList = userCarbonTrackerService.getUserDishedConsumed(userId);
 
-            if (userCarbonTrackerDishList.isEmpty()) {
-                return ResponseEntity.status(404).body(null);
-            } else {
-                return ResponseEntity.ok().body(userCarbonTrackerDishList);
-            }
-
+        if (userCarbonTrackerDishList.isEmpty()) {
+            return ResponseEntity.status(404).body(null);
+        } else {
+            return ResponseEntity.ok().body(userCarbonTrackerDishList);
+        }
     }
 
     //Get a specific user's total carbon consumption since the beginning
