@@ -9,18 +9,24 @@ import { ReactComponent as TickSvg } from "./Tick.svg";
 import { ReactComponent as WarningSvg } from "./Warning.svg";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
+
 const theme = createTheme({
   palette: {
     primary: {
       main: "#5E9387",
     },
   },
+  typography: {
+    fontFamily: ["Open Sans", "sans-serif"].join(","),
+  },
 });
 const steps = ["Amount to Donate", "Confirmation", "Success"];
 
-const MultiStepper = ({organisation}) => {
+const MultiStepper = ({ organisation }) => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
+
+  const [donationAmount, setDonationAmount] = React.useState(0);
 
   const isStepOptional = (step) => {
     return step === 1;
@@ -45,32 +51,17 @@ const MultiStepper = ({organisation}) => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
-  };
-
   const handleReset = () => {
     setActiveStep(0);
   };
 
   const handleButtonText = () => {
     if (activeStep === steps.length - 1) {
-      return <div>Finish</div>;
+      return <div class = "font-bold">Finish</div>;
     } else if (activeStep + 1 == 2) {
-      return <div>Yes, confirm</div>;
+      return <div class = "font-bold">Yes, confirm</div>;
     } else {
-      return <div>Next</div>;
+      return <div class = "font-bold">Next</div>;
     }
   };
 
@@ -106,6 +97,7 @@ const MultiStepper = ({organisation}) => {
               "
                 id="exampleNumber0"
                 placeholder="Number input"
+                onChange={(e) => setDonationAmount(e.target.value)}
               />
             </div>
           </div>
@@ -119,13 +111,7 @@ const MultiStepper = ({organisation}) => {
             <WarningSvg width="4rem" />
           </div>
           <p className="mb-5 text-2xl text-center font-bold text-text-black  dark:text-gray-400">
-            You are about to make a donation of x amount to {organisation}
-          </p>
-          <p className="text-center">
-            Changes cannot be made after this point.
-          </p>
-          <p className="text-center">
-            Would you like to confirm your donation?
+            You are about to make a donation of {donationAmount} E-Credits
           </p>
         </div>
       );
@@ -139,7 +125,8 @@ const MultiStepper = ({organisation}) => {
             Donation Success!
           </h2>
           <p className="text-center">
-            You have made a successful donation of x amount to y organisation
+            You have made a successful donation of {donationAmount} E-Credits to{" "}
+            {organisation}!
           </p>
         </div>
       );
@@ -161,12 +148,13 @@ const MultiStepper = ({organisation}) => {
         </Stepper>
         {activeStep === steps.length ? (
           <React.Fragment>
-            <Typography sx={{ mt: 2, mb: 1 }}>
-              All steps completed - you&apos;re finished
-            </Typography>
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-              <Box sx={{ flex: "1 1 auto" }} />
-              <Button onClick={handleReset}>Reset</Button>
+            <div className="text-center">
+              <Typography sx={{ mt: 2, mb: 1 }}>
+                Thank you for your generous donation!
+              </Typography>
+            </div>
+            <Box className="grid place-items-center">
+              <Button onClick={handleReset}>Make another donation</Button>
             </Box>
           </React.Fragment>
         ) : (
@@ -178,6 +166,7 @@ const MultiStepper = ({organisation}) => {
             <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
               <Button
                 color="inherit"
+                style={{fontWeight: 'bold'}}
                 disabled={activeStep === 0}
                 onClick={handleBack}
                 sx={{ mr: 1 }}
