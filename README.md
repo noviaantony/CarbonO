@@ -1,5 +1,7 @@
 # CarbonO
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0f62897a65f04e868ee58e343eb60080)](https://app.codacy.com/gh/noviaantony/CarbonO?utm_source=github.com&utm_medium=referral&utm_content=noviaantony/CarbonO&utm_campaign=Badge_Grade_Settings)
+
 ![alt text](http://localhost:3002/static/media/Logo.adc3ee63fee3907bc799.png)
 
 > Project By: SMU CS203 G2T2
