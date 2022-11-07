@@ -8,6 +8,7 @@ import Header from "../components/misc/Header";
 import initialDatesArr from "../components/dashboard/getInitialDates";
 import UserRewardService from "../services/UserRewardService";
 import {ThreeDots} from "react-loader-spinner";
+import { motion } from "framer-motion";
 
 const Dashboard = () => {
   const [consumptionData, setConsumptionData] = useState([]);
@@ -111,7 +112,11 @@ const Dashboard = () => {
           </div>
         </>
       ) : (
-        <div className="">
+        <motion.div
+          className="actions"
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+        >
           <initialDatesArr.Provider value={dates}>
             <UserStatistics
               TotalCarbon={totalCarbon.toFixed(0)}
@@ -125,7 +130,7 @@ const Dashboard = () => {
           <div className="flex flex-row justify-center mx-26">
             <RewardsTable historicalData={rewardData} />
           </div>
-        </div>
+        </motion.div>
       )}
     </>
   );
