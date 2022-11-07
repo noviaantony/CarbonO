@@ -36,8 +36,8 @@ public class CarbonTrackerTransaction {
     @JsonBackReference
     private UserCarbonTracker userCarbonTracker;
 
-    @OneToOne
-    @JoinColumn(name="dish_id")
+    @ManyToOne
+    @JoinColumn(name="dish_id", nullable=false)
     private Dish dish;
 
     public CarbonTrackerTransaction(LocalDateTime dateConsumed, UserCarbonTracker userCarbonTracker, Dish dish, Integer pointsEarned) {
