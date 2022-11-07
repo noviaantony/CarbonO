@@ -2,7 +2,6 @@ package com.carbonO.Dish;
 
 import com.carbonO.Ingredient.Ingredient;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;

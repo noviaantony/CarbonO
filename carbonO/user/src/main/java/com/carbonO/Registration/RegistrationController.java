@@ -4,8 +4,6 @@ import com.carbonO.Mailing.MailingService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -49,9 +47,15 @@ public class RegistrationController {
     public void confirm(@RequestParam("token") String token, HttpServletResponse response) throws IOException {
         Long userId = registrationService.confirmToken(token);
         //create a new user reward account after confirmation
-        registrationService.createUserRewardAccount(userId);
-        registrationService.createCarbonTrackerAccount(userId);
-        response.sendRedirect("http://18.136.163.9:8085/login");
+        try {
+            registrationService.createUserRewardAccount(userId);
+            registrationService.createCarbonTrackerAccount(userId);
+        } catch (Exception e) {
+            response.sendRedirect("https://carbonoapp.net/registration-failed");
+        }
+
+        //Note: Change url to domain
+        response.sendRedirect("https://carbonoapp.net/login");
     }
 
 }

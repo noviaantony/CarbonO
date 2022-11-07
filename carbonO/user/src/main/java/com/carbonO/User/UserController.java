@@ -6,17 +6,11 @@ import com.carbonO.User.Exception.UserNotFoundException;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @Controller
@@ -66,7 +60,8 @@ public class UserController {
     public void checkRestPassword(@RequestParam String token, HttpServletResponse response) throws IOException {
         userService.findByResetPasswordToken(token);
 
-        response.sendRedirect("http://18.136.163.9:8085/ResetPassword?token=" + token);
+        //Note: Change url to domain
+        response.sendRedirect("https://carbonoapp.net/ResetPassword?token=" + token);
     }
 
     @PutMapping("/processResetPassword")

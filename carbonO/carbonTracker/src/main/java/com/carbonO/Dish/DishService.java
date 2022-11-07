@@ -13,14 +13,10 @@ import java.util.NoSuchElementException;
 @Service
 public class DishService {
     private final DishRepository dishRepository;
-    private final DishRecipeRepository dishRecipeRepository;
-    private final IngredientRepository ingredientRepository;
 
     @Autowired
-    public DishService(DishRepository dishRepository, DishRecipeRepository dishRecipeRepository, IngredientRepository ingredientRepository) {
+    public DishService(DishRepository dishRepository) {
         this.dishRepository = dishRepository;
-        this.dishRecipeRepository = dishRecipeRepository;
-        this.ingredientRepository = ingredientRepository;
     }
     //get dish by id
     public Dish findDishById(Long id){

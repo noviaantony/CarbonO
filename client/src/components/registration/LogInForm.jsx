@@ -2,12 +2,13 @@ import React, { useRef, useState, useEffect, useContext } from "react";
 import { HiMail, HiLockClosed } from "react-icons/hi";
 import { ReactComponent as SignInSvg } from "./SignInSvg.svg";
 import { Navigate, Link } from "react-router-dom";
-import AuthContext from "../../hooks/AuthProvider";
+import AuthContext from "../../hooks/AuthContext";
 import axios from "axios";
 import CarbonTrackerService from "../../services/CarbonTrackerService";
+import { motion } from "framer-motion";
 
-const LOGIN_URL = "http://18.136.163.9:8080/api/v1/carbonO/user/login";
-const USER_ID_URL = "http://18.136.163.9:8080/api/v1/carbonO/user/getUser";
+const LOGIN_URL = "https://carbonoapp.net/api/v1/carbonO/user/login";
+const USER_ID_URL = "https://carbonoapp.net/api/v1/carbonO/user/getUser";
 
 const LogInForm = () => {
   const { setAuth } = useContext(AuthContext);
@@ -63,7 +64,9 @@ const LogInForm = () => {
         setErrMsg("Missing Username or password");
       } else if (err.response.status === 401) {
         // unauthorized
-        setErrMsg("Something went wrong! Ensure you have verified your account and that your password is correct"); 
+        setErrMsg(
+          "Something went wrong! Ensure you have verified your account and that your password is correct"
+        );
       } else {
         setErrMsg("Something went wrong! Try again.");
       }
@@ -77,12 +80,16 @@ const LogInForm = () => {
         <section>
           <br />
           <p>
-            <Navigate to="/CarbonTracker" />
+            <Navigate to="/Dashboard" />
           </p>
         </section>
       ) : (
-        <div className="flex flex-col items-center justify-center min-h-screen py-2 font-default">
-          <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
+        <motion.div
+          className="actions flex flex-col items-center min-h-screen py-2 font-default mt-20"
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+        >
+          <main className="flex flex-col items-center w-full flex-1 px-20 text-center">
             <div className="bg-white rounded-2xl shadow-2xl flex w-2/3 max-w-4xl">
               <div className="w-3/5 p-5">
                 <div className="py-10">
@@ -168,7 +175,7 @@ const LogInForm = () => {
               </div>
             </div>
           </main>
-        </div>
+        </motion.div>
       )}
     </>
   );

@@ -94,9 +94,6 @@ public class RewardConfig {
             UserReward userReward = new UserReward(1L, 99999);
             userRewardRepository.save(userReward);
 
-            //create dummy user transactions
-            List<RewardTransaction> transactionList = new ArrayList<>();
-
             UserReward userReward1 = userRewardRepository.findByUserId(1L);
             Reward reward1 = rewardRepository.findByRewardName("Upcycled Earrings").get();
 

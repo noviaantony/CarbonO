@@ -11,7 +11,7 @@ import {
   CategoryScale,
 } from "chart.js";
 import CarbonTrackerService from "../../services/CarbonTrackerService";
-import AuthContext from "../../hooks/AuthProvider";
+import AuthContext from "../../hooks/AuthContext";
 
 Chart.register(
   LineController,
@@ -27,75 +27,53 @@ Chart.defaults.font.size = 16;
 // carbon rating summary
 
 const PieChart = () => {
-  const [consumptionData, setConsumptionData] = useState([]);
-  const { auth, setAuth } = useContext(AuthContext);
+  const [lineChartData, setlineChartData] = useState([]);
   const [chartsData, setChartsData] = useState([
     { date: "", totalCarbonRating: 0 },
   ]);
 
-  // console.log("--", consumptionData);
+  const { auth, setAuth } = useContext(AuthContext);
 
   useEffect(() => {
     CarbonTrackerService.getDishConsumed(auth.userId, auth.accessToken).then(
       (response) => {
         console.log("Dish response");
         console.log(response);
-        setConsumptionData(response);
-        console.log(consumptionData);
+        setlineChartData(response);
+        console.log(lineChartData);
         //  setLoading(false);
       }
     );
   }, []);
 
-  // for (let i = 0; consumptionData.length; i++) {
-
-  // const handleChange = (input) => {
-  //   console.log("here")
-  //   setChartsData(
-  //     chartsData.map((data) => {
-  //       if (data.date === input.dateConsumed.substring(0, 10)) {
-  //         return {
-  //           ...data,
-  //           date: input.dateConsumed.substring(0, 10),
-  //           totalCarbonRating: data.totalCarbonRating + input.pointsEarned,
-  //         };
-  //       } else {
-  //         return {
-  //           ...data,
-  //           date: input.dateConsumed.substring(0, 10),
-  //           totalCarbonRating: input.pointsEarned,
-  //         };
-  //       }
-  //     })
-  //   );
-  // };
-
   const test = () => {
     let i = 0;
-      useEffect(() => {
-        for (i; i < consumptionData.length; i++) {
+    useEffect(() => {
+      for (i; i < lineChartData.length; i++) {
         setChartsData(
           chartsData.map((data) => {
-            if (data.date === consumptionData[i].dateConsumed.substring(0, 10)) {
-              console.log("here1")
+            if (data.date === lineChartData[i].dateConsumed.substring(0, 10)) {
+              console.log("here1");
               return {
                 ...data,
-                date: consumptionData[i].dateConsumed.substring(0, 10),
-                totalCarbonRating: data.totalCarbonRating + consumptionData[i].pointsEarned,
+                date: lineChartData[i].dateConsumed.substring(0, 10),
+                totalCarbonRating:
+                  data.totalCarbonRating + lineChartData[i].pointsEarned,
               };
             } else {
-              console.log("here2")
+              console.log("here2");
               return {
                 ...data,
-                date: consumptionData[i].dateConsumed.substring(0, 10),
-                totalCarbonRating: consumptionData[i].pointsEarned,
+                date: lineChartData[i].dateConsumed.substring(0, 10),
+                totalCarbonRating: lineChartData[i].pointsEarned,
               };
             }
           })
         );
-      }},[consumptionData[i]]); 
-      console.log(chartsData);
-}
+      }
+    }, [lineChartData[i]]);
+    console.log(chartsData);
+  };
 
   return (
     <div

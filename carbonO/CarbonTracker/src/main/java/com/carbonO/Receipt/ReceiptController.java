@@ -26,7 +26,7 @@ public class ReceiptController {
         this.receiptService = receiptService;
     }
 
-    private static final String QR_CODE_IMAGE_PATH = "./carbonO/carbonTracker/src/main/resources/static/MyQRCode.png";
+//    private static final String QR_CODE_IMAGE_PATH = "./carbonO/carbonTracker/src/main/resources/static/MyQRCode.png";
 
     @GetMapping("/generateQRReceipt")
     public ResponseEntity<?> getQRCode(@RequestParam("dishId") Long dishId){

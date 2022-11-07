@@ -1,26 +1,41 @@
-import React, {useContext, useState} from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import DonationService from "../../services/DonationService";
-import AuthContext from "../../hooks/AuthProvider";
+import AuthContext from "../../hooks/AuthContext";
 // // import Slider, { Range } from "rc-slider";
 // import Slider from "@mui/material/Slider";
 // // import Slider from "./Slider"
 import Stepper from "./MultiStepper";
 
-const DonationCard = ({organisationId, Title, Image, Description, Website, UserCredits}) => {
-
+const DonationCard = ({
+  organisationId,
+  Title,
+  Image,
+  Description,
+  Website,
+  UserCredits,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [donationAmount, setDonationAmount] = useState(0);
   const { auth, setAuth } = useContext(AuthContext);
   const [message, setMessage] = useState("");
 
   const donatePoints = () => {
-    DonationService.donatePoints(auth.userId, donationAmount, organisationId, auth.accessToken)
-    .then((response) => {
-        console.log(response);
-        setMessage("You have successfully donated " + donationAmount + " points to " + Title);
-        // setIsOpen(false);
+    DonationService.donatePoints(
+      auth.userId,
+      donationAmount,
+      organisationId,
+      auth.accessToken
+    ).then((response) => {
+      console.log(response);
+      setMessage(
+        "You have successfully donated " +
+          donationAmount +
+          " points to " +
+          Title
+      );
+      // setIsOpen(false);
       // <span
       //     className=" text-red-800 text-sm mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900 font-bold mb-3">
       //             {errMsg}
@@ -42,7 +57,7 @@ const DonationCard = ({organisationId, Title, Image, Description, Website, UserC
         overlayClassName="myoverlay"
         closeTimeoutMS={500}
       >
-         <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+        <div class="relative p-4 w-full max-w-md h-full md:h-auto">
           <button
             type="button"
             class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
@@ -62,12 +77,14 @@ const DonationCard = ({organisationId, Title, Image, Description, Website, UserC
                 clip-rule="evenodd"
               ></path>
             </svg>
-            </button>
-            </div>
+          </button>
+        </div>
         <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-          <Stepper organisation = {Title.substring(0, Title.indexOf(':'))}
-                   organisationId={organisationId}/>
-        </div>      
+          <Stepper
+            organisation={Title.substring(0, Title.indexOf(":"))}
+            organisationId={organisationId}
+          />
+        </div>
       </Modal>
 
       <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 font-default">
@@ -79,11 +96,6 @@ const DonationCard = ({organisationId, Title, Image, Description, Website, UserC
           <p className="flex items-left leading-tight p-2 md:p-4 text-sm">
             {Description}
           </p>
-          <a href={Website} className="flex justify-end text-sm">
-            <div className="pr-5 underline underline-offset-1">
-              Visit Website
-            </div>
-          </a>
 
           <footer class="flex items-center justify-between leading-none p-2 md:p-4 bg-white">
             <div class="flex items-center no-underline  text-black" href="#">
@@ -93,17 +105,15 @@ const DonationCard = ({organisationId, Title, Image, Description, Website, UserC
           "
                 type="button"
                 onClick={toggleConfirmationModal}
-
               >
                 Donate E-Credits
               </button>
-              <Link
-                to="/Payment"
-                state = {{from : Title.substring(0, Title.indexOf(':'))}}
+              <a
+                href={Website}
                 className="inline-flex items-center py-2 px-10 text-xs font-xs text-center text-[#5E9387] bg-white rounded-lg  focus:outline-none transition duration-300 mr-3 font-semibold border-[#5E9387] border-2 border-solid hover:bg-gray-700 hover:text-white"
               >
-                Donate Cash
-              </Link>
+                Visit Website
+              </a>
             </div>
           </footer>
         </article>

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const USER_API_URL = 'http://18.136.163.9:8080/api/v1/carbonO';
+const USER_API_URL = 'https://carbonoapp.net/api/v1/carbonO';
 
 class DonationService{
     async getAllOrganisations(){

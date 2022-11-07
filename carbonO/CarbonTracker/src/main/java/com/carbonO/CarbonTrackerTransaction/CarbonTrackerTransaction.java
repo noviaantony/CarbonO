@@ -3,8 +3,6 @@ package com.carbonO.CarbonTrackerTransaction;
 import com.carbonO.Dish.Dish;
 import com.carbonO.UserCarbonTracker.UserCarbonTracker;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
