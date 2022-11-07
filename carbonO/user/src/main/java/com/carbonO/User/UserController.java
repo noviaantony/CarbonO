@@ -61,7 +61,7 @@ public class UserController {
         userService.findByResetPasswordToken(token);
 
         //Note: Change url to domain
-        response.sendRedirect("http://carbono.life/ResetPassword?token=" + token);
+        response.sendRedirect("https://carbonoapp.net/ResetPassword?token=" + token);
     }
 
     @PutMapping("/processResetPassword")
