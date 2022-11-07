@@ -6,7 +6,7 @@ import CarbonTrackerService from "../services/CarbonTrackerService";
 import Header from "../components/misc/Header";
 import AuthContext from "../hooks/AuthProvider";
 import QRScanner from "../components/carbontracker/QRScanner";
-import { motion } from "framer-motion";
+
 
 const CarbonTracker = () => {
   const { auth } = useContext(AuthContext);
