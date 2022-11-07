@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext, useCallback } from "react";
 import CarbonTrackerTable from "../components/dashboard/CarbonTrackerTable";
 import RewardsTable from "../components/dashboard/RewardsTable";
+import DonationTable from "../components/dashboard/DonationTable";
 import UserStatistics from "../components/dashboard/UserStatistics";
 import AuthContext from "../hooks/AuthContext";
 import CarbonTrackerService from "../services/CarbonTrackerService";
@@ -168,6 +169,9 @@ for (let i = 0; i < lineChartData.length; i++) {
           </div>
           <div className="flex flex-row justify-center mx-26">
             <RewardsTable historicalData={rewardData} />
+          </div>
+          <div className="flex flex-row justify-center mx-26">
+            <DonationTable historicalData={rewardData} />
           </div>
         </motion.div>
       )}

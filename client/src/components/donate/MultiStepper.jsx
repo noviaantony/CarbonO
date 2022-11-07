@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext, useState } from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -8,6 +8,8 @@ import Typography from "@mui/material/Typography";
 import { ReactComponent as TickSvg } from "./Tick.svg";
 import { ReactComponent as WarningSvg } from "./Warning.svg";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import DonationService from "../../services/DonationService";
+import AuthContext from "../../hooks/AuthContext";
 
 const theme = createTheme({
   palette: {
@@ -24,6 +26,7 @@ const steps = ["Amount to Donate", "Confirmation", "Success"];
 const MultiStepper = ({ organisation, organisationId }) => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [donationAmount, setDonationAmount] = React.useState(0);
+  const { auth, setAuth } = useContext(AuthContext);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -39,7 +42,12 @@ const MultiStepper = ({ organisation, organisationId }) => {
 
   const handleButtonText = () => {
     if (activeStep === steps.length - 1) {
-      DonationService.donatePoints(auth.userId, donationAmount, organisationId, auth.token).then((response) => {
+      DonationService.donatePoints(
+        auth.userId,
+        donationAmount,
+        organisationId,
+        auth.token
+      ).then((response) => {
         console.log(response);
       });
       return <div class="font-bold">Finish</div>;
