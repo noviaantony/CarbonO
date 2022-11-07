@@ -2,12 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 import CarbonTrackerTable from "../components/dashboard/CarbonTrackerTable";
 import RewardsTable from "../components/dashboard/RewardsTable";
 import UserStatistics from "../components/dashboard/UserStatistics";
-import AuthContext from "../hooks/AuthProvider";
+import AuthContext from "../hooks/AuthContext";
 import CarbonTrackerService from "../services/CarbonTrackerService";
 import Header from "../components/misc/Header";
 import initialDatesArr from "../components/dashboard/getInitialDates";
 import UserRewardService from "../services/UserRewardService";
-import {ThreeDots} from "react-loader-spinner";
+import { ThreeDots } from "react-loader-spinner";
 import { motion } from "framer-motion";
 
 const Dashboard = () => {
@@ -44,7 +44,7 @@ const Dashboard = () => {
 
   //get user total carbon consumed
   useEffect(() => {
-      setLoading(true);
+    setLoading(true);
     CarbonTrackerService.getUserTotalCarbonConsumption(
       auth.userId,
       auth.accessToken
@@ -58,9 +58,9 @@ const Dashboard = () => {
   }, []);
 
   //get rewards claimed by user
-  
+
   useEffect(() => {
-      setLoading(true);
+    setLoading(true);
     UserRewardService.getUserReward(auth.userId, auth.accessToken).then(
       (response) => {
         console.log("User Reward response");
@@ -72,8 +72,6 @@ const Dashboard = () => {
       }
     );
   }, []);
-
-  
 
   //initial dates of the chart
   let dates = [

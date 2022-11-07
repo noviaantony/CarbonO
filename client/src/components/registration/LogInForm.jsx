@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect, useContext } from "react";
 import { HiMail, HiLockClosed } from "react-icons/hi";
 import { ReactComponent as SignInSvg } from "./SignInSvg.svg";
 import { Navigate, Link } from "react-router-dom";
-import AuthContext from "../../hooks/AuthProvider";
+import AuthContext from "../../hooks/AuthContext";
 import axios from "axios";
 import CarbonTrackerService from "../../services/CarbonTrackerService";
 import { motion } from "framer-motion";
@@ -64,7 +64,9 @@ const LogInForm = () => {
         setErrMsg("Missing Username or password");
       } else if (err.response.status === 401) {
         // unauthorized
-        setErrMsg("Something went wrong! Ensure you have verified your account and that your password is correct"); 
+        setErrMsg(
+          "Something went wrong! Ensure you have verified your account and that your password is correct"
+        );
       } else {
         setErrMsg("Something went wrong! Try again.");
       }

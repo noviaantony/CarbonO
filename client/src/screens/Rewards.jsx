@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import Modal from "react-modal";
 import "../styles/styles.css";
 
-import AuthContext from "../hooks/AuthProvider";
+import AuthContext from "../hooks/AuthContext";
 
 const Rewards = () => {
   const [openTab, setOpenTab] = React.useState(1);
@@ -31,16 +31,16 @@ const Rewards = () => {
 
   // get userReward account information
   useEffect(() => {
-      setLoading(true);
-    UserRewardService.getUserReward(auth.userId, auth.accessToken).then(
-      (response) => {
+    setLoading(true);
+    UserRewardService.getUserReward(auth.userId, auth.accessToken)
+      .then((response) => {
         setUserTransactions(response.rewardTransactions);
         setUserRewardPoints(response.rewardPoints);
         console.log(userRewardPoints);
-      }
-    ).then((data) => {
+      })
+      .then((data) => {
         setLoading(false);
-    });
+      });
   }, []);
 
   return (

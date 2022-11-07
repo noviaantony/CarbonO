@@ -11,7 +11,7 @@ import {
   CategoryScale,
 } from "chart.js";
 import CarbonTrackerService from "../../services/CarbonTrackerService";
-import AuthContext from "../../hooks/AuthProvider";
+import AuthContext from "../../hooks/AuthContext";
 
 Chart.register(
   LineController,
@@ -46,22 +46,22 @@ const PieChart = () => {
     );
   }, []);
 
-
   const test = () => {
     let i = 0;
-      useEffect(() => {
-        for (i; i < lineChartData.length; i++) {
+    useEffect(() => {
+      for (i; i < lineChartData.length; i++) {
         setChartsData(
           chartsData.map((data) => {
             if (data.date === lineChartData[i].dateConsumed.substring(0, 10)) {
-              console.log("here1")
+              console.log("here1");
               return {
                 ...data,
                 date: lineChartData[i].dateConsumed.substring(0, 10),
-                totalCarbonRating: data.totalCarbonRating + lineChartData[i].pointsEarned,
+                totalCarbonRating:
+                  data.totalCarbonRating + lineChartData[i].pointsEarned,
               };
             } else {
-              console.log("here2")
+              console.log("here2");
               return {
                 ...data,
                 date: lineChartData[i].dateConsumed.substring(0, 10),
@@ -70,9 +70,10 @@ const PieChart = () => {
             }
           })
         );
-      }},[lineChartData[i]]); 
-      console.log(chartsData);
-  }
+      }
+    }, [lineChartData[i]]);
+    console.log(chartsData);
+  };
 
   return (
     <div

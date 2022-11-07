@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import AuthContext from "../../hooks/AuthProvider";
+import AuthContext from "../../hooks/AuthContext";
 import CarbonTrackerService from "../../services/CarbonTrackerService";
 import UserRewardService from "../../services/UserRewardService";
 import Modal from "react-modal";
@@ -31,7 +31,6 @@ const RewardCard = ({
           return;
         }
       }
-     
     }
   }
 

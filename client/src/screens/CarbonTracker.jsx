@@ -4,10 +4,9 @@ import { MdQrCodeScanner } from "react-icons/md";
 import Card from "../components/carbontracker/Card";
 import CarbonTrackerService from "../services/CarbonTrackerService";
 import Header from "../components/misc/Header";
-import AuthContext from "../hooks/AuthProvider";
+import AuthContext from "../hooks/AuthContext";
 import QRScanner from "../components/carbontracker/QRScanner";
 import { motion } from "framer-motion";
-
 
 const CarbonTracker = () => {
   const { auth } = useContext(AuthContext);
@@ -18,18 +17,15 @@ const CarbonTracker = () => {
 
   useEffect(() => {
     setLoading(true);
-    
+
     CarbonTrackerService.getAllDishes()
       .then((response) => {
-        setFoodList(response); 
-      }).then((data) => {
+        setFoodList(response);
+      })
+      .then((data) => {
         setLoading(false);
       });
   }, []);
-
-  
-
-
 
   return (
     <>
