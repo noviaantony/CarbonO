@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const USER_REWARD_API_URL = 'http://18.136.163.9:8080/api/v1/carbonO/userReward';
+const USER_REWARD_API_URL = 'https://carbonoapp.net/api/v1/carbonO/userReward';
 
 
 

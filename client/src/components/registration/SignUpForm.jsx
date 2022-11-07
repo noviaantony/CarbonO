@@ -7,7 +7,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import validator from "validator";
 
-const REGISTER_URL = 'http://18.136.163.9:8080/api/v1/carbonO/user/registration'
+const REGISTER_URL = 'https://carbonoapp.net/api/v1/carbonO/user/registration'
 
 const SignUpForm = () => {
   const userRef = useRef();
