@@ -30,24 +30,35 @@ class QRScanner extends React.Component {
 
     if (data != null) {
 
-      let scannedMessage = "---";
+      // let scannedMessage = "---";
 
       const response = JSON.parse(data.text);
       console.log(response);
       console.log(this.context.auth.userId);
       //(scannedMessage = "successfully claimed reward!")
 
+      // this.message = "this receipt has already been redeemed :("
 
-
-        CarbonTrackerService.postDishConsumed(this.context.auth.accessToken,this.context.auth.userId,response.receiptId)
-          .then((response) => scannedMessage = response)
-
-          console.log(scannedMessage);
-        
       this.setState({
-        message:
-          this.state.message + scannedMessage,
+        message: "You have successfully claimed your e-credits! this will be reflected on your dashboard.",
       });
+
+
+      CarbonTrackerService.postDishConsumed(
+        this.context.auth.accessToken,
+        this.context.auth.userId,
+        response.receiptId
+      ).then((response) =>
+        {if (response.redeemed != false) {
+          this.setState({
+            message:
+              "This receipt has already been redeemed, close the QRScanner and try again.",
+          });
+        }}
+      );
+
+
+      console.log("curr message: ", this.message);
 
 
       return prev_state;
@@ -76,7 +87,7 @@ class QRScanner extends React.Component {
           onScan={this.handleScan}
         />
 
-        <p>{this.state.message}</p>
+        <p className="text-red-800 text-sm mr-2 px-2.5 py-0.5 rounded font-bold mt-5">{this.state.message}</p>
       </div>
     );
   }
