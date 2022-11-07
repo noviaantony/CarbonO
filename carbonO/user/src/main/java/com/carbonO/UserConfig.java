@@ -51,7 +51,7 @@ public class UserConfig {
             List<NonProfitOrganisation> nonProfitOrganisationsList = List.of(
                     new NonProfitOrganisation(
                             "Cool Earth: Protecting the World’s Rainforests",
-                            "Enact federal policy that would force older coal plants in America to improve their emissions. Today, the charity is a global non-profit organization that works to safeguard against the worst impacts of climate change.",
+                            "A global non-profit organization that enact federal policy that would force older coal plants in America to improve their emissions and save the earth.",
                             "https://856366.smushcdn.com/2556047/wp-content/uploads/2022/09/AdobeStock__307657351-1024x683.jpeg?lossy=0&strip=1&webp=1"
                     ),
                     new NonProfitOrganisation(
@@ -61,7 +61,7 @@ public class UserConfig {
                     ),
                     new NonProfitOrganisation(
                             "Depave: Create More Green Spaces For All",
-                            "A driven organisation that seeks to transition to a regenerative argriculture through the focus of sustainable farms and grasslands.",
+                            "A driven organisation that seeks to transition to a regenerative agriculture through the focus of sustainable farms and grasslands.",
                             "https://as2.ftcdn.net/v2/jpg/05/12/41/73/1000_F_512417375_Q8quk5IiZE84fpnaaRGqBfh76gqDpCDZ.jpg"
                     ),
                     new NonProfitOrganisation(

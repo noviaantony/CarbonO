@@ -29,7 +29,7 @@ public class RegistrationService {
         this.confirmationTokenService = confirmationTokenService;
         this.emailValidator = emailValidator;
         this.userRepository = userRepository;
-        this.webClient = webClient.baseUrl("http://18.136.163.9:8080/api/v1/carbonO/").build();
+        this.webClient = webClient.baseUrl("http://18.136.163.9:80/api/v1/carbonO/").build();
     }
 
 

@@ -45,9 +45,9 @@ public class Dish {
 //    @JsonManagedReference("dish_userCarbonTracker")
 //    private List<UserCarbonTracker> userCarbonTrackers;
 
-    @OneToOne(mappedBy = "dish", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
     @JsonBackReference("dish_carbonTrackerTransaction")
-    private CarbonTrackerTransaction carbonTrackerTransaction;
+    private List<CarbonTrackerTransaction> carbonTrackerTransaction;
 
     public Dish(String dishName) {
         this.dishName = dishName;

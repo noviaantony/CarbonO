@@ -21,7 +21,7 @@ public class UserController {
     @Autowired
     private MailingService mailingService;
 
-    private static final String baseUrl = "http://18.136.163.9:8080/api/v1/carbonO/user";
+    private static final String baseUrl = "http://18.136.163.9:80/api/v1/carbonO/user";
 
     @Autowired
     public UserController(UserService userService){
@@ -61,7 +61,7 @@ public class UserController {
         userService.findByResetPasswordToken(token);
 
         //Note: Change url to domain
-        response.sendRedirect("https://carbonoapp.net/ResetPassword?token=" + token);
+        response.sendRedirect("https://sg.carbonoapp.net/ResetPassword?token=" + token);
     }
 
     @PutMapping("/processResetPassword")

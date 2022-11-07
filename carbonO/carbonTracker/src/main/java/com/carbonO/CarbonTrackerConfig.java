@@ -12,6 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Configuration
@@ -951,7 +952,7 @@ public class CarbonTrackerConfig {
 
             CarbonTrackerTransaction carbonTrackerTransaction7 = new CarbonTrackerTransaction(
                     LocalDateTime.of(2022,11,7,
-                            12,33,53),
+                            14,33,53),
                     userCarbonTracker1,
                     dish4,
                     dish4.getCarbonRating() * 10

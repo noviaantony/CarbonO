@@ -17,7 +17,7 @@ public class RegistrationController {
     @Autowired
     private MailingService mailingService;
 
-    private static final String baseUrl = "http://18.136.163.9:8080/api/v1/carbonO/user/registration";
+    private static final String baseUrl = "http://18.136.163.9:80/api/v1/carbonO/user/registration";
 
     @PostMapping
     public ResponseEntity<String> register(@RequestBody RegistrationRequest request) {
@@ -43,7 +43,7 @@ public class RegistrationController {
         return ResponseEntity.status(201).body(token);
     }
 
-    @GetMapping(path = "confirm")
+    @GetMapping(path = "/confirm")
     public void confirm(@RequestParam("token") String token, HttpServletResponse response) throws IOException {
         Long userId = registrationService.confirmToken(token);
         //create a new user reward account after confirmation
@@ -51,11 +51,11 @@ public class RegistrationController {
             registrationService.createUserRewardAccount(userId);
             registrationService.createCarbonTrackerAccount(userId);
         } catch (Exception e) {
-            response.sendRedirect("https://carbonoapp.net/registration-failed");
+            response.sendRedirect("https://sg.carbonoapp.net/registration-failed");
         }
 
         //Note: Change url to domain
-        response.sendRedirect("https://carbonoapp.net/login");
+        response.sendRedirect("https://sg.carbonoapp.net/login");
     }
 
 }

@@ -6,6 +6,7 @@ import com.carbonO.userReward.UserReward;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Service
@@ -23,7 +24,7 @@ public class RewardTransactionService {
     public void addNewRewardTransaction(UserReward userReward, Reward reward) {
 
         //Create a new reward transaction
-        RewardTransaction rewardTransaction = new RewardTransaction(new Date(),userReward, reward);
+        RewardTransaction rewardTransaction = new RewardTransaction(LocalDateTime.now(),userReward, reward);
         reward.setRewardQuantity(reward.getRewardQuantity() - 1);
         rewardRepository.save(reward);
 
@@ -34,7 +35,7 @@ public class RewardTransactionService {
     public void addNewDonationTransaction(UserReward userReward, Reward reward, Integer pointsToDonate, boolean isDonation, Long organisationId) {
 
         //Create a new donation transaction
-        RewardTransaction rewardTransaction = new RewardTransaction(new Date(), userReward, reward, pointsToDonate, true, organisationId);
+        RewardTransaction rewardTransaction = new RewardTransaction(LocalDateTime.now(), userReward, reward, pointsToDonate, true, organisationId);
 
         rewardTransactionRepository.save(rewardTransaction);
     }

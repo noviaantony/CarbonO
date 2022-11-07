@@ -33,13 +33,9 @@ public class UserCarbonTrackerController {
     @GetMapping("/getUserDishedConsumed")
     public ResponseEntity<List<CarbonTrackerTransaction>> getUserDishedConsumed(@RequestParam("userId") Long userId){
 
-        List<CarbonTrackerTransaction>   userCarbonTrackerDishList = userCarbonTrackerService.getUserDishedConsumed(userId);
+        List<CarbonTrackerTransaction>  userCarbonTrackerDishList = userCarbonTrackerService.getUserDishedConsumed(userId);
 
-        if (userCarbonTrackerDishList.isEmpty()) {
-            return ResponseEntity.status(404).body(null);
-        } else {
-            return ResponseEntity.ok().body(userCarbonTrackerDishList);
-        }
+        return ResponseEntity.ok().body(userCarbonTrackerDishList);
     }
 
     //Get a specific user's total carbon consumption since the beginning
