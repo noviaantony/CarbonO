@@ -31,37 +31,38 @@ const Card = ({
   const [ingredients, setIngredients] = useState([]);
   const [carbonFoodprintBreakdown, setCarbonFootprintBreakdown] = useState([]);
 
-  // useEffect(() => {
-  //   CarbonTrackerService.getAllIngredientsFromDish(dishId).then((response) => {
-  //     console.log(response);
-  //     let ingredientArr = [];
-  //     for (let i = 0; i < response.length - 1; i++) {
-  //       ingredientArr.push(response[i].ingredientName + ", ");
-  //     }
-  //     ingredientArr.push(response[response.length - 1].ingredientName + " ");
-  //     setIngredients(ingredientArr);
-  //   });
-  // }, []);
-
-  // response[i].carbonFootprint
-
   useEffect(() => {
     CarbonTrackerService.getAllIngredientsFromDish(dishId).then((response) => {
       console.log(response);
-      let breakdownArr = [];
+      let ingredientArr = [];
       for (let i = 0; i < response.length - 1; i++) {
-        breakdownArr.push(response[i].ingredientName + "("  + ")" + ", ");
+        ingredientArr.push(response[i].ingredientName + ", ");
       }
-      breakdownArr.push(
-        response[response.length - 1].ingredientName +
-          "(" +
-          ")"
-      );
-      setCarbonFootprintBreakdown(breakdownArr);
-      console.log(carbonFoodprintBreakdown);
+      ingredientArr.push(response[response.length - 1].ingredientName + " ");
+      setIngredients(ingredientArr);
     });
-
   }, []);
+
+  // response[i].carbonFootprint
+
+  // useEffect(() => {
+  //   CarbonTrackerService.getAllIngredientsFromDish(dishId).then((response) => {
+  //     console.log(response);
+  //     let breakdownArr = [];
+  //     for (let i = 0; i < response.length - 1; i++) {
+  //       breakdownArr.push(response[i].ingredientName + "("  + ")" + ", ");
+  //     }
+  //     breakdownArr.push(
+  //       response[response.length - 1].ingredientName +
+  //         "(" +
+  //         ")"
+  //     );
+  //     setCarbonFootprintBreakdown(breakdownArr);
+  //     console.log(carbonFoodprintBreakdown);
+
+  //   });
+
+  // }, []);
 
   const rendereddishRating = [];
   for (let i = 0; i < dishRating; i++) {

@@ -10,9 +10,9 @@ const Header = ({Title, Description}) => {
         <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
           {Description}
         </p>
-        <h3 class = "text-2xl font-extrabold">
+        {/* <h3 class = "text-2xl font-extrabold">
           Current E-Credit Balance: 
-        </h3>
+        </h3> */}
       </div>
     </section>
   );

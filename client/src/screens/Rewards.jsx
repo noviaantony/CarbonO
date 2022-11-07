@@ -67,10 +67,10 @@ const Rewards = () => {
             </div>
           </>
         ) : (
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap mx-36">
             <div className="w-full">
               <ul
-                className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row mx-36 mt-12"
+                className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row mx-16 mt-12"
                 role="tablist"
               >
                 <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
