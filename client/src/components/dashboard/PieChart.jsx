@@ -28,6 +28,7 @@ Chart.defaults.font.size = 16;
 
 const PieChart = () => {
   const [consumptionData, setConsumptionData] = useState([]);
+  const { auth, setAuth } = useContext(AuthContext);
   const [chartsData, setChartsData] = useState([
     { date: "", totalCarbonRating: 0 },
   ]);
