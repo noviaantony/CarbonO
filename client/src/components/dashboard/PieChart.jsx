@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
+import actualPie from "./actualPie";
 import actualDates from "./getDates";
 import {
   Chart,
@@ -25,16 +26,56 @@ Chart.register(
 
 Chart.defaults.font.size = 16;
 
-// carbon rating summary
+function pushToArr(arr, obj) {
+  const index = arr.findIndex((e) => e.rating === obj.rating);
+
+  if (index === -1) {
+    arr.push(obj);
+  } else {
+    let temp_rating = obj.rating;
+    let temp_freq = arr[index].freq + 1;
+    var overWrite = {
+      rating: temp_rating,
+      ratingFreq: temp_freq,
+    };
+    arr[index] = overWrite;
+  }
+}
+
 
 const PieChart = () => {
   const [pieChartData, setPieChartData] = useState([]);
   const [chartsData, setChartsData] = useState([
-    { rating: 0, ratingFreq: 0 },
+    { rating: 1, ratingFreq: 0 },
   ]);
 
   const { auth, setAuth } = useContext(AuthContext);
+  const data = useContext(actualPie);
   const dates = useContext(actualDates);
+  const rate = [];
+  const freq = [];
+
+  let i = 0;
+
+for (i; i < data.length; i++) {
+  const temp = dates.findIndex((e) => e === data[i].rating);
+  if (temp > -1) { //there is such a date 
+    var obj = {
+      rating: data[i].rating,
+      ratingFreq : 1
+    };
+    pushToArr(pieChartData, obj);
+  }
+}
+
+console.log(pieChartData);
+for (let i = 1; i < pieChartData.length; i++) {
+rate.push(pieChartData[i].rating);
+freq.push(pieChartData[i].ratingFreq);
+}
+console.log(rate);
+console.log(freq);
+
   useEffect(() => {
     CarbonTrackerService.getDishConsumed(auth.userId, auth.accessToken).then(
       (response) => {
@@ -47,43 +88,13 @@ const PieChart = () => {
     );
   }, []);
 
-  // const test = () => {
-  //   let i = 0;
-  //   let n = 0
-  //   useEffect(() => {
-  //     for (i; i < dates.length; i++) {
-  //       setChartsData(
-  //         chartsData.map((data) => {
-  //           if (pieChartData[n].dateConsumed.substring(0, 10) === dates[i]) {
-  //             if (data.rating === pieChartData[i].rate) {
-  //               return {
-  //                 ...data,
-  //                 rating: pieChartData[i].rate,
-  //                 ratingFreq:
-  //                   data.ratingFreq + 1,
-  //               };
-  //             } else {
-  //               return {
-  //                 ...data,
-  //                 rating: pieChartData[i].rate,
-  //                 ratingFreq: 1,
-  //               };
-  //             }        
-                   
-  //           } 
-  //         })
-  //       );
-  //     }
-  //   }, [pieChartData[i]]);
-  //   console.log(chartsData);
-  // };
+  
 
   return (
     <div
       style={{ width: "28%", height: "30%" }}
       className="bg-white rounded-lg h-auto p-6 flex items-stretch m-6 font-default"
     >
-      {/* {test()} */}
       <Pie
         data={{
           //labels on x-axis

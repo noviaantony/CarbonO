@@ -8,7 +8,9 @@ import initialDatesArr from "./getInitialDates";
 import actualDates from "./getDates";
 import pointsArr from "./getPoints";
 import actualPoints from "./actualPoints";
-
+import pieChartArr from "./getPieChart";
+import actualPie from "./actualPie";
+import { Pie } from "react-chartjs-2";
 const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
   const [, set] = React.useState(true);
   const [isClickedCarbon, setIsClickedCarbon] = React.useState(true);
@@ -16,9 +18,22 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
 
   const initialDates = useContext(initialDatesArr);
   const points = useContext(pointsArr);
+  // console.log(initialDates);
+  // console.log(points);
+  const pieChartInfo = useContext(pieChartArr);
+console.log(pieChartInfo);
+  const toPieChart = [];
+  const dates = [];
+  // const temp1 = [];
+  // const temp2 = [];
+  // let i = 0;
+  //  for (i; i < initialDates.length; i++) {
+  //   temp1[i] = initialDates.pop();
+  //   temp2[i] = points.pop();
+  //  }
 
-  console.log(initialDates);
-  console.log(points);
+  //  console.log(temp1)
+
   const [startDate, setStartDate] = useState(initialDates[0]);
   const [endDate, setEndDate] = useState(initialDates[initialDates.length - 1]);
 
@@ -37,10 +52,28 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
 
   //slices the dates based on dates filtered by user
   newDates.current = initialDates.slice(indexStart, indexEnd + 1);
-  // console.log(newDates.current);
 
   let newPoints = useRef([]);
   newPoints.current = points.slice(indexStart, indexEnd + 1);
+
+  function pushToArr(arr, obj) {
+    const index = newDates.current.findIndex((e) => e === obj.date);
+
+    if (index > -1) {
+      arr.push(obj);
+    } 
+  }
+  let i = 1;
+  for (i; i < pieChartInfo.length; i++) {
+    var obj = {
+      date: pieChartInfo[i].date,
+      rating: pieChartInfo[i].rating,
+    };
+
+    pushToArr(toPieChart, obj);
+  }
+
+  console.log(toPieChart);
   //filter function appears if there is a chart
   const hasChart = () => {
  
@@ -190,13 +223,17 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
       </div>
 
       {/* updates charts with new dates */}
+      <actualPie.Provider value = {toPieChart}>
       <actualDates.Provider value={newDates.current}>
         <actualPoints.Provider value={newPoints.current}>
           <div className="mx-36">{hasChart()}</div>
 
           <div className="mx-36">{returnCharts()}</div>
+          {/* <PieChart/> */}
         </actualPoints.Provider>
       </actualDates.Provider>
+      </actualPie.Provider>
+      
     </>
   );
 };
