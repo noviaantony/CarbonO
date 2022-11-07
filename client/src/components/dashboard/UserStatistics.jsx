@@ -2,28 +2,12 @@ import React from "react";
 import { FaWallet, FaReceipt, FaLeaf } from "react-icons/fa";
 import { useState, useRef, useContext } from "react";
 import { MdQrCodeScanner } from "react-icons/md";
-import DonutChart from "../dashboard/DonutChart";
 import LineChart from "../dashboard/LineChart";
 import PieChart from "./PieChart";
 import initialDatesArr from "./getInitialDates";
 import actualDates from "./getDates";
-import dayjs from "dayjs";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import TextField from "@mui/material/TextField";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#5E9387",
-    },
-  },
-  typography: {
-    fontFamily: ["Open Sans", "sans-serif"].join(","),
-  },
-});
+import pointsArr from "./getPoints";
+import actualPoints from "./actualPoints"
 
 const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
   const [, set] = React.useState(true);
@@ -31,18 +15,21 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
   const [isClickedReceipt, setIsClickedReceipt] = React.useState(true);
 
   const initialDates = useContext(initialDatesArr);
+  const points = useContext(pointsArr);
 
-  const [startDate, setstartDate] = useState(initialDates[0]);
-  const [endDate, setendDate] = useState(initialDates[initialDates.length - 1]);
+  const [startDate, setStartDate] = useState(initialDates[0]);
+  const [endDate, setEndDate] = useState(initialDates[initialDates.length - 1]);
+  console.log(initialDates);
+  console.log(points);
 
   //updates new dates used in charts
   let newDates = useRef([]);
   const handleChangeFirst = (event) => {
-    setstartDate(event.target.value);
+    setStartDate(event.target.value);
   };
 
   const handleChangeEnd = (event) => {
-    setendDate(event.target.value);
+    setEndDate(event.target.value);
   };
 
   const indexStart = initialDates.indexOf(startDate);
@@ -50,17 +37,16 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
 
   //slices the dates based on dates filtered by user
   newDates.current = initialDates.slice(indexStart, indexEnd + 1);
+  console.log(newDates.current);
 
-  const [value, setValue] = React.useState(dayjs("2014-08-18T21:11:54"));
-  const handleChange = (newValue) => {
-    setValue(newValue);
-  };
+  let newPoints = useRef([]);
+  newPoints.current = points.slice(indexStart, indexEnd + 1);
   //filter function appears if there is a chart
   const hasChart = () => {
     if (isClickedCarbon || isClickedReceipt) {
       return (
         <>
-          {/* <div className="p-4 w-15 rounded-lg bg-white flex border border-gray-800 mx-10  border-none">
+          <div className="p-4 w-15 rounded-lg bg-white flex border border-gray-800 mx-10  border-none">
             <div className="flex items-center">
               <div className="relative">
                 <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -114,69 +100,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
                 />
               </div>
             </div>
-          </div> */}
-  <ThemeProvider theme={theme}>
-          <div className="p-4 w-15 rounded-lg bg-white flex border border-gray-800 mx-10  border-none">
-            <div className="flex items-center">
-              <div className="relative">
-                <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                  <svg
-                    aria-hidden="true"
-                    className="w-5 h-5 text-gray-500 dark:text-gray-400"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                </div>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <MobileDatePicker
-                    label="Start Date"
-                    className = "grid place-items-center"
-                    inputFormat="MM/DD/YYYY"
-                    value={value}
-                    onChange={handleChange}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                </LocalizationProvider>
-              </div>
-              <span className="mx-4 text-gray-500">to</span>
-              <div className="relative">
-                <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                  <svg
-                    aria-hidden="true"
-                    class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                </div>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <MobileDatePicker
-                    label="End Date"
-                    className = "grid place-items-center"
-                    inputFormat="MM/DD/YYYY"
-                    value={value}
-                    onChange={handleChange}
-                    renderInput={(params) => <TextField {...params} />}
-                 
-                  />
-                </LocalizationProvider>
-              </div>
-            </div>
           </div>
-          </ThemeProvider>
         </>
       );
     }
@@ -264,11 +188,14 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
       </div>
 
       {/* updates charts with new dates */}
+      <actualPoints.Provider value = {newPoints.current}>
       <actualDates.Provider value={newDates.current}>
         <div className="mx-36">{hasChart()}</div>
 
         <div className="mx-36">{returnCharts()}</div>
       </actualDates.Provider>
+      </actualPoints.Provider>
+     
     </>
   );
 };

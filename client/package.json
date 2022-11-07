@@ -6,7 +6,7 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@headlessui/react": "^1.7.3",
-    "@heroicons/react": "^2.0.12",
+    "@heroicons/react": "^2.0.13",
     "@material-tailwind/html": "^1.2.2",
     "@material-tailwind/react": "^1.2.4",
     "@mui/material": "^5.10.12",
@@ -35,6 +35,7 @@
     "react-chartjs-2": "^4.3.1",
     "react-collapse": "^5.1.1",
     "react-cookie": "^4.1.1",
+    "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.2",
     "react-file-base64": "^1.0.3",
@@ -54,7 +55,8 @@
     "twin.macro": "^2.8.2",
     "undici": "^5.10.0",
     "validator": "^13.7.0",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "webpack": "^5.74.0"
   },
   "scripts": {
     "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start",
