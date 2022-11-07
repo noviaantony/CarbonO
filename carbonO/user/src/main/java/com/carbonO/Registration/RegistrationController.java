@@ -51,11 +51,11 @@ public class RegistrationController {
             registrationService.createUserRewardAccount(userId);
             registrationService.createCarbonTrackerAccount(userId);
         } catch (Exception e) {
-            response.sendRedirect("http://carbono.life/registration-failed");
+            response.sendRedirect("https://carbonoapp.net/registration-failed");
         }
 
         //Note: Change url to domain
-        response.sendRedirect("http://carbono.life/login");
+        response.sendRedirect("https://carbonoapp.net/login");
     }
 
 }
