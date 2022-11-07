@@ -1,14 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
 import CarbonTrackerTable from "../components/dashboard/CarbonTrackerTable";
 import RewardsTable from "../components/dashboard/RewardsTable";
+import DonationTable from "../components/dashboard/DonationTable";
 import UserStatistics from "../components/dashboard/UserStatistics";
 import AuthContext from "../hooks/AuthContext";
 import CarbonTrackerService from "../services/CarbonTrackerService";
 import Header from "../components/misc/Header";
 import initialDatesArr from "../components/dashboard/getInitialDates";
+import pointsArr from "../components/dashboard/getPoints";
 import UserRewardService from "../services/UserRewardService";
 import { ThreeDots } from "react-loader-spinner";
 import { motion } from "framer-motion";
+
 
 const Dashboard = () => {
   const [consumptionData, setConsumptionData] = useState([]);
@@ -17,7 +20,8 @@ const Dashboard = () => {
   const [userCredits, setUserCredits] = useState(0);
   const [loading, setLoading] = useState(false);
   const { auth, setAuth } = useContext(AuthContext);
-
+  const dates = [];
+  const ratings = [];
   //persist state of user
   // useEffect(() => {
   //     const token = localStorage.getItem("token");
@@ -26,25 +30,29 @@ const Dashboard = () => {
   //     console.log("auth", auth.authenticated);
   //
   // },[]);
+  const [lineChartData, setlineChartData] = useState([]);
+  const [pieChartData, setPieChartData] = useState([]);
+  const [chartsData, setChartsData] = useState([
+    { date: "", totalCarbonRating: 0 },
+  ]);
 
-  // get all dish consumed by user
-  useEffect(() => {
+   // get all dish consumed by user
+   useEffect(() => {
     setLoading(true);
-
     CarbonTrackerService.getDishConsumed(auth.userId, auth.accessToken).then(
       (response) => {
         console.log("Dish response");
         console.log(response);
         setConsumptionData(response);
-        console.log(consumptionData);
-        setLoading(false);
+        setlineChartData(response);
+        console.log(lineChartData);
+        // setLoading(false);
       }
     );
   }, []);
-
   //get user total carbon consumed
   useEffect(() => {
-    setLoading(true);
+      setLoading(true);
     CarbonTrackerService.getUserTotalCarbonConsumption(
       auth.userId,
       auth.accessToken
@@ -56,11 +64,10 @@ const Dashboard = () => {
       setLoading(false);
     });
   }, []);
-
   //get rewards claimed by user
-
+  
   useEffect(() => {
-    setLoading(true);
+      setLoading(true);
     UserRewardService.getUserReward(auth.userId, auth.accessToken).then(
       (response) => {
         console.log("User Reward response");
@@ -73,23 +80,46 @@ const Dashboard = () => {
     );
   }, []);
 
-  //initial dates of the chart
-  let dates = [
-    "2022-10-16",
-    "2022-10-17",
-    "2022-10-18",
-    "2022-10-19",
-    "2022-10-20",
-    "2022-10-21",
-    "2022-10-22",
-  ];
+    //initial dates and points of the chart
+  const test = () => {
+    let i = 0;
+      useEffect(() => {
+        for (i; i < lineChartData.length; i++) {
+        setChartsData(
+          chartsData.map((data) => {
+            if (data.date === lineChartData[i].dateConsumed.substring(0, 10)) {
+              console.log("here1")
+              return {
+                ...data,
+                date: lineChartData[i].dateConsumed.substring(0, 10),
+                totalCarbonRating: data.totalCarbonRating + lineChartData[i].pointsEarned,
+              };
+            } else {
+              console.log("here2")
+              return {
+                ...data,
+                date: lineChartData[i].dateConsumed.substring(0, 10),
+                totalCarbonRating: lineChartData[i].pointsEarned,
+              };
+            }
+          })
+        );
+      }},[lineChartData[i]]); 
+      console.log(chartsData);
+      for (let i = 0; i < chartsData.length; i++) {
+        dates.push(chartsData[i].date);
+        ratings.push(chartsData[i].totalCarbonRating);
+      }
+      console.log(dates);
+      console.log(ratings);
+}
 
+ 
   let title = auth.firstName + "'s Dashboard";
-
-  console.log(consumptionData);
 
   return (
     <>
+    {test()}
       <Header
         Title={title}
         Description="keep track of you receipt uploads, carbon foodprint, reward claims and donation here"
@@ -115,18 +145,26 @@ const Dashboard = () => {
           animate={{ opacity: 1 }}
           initial={{ opacity: 0 }}
         >
-          <initialDatesArr.Provider value={dates}>
+      <pointsArr.Provider value = {ratings}>
+      <initialDatesArr.Provider value={dates}>
             <UserStatistics
               TotalCarbon={totalCarbon.toFixed(0)}
               Ecredits={userCredits}
               TotalReceiptsScanned={consumptionData.length}
             />
           </initialDatesArr.Provider>
+      </pointsArr.Provider>
+      
+      
+         
           <div className="flex flex-row justify-center mx-26">
             <CarbonTrackerTable historicalData={consumptionData} />
           </div>
           <div className="flex flex-row justify-center mx-26">
             <RewardsTable historicalData={rewardData} />
+          </div>
+          <div className="flex flex-row justify-center mx-26">
+            <DonationTable historicalData={rewardData} />
           </div>
         </motion.div>
       )}

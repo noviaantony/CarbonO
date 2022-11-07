@@ -51,6 +51,7 @@ class QRScanner extends React.Component {
               "This receipt has already been redeemed, close the QRScanner and try again.",
           });
         }
+        return;
       });
 
       console.log("curr message: ", this.message);
