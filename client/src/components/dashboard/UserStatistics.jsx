@@ -7,7 +7,7 @@ import PieChart from "./PieChart";
 import initialDatesArr from "./getInitialDates";
 import actualDates from "./getDates";
 import pointsArr from "./getPoints";
-import actualPoints from "./actualPoints"
+import actualPoints from "./actualPoints";
 
 const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
   const [, set] = React.useState(true);
@@ -17,10 +17,10 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
   const initialDates = useContext(initialDatesArr);
   const points = useContext(pointsArr);
 
-  const [startDate, setStartDate] = useState(initialDates[0]);
-  const [endDate, setEndDate] = useState(initialDates[initialDates.length - 1]);
   console.log(initialDates);
   console.log(points);
+  const [startDate, setStartDate] = useState(initialDates[0]);
+  const [endDate, setEndDate] = useState(initialDates[initialDates.length - 1]);
 
   //updates new dates used in charts
   let newDates = useRef([]);
@@ -37,13 +37,13 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
 
   //slices the dates based on dates filtered by user
   newDates.current = initialDates.slice(indexStart, indexEnd + 1);
-  console.log(newDates.current);
+  // console.log(newDates.current);
 
   let newPoints = useRef([]);
   newPoints.current = points.slice(indexStart, indexEnd + 1);
   //filter function appears if there is a chart
   const hasChart = () => {
-    if (isClickedCarbon || isClickedReceipt) {
+ 
       return (
         <>
           <div className="p-4 w-15 rounded-lg bg-white flex border border-gray-800 mx-10  border-none">
@@ -103,7 +103,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
           </div>
         </>
       );
-    }
+    
   };
 
   //display charts based on click
@@ -112,16 +112,18 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
       return (
         <div class="flex flex-row justify-evenly">
           <LineChart />
-          <PieChart />
+          {/* <PieChart /> */}
         </div>
       );
-    } else if (isClickedReceipt) {
-      return (
-        <div className="flex flex-row justify-evenly">
-          <PieChart />
-        </div>
-      );
-    } else if (isClickedCarbon) {
+    }
+    // else if (isClickedReceipt) {
+    //   return (
+    //     <div className="flex flex-row justify-evenly">
+    //       <PieChart />
+    //     </div>
+    //   );
+    // }
+    else if (isClickedCarbon) {
       return (
         <div className="flex flex-row justify-evenly">
           <LineChart />
@@ -136,7 +138,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
         {/* first */}
         <div class="px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 font-default">
           <div className="p-4 text-sm text-[#5e938780] bg-white rounded-lg flex items-stretch m-6 drop-shadow-sm font-default cursor-pointer h-30">
-            <FaWallet size={60} />
+            <FaWallet size={80} />
             <div className="ml-20 mt-2 text-xl text-center font-semibold text-gray-700">
               <h1 class="text-4xl font-bold"> {Ecredits} </h1>
               <h5 class="text-xs"> E-Credits Currently </h5>
@@ -156,7 +158,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
           }}
         >
           <div className="p-4 text-sm text-[#5e938780] bg-white rounded-lg flex items-stretch m-6 drop-shadow-sm font-default cursor-pointer h-30">
-            <FaLeaf size={60} />
+            <FaLeaf size={80} />
             <div className="ml-12 mt-2 text-xl font-semibold text-gray-700">
               <h1 class="text-4xl text-center font-bold"> {TotalCarbon} </h1>
               <h5 class="text-xs">C02 Consumed this Month</h5>
@@ -176,7 +178,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
           }}
         >
           <div className="p-4 text-sm text-[#5e938780] bg-white rounded-lg flex items-stretch m-6 drop-shadow-sm font-default cursor-pointer h-30">
-            <MdQrCodeScanner size={60} />
+            <MdQrCodeScanner size={80} />
             <div className="ml-10 mt-2 text-xl font-semibold text-gray-700">
               <h1 class="text-4xl text-center font-bold">
                 {TotalReceiptsScanned}
@@ -188,14 +190,13 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
       </div>
 
       {/* updates charts with new dates */}
-      <actualPoints.Provider value = {newPoints.current}>
       <actualDates.Provider value={newDates.current}>
-        <div className="mx-36">{hasChart()}</div>
+        <actualPoints.Provider value={newPoints.current}>
+          <div className="mx-36">{hasChart()}</div>
 
-        <div className="mx-36">{returnCharts()}</div>
+          <div className="mx-36">{returnCharts()}</div>
+        </actualPoints.Provider>
       </actualDates.Provider>
-      </actualPoints.Provider>
-     
     </>
   );
 };

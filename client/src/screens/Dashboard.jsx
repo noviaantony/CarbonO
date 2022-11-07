@@ -30,10 +30,10 @@ const Dashboard = () => {
   //
   // },[]);
   const [lineChartData, setlineChartData] = useState([]);
-  const [pieChartData, setPieChartData] = useState([]);
   const [chartsData, setChartsData] = useState([
     { date: "", totalCarbonRating: 0 },
   ]);
+
 
    // get all dish consumed by user
    useEffect(() => {
@@ -44,7 +44,6 @@ const Dashboard = () => {
         console.log(response);
         setConsumptionData(response);
         setlineChartData(response);
-        console.log(lineChartData);
         // setLoading(false);
       }
     );
@@ -78,47 +77,40 @@ const Dashboard = () => {
       }
     );
   }, []);
-
-    //initial dates and points of the chart
-  const test = () => {
-    let i = 0;
-      useEffect(() => {
-        for (i; i < lineChartData.length; i++) {
-        setChartsData(
-          chartsData.map((data) => {
-            if (data.date === lineChartData[i].dateConsumed.substring(0, 10)) {
-              console.log("here1")
-              return {
-                ...data,
-                date: lineChartData[i].dateConsumed.substring(0, 10),
-                totalCarbonRating: data.totalCarbonRating + lineChartData[i].pointsEarned,
-              };
-            } else {
-              console.log("here2")
-              return {
-                ...data,
-                date: lineChartData[i].dateConsumed.substring(0, 10),
-                totalCarbonRating: lineChartData[i].pointsEarned,
-              };
-            }
-          })
-        );
-      }},[lineChartData[i]]); 
-      console.log(chartsData);
-      for (let i = 0; i < chartsData.length; i++) {
-        dates.push(chartsData[i].date);
-        ratings.push(chartsData[i].totalCarbonRating);
-      }
-      console.log(dates);
-      console.log(ratings);
-}
-
  
   let title = auth.firstName + "'s Dashboard";
+  function pushToArr (arr , obj) {
+    const index = arr.findIndex((e) => e.date === obj.date);
+  
+    if (index === -1) {
+      arr.push(obj);
+    } else {
+      let temp_date = obj.date;
+      let temp_points = arr[index].totalCarbonRating + obj.totalCarbonRating;
+      var overWrite = {
+        date : temp_date,
+        totalCarbonRating : temp_points
+      };
+      arr[index] = overWrite;
+    }
+  }
+    let i = 0;
+    for (i; i < lineChartData.length; i++) {
+   
+     var objTest = {
+       date : lineChartData[i].dateConsumed.substring(0, 10),
+       totalCarbonRating : lineChartData[i].pointsEarned
+     };
+   
+     pushToArr(chartsData, objTest);
+   }
 
+   for (let i = 1; i < chartsData.length; i++) {
+    dates.push(chartsData[i].date);
+    ratings.push(chartsData[i].totalCarbonRating);
+  }
   return (
     <>
-    {test()}
       <Header
         Title={title}
         Description="keep track of you receipt uploads, carbon foodprint, reward claims and donation here"
@@ -154,8 +146,6 @@ const Dashboard = () => {
           </initialDatesArr.Provider>
       </pointsArr.Provider>
       
-      
-         
           <div className="flex flex-row justify-center mx-26">
             <CarbonTrackerTable historicalData={consumptionData} />
           </div>

@@ -41,7 +41,7 @@ const PieChart = () => {
         console.log("Dish response");
         console.log(response);
         setPieChartData(response);
-        console.log(lineChartData);
+        // console.log(pieChartData);
         //  setLoading(false);
       }
     );
