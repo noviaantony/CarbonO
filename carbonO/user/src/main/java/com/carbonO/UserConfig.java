@@ -1,7 +1,10 @@
-package com.carbonO.User;
+package com.carbonO;
 
 import com.carbonO.Donations.NonProfitOrganisation;
 import com.carbonO.Donations.NonProfitOrganisationService;
+import com.carbonO.User.User;
+import com.carbonO.User.UserRepository;
+import com.carbonO.User.UserRole;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -62,12 +65,12 @@ public class UserConfig {
                             "https://as2.ftcdn.net/v2/jpg/05/12/41/73/1000_F_512417375_Q8quk5IiZE84fpnaaRGqBfh76gqDpCDZ.jpg"
                     ),
                     new NonProfitOrganisation(
-                            "WattTime: Leveraging Technology to Save the Environment",
+                            "WattTime: Technology to Save the Environment",
                             "This organisation designs Automated Emissions Reduction solutions to empower all users to choose clean energy.",
                             "https://as1.ftcdn.net/v2/jpg/04/71/77/90/1000_F_471779082_mHHJIPaFThAkAP7k7YBrBJ4uH48LmbGq.jpg"
                     ),
                     new NonProfitOrganisation(
-                            "The Carbon Underground: An Agricultural Combat Against Climate Change",
+                            "The Carbon Underground: An Agricultural Combat",
                             "a driven organisation that seeks to transition to a regenerative agriculture through the focus of sustainable farms and grasslands",
                             "https://as2.ftcdn.net/v2/jpg/05/12/41/73/1000_F_512417375_Q8quk5IiZE84fpnaaRGqBfh76gqDpCDZ.jpg"
                     )
