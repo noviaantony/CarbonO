@@ -10,6 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Configuration
@@ -41,19 +42,19 @@ public class RewardConfig {
                     "https://grayestudio.com/ ", "https://cdn.shopify.com/s/files/1/1414/1076/products/52064546067_a1a0dab85d_kcopy_550x.jpg?v=1653030012",
                     "Fashion"));
 
-            rewardList.add(new Reward("GRAYE :", "Padded Ankle Socks", 1000,
+            rewardList.add(new Reward("GRAYE :", "Padded Black Socks", 8000,
                     "Free", 200,
-                    "https://grayestudio.com/", "https://cdn.shopify.com/s/files/1/1414/1076/products/DSC05022copy_1680x.jpg?v=1644910099",
+                    "https://grayestudio.com/", "https://cf.shopee.sg/file/461ca4a02f516f30cb2af00dc1f3a6d0",
                     "Fashion"));
 
-            rewardList.add(new Reward("GRAYE :", "Padded Ankle Socks", 10000,
+            rewardList.add(new Reward("GRAYE :", "Padded Green Socks", 10000,
                     "Free", 100,
-                    "https://grayestudio.com/", "https://cdn.shopify.com/s/files/1/1414/1076/products/49058766003_0deefbbae7_k_1100x.jpg?v=1573660433",
+                    "https://grayestudio.com/", "https://img.ltwebstatic.com/images3_pi/2022/05/16/1652665494b37bae04f001b9cf1a8d67632f418b6f_thumbnail_900x.webp",
                     "Fashion"));
 
             rewardList.add(new Reward("Tokyo Bags :", "Dark Brown Backpack", 9000,
                     "20% Discount", 250,
-                    "https://tokyobags.co/", "https://n.nordstrommedia.com/id/sr3/5c768a97-1600-4812-8dd2-1cf0c1233dc6.jpeg?h=365&w=240&dpr=2",
+                    "https://tokyobags.co/", "https://images.unsplash.com/photo-1598532163257-ae3c6b2524b6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmFnc3xlbnwwfHwwfHw%3D&w=1000&q=80",
                     "Fashion"));
 
             //Food rewards
@@ -63,7 +64,7 @@ public class RewardConfig {
                     "Food"));
 
             rewardList.add(new Reward("Real Food", "", 4000,
-                    "10% off all takeaway with a minimum order of $50*", 1000,
+                    "10% off all takeaway*", 1000,
                     "https://www.realfoodgrocer.com/", "https://d1sag4ddilekf6.azureedge.net/compressed/merchants/4-C2WKG4L2RYKXLA/hero/cfbd3b33731c405e9c5deb7a53ca7670_1636093659844014699.jpeg",
                     "Food"));
 
@@ -85,19 +86,19 @@ public class RewardConfig {
             //Transport Reward
             rewardList.add(new Reward("Grab", "", 5000,
                     "20% off your next GrabHitch ride!", 1000,
-                    "https://www.grab.com/sg/", "https://1000logos.net/wp-content/uploads/2022/08/Grab-Logo.jpg",
+                    "https://www.grab.com/sg/", "https://motoristprod.s3.amazonaws.com/uploads/content_article_cover_image/photo/1410/motorist-driving-grab-personal-car.png",
                     "Transport"));
 
             rewardRepository.saveAll(rewardList);
 
             //create user reward account
-            UserReward userReward = new UserReward(1L, 99999);
+            UserReward userReward = new UserReward(1L, 100000);
             userRewardRepository.save(userReward);
 
             UserReward userReward1 = userRewardRepository.findByUserId(1L);
             Reward reward1 = rewardRepository.findByRewardName("Upcycled Earrings").get();
 
-            RewardTransaction transaction1 = new RewardTransaction(new Date(),
+            RewardTransaction transaction1 = new RewardTransaction(LocalDateTime.now(),
                     userReward1,
                     reward1);
 

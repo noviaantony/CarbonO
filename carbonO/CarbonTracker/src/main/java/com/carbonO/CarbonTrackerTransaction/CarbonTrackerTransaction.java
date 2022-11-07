@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -27,7 +28,7 @@ public class CarbonTrackerTransaction {
     )
     private Long id;
     @Column(name="date_of_consumption")
-    private Date dateConsumed;
+    private LocalDateTime dateConsumed;
     private Integer pointsEarned;
 
     @ManyToOne
@@ -39,10 +40,12 @@ public class CarbonTrackerTransaction {
     @JoinColumn(name="dish_id")
     private Dish dish;
 
-    public CarbonTrackerTransaction(Date dateConsumed, UserCarbonTracker userCarbonTracker, Dish dish, Integer pointsEarned) {
+    public CarbonTrackerTransaction(LocalDateTime dateConsumed, UserCarbonTracker userCarbonTracker, Dish dish, Integer pointsEarned) {
         this.dateConsumed = dateConsumed;
         this.userCarbonTracker = userCarbonTracker;
         this.dish = dish;
         this.pointsEarned = pointsEarned;
     }
+
+
 }

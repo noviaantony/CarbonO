@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -25,10 +26,10 @@ public class Receipt {
     )
     private Long receiptId;
     private Long dishConsumedId;
-    private Date dateOfReceipt;
+    private LocalDateTime dateOfReceipt;
     private boolean isRedeemed;
 
-    public Receipt(Long dishConsumed, Date dateOfReceipt) {
+    public Receipt(Long dishConsumed, LocalDateTime dateOfReceipt) {
         this.dishConsumedId = dishConsumed;
         this.dateOfReceipt = dateOfReceipt;
         this.isRedeemed = false;

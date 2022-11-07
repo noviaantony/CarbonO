@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -28,7 +30,7 @@ public class RewardTransaction {
             generator = "reward_transaction_sequence"
     )
     private Long id;
-    private Date dateOfTransaction;
+    private LocalDateTime dateOfTransaction;
     private boolean isDonation = false;
     private Long organisationId;
     private Integer pointsDonated = 0;
@@ -42,12 +44,12 @@ public class RewardTransaction {
     @JoinColumn(name = "reward_id")
     private Reward reward;
 
-    public RewardTransaction(Date dateOfTransaction, UserReward userReward, Reward reward) {
+    public RewardTransaction(LocalDateTime dateOfTransaction, UserReward userReward, Reward reward) {
         this.dateOfTransaction = dateOfTransaction;
         this.userReward = userReward;
         this.reward = reward;
     }
-    public RewardTransaction(Date dateOfTransaction, UserReward userReward, Reward reward, Integer pointsDonated, boolean isDonation, Long organisationId) {
+    public RewardTransaction(LocalDateTime dateOfTransaction, UserReward userReward, Reward reward, Integer pointsDonated, boolean isDonation, Long organisationId) {
         this.dateOfTransaction = dateOfTransaction;
         this.userReward = userReward;
         this.reward = reward;

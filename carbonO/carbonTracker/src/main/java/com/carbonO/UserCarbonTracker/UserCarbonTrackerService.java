@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -58,7 +59,7 @@ public class UserCarbonTrackerService {
         //get  user carbon Tracker
         UserCarbonTracker userCarbonTracker = userCarbonTrackerRepository.findByUserId(userId);
         //add new carbon tracker transaction
-        CarbonTrackerTransaction carbonTrackerTransaction = new CarbonTrackerTransaction(new Date(),userCarbonTracker, dish, dishPoints);
+        CarbonTrackerTransaction carbonTrackerTransaction = new CarbonTrackerTransaction(LocalDateTime.now(),userCarbonTracker, dish, dishPoints);
 
         //Internal Api call to update user points on reward
         webClient.put().uri("userReward/updateUserPoints?userId=" + userId + "&pointsEarned=" + dishPoints).retrieve().bodyToMono(String.class).block();
@@ -68,18 +69,7 @@ public class UserCarbonTrackerService {
     }
 
     public List<CarbonTrackerTransaction>  getUserDishedConsumed(Long userId) {
-            List<CarbonTrackerTransaction> userCarbonTransactions = userCarbonTrackerRepository.findByUserId(userId).getCarbonTrackerTransaction();
-//            List<Dish> userDishes = new ArrayList<>();
-//            for(CarbonTrackerTransaction carbonTrackerTransaction : userCarbonTransactions){
-//                userDishes.add(carbonTrackerTransaction.getDish());
-//            }
-
-//        List<Dish> dishConsumed = new ArrayList<>();
-//        for (UserCarbonTracker userCarbonTracker : userCarbonTrackerList){
-//            dishConsumed.add(userCarbonTracker.getDish());
-//        }
-
-        return userCarbonTransactions;
+        return userCarbonTrackerRepository.findByUserId(userId).getCarbonTrackerTransaction();
     }
 
     public void addCarbonTrackerUser(Long userId) {

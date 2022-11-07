@@ -890,24 +890,83 @@ public class CarbonTrackerConfig {
 //             Adding total carbon footprint
             dishService.updateTotalCarbonFootprint();
 
-
             //user sample for food consumed
             UserCarbonTracker userCarbonTracker1 = new UserCarbonTracker(
                     1L
-            );
-            CarbonTrackerTransaction carbonTrackerTransaction1 = new CarbonTrackerTransaction(
-                    new Date(),
-                    userCarbonTracker1,
-                    dish2,
-                    dish2.getCarbonRating() * 10
             );
 
             userCarbonTrackerRepository.saveAll(
                     List.of(userCarbonTracker1)
             );
 
+
+            CarbonTrackerTransaction carbonTrackerTransaction1 = new CarbonTrackerTransaction(
+
+                    LocalDateTime.of(2022,11,2,
+                            14,45,22),
+                    userCarbonTracker1,
+                    dish3,
+                    dish3.getCarbonRating() * 10
+            );
+
+            CarbonTrackerTransaction carbonTrackerTransaction2 = new CarbonTrackerTransaction(
+                    LocalDateTime.of(2022,11,3,
+                            12,35,13),
+                    userCarbonTracker1,
+                    dish6,
+                    dish6.getCarbonRating() * 10
+            );
+
+            CarbonTrackerTransaction carbonTrackerTransaction3 = new CarbonTrackerTransaction(
+                    LocalDateTime.of(2022,11,4,
+                            8,14,46),
+                    userCarbonTracker1,
+                    dish8,
+                    dish8.getCarbonRating() * 10
+            );
+
+            CarbonTrackerTransaction carbonTrackerTransaction4 = new CarbonTrackerTransaction(
+                    LocalDateTime.of(2022,11,4,
+                            13,14,46),
+                    userCarbonTracker1,
+                    dish8,
+                    dish8.getCarbonRating() * 10
+            );
+
+            CarbonTrackerTransaction carbonTrackerTransaction5 = new CarbonTrackerTransaction(
+                    LocalDateTime.of(2022,11,5,
+                            19,33,53),
+                    userCarbonTracker1,
+                    dish4,
+                    dish4.getCarbonRating() * 10
+            );
+
+            CarbonTrackerTransaction carbonTrackerTransaction6 = new CarbonTrackerTransaction(
+                    LocalDateTime.of(2022,11,6,
+                            12,33,53),
+                    userCarbonTracker1,
+                    dish4,
+                    dish4.getCarbonRating() * 10
+            );
+
+            CarbonTrackerTransaction carbonTrackerTransaction7 = new CarbonTrackerTransaction(
+                    LocalDateTime.of(2022,11,7,
+                            12,33,53),
+                    userCarbonTracker1,
+                    dish4,
+                    dish4.getCarbonRating() * 10
+            );
+
+            CarbonTrackerTransaction carbonTrackerTransaction8 = new CarbonTrackerTransaction(
+                    LocalDateTime.now(),
+                    userCarbonTracker1,
+                    dish2,
+                    dish2.getCarbonRating() * 10
+            );
+
             carbonTrackerTransactionRepository.saveAll(
-                    List.of(carbonTrackerTransaction1)
+                    List.of(carbonTrackerTransaction1,carbonTrackerTransaction2,carbonTrackerTransaction3,carbonTrackerTransaction4,carbonTrackerTransaction5,
+                            carbonTrackerTransaction6,carbonTrackerTransaction7)
             );
         };
     }

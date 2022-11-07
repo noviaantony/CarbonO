@@ -29,13 +29,7 @@ public class UserCarbonTracker {
     )
     private Long id;
     private Long userId;
-//    @Column(name="date_of_consumption")
-//    private Date dateConsumed;
 
-//    @ManyToOne
-//    @JoinColumn(name="dish_id")
-//    @JsonBackReference("dish_userCarbonTracker")
-//    private Dish dish;
     @OneToMany(mappedBy = "userCarbonTracker", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<CarbonTrackerTransaction> carbonTrackerTransaction;

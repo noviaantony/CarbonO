@@ -2,7 +2,7 @@ package com.carbonO.Receipt;
 
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Service
 public class ReceiptService {
@@ -13,7 +13,7 @@ public class ReceiptService {
     }
 
     public Receipt addReceipt(Long dishId) {
-        return receiptRepository.save(new Receipt(dishId, new Date()));
+        return receiptRepository.save(new Receipt(dishId, LocalDateTime.now()));
     }
 
     public Receipt redeemReceiptById(Long receiptId) {
