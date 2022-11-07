@@ -34,7 +34,6 @@ function App() {
           <>
             <Route path="/" element={<Landing />} />
             <Route path="/CarbonTracker" element={<CarbonTracker />} />
-            <Route path="/ResetPassword" element={<ResetPassword />} />
             <Route path="/Dashboard" element={<Dashboard />} />
             <Route path="/Donate" element={<Donate />} />
             <Route path="/Rewards" element={<Rewards />} />
@@ -47,6 +46,7 @@ function App() {
             <Route path="/" element={<Landing />} />
             <Route path="/Login" element={<LogInForm />} />
               <Route path="/ForgetPassword" element={<ForgotPassword />} />
+              <Route path="/ResetPassword" element={<ResetPassword />} />
             <Route path="/Signup" element={<SignUpForm />} />
           </>
         )}

@@ -36,10 +36,10 @@ public class UserCarbonTrackerService {
 
 
     public Double getUserTotalCarbonConsumption(Long userId, String token) {
-        //commented off for testing
-//        if (!jwtAuthService.authorizeUser(token)){
-//            throw new RuntimeException("User is not authorized to access this data");
-//        }
+
+        if (!jwtAuthService.authorizeUser(token)){
+            throw new RuntimeException("User is not authorized to access this data");
+        }
 
         //get user least of carbonTrackerTransactions
         List<CarbonTrackerTransaction> userCarbonTransactions = userCarbonTrackerRepository.findByUserId(userId).getCarbonTrackerTransaction();
