@@ -64,7 +64,7 @@ class CarbonTrackerService {
       return response.data;
 
     } catch (error) {
-      console.log("here");
+      console.log("receipt redemption failed");
       console.log(error.response.data);
       return error.response.data;
     }

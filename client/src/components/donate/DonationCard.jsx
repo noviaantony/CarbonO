@@ -42,7 +42,7 @@ const DonationCard = ({organisationId, Title, Image, Description, Website, UserC
         overlayClassName="myoverlay"
         closeTimeoutMS={500}
       >
-         <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+        <div class="relative p-4 w-full max-w-md h-full md:h-auto">
           <button
             type="button"
             class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
@@ -62,12 +62,14 @@ const DonationCard = ({organisationId, Title, Image, Description, Website, UserC
                 clip-rule="evenodd"
               ></path>
             </svg>
-            </button>
-            </div>
+          </button>
+        </div>
         <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-          <Stepper organisation = {Title.substring(0, Title.indexOf(':'))}
-                   organisationId={organisationId}/>
-        </div>      
+          <Stepper
+            organisation={Title.substring(0, Title.indexOf(":"))}
+            organisationId={organisationId}
+          />
+        </div>
       </Modal>
 
       <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 font-default">
@@ -79,11 +81,6 @@ const DonationCard = ({organisationId, Title, Image, Description, Website, UserC
           <p className="flex items-left leading-tight p-2 md:p-4 text-sm">
             {Description}
           </p>
-          <a href={Website} className="flex justify-end text-sm">
-            <div className="pr-5 underline underline-offset-1">
-              Visit Website
-            </div>
-          </a>
 
           <footer class="flex items-center justify-between leading-none p-2 md:p-4 bg-white">
             <div class="flex items-center no-underline  text-black" href="#">
@@ -93,16 +90,15 @@ const DonationCard = ({organisationId, Title, Image, Description, Website, UserC
           "
                 type="button"
                 onClick={toggleConfirmationModal}
-
               >
                 Donate E-Credits
               </button>
-              <Link
-                to="/Payment"
+              <a
+                href={Website}
                 className="inline-flex items-center py-2 px-10 text-xs font-xs text-center text-[#5E9387] bg-white rounded-lg  focus:outline-none transition duration-300 mr-3 font-semibold border-[#5E9387] border-2 border-solid hover:bg-gray-700 hover:text-white"
               >
-                Donate Cash
-              </Link>
+                Visit Website
+              </a>
             </div>
           </footer>
         </article>

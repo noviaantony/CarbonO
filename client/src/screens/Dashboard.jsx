@@ -8,6 +8,7 @@ import Header from "../components/misc/Header";
 import initialDatesArr from "../components/dashboard/getInitialDates";
 import UserRewardService from "../services/UserRewardService";
 import {ThreeDots} from "react-loader-spinner";
+import { motion } from "framer-motion";
 
 const Dashboard = () => {
   const [consumptionData, setConsumptionData] = useState([]);
@@ -95,35 +96,42 @@ const Dashboard = () => {
         Title={title}
         Description="keep track of you receipt uploads, carbon foodprint, reward claims and donation here"
       />
-        {loading ? (
-            <>
-                <div className="flex justify-center h-screen mt-20">
-                    <ThreeDots
-                        height="300"
-                        width="300"
-                        radius="9"
-                        color="#000"
-                        ariaLabel="three-dots-loading"
-                        wrapperStyle={{}}
-                        wrapperClassName=""
-                        visible={true}
-                    />
-                </div>
-            </>
-        ) : (
-        <div className="">
-        <initialDatesArr.Provider value={dates}>
-          <UserStatistics
-            TotalCarbon={totalCarbon.toFixed(0)}
-            Ecredits={userCredits}
-          />
-        </initialDatesArr.Provider>
-        <div className="flex flex-row justify-center mx-20">
-          <CarbonTrackerTable historicalData={consumptionData} />
-          <RewardsTable historicalData={rewardData} />
-        </div>
-      </div>
-        )}
+      {loading ? (
+        <>
+          <div className="flex justify-center h-screen mt-20">
+            <ThreeDots
+              height="300"
+              width="300"
+              radius="9"
+              color="#000"
+              ariaLabel="three-dots-loading"
+              wrapperStyle={{}}
+              wrapperClassName=""
+              visible={true}
+            />
+          </div>
+        </>
+      ) : (
+        <motion.div
+          className="actions"
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+        >
+          <initialDatesArr.Provider value={dates}>
+            <UserStatistics
+              TotalCarbon={totalCarbon.toFixed(0)}
+              Ecredits={userCredits}
+              TotalReceiptsScanned={consumptionData.length}
+            />
+          </initialDatesArr.Provider>
+          <div className="flex flex-row justify-center mx-26">
+            <CarbonTrackerTable historicalData={consumptionData} />
+          </div>
+          <div className="flex flex-row justify-center mx-26">
+            <RewardsTable historicalData={rewardData} />
+          </div>
+        </motion.div>
+      )}
     </>
   );
 };

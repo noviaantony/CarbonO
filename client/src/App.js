@@ -30,16 +30,26 @@ function App() {
     <>
       {auth.authenticated ? <AuthNavbar /> : <NotAuthNavbar />}
       <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/CarbonTracker" element={<CarbonTracker />} />
-        <Route path="/Login" element={<LogInForm />} />
-        <Route path="/ResetPassword" element={<ResetPassword />} />
-        <Route path="/ForgetPassword" element={<ForgotPassword />} />
-        <Route path="/Signup" element={<SignUpForm />} />
-        <Route path="/Dashboard" element={<Dashboard />} />
-        <Route path="/Donate" element={<Donate />} />
-        <Route path="/Rewards" element={<Rewards />} />
-        <Route path="/Payment" element={<Payment />} />
+        {auth.authenticated ? (
+          <>
+            <Route path="/" element={<Landing />} />
+            <Route path="/CarbonTracker" element={<CarbonTracker />} />
+            <Route path="/ResetPassword" element={<ResetPassword />} />
+            <Route path="/ForgetPassword" element={<ForgotPassword />} />
+            <Route path="/Dashboard" element={<Dashboard />} />
+            <Route path="/Donate" element={<Donate />} />
+            <Route path="/Rewards" element={<Rewards />} />
+            <Route path="/Payment" element={<Payment />} />
+            <Route path="/Login" element={<LogInForm />} />
+            <Route path="/Signup" element={<SignUpForm />} />
+          </>
+        ) : (
+          <>
+            <Route path="/" element={<Landing />} />
+            <Route path="/Login" element={<LogInForm />} />
+            <Route path="/Signup" element={<SignUpForm />} />
+          </>
+        )}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />

@@ -4,7 +4,8 @@ import { ReactComponent as SignUpSvg } from "./SignUpSvg.svg";
 import PasswordChecklist from "react-password-checklist"
 import {Link, Navigate} from "react-router-dom";
 import axios from "axios";
-import Modal from "react-modal";
+import { motion } from "framer-motion";
+import validator from "validator";
 
 const REGISTER_URL = 'http://18.136.163.9:8080/api/v1/carbonO/user/registration'
 
@@ -24,9 +25,18 @@ const SignUpForm = () => {
 	const [confirmPw, setConfirmPw] = useState("");
 
   const [isOpen, setIsOpen] = useState(false);
+
   function toggleConfirmationModal() {
     setIsOpen(!isOpen);
   }
+
+  const validatePassword = (password) => {
+    if (validator.isStrongPassword(password, {minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1,})) {
+      return true;
+    } else {
+      return false
+    }
+  };
 
 
   useEffect(() => {
@@ -40,40 +50,57 @@ const SignUpForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const jsonRegistrationInfo = JSON.stringify({
-            "firstName": firstName,
-            "lastName": lastName,
-            "email": email,
-            "password": password}
-    );
+    if (password != confirmPassword){
+      setErrMsg('Passwords do not match!');
+      console.log(errMsg)
+      errRef.current.focus();
+      
+    } else if (!validatePassword(password)) {
+      setErrMsg("Passwords is not strong enough!");
+      console.log(errMsg);
+      errRef.current.focus();
 
-    if (password !== confirmPassword){
-        setErrMsg('Passwords do not match');
-        console.log(errMsg)
-        errRef.current.focus();
-    }
 
-    try{
-        const response = await axios.post(REGISTER_URL,
-            jsonRegistrationInfo,
-            {headers: {'Content-Type': 'application/json'}});
-        console.log(response)
+    } else {
+
+      const jsonRegistrationInfo = JSON.stringify({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+      });
+
+      try {
+        const response = await axios.post(REGISTER_URL, jsonRegistrationInfo, {
+          headers: { "Content-Type": "application/json" },
+        });
+        console.log(response);
         setSuccess(true);
-    }catch (err){
-        if (!err?.response){
-            setErrMsg("Oops! Unable to connect to server.");
-        }  else if (err.response.status === 403){
-            setErrMsg('Oops! This email is taken.');
+        setErrMsg("You have succesfully signed up! Check your email to verify your account.")
+      } catch (err) {
+        if (!err?.response) {
+          setErrMsg("Oops! Unable to connect to server.");
+        } else if (err.response.status === 403) {
+          setErrMsg("Oops! This email is taken.");
         } else {
-            setErrMsg('Unable to signup, please check if your email exists.');
+          setErrMsg("Unable to signup, please check if your email exists.");
         }
-        console.log(errMsg)
+        console.log(errMsg);
         errRef.current.focus();
+      }
+
     }
+
   }
+
+
   return (
     <>
-      <div className="flex flex-col items-center justify-center min-h-screen py-2 font-default">
+      <motion.div
+        className="actions flex flex-col items-center justify-center min-h-screen py-2 font-default mt-20 mb-20"
+        animate={{ opacity: 1 }}
+        initial={{ opacity: 0 }}
+      >
         <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
           <div className="bg-white rounded-2xl shadow-2xl flex w-2/3 max-w-4xl">
             <div className="w-3/5 p-5">
@@ -83,22 +110,17 @@ const SignUpForm = () => {
                   className={errMsg ? "errmsg" : "offscreen"}
                   aria-live="assertive"
                 ></p>
-                {/*change this accordingly this is the error message*/}
                 <h2 className="text-2xl font-bold text-gray-700 mb-2">
                   Sign up for an account
                 </h2>
                 <div className="border-2 w-10 border-gray-700 bg-gray-700 inline-block mb-2"></div>
               </div>
-              {success ? (
-                <span class=" text-green-800 text-sm mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900 font-bold mb-3">
-                  "You have succesfully signed up! Check you email to verify
-                  your account."
-                </span>
-              ) : (
-                <span class=" text-red-800 text-sm mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900 font-bold mb-3">
+              <div className='mb-8'>
+                <span className=" text-red-800 text-sm mr-2 px-2.5 py-0.5 rounded font-bold mb-8">
                   {errMsg}
                 </span>
-              )}
+              </div>
+
               <form onSubmit={handleSubmit}>
                 <div className="flex flex-col items-center">
                   {/* First and Last name section */}
@@ -193,7 +215,7 @@ const SignUpForm = () => {
                       "capital",
                       "match",
                     ]}
-                    minLength={5}
+                    minLength={8}
                     value={pw}
                     valueAgain={confirmPw}
                     onChange={(isValid) => {}}
@@ -219,7 +241,7 @@ const SignUpForm = () => {
             </div>
           </div>
         </main>
-      </div>
+      </motion.div>
     </>
   );
 }

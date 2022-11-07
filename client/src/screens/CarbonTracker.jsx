@@ -8,6 +8,7 @@ import AuthContext from "../hooks/AuthProvider";
 import QRScanner from "../components/carbontracker/QRScanner";
 import { motion } from "framer-motion";
 
+
 const CarbonTracker = () => {
   const { auth } = useContext(AuthContext);
   const [searchTerm, setSearchTerm] = useState("");

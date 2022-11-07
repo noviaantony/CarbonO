@@ -26,7 +26,6 @@ const MultiStepper = ({ organisation, organisationId }) => {
   const [donationAmount, setDonationAmount] = React.useState(0);
 
   const handleNext = () => {
-    let newSkipped = skipped;
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 

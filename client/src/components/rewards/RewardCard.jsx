@@ -194,9 +194,13 @@ const RewardCard = ({
         </div>
       </Modal>
 
-      <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 font-default">
+      <div class="my-1 px-1 w-9/12 md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 font-default">
         <article class="overflow-hidden rounded-lg bg-white">
-          <img alt="meow" class="block h-72 w-full" src={RewardImage} />
+          <img
+            alt="reward image"
+            class="block h-60 w-full object-cover"
+            src={RewardImage}
+          />
           <header class="flex items-left leading-tight p-2 md:p-4 ">
             <h1 class="text-2xl font-bold">
               {RewardBrandName} {RewardName}
