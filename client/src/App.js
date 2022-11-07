@@ -9,7 +9,7 @@ import Donate from "./screens/Donate";
 import Rewards from "./screens/Rewards";
 import Payment from "./screens/Payment";
 import Footer from "./components/footer/Footer";
-import AuthContext from "./hooks/AuthProvider";
+import AuthContext from "./hooks/AuthContext";
 import AuthNavbar from "./components/navigation/AuthNavbar";
 import NotAuthNavbar from "./components/navigation/NotAuthNavbar";
 import PageNotFound from "./screens/PageNotFound";

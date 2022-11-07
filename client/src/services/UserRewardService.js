@@ -2,6 +2,8 @@ import axios from 'axios';
 
 const USER_REWARD_API_URL = 'http://18.136.163.9:8080/api/v1/carbonO/userReward';
 
+
+
 class UserRewardService{
     async getAllRewards(){
         console.log('grabbing rewards');

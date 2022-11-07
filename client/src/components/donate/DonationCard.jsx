@@ -1,26 +1,41 @@
-import React, {useContext, useState} from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import DonationService from "../../services/DonationService";
-import AuthContext from "../../hooks/AuthProvider";
+import AuthContext from "../../hooks/AuthContext";
 // // import Slider, { Range } from "rc-slider";
 // import Slider from "@mui/material/Slider";
 // // import Slider from "./Slider"
 import Stepper from "./MultiStepper";
 
-const DonationCard = ({organisationId, Title, Image, Description, Website, UserCredits}) => {
-
+const DonationCard = ({
+  organisationId,
+  Title,
+  Image,
+  Description,
+  Website,
+  UserCredits,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [donationAmount, setDonationAmount] = useState(0);
   const { auth, setAuth } = useContext(AuthContext);
   const [message, setMessage] = useState("");
 
   const donatePoints = () => {
-    DonationService.donatePoints(auth.userId, donationAmount, organisationId, auth.accessToken)
-    .then((response) => {
-        console.log(response);
-        setMessage("You have successfully donated " + donationAmount + " points to " + Title);
-        // setIsOpen(false);
+    DonationService.donatePoints(
+      auth.userId,
+      donationAmount,
+      organisationId,
+      auth.accessToken
+    ).then((response) => {
+      console.log(response);
+      setMessage(
+        "You have successfully donated " +
+          donationAmount +
+          " points to " +
+          Title
+      );
+      // setIsOpen(false);
       // <span
       //     className=" text-red-800 text-sm mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900 font-bold mb-3">
       //             {errMsg}

@@ -1,37 +1,37 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from "../components/misc/Header";
 import DonationCard from "../components/donate/DonationCard";
 import CarbonTrackerService from "../services/CarbonTrackerService";
 import DonationService from "../services/DonationService";
-import {ThreeDots} from "react-loader-spinner";
+import { ThreeDots } from "react-loader-spinner";
 import Card from "../components/carbontracker/Card";
-import AuthContext from "../hooks/AuthProvider";
+import AuthContext from "../hooks/AuthContext";
 import UserRewardService from "../services/UserRewardService";
-import {motion} from "framer-motion";
+import { motion } from "framer-motion";
 
 const Donate = () => {
   const [organisationList, setOrganisationList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [userCredits, setUserCredits] = useState(0);
-  const {auth} = useContext(AuthContext);
+  const { auth } = useContext(AuthContext);
 
   useEffect(() => {
     setLoading(true);
     DonationService.getAllOrganisations()
-        .then((response) => {
-          setOrganisationList(response);
-        })
-        .then(() => {
-          setLoading(false);
-        });
+      .then((response) => {
+        setOrganisationList(response);
+      })
+      .then(() => {
+        setLoading(false);
+      });
   }, []);
 
   //get rewards claimed by user
   useEffect(() => {
     UserRewardService.getUserReward(auth.userId, auth.accessToken).then(
-        (response) => {
-          setUserCredits(response.rewardPoints);
-        }
+      (response) => {
+        setUserCredits(response.rewardPoints);
+      }
     );
   }, []);
 
@@ -53,16 +53,16 @@ const Donate = () => {
           </div>
         </>
       ) : (
-        <motion.div className="h-max actions"             
-            animate={{ opacity: 1 }}
-            initial={{ opacity: 0 }}>
+        <motion.div
+          className="h-max actions"
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+        >
           <Header
             Title="Translate Your Efforts Into More Effort!"
             Description="use the e-credits you earned to donate to climate change campaigns, we make donating easy for you."
           />
-          <div
-            className="actions container my-12 mx-auto px-4 md:px-1"
-          >
+          <div className="actions container my-12 mx-auto px-4 md:px-1">
             <div class="flex flex-wrap -mx-1 lg:-mx-4">
               {organisationList.map((organisation) => {
                 return (

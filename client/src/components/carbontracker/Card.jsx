@@ -2,9 +2,13 @@ import React, { useContext, useState, useEffect, Fragment } from "react";
 import axios from "axios";
 import { IoLeafOutline, IoLeafSharp } from "react-icons/io5";
 import CarbonTrackerService from "../../services/CarbonTrackerService";
-import AuthContext from "../../hooks/AuthProvider";
+import AuthContext from "../../hooks/AuthContext";
 // import QRScanner from "./QRScanner";
-import { Accordion, AccordionHeader, AccordionBody } from "@material-tailwind/react";
+import {
+  Accordion,
+  AccordionHeader,
+  AccordionBody,
+} from "@material-tailwind/react";
 
 const Card = ({
   dishId,

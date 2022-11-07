@@ -1,9 +1,9 @@
-import React, {useState, useContext, useEffect} from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 //import initialDatesArr from "./getInitialDates";
 import actualDates from "./getDates";
 import CarbonTrackerService from "../../services/CarbonTrackerService";
-import AuthContext from "../../hooks/AuthProvider";
+import AuthContext from "../../hooks/AuthContext";
 
 import {
   Chart,
@@ -145,6 +145,3 @@ const LineChart = () => {
 };
 
 export default LineChart;
-
-
-
