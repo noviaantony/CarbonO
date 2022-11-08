@@ -105,7 +105,7 @@ const LineChart = () => {
   return (
     <>
       <div
-        style={{ width: "100%", height: "80%" }}
+        style={{ width: "95%", height: "80%" }}
         className="bg-white rounded-lg h-auto p-6 flex items-stretch m-6 font-default text-xs"
       >
         <Line
