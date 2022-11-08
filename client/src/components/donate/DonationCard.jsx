@@ -3,9 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import DonationService from "../../services/DonationService";
 import AuthContext from "../../hooks/AuthContext";
-// // import Slider, { Range } from "rc-slider";
-// import Slider from "@mui/material/Slider";
-// // import Slider from "./Slider"
 import Stepper from "./MultiStepper";
 
 const DonationCard = ({

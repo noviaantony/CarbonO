@@ -1,22 +1,22 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from "react";
 import userRewardService from "../../services/UserRewardService";
 
-const RewardsTable = ({ historicalData }) => {
-  const [rewards, setRewards] = React.useState([]);
+const DonationTable = ({historicalData}) => {
+  
+  const [donation, setDonation] = React.useState([]);
 
-
-    useEffect(() => {
-      console.log("rewards data:", historicalData)
-      let rewardTransaction = [];
-      historicalData.forEach((data) => {
-        if (data.donation === false) {
-          console.log(data);
-          rewardTransaction.push(data);
-        } 
-      });
-      setRewards(rewardTransaction)
-      console.log("rewards:",rewards);
-    }, []);
+  useEffect(() => {
+    console.log("rewards data:", historicalData)
+    let donationTransaction = [];
+    historicalData.forEach((data) => {
+      if (data.donation === true) {
+        console.log(data);
+        donationTransaction.push(data);
+      } 
+    });
+    setDonation(donationTransaction)
+    console.log("donation:",donation);
+  }, []);
 
   return (
     <div className="overflow-x-auto relative sm:rounded-lg  m-6 font-default w-10/12">
@@ -24,21 +24,21 @@ const RewardsTable = ({ historicalData }) => {
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" className="py-3 px-6">
-              Reward
+              Donation
             </th>
             <th scope="col" className="py-3 px-6">
-              Brand
+              Organisation Id
             </th>
             <th scope="col" className="py-3 px-6">
               Date
             </th>
             <th scope="col" className="py-3 px-6">
-              E-Credits Used
+              E-Credits Donated
             </th>
           </tr>
         </thead>
         <tbody>
-          {rewards.map((data) => {
+          {donation.map((data) => {
 
               return (
                 <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
@@ -46,19 +46,16 @@ const RewardsTable = ({ historicalData }) => {
                     scope="row"
                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
-                    Reward
+                    Donation
                   </th>
                   <td className="py-4 px-6">
-                    {data.reward.brandName.substring(
-                      0,
-                      data.reward.brandName.length - 2
-                    )}
+                    {data.organisationId}
                   </td>
                   <td className="py-4 px-6">
                     {data.dateOfTransaction.substring(0, 10)}
                   </td>
                   <td className="py-4 px-6">
-                    {data.reward.redemptionPointsRequired}
+                    {data.pointsDonated}
                   </td>
                 </tr>
               );
@@ -67,6 +64,6 @@ const RewardsTable = ({ historicalData }) => {
       </table>
     </div>
   );
-};
+}
 
-export default RewardsTable;
+export default DonationTable;

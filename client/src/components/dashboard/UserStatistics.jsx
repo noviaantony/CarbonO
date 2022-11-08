@@ -2,47 +2,49 @@ import React from "react";
 import { FaWallet, FaReceipt, FaLeaf } from "react-icons/fa";
 import { useState, useRef, useContext } from "react";
 import { MdQrCodeScanner } from "react-icons/md";
-import DonutChart from "../dashboard/DonutChart";
 import LineChart from "../dashboard/LineChart";
 import PieChart from "./PieChart";
 import initialDatesArr from "./getInitialDates";
 import actualDates from "./getDates";
-import dayjs from "dayjs";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import TextField from "@mui/material/TextField";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#5E9387",
-    },
-  },
-  typography: {
-    fontFamily: ["Open Sans", "sans-serif"].join(","),
-  },
-});
-
+import pointsArr from "./getPoints";
+import actualPoints from "./actualPoints";
+import pieChartArr from "./getPieChart";
+import actualPie from "./actualPie";
+import { Pie } from "react-chartjs-2";
 const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
   const [, set] = React.useState(true);
   const [isClickedCarbon, setIsClickedCarbon] = React.useState(true);
   const [isClickedReceipt, setIsClickedReceipt] = React.useState(true);
 
   const initialDates = useContext(initialDatesArr);
+  const points = useContext(pointsArr);
+  // console.log(initialDates);
+  // console.log(points);
+  const pieChartInfo = useContext(pieChartArr);
+console.log(pieChartInfo);
+  const toPieChart = [];
+  const dates = [];
+  // const temp1 = [];
+  // const temp2 = [];
+  // let i = 0;
+  //  for (i; i < initialDates.length; i++) {
+  //   temp1[i] = initialDates.pop();
+  //   temp2[i] = points.pop();
+  //  }
 
-  const [startDate, setstartDate] = useState(initialDates[0]);
-  const [endDate, setendDate] = useState(initialDates[initialDates.length - 1]);
+  //  console.log(temp1)
+
+  const [startDate, setStartDate] = useState(initialDates[0]);
+  const [endDate, setEndDate] = useState(initialDates[initialDates.length - 1]);
 
   //updates new dates used in charts
   let newDates = useRef([]);
   const handleChangeFirst = (event) => {
-    setstartDate(event.target.value);
+    setStartDate(event.target.value);
   };
 
   const handleChangeEnd = (event) => {
-    setendDate(event.target.value);
+    setEndDate(event.target.value);
   };
 
   const indexStart = initialDates.indexOf(startDate);
@@ -51,16 +53,33 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
   //slices the dates based on dates filtered by user
   newDates.current = initialDates.slice(indexStart, indexEnd + 1);
 
-  const [value, setValue] = React.useState(dayjs("2014-08-18T21:11:54"));
-  const handleChange = (newValue) => {
-    setValue(newValue);
-  };
+  let newPoints = useRef([]);
+  newPoints.current = points.slice(indexStart, indexEnd + 1);
+
+  function pushToArr(arr, obj) {
+    const index = newDates.current.findIndex((e) => e === obj.date);
+
+    if (index > -1) {
+      arr.push(obj);
+    } 
+  }
+  let i = 1;
+  for (i; i < pieChartInfo.length; i++) {
+    var obj = {
+      date: pieChartInfo[i].date,
+      rating: pieChartInfo[i].rating,
+    };
+
+    pushToArr(toPieChart, obj);
+  }
+
+  console.log(toPieChart);
   //filter function appears if there is a chart
   const hasChart = () => {
-    if (isClickedCarbon || isClickedReceipt) {
+ 
       return (
         <>
-          {/* <div className="p-4 w-15 rounded-lg bg-white flex border border-gray-800 mx-10  border-none">
+          <div className="p-4 w-15 rounded-lg bg-white flex border border-gray-800 mx-10  border-none">
             <div className="flex items-center">
               <div className="relative">
                 <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -114,72 +133,10 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
                 />
               </div>
             </div>
-          </div> */}
-  <ThemeProvider theme={theme}>
-          <div className="p-4 w-15 rounded-lg bg-white flex border border-gray-800 mx-10  border-none">
-            <div className="flex items-center">
-              <div className="relative">
-                <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                  <svg
-                    aria-hidden="true"
-                    className="w-5 h-5 text-gray-500 dark:text-gray-400"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                </div>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <MobileDatePicker
-                    label="Start Date"
-                    className = "grid place-items-center"
-                    inputFormat="MM/DD/YYYY"
-                    value={value}
-                    onChange={handleChange}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                </LocalizationProvider>
-              </div>
-              <span className="mx-4 text-gray-500">to</span>
-              <div className="relative">
-                <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                  <svg
-                    aria-hidden="true"
-                    class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                </div>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <MobileDatePicker
-                    label="End Date"
-                    className = "grid place-items-center"
-                    inputFormat="MM/DD/YYYY"
-                    value={value}
-                    onChange={handleChange}
-                    renderInput={(params) => <TextField {...params} />}
-                 
-                  />
-                </LocalizationProvider>
-              </div>
-            </div>
           </div>
-          </ThemeProvider>
         </>
       );
-    }
+    
   };
 
   //display charts based on click
@@ -188,16 +145,18 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
       return (
         <div class="flex flex-row justify-evenly">
           <LineChart />
-          <PieChart />
+          {/* <PieChart /> */}
         </div>
       );
-    } else if (isClickedReceipt) {
-      return (
-        <div className="flex flex-row justify-evenly">
-          <PieChart />
-        </div>
-      );
-    } else if (isClickedCarbon) {
+    }
+    // else if (isClickedReceipt) {
+    //   return (
+    //     <div className="flex flex-row justify-evenly">
+    //       <PieChart />
+    //     </div>
+    //   );
+    // }
+    else if (isClickedCarbon) {
       return (
         <div className="flex flex-row justify-evenly">
           <LineChart />
@@ -212,7 +171,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
         {/* first */}
         <div class="px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 font-default">
           <div className="p-4 text-sm text-[#5e938780] bg-white rounded-lg flex items-stretch m-6 drop-shadow-sm font-default cursor-pointer h-30">
-            <FaWallet size={60} />
+            <FaWallet size={80} />
             <div className="ml-20 mt-2 text-xl text-center font-semibold text-gray-700">
               <h1 class="text-4xl font-bold"> {Ecredits} </h1>
               <h5 class="text-xs"> E-Credits Currently </h5>
@@ -232,7 +191,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
           }}
         >
           <div className="p-4 text-sm text-[#5e938780] bg-white rounded-lg flex items-stretch m-6 drop-shadow-sm font-default cursor-pointer h-30">
-            <FaLeaf size={60} />
+            <FaLeaf size={80} />
             <div className="ml-12 mt-2 text-xl font-semibold text-gray-700">
               <h1 class="text-4xl text-center font-bold"> {TotalCarbon} </h1>
               <h5 class="text-xs">C02 Consumed this Month</h5>
@@ -252,7 +211,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
           }}
         >
           <div className="p-4 text-sm text-[#5e938780] bg-white rounded-lg flex items-stretch m-6 drop-shadow-sm font-default cursor-pointer h-30">
-            <MdQrCodeScanner size={60} />
+            <MdQrCodeScanner size={80} />
             <div className="ml-10 mt-2 text-xl font-semibold text-gray-700">
               <h1 class="text-4xl text-center font-bold">
                 {TotalReceiptsScanned}
@@ -264,11 +223,17 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
       </div>
 
       {/* updates charts with new dates */}
+      <actualPie.Provider value = {toPieChart}>
       <actualDates.Provider value={newDates.current}>
-        <div className="mx-36">{hasChart()}</div>
+        <actualPoints.Provider value={newPoints.current}>
+          <div className="mx-36">{hasChart()}</div>
 
-        <div className="mx-36">{returnCharts()}</div>
+          <div className="mx-36">{returnCharts()}</div>
+          {/* <PieChart/> */}
+        </actualPoints.Provider>
       </actualDates.Provider>
+      </actualPie.Provider>
+      
     </>
   );
 };
