@@ -11,69 +11,40 @@ import actualPoints from "./actualPoints";
 import pieChartArr from "./getPieChart";
 import actualPie from "./actualPie";
 import { Pie } from "react-chartjs-2";
+
+
 const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
   const [, set] = React.useState(true);
   const [isClickedCarbon, setIsClickedCarbon] = React.useState(true);
   const [isClickedReceipt, setIsClickedReceipt] = React.useState(true);
 
-  const initialDates = useContext(initialDatesArr);
-  const points = useContext(pointsArr);
+  // const initialDates = useContext(initialDatesArr);
+  // const points = useContext(pointsArr);
   // console.log(initialDates);
   // console.log(points);
-  const pieChartInfo = useContext(pieChartArr);
-console.log(pieChartInfo);
-  const toPieChart = [];
-  const dates = [];
-  // const temp1 = [];
-  // const temp2 = [];
-  // let i = 0;
-  //  for (i; i < initialDates.length; i++) {
-  //   temp1[i] = initialDates.pop();
-  //   temp2[i] = points.pop();
-  //  }
+  
+  // const [startDate, setStartDate] = useState(initialDates[0]);
+  // const [endDate, setEndDate] = useState(initialDates[initialDates.length - 1]);
+  
+  // //updates new dates used in charts
+  // let newDates = useRef([]);
+  // const handleChangeFirst = (event) => {
+  //   setStartDate(event.target.value);
+  // };
 
-  //  console.log(temp1)
+  // const handleChangeEnd = (event) => {
+  //   setEndDate(event.target.value);
+  // };
 
-  const [startDate, setStartDate] = useState(initialDates[0]);
-  const [endDate, setEndDate] = useState(initialDates[initialDates.length - 1]);
+  // const indexStart = initialDates.indexOf(startDate);
+  // const indexEnd = initialDates.indexOf(endDate);
 
-  //updates new dates used in charts
-  let newDates = useRef([]);
-  const handleChangeFirst = (event) => {
-    setStartDate(event.target.value);
-  };
+  // //slices the dates based on dates filtered by user
+  // newDates.current = initialDates.slice(indexStart, indexEnd + 1);
 
-  const handleChangeEnd = (event) => {
-    setEndDate(event.target.value);
-  };
+  // let newPoints = useRef([]);
+  // newPoints.current = points.slice(indexStart, indexEnd + 1);
 
-  const indexStart = initialDates.indexOf(startDate);
-  const indexEnd = initialDates.indexOf(endDate);
-
-  //slices the dates based on dates filtered by user
-  newDates.current = initialDates.slice(indexStart, indexEnd + 1);
-
-  let newPoints = useRef([]);
-  newPoints.current = points.slice(indexStart, indexEnd + 1);
-
-  function pushToArr(arr, obj) {
-    const index = newDates.current.findIndex((e) => e === obj.date);
-
-    if (index > -1) {
-      arr.push(obj);
-    } 
-  }
-  let i = 1;
-  for (i; i < pieChartInfo.length; i++) {
-    var obj = {
-      date: pieChartInfo[i].date,
-      rating: pieChartInfo[i].rating,
-    };
-
-    pushToArr(toPieChart, obj);
-  }
-
-  console.log(toPieChart);
   //filter function appears if there is a chart
   const hasChart = () => {
  
@@ -167,6 +138,7 @@ console.log(pieChartInfo);
 
   return (
     <>
+    
       <div class="flex flex-wrap -mx-1 lg:mx-36">
         {/* first */}
         <div class="px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 font-default">
@@ -223,16 +195,12 @@ console.log(pieChartInfo);
       </div>
 
       {/* updates charts with new dates */}
-      <actualPie.Provider value = {toPieChart}>
-      <actualDates.Provider value={newDates.current}>
-        <actualPoints.Provider value={newPoints.current}>
-          <div className="mx-36">{hasChart()}</div>
+          {/* <div className="mx-36">{hasChart()}</div> */}
 
           <div className="mx-36">{returnCharts()}</div>
           {/* <PieChart/> */}
-        </actualPoints.Provider>
-      </actualDates.Provider>
-      </actualPie.Provider>
+    
+  
       
     </>
   );

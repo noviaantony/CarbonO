@@ -13,21 +13,6 @@ import UserRewardService from "../services/UserRewardService";
 import { ThreeDots } from "react-loader-spinner";
 import { motion } from "framer-motion";
 
-function pushToArr(arr, obj) {
-  const index = arr.findIndex((e) => e.date === obj.date);
-
-  if (index === -1) {
-    arr.push(obj);
-  } else {
-    let temp_date = obj.date;
-    let temp_points = arr[index].totalPoints + obj.totalPoints;
-    var overWrite = {
-      date: temp_date,
-      totalPoints: temp_points,
-    };
-    arr[index] = overWrite;
-  }
-}
 
 const Dashboard = () => {
   const [consumptionData, setConsumptionData] = useState([]);
@@ -36,6 +21,7 @@ const Dashboard = () => {
   const [userCredits, setUserCredits] = useState(0);
   const [loading, setLoading] = useState(false);
   const { auth, setAuth } = useContext(AuthContext);
+  
   const dates = [];
   const points = [];
   //persist state of user
@@ -46,8 +32,7 @@ const Dashboard = () => {
   //     console.log("auth", auth.authenticated);
   //
   // },[]);
-  const [lineChartData, setLineChartData] = useState([]);
-  const [chartsData, setChartsData] = useState([{ date: "", totalPoints: 0 }]);
+  
   const [pieChartData, setPieChartData] = useState([{ date: "", rating: 0 }]);
 
   // get all dish consumed by user
@@ -56,41 +41,23 @@ const Dashboard = () => {
     CarbonTrackerService.getDishConsumed(auth.userId, auth.accessToken).then(
       (response) => {
         console.log("Dish response");
-        // console.log(response);
+        console.log(response);
         setConsumptionData(response);
-        setLineChartData(response);
+        // setLineChartData(response);
         // setLoading(false);
       }
     );
   }, []);
-
-  let i = 0;
- 
-    
-
-  for (i; i < lineChartData.length; i++) {
-    var obj = {
-      date: lineChartData[i].dateConsumed.substring(0, 10),
-      totalPoints: lineChartData[i].pointsEarned,
-    };
-    pushToArr(chartsData, obj);
-  }
-
-console.log(chartsData);
-for (let i = 1; i < chartsData.length; i++) {
-  dates.push(chartsData[i].date);
-  points.push(chartsData[i].totalPoints);
-}
-
+  
 //for pie chart
-for (let i = 0; i < lineChartData.length; i++) {
-  console.log("count")
-  var obj = {
-    date: lineChartData[i].dateConsumed.substring(0, 10),
-    rating: lineChartData[i].dish.carbonRating,
-  };
-  pieChartData.push(obj);
-}
+// for (let i = 0; i < lineChartData.length; i++) {
+//   console.log("count")
+//   var obj = {
+//     date: lineChartData[i].dateConsumed.substring(0, 10),
+//     rating: lineChartData[i].dish.carbonRating,
+//   };
+//   pieChartData.push(obj);
+// }
   //get user total carbon consumed
   useEffect(() => {
     setLoading(true);
@@ -105,7 +72,7 @@ for (let i = 0; i < lineChartData.length; i++) {
       setLoading(false);
     });
   }, []);
-
+  
   //get rewards claimed by user
   useEffect(() => {
     setLoading(true);
@@ -123,7 +90,6 @@ for (let i = 0; i < lineChartData.length; i++) {
 
   let title = auth.firstName + "'s Dashboard";
 
-  
   return (
     <>
       <Header
@@ -151,19 +117,16 @@ for (let i = 0; i < lineChartData.length; i++) {
           animate={{ opacity: 1 }}
           initial={{ opacity: 0 }}
         >
-          <pieChartArr.Provider value = {pieChartData}>
-          <pointsArr.Provider value={points}>
-            <initialDatesArr.Provider value={dates}>
+          {/* <pointsArr.Provider value={points}>
+            <initialDatesArr.Provider value={dates}> */}
               <UserStatistics
                 TotalCarbon={totalCarbon.toFixed(0)}
                 Ecredits={userCredits}
                 TotalReceiptsScanned={consumptionData.length}
               />
-            </initialDatesArr.Provider>
-          </pointsArr.Provider>
-          </pieChartArr.Provider>
+            {/* </initialDatesArr.Provider>
+          </pointsArr.Provider> */}
           
-
           <div className="flex flex-row justify-center mx-26">
             <CarbonTrackerTable historicalData={consumptionData} />
           </div>
