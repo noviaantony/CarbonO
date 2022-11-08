@@ -31,7 +31,7 @@ public class UserCarbonTrackerService {
         this.receiptService = receiptService;
         this.dishService = dishService;
         this.jwtAuthService = jwtAuthService;
-        this.webClient = webClientBuilder.baseUrl("http://18.136.163.9:8080/api/v1/carbonO/").build();
+        this.webClient = webClientBuilder.baseUrl("http://18.136.163.9:80/api/v1/carbonO/").build();
     }
 
 
