@@ -26,13 +26,13 @@ const RewardsTable = ({ historicalData }) => {
             <th scope="col" className="py-3 px-6">
               Reward
             </th>
-            <th scope="col" className="py-3 px-6">
+            <th scope="col" className="py-3 px-12">
               Brand
             </th>
-            <th scope="col" className="py-3 px-6">
+            <th scope="col" className="py-3 px-12">
               Date
             </th>
-            <th scope="col" className="py-3 px-6">
+            <th scope="col" className="py-3 px-8">
               E-Credits Used
             </th>
           </tr>
@@ -48,16 +48,16 @@ const RewardsTable = ({ historicalData }) => {
                   >
                     Reward
                   </th>
-                  <td className="py-4 px-6">
+                  <td className="py-4 px-10">
                     {data.reward.brandName.substring(
                       0,
                       data.reward.brandName.length - 2
                     )}
                   </td>
-                  <td className="py-4 px-6">
+                  <td className="py-4 px-8">
                     {data.dateOfTransaction.substring(0, 10)}
                   </td>
-                  <td className="py-4 px-6">
+                  <td className="py-4 px-12">
                     {data.reward.redemptionPointsRequired}
                   </td>
                 </tr>
