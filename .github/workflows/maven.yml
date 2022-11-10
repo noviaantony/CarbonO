@@ -29,19 +29,20 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
-    - name: Build with Maven and push image
+    - name: Build user with Maven and push image
       env:
           CARBONO_USERNAME: ${{ secrets.CARBONO_USERNAME  }}
           CARBONO_PASSWORD: ${{ secrets.CARBONO_PASSWORD  }}
+      working-directory: ./carbonO/user
       run: |
-        cd ./carbonO/user
         mvn clean package dockerfile:push
-#     - name: Build & push Docker image
-#       uses: mr-smithers-excellent/docker-build-push@v5
-#       with:
-#         image: newbieshine/springboot-images-new
-#         tags: latest
-#         registry: docker.io
-#         dockerfile: Dockerfile
-#         username: ${{ secrets.DOCKER_USERNAME }}
-#         password: ${{ secrets.DOCKER_PASSWORD }}
+      
+    - name: Build carbonTracker with Maven and push image
+      working-directory: ./carbonO/carbonTracker
+      run: |
+        mvn clean package dockerfile:push
+        
+    - name: Build userReward with Maven and push image
+      working-directory: ./carbonO/userReward
+      run: |
+        mvn clean package dockerfile:push 
