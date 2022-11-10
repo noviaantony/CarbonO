@@ -24,13 +24,18 @@ jobs:
         java-version: '18'
         distribution: 'temurin'
         cache: maven
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Build with Maven and push image
       env:
           CARBONO_USERNAME: ${{ secrets.CARBONO_USERNAME  }}
           CARBONO_PASSWORD: ${{ secrets.CARBONO_PASSWORD  }}
       run: |
         cd ./carbonO/user
-        mvn clean package -D dockerfile.useMavenSettingsForAuth=true dockerfile:push
+        mvn clean package -D dockerfile:push
 #     - name: Build & push Docker image
 #       uses: mr-smithers-excellent/docker-build-push@v5
 #       with:
