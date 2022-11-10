@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { Doughnut } from "react-chartjs-2";
 import 'chart.js/auto';
 import {
@@ -10,6 +10,8 @@ import {
   Title,
   CategoryScale,
 } from "chart.js";
+import CarbonTrackerService from "../../services/CarbonTrackerService";
+import AuthContext from "../../hooks/AuthContext";
 
 Chart.register(
   LineController,
@@ -20,44 +22,100 @@ Chart.register(
   CategoryScale
 );
 
-Chart.defaults.font.size = 20;
+function arrRating(arr, obj) {
+  const index = arr.findIndex((e) => e.rating === obj.rating);
+
+  if (index === -1) {
+    arr.push(obj);
+  } else {
+    let tempRating = obj.rating;
+    let tempFreq = arr[index].ratingFreq + obj.ratingFreq;
+    var overWrite = {
+      rating: tempRating,
+      ratingFreq: tempFreq,
+    };
+    arr[index] = overWrite;
+  }
+}
+
+function getRatingData(ratingChart, ratings, ratingFreq) {
+  let index = 1;
+  let actualIndex = 0;
+  for (index; index < ratingChart.length; index++) {
+    let temp1 = ratingChart[index].rating;
+    ratings[actualIndex] = temp1;
+    let temp2 = ratingChart[index].ratingFreq;
+    ratingFreq[actualIndex] = temp2;
+    ++actualIndex;
+  }
+}
 
 const DonutChart = () => {
+  const [donutChartData, setDonutChartData] = useState([]);
+  const ratingChart = [{ rating: 0, ratingFreq: 0 }];
+  const ratings = [];
+  const ratingFreq = [];
+  const { auth, setAuth } = useContext(AuthContext);
+  useEffect(() => {
+    CarbonTrackerService.getDishConsumed(auth.userId, auth.accessToken).then(
+      (response) => {
+        setDonutChartData(response);
+      }
+    );
+  }, []);
+
+  let index1 = 0;
+  for (index1; index1 < donutChartData.length; index1++) {
+   
+    var obj = {
+      rating: donutChartData[index1].dish.carbonRating,
+      ratingFreq: 1,
+    };
+    arrRating(ratingChart, obj);
+  }
+
+  getRatingData(ratingChart, ratings, ratingFreq);
+
   return (
     <div
-      style={{ width: "28%", height: "30%" }}
-      className="bg-white rounded-lg h-auto p-6 flex items-stretch m-6 font-default"
+      style={{ width: "28%", height: "80%" }}
+      className="bg-white rounded-lg h-10 p-6 flex items-stretch m-6 font-default"
     >
       <Doughnut
         data={{
           //labels on x-axis
-          labels: ["Category 1", "Category 2", "Category 3"],
+          labels : ratings,
           datasets: [
             {
               label: "E-Credits",
-              data: [12, 19, 3],
+              data: ratingFreq,
               backgroundColor: [
-                "rgba(255, 99, 132, 0.2)",
-                "rgba(54, 162, 235, 0.2)",
-                "rgba(255, 206, 86, 0.2)",
+                "rgba(35, 112, 50, 0.8)",
+                "rgba(5, 71, 18, 0.8)",
+                "rgba(220,236,228,0.8)",
+                "rgba(22,163,74,255)"
               ],
               borderColor: [
-                "rgba(255, 99, 132, 1)",
-                "rgba(54, 162, 235, 1)",
-                "rgba(255, 206, 86, 1)",
+                "rgba(35, 112, 50, 1)",
+                "rgba(5, 71, 18, 1)",
+                "rgba(220,236,228,1)",
+                "rgba(22,163,74,255)"
               ],
               borderWidth: 1,
             },
           ],
         }}
-        height={300}
-        width={600}
+        height={350}
+        width={500}
         options={{
           maintainAspectRatio: false,
           plugins: {
             title: {
               display: true,
-              text: "Total Current E-Credits",
+              text: "Receipts by Ratings",
+              font : {
+                size : 25
+              }
             },
 
             legend: {

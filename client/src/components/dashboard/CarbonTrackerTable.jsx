@@ -10,16 +10,16 @@ const CarbonTrackerTable = ({historicalData}) => {
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
-            <th scope="col" className="py-3 px-6">
+            <th scope="col" className="py-3 px-8">
               Dish Name
             </th>
-            <th scope="col" className="py-3 px-6">
+            <th scope="col" className="py-3 px-9">
               Date
             </th>
             <th scope="col" className="py-3 px-6">
               Carbon Rating
             </th>
-            <th scope="col" className="py-3 px-6">
+            <th scope="col" className="py-3 px-4">
               C02 consumed
             </th>
             <th scope="col" className="py-3 px-6">
@@ -38,9 +38,9 @@ const CarbonTrackerTable = ({historicalData}) => {
                 {data.dish.dishName}
               </th>
               <td className="py-4 px-6">{data.dateConsumed.substring(0,10)}</td>
-              <td className="py-4 px-6">{data.dish.carbonRating}</td>
-              <td className="py-4 px-6">{data.dish.totalCarbonFootprint.toFixed(0) + 'g'}</td>
-              <td className="py-4 px-6">
+              <td className="py-4 px-16 ">{data.dish.carbonRating}</td>
+              <td className="py-4 px-9">{data.dish.totalCarbonFootprint.toFixed(0) + 'g'}</td>
+              <td className="py-4 px-16">
                 <a
                     href="#"
                     className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
