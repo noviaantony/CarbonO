@@ -1,5 +1,10 @@
 # CarbonO
 
+<p align="center">
+    <img src="https://raw.githubusercontent.com/Chen-ZhaoXing/CarbonO/main/CarbonOLogo.png" width="50%"/>
+</p>
+
+
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/a8175a62e9504cf88bb33e2b5e29170a)](https://www.codacy.com/gh/Chen-ZhaoXing/CarbonO/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Chen-ZhaoXing/CarbonO&amp;utm_campaign=Badge_Grade)
 
 > Project By: SMU CS203 G2T2
