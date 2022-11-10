@@ -1,4 +1,4 @@
-package com.carbonO.Receipt;
+package com.carbonOtest.Receipt;
 
 import org.springframework.stereotype.Service;
 

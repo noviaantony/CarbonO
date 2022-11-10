@@ -1,10 +1,9 @@
-package com.carbonO.Receipt;
+package com.carbonOtest.Receipt;
 
 import com.google.zxing.WriterException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.util.Base64;
 
 @RestController
 @RequestMapping(path = "api/v1/carbonO/carbonTracker/qrReceipt/")
