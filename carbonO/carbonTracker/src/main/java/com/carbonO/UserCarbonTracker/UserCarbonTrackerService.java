@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.List;
 
 @Service
 public class UserCarbonTrackerService {
@@ -36,9 +36,9 @@ public class UserCarbonTrackerService {
 
     public Double getUserTotalCarbonConsumption(Long userId, String token) {
 
-        if (!jwtAuthService.authorizeUser(token)){
-            throw new RuntimeException("User is not authorized to access this data");
-        }
+//        if (!jwtAuthService.authorizeUser(token)){
+//            throw new RuntimeException("User is not authorized to access this data");
+//        }
 
         //get user least of carbonTrackerTransactions
         List<CarbonTrackerTransaction> userCarbonTransactions = userCarbonTrackerRepository.findByUserId(userId).getCarbonTrackerTransaction();
@@ -58,7 +58,7 @@ public class UserCarbonTrackerService {
         //get  user carbon Tracker
         UserCarbonTracker userCarbonTracker = userCarbonTrackerRepository.findByUserId(userId);
         //add new carbon tracker transaction
-        CarbonTrackerTransaction carbonTrackerTransaction = new CarbonTrackerTransaction(LocalDateTime.now(),userCarbonTracker, dish, dishPoints);
+        CarbonTrackerTransaction carbonTrackerTransaction = new CarbonTrackerTransaction(LocalDateTime.now(), userCarbonTracker, dish, dishPoints);
 
         //Internal Api call to update user points on reward
         webClient.put().uri("userReward/updateUserPoints?userId=" + userId + "&pointsEarned=" + dishPoints).retrieve().bodyToMono(String.class).block();
@@ -67,7 +67,7 @@ public class UserCarbonTrackerService {
         carbonTrackerTransactionService.saveCarbonTrackerTransaction(carbonTrackerTransaction);
     }
 
-    public List<CarbonTrackerTransaction>  getUserDishedConsumed(Long userId) {
+    public List<CarbonTrackerTransaction> getUserDishedConsumed(Long userId) {
         return userCarbonTrackerRepository.findByUserId(userId).getCarbonTrackerTransaction();
     }
 

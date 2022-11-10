@@ -41,7 +41,7 @@ CarbonO is an application whereby users can claim e-credits when they consume fo
 > View historical reward claims and donations made
 ---
 ## API Documentation
-> Refer to this detailed documentation to properly use the API endpoints for the microservices....
+> Refer to our detailed documentation to properly use the API endpoints for the microservices (https://carbonoapp.docs.apiary.io/)
 ---
 
 ## **Technology Stack**

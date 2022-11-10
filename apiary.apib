@@ -1,80 +1,590 @@
 FORMAT: 1A
-HOST: https://polls.apiblueprint.org/
+HOST: https://carbonoapp.net/api/v1/carbonO/
 
-# CarbonO
+# Welcome to CarbonO's API
+CarbonO is an application whereby users can claim e-credits when they consume foods with lower carbon footprints. 
+User can browse a page of dishes and compare the carbon emissions of the various dishes through their "carbon rating" 
+(based on Eaternity: https://eaternity.org/). Users can scan QR codes from a receipt for a dish (from the dishes mentioned in our application) 
+and claim "e-credits". When a dish has a higher carbon-rating (dishes with lower carbon footprint) , users can claim more e-credits for that dish. 
+Lastly, users can convieniently use accumulated e-credits to claim rewards or donate to organizations fighting climate change!
+Hello!
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+## Server Responses
+A successful request will be prompted with either `200 - Success` or `201 - Created`.
 
-## Questions Collection [/questions]
+Sadly, sometimes requests to the API are not successful. Failures can occur for a wide range of reasons. In all cases, the API returns an HTTP Status Code that indicates the nature of the failure (below), with a response body in JSON format containing additional information.
 
-### List All Questions [GET]
+* 200   `Success` - If a resource was requested, it will be available at the top level of the response body.
+* 201   `Created` -  The request was successful and a resource was created. The Location Header field indicates the URI the resource can be found.
+* 400   `Bad request` - This occurs when the request was not sent according to the documentation. Can be either the JSON format or the content. Check the documentation and the syntax of the request and try again.
+* 401   `No authorization` - A valid JsonWebToken (JWT), so the API verify the user with the request. The user might wish to double check that he/she had login on the website.
+* 403   `Forbidden` - The user is not authorized to access the resources requested.
+* 404   `Not found` - Either the request method and path supplied do not specify a known action in the API, or the object specified by the request does not exist.
 
-+ Response 200 (application/json)
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
+* 500   `Server error` - Just try again.
 
-### Create a New Question [POST]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+# Group User Resources
 
-+ Request (application/json)
+## User Properties 
+User is the core of the application, containing important personal information such as emails, 
+encrypted password and user role. Authentication will be secured by JSON Web Token (JWT)
+| Property | Type  | Description    | Required |
+|:----------|:--------|:------------------|:----------|
+|id|Long|Unique ID of user (auto generated)|Yes|
+|firstName|String|First name of user|Yes|
+|lastName|String|Last name of user|Yes|
+|email|String|Valid email of user|Yes|
+|password|String|Encrypted password with salt|Yes|
+|userRole|UserRole|UserRole(emum): Contains 2 roles: ("User", "Admin") It will be allocated by CarbonO. To determine authorities of a user.|Yes|
+|isLocked|Boolean|Status of locked account (Default: false)|Yes|
+|confirmationToken|List<ConfirmationToken>|Contains all information on confirmation token|No|
+|resetPasswordToken|String|Random string of length 45 generated during password reset|No|
 
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
+## ConfirmationToken Properties
+A confirmation link with a confirmation token will be sent to a newly registered user, 
+to allow the user to activate his/her account.
+| Property | Type  | Description    | Required |
+|:----------|:--------|:------------------|:----------|
+|id|Long|Unique ID of user (auto generated)|Yes|
+|firstName|String|First name of user|Yes|
+|lastName|String|Last name of user|Yes|
+|email|String|Valid email of user|Yes|
+|password|String|Encrypted password with salt|Yes|
+|userRole|UserRole|UserRole(emum): Contains 2 roles: ("User", "Admin") It will be allocated by CarbonO. To determine authorities of a user.|Yes|
+|isLocked|Boolean|Status of locked account (Default: false)|Yes|
+|confirmationToken|List<ConfirmationToken>|Contains all information on confirmation token|No|
+|resetPasswordToken|String|Random string of length 45 generated during password reset|No|
 
-+ Response 201 (application/json)
+
+## User - User Authentication  [/user/login]
+### User Login [POST]
++ Request user login
 
     + Headers
-
-            Location: /questions/2
+        Content-Type:multipart/form-data; boundary={boundary value}
+        
+    + Body
+        
+        --{boundary value}
+        Content-Disposition: form-data; name="username"
+        
+        chenzhaoxing.98@gmail.com
+        --{boundary value}
+        Content-Disposition: form-data; name="password"
+        
+        123
+        --{boundary value}--
++ Response 200 (application/json)
 
     + Body
 
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
+            {   
+                "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGVuemhhb3hpbmcuOThAZ21haWwuY29tIiwicm9sZXMiOlsiQURNSU4iXSwiaXNzIjoiaHR0cDovLzE3Mi4xNy4wLjY6ODA4MS9hcGkvdjEvY2FyYm9uTy91c2VyL2xvZ2luIiwiZXhwIjoxNjY4MDEzNDkyfQ.JyWbBrkkP6cfZmckezXPsPFyIhUAdMCqwxz8ZfWvPMY",
+                "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGVuemhhb3hpbmcuOThAZ21haWwuY29tIiwiaXNzIjoiaHR0cDovLzE3Mi4xNy4wLjY6ODA4MS9hcGkvdjEvY2FyYm9uTy91c2VyL2xvZ2luIiwiZXhwIjoxNjY4MDE0NjkyfQ.3CuqHiVWiHB7OA4atJlyXV5HlQBqIeiWjC8R1o9Fpvk"
+            }
+
+
+## User - User Registration [/user/registration/]
+### Register for new user account [POST]
++ Request register (application/json)
+
+        {
+            "firstName" : "zhao",
+            "lastName": "xing",
+            "email": "zx@gmail.com",
+            "password": "123"
+        }
++ Response 201 (application/json)
+    + Body
+
+            {   
+                "User has been created
+            }
+
+## User - New User Account Confirmation [/registration/confirm?token={token}]
+### Confirm new user account [POST]
++ Parameters
+    + token (45 alpha numerical value) - Generated after account registration
++ Request confirm account(application/json)
+
++ Response 200 (text/plain)
+    + Body
+
+            {   
+                "User will be redirected to login page"
+            }
+
+# Group User Reward Resources
+
+##Reward Properties 
+Rewards can be claimed when users have accumulated sufficient points during carbon tracking. We have partnered with sustainable brands and each unique reward can only be redeemed once.
+| Property | Type  | Description    | Required |
+|:----------|:--------|:------------------|:----------|
+|rewardId|Long|Unique ID of a reward|Yes|
+|brandName|String|Brand name of the company that provided the reward|Yes|
+|rewardName|String|Name of the reward|Yes|
+|redemptionPointsRequired|Integer|Redemption points required to claim the reward|Yes|
+|rewardDescription|String|Short description of reward|Yes|
+|rewardQuantity|Integer|Total available quanity of reward|Yes|
+|rewardWebsite|String|URL of reward website|Yes|
+|imageAddress|String|URL of reward's image|Yes|
+|rewardType|String|Category of reward|Yes|
+|rewardTransaction|RewardTransaction|Mapping to respective transaction in rewards|No|
+
+## User Reward Properties
+User Reward keeps track of user reward transactions and computes the points available in a user reward account while also storing the rewards that a user can claim.
+| Property | Type  | Description    | Required |
+|:----------|:--------|:------------------|:----------|
+|userRewardID|Long|Unique ID of UserReward|Yes|
+|userID|Long|Unique user of UserReward account|Yes|
+|rewardPoints|Integer|Availble reward points of user|Yes|
+|rewardTransaction|RewardTransaction|Mapping to respective RewardTransactions|No|
+
+## Reward Transaction Properties
+Reward Transaction stores the information such as date and donataion amount of reward claimed by a particular user.
+| Property | Type  | Description    | Required |
+|:----------|:--------|:------------------|:----------|
+|id|Long|Unique ID of RewardTransaction|Yes|
+|dateOfTransaction|LocalDateTime|Date of transaction|Yes|
+|isDonation|boolean|Checks whether reward is a donation|Yes|
+|organisationId|Long||Yes|
+|pointsDonated|Integer|Amount of points donated if any|Yes|
+|userReward|UserReward|Mapping to 1 UserReward account|Yes|
+|reward|Reward|Mapping to 1 Reward|Yes|
+
+## User Reward - Get Rewards  [/userReward/reward/getAllRewards]
+### Retrieve all available rewards [GET]
+
++ Request get all rewards(application/json)
+        
++ Response 200 (application/json)
+    [
+        {
+            "rewardId": 1,
+            "brandName": "Another Sole :",
+            "rewardName": "Paloma Fog Shoe",
+            "redemptionPointsRequired": 7500,
+            "rewardDescription": "10% Discount",
+            "rewardQuantity": 300,
+            "website": "https://sg.anothersole.com/",
+            "imageAddress": "https://cdn.shopify.com/s/files/1/2006/0543/products/Paloma_-_Fog_lifestyle__Cropped_540x.png?v=1644807797",
+            "rewardType": "Fashion"
+        }
+    ]
+
+## User Reward - User Reward Transactions [/userReward/getUserReward]
+### Retrieve all user reward transactions [GET]
++ Parameters
+    + userId (Number) - User ID of the user
++ Request get user reward transactions(application/json)
+        
++ Response 200 (application/json)
+    [
+        "userRewardId": 1,
+        "userId": 1,
+        "rewardPoints": 91520,
+        "rewardTransactions": [
+        {
+            "id": 1,
+            "dateOfTransaction": "2022-11-10T11:54:23.475457",
+            "organisationId": null,
+            "pointsDonated": 0,
+            "reward": {
+                "rewardId": 2,
+                "brandName": "The Eco Gem :",
+                "rewardName": "Upcycled Earrings",
+                "redemptionPointsRequired": 9000,
+                "rewardDescription": "Complementary Earrings",
+                "rewardQuantity": 500,
+                "website": "https://www.facebook.com/theecogem/",
+                "imageAddress": "https://i.pinimg.com/originals/0b/52/0a/0b520a348452a8b418911d8131296b87.jpg ",
+                "rewardType": "Fashion"
+            },
+            "donation": false
+        }
+    ]
+
+## User Reward - Reward Claim [/userReward/reward/getAllRewards]
+### Submit reward claimed by user [POST]
++ Parameters
+    + userId (Number) - User ID of the user
+    + rewardId (Number) - Reward ID to identify reward to be claimed
++ Request claim reward(application/json)
+        
++ Response 201 (application/json)
+    {
+        "success": true,
+        "message": "Reward claimed",
+        "timestamp": "2022-11-10T15:08:03.856554611"
+    }
+
+## User Reward - Donate CarbonO Credits [/userReward/donateRewardPoints]
+### Donate carbonO credits to the organisation selected[PUT]
++ Parameters
+    + userId (Number) - User ID of the user
+    + pointsToDonate (Number) - Reward ID to identify reward to be claimed
+    + organisationId (Number) - Organisation ID to identify the company selected
++ Request claim reward(application/json)
+        
++ Response 201 (application/json)
+    {
+        "success": true,
+        "message": "Reward points successfully donated",
+        "timestamp": "2022-11-10T15:10:31.558113229"
+    }
+
+ ## User Reward - User CarbonO Credits [/userReward/updateUserPoints]
+### Set user carbonO credits[PUT]
++ Parameters
+    + userId (Number) - User ID of the user
+    + pointsEarned (Number) - Points earned or used by the user
++ Request set user CarbonO Credits(application/json)
+        
++ Response 201 (application/json)
+    {
+        "success": true,
+        "message": "Reward points successfully updated",
+        "timestamp": "2022-11-10T15:15:42.028218079"
+    } 
+
+# Group Carbon Tracker Resources
+
+## User Carbon Tracker Properties 
+User Carbon Tracker tracks and stores the users' food consumption transactions and handles carbon footprint computations. 
+| Property | Type  | Description    | Required |
+|:----------|:--------|:------------------|:----------|
+|userCarbonTrackerId|Long|Unique Id (Auto generated) to represent a user carbon tracker account, created upon user's confirming his/her account|Yes|
+|userId|Long|Unique User Id to identify which user does the user carbon tracker account belongs to|Yes|
+|carbonTrackerTransaction|List<CarbonTrackerTransaction>|Contains all carbon  tracker transanctions of the user|No|
+
+## Carbon Tracker Transactions Properties 
+Transactions contain the dish consumed, date of consumption, and points earned for each receipt scanned.
+| Property | Type  | Description    | Required |
+|:----------|:--------|:------------------|:----------|
+|carbonTrackerTransactionId|Long|Unique Id (Auto generated) to represent a carbon tracker transaction|Yes|
+|dateConsumed|LocalDateTime|Date and time of when the transaction was recorded, occurs when a user scans a receipt|Yes|
+|pointsEarned|Integer|Amount of points earned by the user for the food consumed by the user|Yes|
+|userCarbonTracker|UserCarbonTracker|To identify which user does the transaction belong to|No|
+|dish|Dish|Identify which dish did the user consumed in this a transaction|No|
+
+## Receipt Properties 
+Stores all the receipt 
+| Property | Type  | Description    | Required |
+|:----------|:--------|:------------------|:----------|
+|receiptId|Long|Unique Id (Auto generated) to represent a receipt|Yes|
+|dishConsumedId|Long|Unique Id to represent the dish consumed|Yes|
+|dateOfReceipt|LocalDateTime|Date of the receipt|Yes|
+|isRedeemed|boolean|Determines whether a receipt has been redeemed by the user (default false)|Yes|
+
+
+## User Carbon Tracker - Dish Consumption  [/carbonTracker/getUserDishedConsumed]
+### Retrieve dishes consumed by user [GET]
++ Parameters
+    + userId (Number) - user Id of the user
++ Request get dish consumed (application/json)
+        
++ Response 200 (application/json)
+    + Body
+
+    [
+        {
+            "id": 7,
+            "dateConsumed": "2022-11-07T14:33:53",
+            "pointsEarned": 40,
+            "dish": {
+                "id": 2,
+                "dishName": "Nasi Lemak",
+                "totalCarbonFootprint": 277.78999999999996,
+                "photo": "https://media.timeout.com/images/103636261/image.jpg",
+                "carbonRating": 4,
+                "dishRewardPoints": 40,
+                "recipeIngredients": [
                     {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
+                        "id": 29,
+                        "quantity": 64.0
+                    },
+                    {
+                        "id": 30,
+                        "quantity": 1.25
+                    },
+                    {
+                        "id": 31,
+                        "quantity": 45.0
+                    },
+                    {
+                        "id": 32,
+                        "quantity": 18.75
+                    },
+                    {
+                        "id": 33,
+                        "quantity": 0.75
+                    },
+                    {
+                        "id": 34,
+                        "quantity": 3.0
+                    },
+                    {
+                        "id": 35,
+                        "quantity": 32.0
+                    },
+                    {
+                        "id": 36,
+                        "quantity": 2.5
+                    },
+                    {
+                        "id": 37,
+                        "quantity": 1.25
+                    },
+                    {
+                        "id": 38,
+                        "quantity": 2.5
+                    },
+                    {
+                        "id": 39,
+                        "quantity": 22.0
+                    },
+                    {
+                        "id": 40,
+                        "quantity": 100.0
+                    }
+                ],
+                "dishKeywords": [
+                    {
+                        "id": 21,
+                        "keyword": "Nasi Lemak"
+                    },
+                    {
+                        "id": 22,
+                        "keyword": "Nasi"
+                    },
+                    {
+                        "id": 23,
+                        "keyword": "Lemak"
                     }
                 ]
             }
+        }
+    ]
+
+## User Carbon Tracker - Carbon Consumption  [/carbonTracker/getUserTotalCarbonConsumption]
+### Retrieve total carbon consumption by user[GET]
++ Parameters
+    + userId (Number) - user Id of the user
++ Headers
+    Authorization:
++ Request get user total carbon consumption(application/json)
+        
++ Response 200 (plain/text)
+    2751.838
+    
+## User Carbon Tracker - Submit Dish Consumed [/carbonTracker/getUserTotalCarbonConsumption]
+### Add dish consumed by user[POST]
++ Parameters
+    + userId (Number) - user Id of the user
+    + receiptId (Number) - receipt id provided on the user's receipt
++ Headers
+    Authorization:
++ Request post dish consumed (application/json)
+        
++ Response 201 (plain/text)
+    Dish consumed by user added successfully
+
+## User Carbon Tracker - Generate receipt [/carbonTracker/qrReceipt/generateQRReceipt]
+### Create a receipt with a qr code[GET]
++ Parameters
+    + dishId (Number) - dish id consumed
++ Request generate qr receipt (application/json)
++ Response 201 (image/png)
+    Qr code image
+    
+## User Carbon Tracker - Get Receipt Information by ID [/carbonTracker/qrReceipt/getReceipt]
+### Get receipt by ID[GET]
++ Parameters
+    + receiptId (Number)
++ Request get receipt (application/json)
++ Response 201 (image/png)
+    {
+        "receiptId": 1,
+        "dishConsumedId": 1,
+        "dateOfReceipt": "2022-11-10T14:47:27.106391",
+        "redeemed": true
+    }
+
+# Group Dish Resources
+
+## Dish Properties
+Selection of dishes offered by CarbonO to promote low carbon diet. Each dish has its own carbon rating depending on its carbon footprint. Users will be reward with more points for higher sustainability foods.
+| Property | Type  | Description    | Required |
+|:----------|:--------|:------------------|:----------|
+|id|Long|Unique ID of dish|Yes|
+|dishName|String|Name of dish|Yes|
+|totalCarbonFootprint|Double|Carbon footprint of dish|Yes|
+|photo|String|URL of dish's image|Yes|
+|carbonRating|Integer|Rating given by CarbonO|Yes|
+|dishRewardPoints|Integer|Reward points earned by dish|Yes|
+|recipeIngredients|List of DishRecipe|Mapping to respective DishRecipe|Yes|
+|carbonTrackerTransaction|List of CarbonTrackerTransaction|Mapping to respective CarbonTrackerTransaction|No|
+
+## Ingredients Properties
+Each ingredient has their respetive carbon footprint value.
+| Property | Type  | Description    | Required |
+|:----------|:--------|:------------------|:----------|
+|id|Long|Unique ID of ingredient|Yes|
+|ingredientName|String|Name of ingredient|Yes|
+|carbonFootprint|Double|Carbon footprint generated by ingredient|Yes|
+|photo|String|URL of ingredient's iamge|Yes|
+|dishRecipe|List of DishRecipe|Mapping to respective DishRecipe|No|
+
+## Dish Receipe Properties
+Stores the ingredients required in a recipe of a dish.
+| Property | Type  | Description    | Required |
+|:----------|:--------|:------------------|:----------|
+|id|Long|Unique ID of a dish recipe|Yes|
+|quantity|double|Number of ingredients needed for the dish recipe|Yes|
+|dish|Dish|Mapping to respective Dish|No|
+|ingredient|Ingredient|Mapping to respective ingredient|No|
+
+
+## Dish [/carbonTracker/dish/getAllDishes]
+### Retrieve all dishes available [GET]
++ Request get dishes (application/json)
+        
++ Response 200 (application/json)
+    [
+        {
+            "id": 1,
+            "dishName": "Fish and Chips",
+            "totalCarbonFootprint": 208.02,
+            "photo": "https://media.istockphoto.com/photos/british-traditional-fish-and-chips-with-mashed-peas-tartar-sauce-and-picture-id1178035212?k=20&m=1178035212&s=170667a&w=0&h=Lq_0r-YdoP_7toqFeymzjldBg6fWSG07lEyCPYFLc3A=",
+            "carbonRating": 4,
+            "dishRewardPoints": 40,
+            "recipeIngredients": [
+                {
+                    "id": 62,
+                    "quantity": 30.0
+                },
+                {
+                    "id": 63,
+                    "quantity": 170.0
+                },
+                {
+                    "id": 64,
+                    "quantity": 5.0
+                },
+                {
+                    "id": 61,
+                    "quantity": 60.0
+                },
+                {
+                    "id": 60,
+                    "quantity": 173.0
+                },
+                {
+                    "id": 65,
+                    "quantity": 10.0
+                }
+            ],
+            "dishKeywords": [
+                {
+                    "id": 36,
+                    "keyword": "Fish and Chips"
+                },
+                {
+                    "id": 37,
+                    "keyword": "Fish"
+                },
+                {
+                    "id": 38,
+                    "keyword": "Chips"
+                },
+                {
+                    "id": 39,
+                    "keyword": "Western"
+                }
+            ]
+        }
+    ]
+
+## Dish - Dish Ingredients [/carbonTracker/dish/getAllIngredientsFromDish]
+### Retrieve ingredients of a dish [GET]
++ Parameters
+    + dishId (Number) - Dish id of a dish
++ Request get dish ingredients (application/json)
+        
++ Response 200 (application/json)
+    [
+        {
+            "id": 9,
+            "ingredientName": "Potato",
+            "carbonFootprint": 0.04,
+            "photo": null,
+            "dishRecipe": [
+                {
+                    "id": 69,
+                    "quantity": 65.0
+                }
+            ]
+        },
+        {
+            "id": 21,
+            "ingredientName": "Carrot",
+            "carbonFootprint": 0.18,
+            "photo": null,
+            "dishRecipe": [
+                {
+                    "id": 71,
+                    "quantity": 17.0
+                }
+            ]
+        },
+        {
+            "id": 27,
+            "ingredientName": "Beef",
+            "carbonFootprint": 16.88,
+            "photo": null,
+            "dishRecipe": [
+                {
+                    "id": 66,
+                    "quantity": 113.0
+                }
+            ]
+        },
+        {
+            "id": 36,
+            "ingredientName": "Tomato",
+            "carbonFootprint": 0.64,
+            "photo": null,
+            "dishRecipe": [
+                {
+                    "id": 68,
+                    "quantity": 56.0
+                }
+            ]
+        },
+        {
+            "id": 38,
+            "ingredientName": "Beef Broth",
+            "carbonFootprint": 7.05,
+            "photo": null,
+            "dishRecipe": [
+                {
+                    "id": 67,
+                    "quantity": 113.0
+                }
+            ]
+        },
+        {
+            "id": 41,
+            "ingredientName": "Celery",
+            "carbonFootprint": 0.45,
+            "photo": null,
+            "dishRecipe": [
+                {
+                    "id": 70,
+                    "quantity": 18.0
+                }
+            ]
+        }
+    ]
