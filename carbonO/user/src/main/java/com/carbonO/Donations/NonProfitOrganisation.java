@@ -1,5 +1,6 @@
 package com.carbonO.Donations;
 
+import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +23,8 @@ public class NonProfitOrganisation {
             generator = "organisation_sequence"
     )
     private Long id;
+
+    @NotNull
     private String organisationName;
     private String organisationDescription;
     private String organisationImage;

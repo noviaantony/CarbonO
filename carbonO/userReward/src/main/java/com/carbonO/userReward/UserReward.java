@@ -2,7 +2,11 @@ package com.carbonO.userReward;
 
 import com.carbonO.RewardTransaction.RewardTransaction;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.*;
+import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -24,7 +28,10 @@ public class UserReward {
             generator = "user_Reward_sequence"
     )
     private Long userRewardId;
+
+    @NotNull
     private Long userId;
+    @NotNull
     private Integer rewardPoints;
 
     @OneToMany(mappedBy = "userReward", cascade = CascadeType.ALL)
