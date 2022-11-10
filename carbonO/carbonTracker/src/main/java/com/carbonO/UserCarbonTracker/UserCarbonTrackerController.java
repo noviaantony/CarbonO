@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
+import java.util.List;
 
 
 @RestController
@@ -18,6 +18,7 @@ public class UserCarbonTrackerController {
     public UserCarbonTrackerController(UserCarbonTrackerService userCarbonTrackerService) {
         this.userCarbonTrackerService = userCarbonTrackerService;
     }
+
     //Add new carbon tracker user
     @PostMapping(path = "/addCarbonTrackerUser")
     public ResponseEntity<String> addCarbonTrackerUser(@RequestParam("userId") Long userId) {
@@ -31,17 +32,17 @@ public class UserCarbonTrackerController {
 
     //Get all dishes consumed by a user
     @GetMapping("/getUserDishedConsumed")
-    public ResponseEntity<List<CarbonTrackerTransaction>> getUserDishedConsumed(@RequestParam("userId") Long userId){
+    public ResponseEntity<List<CarbonTrackerTransaction>> getUserDishedConsumed(@RequestParam("userId") Long userId) {
 
-        List<CarbonTrackerTransaction>  userCarbonTrackerDishList = userCarbonTrackerService.getUserDishedConsumed(userId);
+        List<CarbonTrackerTransaction> userCarbonTrackerDishList = userCarbonTrackerService.getUserDishedConsumed(userId);
 
         return ResponseEntity.ok().body(userCarbonTrackerDishList);
     }
 
     //Get a specific user's total carbon consumption since the beginning
     @GetMapping("/getUserTotalCarbonConsumption")
-    public ResponseEntity<Double> getUserTotalCarbonConsumption(@RequestParam("userId") Long userId, @RequestHeader("Authorization") String token ) {
-            return ResponseEntity.ok().body(userCarbonTrackerService.getUserTotalCarbonConsumption(userId, token));
+    public ResponseEntity<Double> getUserTotalCarbonConsumption(@RequestParam("userId") Long userId, @RequestHeader("Authorization") String token) {
+        return ResponseEntity.ok().body(userCarbonTrackerService.getUserTotalCarbonConsumption(userId, token));
     }
 
     //Add the dish consumed by a user
@@ -56,7 +57,5 @@ public class UserCarbonTrackerController {
             return ResponseEntity.status(400).body(e.getMessage());
         }
     }
-
-    //Todo: Get user total carbon consumption for a day or between a certain time period
 
 }
