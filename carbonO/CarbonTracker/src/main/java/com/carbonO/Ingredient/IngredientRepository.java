@@ -1,4 +1,4 @@
-package com.carbonOtest.Ingredient;
+package com.carbonO.Ingredient;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

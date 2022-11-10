@@ -1,6 +1,6 @@
-package com.carbonOtest.Dish;
+package com.carbonO.Dish;
 
-import com.carbonOtest.Ingredient.Ingredient;
+import com.carbonO.Ingredient.Ingredient;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 

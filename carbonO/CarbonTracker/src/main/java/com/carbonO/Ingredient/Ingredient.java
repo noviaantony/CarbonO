@@ -1,6 +1,6 @@
-package com.carbonOtest.Ingredient;
+package com.carbonO.Ingredient;
 
-import com.carbonOtest.Dish.DishRecipe;
+import com.carbonO.Dish.DishRecipe;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

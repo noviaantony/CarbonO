@@ -1,9 +1,9 @@
-package com.carbonOtest;
+package com.carbonO;
 
 
-import com.carbonOtest.UserCarbonTracker.UserCarbonTracker;
+import com.carbonO.UserCarbonTracker.UserCarbonTracker;
 
-import com.carbonOtest.UserCarbonTracker.UserCarbonTrackerService;
+import com.carbonO.UserCarbonTracker.UserCarbonTrackerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

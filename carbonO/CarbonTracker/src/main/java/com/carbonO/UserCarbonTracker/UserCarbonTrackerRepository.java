@@ -1,4 +1,4 @@
-package com.carbonOtest.UserCarbonTracker;
+package com.carbonO.UserCarbonTracker;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

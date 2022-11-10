@@ -1,4 +1,4 @@
-package com.carbonOtest.Exceptions;
+package com.carbonO.Exceptions;
 
 public class DishNotFoundException extends RuntimeException{
 

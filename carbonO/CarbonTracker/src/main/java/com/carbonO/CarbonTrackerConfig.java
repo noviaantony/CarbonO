@@ -1,12 +1,12 @@
-package com.carbonOtest;
+package com.carbonO;
 
-import com.carbonOtest.CarbonTrackerTransactions.CarbonTrackerTransaction;
-import com.carbonOtest.CarbonTrackerTransactions.CarbonTrackerTransactionRepository;
-import com.carbonOtest.Dish.*;
-import com.carbonOtest.Ingredient.Ingredient;
-import com.carbonOtest.Ingredient.IngredientRepository;
-import com.carbonOtest.UserCarbonTracker.UserCarbonTracker;
-import com.carbonOtest.UserCarbonTracker.UserCarbonTrackerRepository;
+import com.carbonO.CarbonTrackerTransactions.CarbonTrackerTransaction;
+import com.carbonO.CarbonTrackerTransactions.CarbonTrackerTransactionRepository;
+import com.carbonO.Dish.*;
+import com.carbonO.Ingredient.Ingredient;
+import com.carbonO.Ingredient.IngredientRepository;
+import com.carbonO.UserCarbonTracker.UserCarbonTracker;
+import com.carbonO.UserCarbonTracker.UserCarbonTrackerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;

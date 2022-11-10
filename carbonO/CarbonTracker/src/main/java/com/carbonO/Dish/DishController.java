@@ -1,7 +1,7 @@
-package com.carbonOtest.Dish;
+package com.carbonO.Dish;
 
-import com.carbonOtest.Exceptions.DishNotFoundException;
-import com.carbonOtest.Ingredient.Ingredient;
+import com.carbonO.Exceptions.DishNotFoundException;
+import com.carbonO.Ingredient.Ingredient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

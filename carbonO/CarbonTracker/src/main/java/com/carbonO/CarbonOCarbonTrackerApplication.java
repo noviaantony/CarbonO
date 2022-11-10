@@ -1,4 +1,4 @@
-package com.carbonOtest;
+package com.carbonO;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

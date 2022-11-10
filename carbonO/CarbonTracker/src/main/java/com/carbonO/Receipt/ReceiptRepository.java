@@ -1,4 +1,4 @@
-package com.carbonOtest.Receipt;
+package com.carbonO.Receipt;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

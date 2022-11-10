@@ -1,4 +1,4 @@
-package com.carbonOtest.Dish;
+package com.carbonO.Dish;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

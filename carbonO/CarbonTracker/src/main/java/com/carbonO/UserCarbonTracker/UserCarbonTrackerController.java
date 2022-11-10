@@ -1,6 +1,6 @@
-package com.carbonOtest.UserCarbonTracker;
+package com.carbonO.UserCarbonTracker;
 
-import com.carbonOtest.CarbonTrackerTransactions.CarbonTrackerTransaction;
+import com.carbonO.CarbonTrackerTransactions.CarbonTrackerTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;

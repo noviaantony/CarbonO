@@ -1,4 +1,4 @@
-package com.carbonOtest.Ingredient;
+package com.carbonO.Ingredient;
 
 import org.springframework.stereotype.Service;
 

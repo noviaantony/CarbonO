@@ -1,4 +1,4 @@
-package com.carbonOtest.Receipt;
+package com.carbonO.Receipt;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;

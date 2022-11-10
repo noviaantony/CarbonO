@@ -1,4 +1,4 @@
-package com.carbonOtest.JWTAuth;
+package com.carbonO.JWTAuth;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;

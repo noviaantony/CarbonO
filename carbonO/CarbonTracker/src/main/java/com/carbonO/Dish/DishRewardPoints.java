@@ -1,4 +1,4 @@
-package com.carbonOtest.Dish;
+package com.carbonO.Dish;
 
 import org.springframework.stereotype.Service;
 

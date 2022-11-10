@@ -1,6 +1,6 @@
-package com.carbonOtest.UserCarbonTracker;
+package com.carbonO.UserCarbonTracker;
 
-import com.carbonOtest.CarbonTrackerTransactions.CarbonTrackerTransaction;
+import com.carbonO.CarbonTrackerTransactions.CarbonTrackerTransaction;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

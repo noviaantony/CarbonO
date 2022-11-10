@@ -1,4 +1,4 @@
-package com.carbonOtest.Dish;
+package com.carbonO.Dish;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;

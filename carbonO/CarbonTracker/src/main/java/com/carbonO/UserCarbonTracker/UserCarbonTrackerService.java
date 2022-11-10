@@ -1,11 +1,11 @@
-package com.carbonOtest.UserCarbonTracker;
+package com.carbonO.UserCarbonTracker;
 
-import com.carbonOtest.CarbonTrackerTransactions.CarbonTrackerTransaction;
-import com.carbonOtest.CarbonTrackerTransactions.CarbonTrackerTransactionService;
-import com.carbonOtest.Dish.Dish;
-import com.carbonOtest.Dish.DishService;
-import com.carbonOtest.JWTAuth.JWTAuthService;
-import com.carbonOtest.Receipt.ReceiptService;
+import com.carbonO.CarbonTrackerTransactions.CarbonTrackerTransaction;
+import com.carbonO.CarbonTrackerTransactions.CarbonTrackerTransactionService;
+import com.carbonO.Dish.Dish;
+import com.carbonO.Dish.DishService;
+import com.carbonO.JWTAuth.JWTAuthService;
+import com.carbonO.Receipt.ReceiptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
