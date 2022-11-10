@@ -59,7 +59,6 @@ const DonutChart = () => {
   useEffect(() => {
     CarbonTrackerService.getDishConsumed(auth.userId, auth.accessToken).then(
       (response) => {
-        console.log("Dish response");
         setDonutChartData(response);
       }
     );
@@ -75,10 +74,7 @@ const DonutChart = () => {
     arrRating(ratingChart, obj);
   }
 
-  console.log(ratingChart);
   getRatingData(ratingChart, ratings, ratingFreq);
-console.log(ratings);
-console.log(ratingFreq);
 
   return (
     <div

@@ -1,49 +1,25 @@
 import React from "react";
-import { FaWallet, FaReceipt, FaLeaf } from "react-icons/fa";
-import { useState, useRef, useContext, useEffect } from "react";
+import { FaWallet, FaLeaf } from "react-icons/fa";
 import { MdQrCodeScanner } from "react-icons/md";
 import LineChart from "../dashboard/LineChart";
-import PieChart from "./PieChart";
 import DonutChart from "./DonutChart";
-import initialDatesArr from "./getInitialDates";
-import actualDates from "./getDates";
-import pointsArr from "./getPoints";
-import actualPoints from "./actualPoints";
-import pieChartArr from "./getPieChart";
-import actualPie from "./actualPie";
-import CarbonTrackerService from "../../services/CarbonTrackerService";
-import AuthContext from "../../hooks/AuthContext";
 
 const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
   const [, set] = React.useState(true);
   const [isClickedCarbon, setIsClickedCarbon] = React.useState(true);
   const [isClickedReceipt, setIsClickedReceipt] = React.useState(true);
-  const lineChartData = [];
 
-
-  //display charts based on click
   const returnCharts = () => {
-    if (isClickedCarbon && isClickedReceipt) {
       return (
         <div class="flex flex-row justify-evenly">
           <LineChart />
           <DonutChart/>
         </div>
       );
-    }
-    else if (isClickedCarbon) {
-      return (
-          // <div class="flex flex-row justify-evenly">
-          <div>
-          <LineChart />
-        </div>
-      );
-    }
   };
 
   return (
-    <>
-    
+    <>   
       <div class="flex flex-wrap -mx-1 lg:mx-36">
         {/* first */}
         <div class="px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 font-default">
@@ -99,13 +75,7 @@ const UserStatistics = ({ Ecredits, TotalCarbon, TotalReceiptsScanned }) => {
         </div>
       </div>
 
-      {/* updates charts with new dates */}
-          {/* <div className="mx-36">{hasChart()}</div> */}
-
           <div className="mx-36">{returnCharts()}</div>
-          {/* <PieChart/> */}
-    
-  
       
     </>
   );
