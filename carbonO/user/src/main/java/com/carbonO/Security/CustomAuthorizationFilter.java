@@ -32,7 +32,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
     //front end need to set the authorizationHeader as Authorization = Bearer (User JWT Token)
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        if (request.getServletPath().equals("/api/v1/carbonO/user/login")){ //prevent having to authorize if the user is just logging in
+        if (request.getServletPath().equals("/api/v1/carbonO/user/login") || request.getServletPath().equals("/api/v1/carbonO/user/checkRefreshToken")){ //prevent having to authorize if the user is just logging in
             filterChain.doFilter(request,response);
         } else {
             String authorizationHeader = request.getHeader(AUTHORIZATION);
