@@ -35,7 +35,7 @@ jobs:
           CARBONO_PASSWORD: ${{ secrets.CARBONO_PASSWORD  }}
       run: |
         cd ./carbonO/user
-        mvn clean package deploy
+        mvn clean package dockerfile:push
 #     - name: Build & push Docker image
 #       uses: mr-smithers-excellent/docker-build-push@v5
 #       with:
