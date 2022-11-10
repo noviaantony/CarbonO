@@ -1,80 +1,132 @@
 FORMAT: 1A
-HOST: https://polls.apiblueprint.org/
+HOST: https://carbonoapp.net/api/v1/carbonO/
 
-# CarbonO
+# Welcome to CarbonO's API
+CarbonO is an application whereby users can claim e-credits when they consume foods with lower carbon footprints. 
+User can browse a page of dishes and compare the carbon emissions of the various dishes through their "carbon rating" 
+(based on Eaternity: https://eaternity.org/). Users can scan QR codes from a receipt for a dish (from the dishes mentioned in our application) 
+and claim "e-credits". When a dish has a higher carbon-rating (dishes with lower carbon footprint) , users can claim more e-credits for that dish. 
+Lastly, users can convieniently use accumulated e-credits to claim rewards or donate to organizations fighting climate change!
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+## Server Responses
+A successful request will be prompted with either `200 - Success` or `201 - Created`.
 
-## Questions Collection [/questions]
+Sadly, sometimes requests to the API are not successful. Failures can occur for a wide range of reasons. In all cases, the API returns an HTTP Status Code that indicates the nature of the failure (below), with a response body in JSON format containing additional information.
 
-### List All Questions [GET]
+* 200   `Success` - If a resource was requested, it will be available at the top level of the response body.
+* 201   `Created` -  The request was successful and a resource was created. The Location Header field indicates the URI the resource can be found.
+* 400   `Bad request` - This occurs when the request was not sent according to the documentation. Can be either the JSON format or the content. Check the documentation and the syntax of the request and try again.
+* 401   `No authorization` - A valid JsonWebToken (JWT), so the API verify the user with the request. The user might wish to double check that he/she had login on the website.
+* 403   `Forbidden` - The user is not authorized to access the resources requested.
+* 404   `Not found` - Either the request method and path supplied do not specify a known action in the API, or the object specified by the request does not exist.
 
-+ Response 200 (application/json)
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
+* 500   `Server error` - Just try again.
 
-### Create a New Question [POST]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+# Group User Microservice APIs
 
-+ Request (application/json)
+## User Properties 
+User is the core of the application, containing important personal information such as emails, 
+encrypted password and user role. Authentication will be secured by JSON Web Token (JWT)
+| Property | Type  | Description    | Required |
+|:----------|:--------|:------------------|:----------|
+|id|Long|Unique ID of user (auto generated)|Yes|
+|firstName|String|First name of user|Yes|
+|lastName|String|Last name of user|Yes|
+|email|String|Valid email of user|Yes|
+|password|String|Encrypted password with salt|Yes|
+|userRole|UserRole|UserRole(emum): Contains 2 roles: ("User", "Admin") It will be allocated by CarbonO. To determine authorities of a user.|Yes|
+|isLocked|Boolean|Status of locked account (Default: false)|Yes|
+|confirmationToken|List<ConfirmationToken>|Contains all information on confirmation token|No|
+|resetPasswordToken|String|Random string of length 45 generated during password reset|No|
 
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
+## ConfirmationToken Properties
+A confirmation link with a confirmation token will be sent to a newly registered user, 
+to allow the user to activate his/her account to log into thenovia
+| Property | Type  | Description    | Required |
+|:----------|:--------|:------------------|:----------|
+|id|Long|Unique ID of user (auto generated)|Yes|
+|firstName|String|First name of user|Yes|
+|lastName|String|Last name of user|Yes|
+|email|String|Valid email of user|Yes|
+|password|String|Encrypted password with salt|Yes|
+|userRole|UserRole|UserRole(emum): Contains 2 roles: ("User", "Admin") It will be allocated by CarbonO. To determine authorities of a user.|Yes|
+|isLocked|Boolean|Status of locked account (Default: false)|Yes|
+|confirmationToken|List<ConfirmationToken>|Contains all information on confirmation token|No|
+|resetPasswordToken|String|Random string of length 45 generated during password reset|No|
 
-+ Response 201 (application/json)
+
+## User Authentication  [/user/login]
+### User Login [POST]
++ Request user login
 
     + Headers
-
-            Location: /questions/2
+        Content-Type:multipart/form-data; boundary={boundary value}
+        
+    + Body
+        
+        --{boundary value}
+        Content-Disposition: form-data; name="username"
+        
+        chenzhaoxing.98@gmail.com
+        --{boundary value}
+        Content-Disposition: form-data; name="password"
+        
+        123
+        --{boundary value}--
++ Response 200 (application/json)
 
     + Body
 
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
+            {   
+                "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGVuemhhb3hpbmcuOThAZ21haWwuY29tIiwicm9sZXMiOlsiQURNSU4iXSwiaXNzIjoiaHR0cDovLzE3Mi4xNy4wLjY6ODA4MS9hcGkvdjEvY2FyYm9uTy91c2VyL2xvZ2luIiwiZXhwIjoxNjY4MDEzNDkyfQ.JyWbBrkkP6cfZmckezXPsPFyIhUAdMCqwxz8ZfWvPMY",
+                "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGVuemhhb3hpbmcuOThAZ21haWwuY29tIiwiaXNzIjoiaHR0cDovLzE3Mi4xNy4wLjY6ODA4MS9hcGkvdjEvY2FyYm9uTy91c2VyL2xvZ2luIiwiZXhwIjoxNjY4MDE0NjkyfQ.3CuqHiVWiHB7OA4atJlyXV5HlQBqIeiWjC8R1o9Fpvk"
             }
+
+
+## User Registration [/user/registration/]
+### Register for new user account [POST]
++ Request register (application/json)
+
+        {
+            "firstName" : "zhao",
+            "lastName": "xing",
+            "email": "zx@gmail.com",
+            "password": "123"
+        }
++ Response 201 (application/json)
+    + Body
+
+            {   
+                "User has been created
+            }
+
+## User Account Confirmation [/registration/confirm?token={token}]
+### Confirm new user account [POST]
++ Parameters
+    + token (45 alpha numerical value) - Generated after account registration
++ Request confirm account(application/json)
+
++ Response 200 (text/plain)
+    + Body
+
+            {   
+                "User will be redirected to login page"
+            }
+
+# Group User Reward Microservice APIs
+
+## User Reward Properties 
+User Reward keeps track of user reward transactions and computes the points available in a user reward account while also storing the rewards that a user can claim.
+| Property | Type  | Description    | Required |
+|:----------|:--------|:------------------|:----------|
+|rewardId|Long|Unique ID of a reward|Yes|
+|brandName|String|Brand name of the company that provided the reward|Yes|
+|rewardName|String|Name of the reward|Yes|
+|redemptionPointsRequired|Integer|Redemption points required to claim the reward|Yes|
+
+
+
+
+# Group Carbon Tracker Microservice APIs
