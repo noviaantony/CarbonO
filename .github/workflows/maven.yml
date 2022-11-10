@@ -36,14 +36,13 @@ jobs:
       working-directory: ./carbonO/user
       run: |
         mvn clean package dockerfile:push
-      
-    - name: Build carbonTracker with Maven and push image
-      working-directory: ./carbonO/carbonTracker
-      run: |
-        mvn clean install
-        mvn clean package dockerfile:push
         
     - name: Build userReward with Maven and push image
       working-directory: ./carbonO/userReward
       run: |
         mvn clean package dockerfile:push 
+        
+    - name: Build carbonTracker with Maven and push image
+      working-directory: ./carbonO/carbonTracker
+      run: |
+        mvn clean package dockerfile:push
