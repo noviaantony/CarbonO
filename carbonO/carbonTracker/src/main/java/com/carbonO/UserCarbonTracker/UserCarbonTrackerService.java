@@ -1,8 +1,7 @@
 package com.carbonO.UserCarbonTracker;
 
-import com.carbonO.CarbonTrackerTransaction.CarbonTrackerTransaction;
-import com.carbonO.CarbonTrackerTransaction.CarbonTrackerTransactionRepository;
-import com.carbonO.CarbonTrackerTransaction.CarbonTrackerTransactionService;
+import com.carbonO.CarbonTrackerTransactions.CarbonTrackerTransaction;
+import com.carbonO.CarbonTrackerTransactions.CarbonTrackerTransactionService;
 import com.carbonO.Dish.Dish;
 import com.carbonO.Dish.DishService;
 import com.carbonO.JWTAuth.JWTAuthService;

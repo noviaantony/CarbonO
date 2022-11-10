@@ -1,4 +1,4 @@
-package com.carbonO.CarbonTrackerTransaction;
+package com.carbonO.CarbonTrackerTransactions;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

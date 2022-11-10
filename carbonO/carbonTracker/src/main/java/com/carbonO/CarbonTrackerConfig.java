@@ -1,7 +1,7 @@
 package com.carbonO;
 
-import com.carbonO.CarbonTrackerTransaction.CarbonTrackerTransaction;
-import com.carbonO.CarbonTrackerTransaction.CarbonTrackerTransactionRepository;
+import com.carbonO.CarbonTrackerTransactions.CarbonTrackerTransaction;
+import com.carbonO.CarbonTrackerTransactions.CarbonTrackerTransactionRepository;
 import com.carbonO.Dish.*;
 import com.carbonO.Ingredient.Ingredient;
 import com.carbonO.Ingredient.IngredientRepository;

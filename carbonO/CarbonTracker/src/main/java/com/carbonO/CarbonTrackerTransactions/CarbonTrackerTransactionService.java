@@ -1,4 +1,4 @@
-package com.carbonO.CarbonTrackerTransaction;
+package com.carbonO.CarbonTrackerTransactions;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

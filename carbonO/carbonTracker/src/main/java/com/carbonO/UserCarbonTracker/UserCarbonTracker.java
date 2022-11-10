@@ -1,6 +1,6 @@
 package com.carbonO.UserCarbonTracker;
 
-import com.carbonO.CarbonTrackerTransaction.CarbonTrackerTransaction;
+import com.carbonO.CarbonTrackerTransactions.CarbonTrackerTransaction;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 @Entity
