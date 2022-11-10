@@ -6,9 +6,6 @@ import UserStatistics from "../components/dashboard/UserStatistics";
 import AuthContext from "../hooks/AuthContext";
 import CarbonTrackerService from "../services/CarbonTrackerService";
 import Header from "../components/misc/Header";
-import initialDatesArr from "../components/dashboard/getInitialDates";
-import pointsArr from "../components/dashboard/getPoints";
-import pieChartArr from "../components/dashboard/getPieChart";
 import UserRewardService from "../services/UserRewardService";
 import { ThreeDots } from "react-loader-spinner";
 import { motion } from "framer-motion";
@@ -21,19 +18,6 @@ const Dashboard = () => {
   const [userCredits, setUserCredits] = useState(0);
   const [loading, setLoading] = useState(false);
   const { auth, setAuth } = useContext(AuthContext);
-  
-  const dates = [];
-  const points = [];
-  //persist state of user
-  // useEffect(() => {
-  //     const token = localStorage.getItem("token");
-  //     setAuth({"authenticated": localStorage.getItem("authenticated"),"accessToken": localStorage.getItem("token")
-  //             , "userId": localStorage.getItem("userId"), "firstName": localStorage.getItem("firstName")});
-  //     console.log("auth", auth.authenticated);
-  //
-  // },[]);
-  
-  const [pieChartData, setPieChartData] = useState([{ date: "", rating: 0 }]);
 
   // get all dish consumed by user
   useEffect(() => {
@@ -43,21 +27,10 @@ const Dashboard = () => {
         console.log("Dish response");
         console.log(response);
         setConsumptionData(response);
-        // setLineChartData(response);
-        // setLoading(false);
       }
     );
   }, []);
-  
-//for pie chart
-// for (let i = 0; i < lineChartData.length; i++) {
-//   console.log("count")
-//   var obj = {
-//     date: lineChartData[i].dateConsumed.substring(0, 10),
-//     rating: lineChartData[i].dish.carbonRating,
-//   };
-//   pieChartData.push(obj);
-// }
+
   //get user total carbon consumed
   useEffect(() => {
     setLoading(true);
@@ -117,15 +90,11 @@ const Dashboard = () => {
           animate={{ opacity: 1 }}
           initial={{ opacity: 0 }}
         >
-          {/* <pointsArr.Provider value={points}>
-            <initialDatesArr.Provider value={dates}> */}
               <UserStatistics
                 TotalCarbon={totalCarbon.toFixed(0)}
                 Ecredits={userCredits}
                 TotalReceiptsScanned={consumptionData.length}
               />
-            {/* </initialDatesArr.Provider>
-          </pointsArr.Provider> */}
           
           <div className="flex flex-row justify-center mx-26">
             <CarbonTrackerTable historicalData={consumptionData} />

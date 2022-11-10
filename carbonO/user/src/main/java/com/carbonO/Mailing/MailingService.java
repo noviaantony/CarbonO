@@ -1,6 +1,5 @@
 package com.carbonO.Mailing;
 
-import com.carbonO.Registration.RegistrationService;
 import com.carbonO.User.User;
 import com.carbonO.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

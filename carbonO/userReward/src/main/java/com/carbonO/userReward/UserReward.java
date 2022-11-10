@@ -1,7 +1,6 @@
 package com.carbonO.userReward;
 
 import com.carbonO.RewardTransaction.RewardTransaction;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 

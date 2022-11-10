@@ -228,10 +228,10 @@ const RewardCard = ({
           </div>
 
           <footer class="flex items-center justify-between leading-none p-2 md:p-4 bg-white">
-            <div class="flex items-center no-underline  text-black" href="#">
+            <div class="flex items-center no-underline text-black" href="#">
               <button
                 to="/ClaimReward"
-                className="inline-flex items-center py-2 px-8 text-xs font-xs text-center text-white bg-[#5E9387] rounded-lg  focus:outline-none transition duration-300 mr-3 font-semibold hover:bg-gray-700 hover:text-white
+                className=" items-center h-19 py-2 px-8 text-xs font-xs text-center text-white bg-[#5E9387] rounded-lg  focus:outline-none transition duration-300 mr-3 font-semibold hover:bg-gray-700 hover:text-white
           "
                 type="button"
                 onClick={() => {
@@ -243,11 +243,11 @@ const RewardCard = ({
               </button>
               <button
                 href={RewardWebsite}
-                className="inline-flex items-center py-2 px-8 text-xs font-xs text-center bg-white text-[#5E9387] rounded-md focus:outline-none transition duration-300 mr-3 font-semibold border-[#5E9387] border-2 border-solid hover:bg-gray-700 hover:text-white
+                className=" items-center py-2 px-8 text-xs font-xs text-center bg-white text-[#5E9387] rounded-md focus:outline-none transition duration-300 mr-3 font-semibold border-[#5E9387] border-2 border-solid hover:bg-gray-700 hover:text-white
           "
                 type="button"
               >
-                Visit Brand Website
+                Visit Website
               </button>
             </div>
           </footer>

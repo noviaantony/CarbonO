@@ -6,7 +6,6 @@ import com.carbonO.User.User;
 import com.carbonO.User.UserRepository;
 import com.carbonO.User.UserRole;
 import com.carbonO.User.UserService;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;

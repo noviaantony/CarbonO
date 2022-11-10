@@ -3,7 +3,6 @@ package com.carbonO;
 import com.carbonO.Registration.RegistrationRequest;
 import com.carbonO.Registration.token.ConfirmationTokenRepository;
 import com.carbonO.User.*;
-import net.bytebuddy.utility.RandomString;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

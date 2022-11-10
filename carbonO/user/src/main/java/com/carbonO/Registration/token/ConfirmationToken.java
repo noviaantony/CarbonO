@@ -3,7 +3,6 @@ package com.carbonO.Registration.token;
 
 import com.carbonO.User.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

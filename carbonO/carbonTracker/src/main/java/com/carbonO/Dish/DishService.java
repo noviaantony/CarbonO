@@ -2,7 +2,6 @@ package com.carbonO.Dish;
 
 import com.carbonO.Exceptions.DishNotFoundException;
 import com.carbonO.Ingredient.Ingredient;
-import com.carbonO.Ingredient.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

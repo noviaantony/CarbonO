@@ -1,13 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import { IoCalendarNumber } from "react-icons/io5";
 import Modal from "react-modal";
-import {
-  Elements,
-  CardElement,
-  useElements,
-  useStripe, 
-} from "@stripe/react-stripe-js";
+import {CardElement,} from "@stripe/react-stripe-js";
 import { motion } from "framer-motion";
 import { useLocation } from 'react-router-dom'
 
@@ -21,13 +15,10 @@ const CARD_OPTIONS = {
       color: "#1F2937",
       fontWeight: 20,
       fontFamily: "Open Sans, sans-serif",
-      // fontSize: "0.875rem",
-      // fontSmoothing: "antialiased",
       ":-webkit-autofill": { color: "#9CA3AF" },
       "::placeholder": { color: "#9CA3AF" },
     },
     invalid: {
-      //   iconColor: "#ffc7ee",
       color: "#000",
     },
   },
@@ -76,37 +67,9 @@ function ModalIcon() {
 }
 
 const PaymentForm = () => {
-  const stripe = useStripe();
-  const elements = useElements();
 const location = useLocation();
 const { from } = location.state
-  const handleSubmit = async (e) => {
-    // We don't want to let default form submission happen here,
-    // which would refresh the page.
-    e.preventDefault();
-
-    //create payment intent on server
-    const { error: backendError, clientSecret } = await fetch(
-      "/create-payment-intent",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          paymentMethodType: "card",
-          currency: "usd",
-        }),
-      }
-    ).then((r) => r.json());
-
-    //confirm payment on the client
-    const { paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: elements.getElement(CardElement),
-      },
-    });
-  };
+  
 
   const [isOpen, setIsOpen] = useState(false);
   function toggleConfirmationModal() {
@@ -125,30 +88,6 @@ const { from } = location.state
     setDonationAmount(event.target.value);
   };
   
-  // const [cardNumber, setCardNumber] = useState(0);
-  // const handleChangeCardNumber = (event) => {
-  //   setCardNumber(event.target.value);
-  // };
-
-  // const [expiryDate, setExpiryDate] = useState(0);
-  // const handleChangeExpiryDate = (event) => {
-  //   setExpiryDate(event.target.value);
-  // };
-
-  // const [Cvc, setCvc] = useState(0);
-  // const handleChangeCvc = (event) => {
-  //   setCvc(event.target.value);
-  // };
-
-  // const handlePayment = () => {
-  //   var payeeName = elements.create({ cardNumber });
-  //   payeeName.mount("#card-number");
-  //   var cardExpiry = elements.create({ expiryDate });
-  //   cardExpiry.mount("#card-expiry");
-  //   var cardCvc = elements.create({ Cvc });
-  //   cardCvc.mount("cardCvc");
-  //   return <div></div>;
-  // };
   return (
     <>
       <Modal
@@ -254,58 +193,6 @@ const { from } = location.state
                         placeholder="$50.00"
                       />
                     </div>
-                    {/* <!-- Card Number -->
-                      <div className="">
-                        <label
-                          class="block text-sm font-medium mb-1"
-                          for="card-nr"
-                        >
-                          Card Number <span class="text-red-500">*</span>
-                        </label>
-                        <input
-                          id="card-nr"
-                          class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full"
-                          type="text"
-                          onChange={handleChangeCardNumber}
-                          value={cardNumber}
-                          placeholder="1234 1234 1234 1234"
-                        />
-                      </div> */}
-                    {/* <!-- Expiry and CVC --> */}
-                    {/* <div class="flex space-x-4">
-                        <div class="flex-1">
-                          <label
-                            class="block text-sm font-medium mb-1"
-                            for="card-expiry"
-                          >
-                            Expiry Date <span class="text-red-500">*</span>
-                          </label>
-                          <input
-                            id="card-expiry"
-                            class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full"
-                            type="text"
-                            onChange={handleChangeExpiryDate}
-                            value={expiryDate}
-                            placeholder="MM/YY"
-                          />
-                        </div>
-                        <div class="flex-1">
-                          <label
-                            class="block text-sm font-medium mb-1"
-                            for="card-cvc"
-                          >
-                            CVC <span class="text-red-500">*</span>
-                          </label>
-                          <input
-                            id="card-cvc"
-                            class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full"
-                            type="text"
-                            onChange={handleChangeCvc}
-                            value={Cvc}
-                            placeholder="CVC"
-                          />
-                        </div>
-                      </div> */}
                     {/* <!-- Name on Card --> */}
                     <div>
                       <label
@@ -364,17 +251,6 @@ const { from } = location.state
                       </button>
                     </div>
                   </div>
-                  {/* <div class="mt-6">
-                      <div class="mb-4">
-                        
-                        <button
-                          class="font-medium text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out w-full bg-[#5E9387] hover:bg-gray-700 text-white focus:outline-none focus-visible:ring-2"
-                       
-                        >
-                          Donate
-                        </button>
-                      </div>
-                    </div> */}
                 </div>
               </div>
             </div>
