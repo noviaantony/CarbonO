@@ -14,8 +14,7 @@ jobs:
 
     runs-on: ubuntu-latest
     environment: 
-      name: production
-      url: https://github.com
+      name: Production
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 18
