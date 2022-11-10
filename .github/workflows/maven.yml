@@ -22,16 +22,16 @@ jobs:
         java-version: '18'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
+    - name: Build with Maven and push image
       run: |
-        cd ./carbonO
-        mvn clean install -DskipTests
-    - name: Build & push Docker image
-      uses: mr-smithers-excellent/docker-build-push@v5
-      with:
-        image: newbieshine/springboot-images-new
-        tags: latest
-        registry: docker.io
-        dockerfile: Dockerfile
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        cd ./carbonO/user
+        mvn clean package -D dockerfile.useMavenSettingsForAuth=true dockerfile:push
+#     - name: Build & push Docker image
+#       uses: mr-smithers-excellent/docker-build-push@v5
+#       with:
+#         image: newbieshine/springboot-images-new
+#         tags: latest
+#         registry: docker.io
+#         dockerfile: Dockerfile
+#         username: ${{ secrets.DOCKER_USERNAME }}
+#         password: ${{ secrets.DOCKER_PASSWORD }}
