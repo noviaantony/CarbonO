@@ -33,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         customAuthenticationFilter.setFilterProcessesUrl("/api/v1/carbonO/user/login");
         http.cors().and().csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
-        http.authorizeRequests().antMatchers("/api/v1/carbonO/login/**", "/api/v1/carbonO/user/**").permitAll();
+        http.authorizeRequests().antMatchers("/api/v1/carbonO/user/login/**", "/api/v1/carbonO/user/**").permitAll();
         http.authorizeRequests().antMatchers("/api/v1/carbonO/user/getAllNonProfitOrganisations").authenticated();
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
