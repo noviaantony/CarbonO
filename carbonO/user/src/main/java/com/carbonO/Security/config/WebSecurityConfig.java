@@ -33,11 +33,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         customAuthenticationFilter.setFilterProcessesUrl("/api/v1/carbonO/user/login");
         http.cors().and().csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
-        http.authorizeRequests().antMatchers("/api/v1/carbonO/login/**",
-                "/api/v1/carbonO/user/checkRefreshToken").permitAll();
-        http.authorizeRequests().antMatchers("/api/v1/carbonO/user/isAuthorize/**").permitAll();
-//        http.authorizeRequests().antMatchers("/api/v1/carbonO/**").hasAnyAuthority("ADMIN");
-        http.authorizeRequests().anyRequest().permitAll(); //authenticated(); //.and()
+        http.authorizeRequests().antMatchers("/api/v1/carbonO/login/**", "/api/v1/carbonO/user/**").permitAll();
+        http.authorizeRequests().antMatchers("/api/v1/carbonO/user/getAllNonProfitOrganisations").authenticated();
+        http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
@@ -57,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception{
+    public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
