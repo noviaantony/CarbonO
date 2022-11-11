@@ -8,7 +8,7 @@ class DonationService {
         try {
             const response = await axios.get(
                 `${USER_API_URL}/user/getAllNonProfitOrganisations`,
-                {headers: {Authorization: "Bearer" + userToken}}
+                {headers: {Authorization: "Bearer " + userToken}}
             );
             return response.data;
         } catch (error) {
@@ -22,7 +22,7 @@ class DonationService {
             const response = await axios.put(
                 `${USER_API_URL}/userReward/donateRewardPoints`,
                 null,
-                {params: {userId, pointsToDonate, organisationId}, headers: {Authorization: "Bearer" + userToken}}
+                {params: {userId, pointsToDonate, organisationId}, headers: {Authorization: "Bearer " + userToken}}
             );
             return response.data;
         } catch (error) {

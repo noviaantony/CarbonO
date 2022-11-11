@@ -13,7 +13,7 @@ class CarbonTrackerService {
         try {
             const response = await axios.get(
                 `${CARBON_TRACKER_API_URL}/getUserTotalCarbonConsumption`,
-                {params: {userId}, headers: {Authorization: "Bearer" + userToken}}
+                {params: {userId}, headers: {Authorization: "Bearer " + userToken}}
             );
             return response.data;
         } catch (error) {
@@ -26,7 +26,7 @@ class CarbonTrackerService {
         try {
             const response = await axios.get(
                 `${CARBON_TRACKER_API_URL}/dish/getAllIngredientsFromDish`,
-                {params: {dishId}, headers: {Authorization: "Bearer" + userToken}}
+                {params: {dishId}, headers: {Authorization: "Bearer " + userToken}}
             );
             console.log(response);
             return response.data;
@@ -41,7 +41,7 @@ class CarbonTrackerService {
         try {
             const response = await axios.get(
                 `${CARBON_TRACKER_API_URL}/dish/getAllDishes`,
-                {headers: {Authorization: "Bearer" + userToken}}
+                {headers: {Authorization: "Bearer " + userToken}}
             );
             return response.data;
         } catch (error) {
@@ -58,7 +58,7 @@ class CarbonTrackerService {
                 null,
                 {
                     params: {userId, receiptId},
-                    headers: {Authorization: "Bearer" + userToken},
+                    headers: {Authorization: "Bearer " + userToken},
                 }
             );
             console.log(response.data)
@@ -77,7 +77,7 @@ class CarbonTrackerService {
         try {
             const response = await axios.get(
                 `${CARBON_TRACKER_API_URL}/getUserDishedConsumed`,
-                {params: {userId}, headers: {Authorization: "Bearer" + userToken}}
+                {params: {userId}, headers: {Authorization: "Bearer " + userToken}}
             );
             return response.data;
         } catch (error) {

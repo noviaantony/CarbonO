@@ -8,7 +8,7 @@ class UserRewardService {
         console.log('grabbing rewards');
         const response = await axios.get(
             `${USER_REWARD_API_URL}/reward/getAllRewards`,
-            {headers: {Authorization: "Bearer" + userToken}}
+            {headers: {Authorization: "Bearer " + userToken}}
         );
         return response.data;
 
@@ -18,7 +18,7 @@ class UserRewardService {
         console.log('grabbing user rewards');
         const response = await axios.get(
             `${USER_REWARD_API_URL}/getUserReward`,
-            {params: {userId}, headers: {Authorization: "Bearer" + userToken}},
+            {params: {userId}, headers: {Authorization: "Bearer " + userToken}},
         );
         return response.data;
     }
@@ -29,7 +29,7 @@ class UserRewardService {
         const response = await axios.post(
             `${USER_REWARD_API_URL}/claimReward`,
             null,
-            {params: {userId, rewardId}, headers: {Authorization: "Bearer" + userToken}},
+            {params: {userId, rewardId}, headers: {Authorization: "Bearer " + userToken}},
         );
         return response.data;
     }
