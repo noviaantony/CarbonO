@@ -8,6 +8,7 @@ import CarbonTrackerService from "../services/CarbonTrackerService";
 import Header from "../components/misc/Header";
 import {ThreeDots} from "react-loader-spinner";
 import {motion} from "framer-motion";
+import UserRewardService from "../services/UserRewardService";
 
 
 const Dashboard = () => {
