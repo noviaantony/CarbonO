@@ -29,26 +29,26 @@ const Dashboard = () => {
                 setConsumptionData(response);
             }
         );
-        // CarbonTrackerService.getUserTotalCarbonConsumption(
-        //     auth.userId,
-        //     auth.accessToken
-        // ).then((response) => {
-        //     console.log("Carbon response");
-        //     console.log(response);
-        //     setTotalCarbon(response);
-        //     console.log(totalCarbon);
-        //     setLoading(false);
-        // });
-        // UserRewardService.getUserReward(auth.userId, auth.accessToken).then(
-        //     (response) => {
-        //         console.log("User Reward response");
-        //         console.log(response);
-        //         setRewardData(response.rewardTransactions);
-        //         console.log(rewardData);
-        //         setUserCredits(response.rewardPoints);
-        //         setLoading(false);
-        //     }
-        // );
+        CarbonTrackerService.getUserTotalCarbonConsumption(
+            auth.userId,
+            auth.accessToken
+        ).then((response) => {
+            console.log("Carbon response");
+            console.log(response);
+            setTotalCarbon(response);
+            console.log(totalCarbon);
+            setLoading(false);
+        });
+        UserRewardService.getUserReward(auth.userId, auth.accessToken).then(
+            (response) => {
+                console.log("User Reward response");
+                console.log(response);
+                setRewardData(response.rewardTransactions);
+                console.log(rewardData);
+                setUserCredits(response.rewardPoints);
+                setLoading(false);
+            }
+        );
     }, []);
 
     //get user total carbon consumed
