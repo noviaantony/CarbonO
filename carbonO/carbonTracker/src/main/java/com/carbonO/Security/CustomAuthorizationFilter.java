@@ -32,6 +32,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
     //front end need to set the authorizationHeader as Authorization = Bearer (User JWT Token)
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+
         String authorizationHeader = request.getHeader(AUTHORIZATION);
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             try {

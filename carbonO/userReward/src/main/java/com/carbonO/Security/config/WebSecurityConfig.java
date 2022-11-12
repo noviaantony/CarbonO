@@ -22,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
-        http.authorizeRequests().antMatchers("/api/v1/carbonO/userReward/addNewUserReward**", "/api/v1/carbonO/userReward/updateUserPoints**").permitAll();
+        http.authorizeRequests().antMatchers("/api/v1/carbonO/userReward/addCarbonTrackerUser?userId=**", "/api/v1/carbonO/userReward/updateUserPoints**").permitAll();
 //        http.authorizeRequests().antMatchers("/api/v1/carbonO/**").authenticated();
 //        http.authorizeRequests().antMatchers("/api/v1/carbonO/**").hasAnyAuthority("ADMIN");
         http.authorizeRequests().anyRequest().authenticated();
