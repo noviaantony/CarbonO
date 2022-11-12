@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
 //        http.authorizeRequests().antMatchers("/api/v1/carbonO/carbonTracker/addCarbonTrackerUser?userId=*").permitAll();
-        http.authorizeRequests().regexMatchers("/api/v1/carbonO/carbonTracker/addCarbonTrackerUser?userId=\\d+").permitAll();
+        http.authorizeRequests().regexMatchers("/api/v1/carbonO/carbonTracker/addCarbonTrackerUser?userId=+").permitAll();
 //        http.authorizeRequests().antMatchers("/api/v1/carbonO/**").authenticated();
 //        http.authorizeRequests().antMatchers("/api/v1/carbonO/**").hasAnyAuthority("ADMIN");
         http.authorizeRequests().anyRequest().authenticated();
